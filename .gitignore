@@ -1,0 +1,31 @@
+# Archivos temporales y de bloqueo
+*.lock
+*.recover
+*.ffs
+
+# Entornos virtuales
+venv/
+.env
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Bases de datos y archivos pesados (ignorar para GitHub)
+*.db
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.cpg
+*.qmd
+*.xml
+
+# Archivos de datos descargados temporalmente
+*.csv
+*.json
+*.html
