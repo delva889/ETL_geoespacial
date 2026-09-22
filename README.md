@@ -1,26 +1,40 @@
-# Transformación e Integración de Datos Geoespaciales: Energía Hidráulica y Solar en España
+# Modelo de Transformación e Integración de Datos Geoespaciales aplicado a la Energía Hidráulica en España
 
 Este proyecto se centra en la obtención, transformación e integración de datos espaciales y tabulares procedentes de diversas cuencas hidrográficas de España, con aplicación al análisis de energías renovables (hidráulica y solar).
 
 ## Tecnologías Utilizadas
-* **Python**: Scripts principales para la obtención de datos mediante web scraping.
-  * Librerías destacadas: `requests`, `BeautifulSoup`, `pandas`, `geopandas`, `selenium`.
+* **Python**: Scripts principales para la obtención de datos mediante web scraping y geoprocesamiento espacial.
+  * Librerías destacadas: `requests`, `BeautifulSoup`, `pandas`, `geopandas`, `selenium`, `sqlalchemy`.
 * **FME (Feature Manipulation Engine)**: Flujos de trabajo (`.fmw`) para la integración y procesamiento de los datos espaciales.
 * **Bases de Datos Espaciales**: Uso de SQLite, GeoPackage y PostgreSQL (PostGIS) para almacenar las geometrías de los embalses y sus atributos actualizados.
+* **React & Vite**: Frontend y Dashboard Interactivo de misión crítica.
+* **Leaflet & Recharts**: Librerías de visualización web (mapas interactivos y gráficas analíticas reactivas).
+
+## Dashboard Interactivo en Vivo
+El resultado final de este proyecto (la integración ETL servida en un mapa analítico) está desplegado y accesible públicamente. Puedes visualizar el cuadro de mando directamente aquí:
+**[Ver Dashboard de Energía Hidráulica (Mission Control)](https://delva889.github.io/ETL_geoespacial/)**
 
 ## Estructura del Proyecto
 
-* `/src`: Contiene los scripts en Python.
+* `/src`: Contiene los scripts en Python (ETL espacial).
   * `scraping.py`: Extrae datos de embalses de España agrupados por cuenca y los almacena en PostgreSQL y CSV.
-  * `descarga_saih.py`: Descarga información de diferentes confederaciones hidrográficas (SAIH) mediante técnicas avanzadas, manejando APIs y tokens (Guadiana, Ebro, Tajo) o leyendo HTML/CSV directo.
-  * `geom.py`: Combina los datos obtenidos con las geometrías (Shapefile) mediante métricas de similitud textual (`rapidfuzz`) y exporta capas GeoPackage y PostGIS actualizadas.
-* `/fme_workspaces`: Espacios de trabajo de FME (`.fmw`) usados para el procesamiento espacial.
-* `/docs`: Memoria del proyecto en formato documento y un pequeño manual en Markdown explicando los formatos de descarga.
-* `/dataPH`: (No incluido en el repositorio por tamaño) Carpeta esperada en el flujo de trabajo para guardar las salidas CSV y GPKG temporales.
+  * `descarga_saih.py`: Descarga información de diferentes confederaciones hidrográficas (SAIH) mediante técnicas avanzadas, manejando APIs y tokens.
+  * `geom.py`: Combina los datos obtenidos con las geometrías (Shapefile) mediante métricas de similitud textual y exporta capas en formato GeoJSON para consumo web.
+* `/fme_workspaces`: Espacios de trabajo de FME (`.fmw`) usados para el procesamiento avanzado.
+* `/docs`: Memoria del proyecto en formato documento y manuales técnicos.
+* `/dashboard`: Código fuente del Frontend interactivo (Mission Control). Construido con React, TypeScript, TailwindCSS y Vite.
 
-## Ejecución del flujo
-1. Ejecutar `descarga_saih.py` y `scraping.py` para recolecir datos de los embalses y sistemas SAIH en la carpeta `dataPH/`.
-2. Ejecutar `geom.py` para realizar un cruce espacial de los datos obtenidos con la capa de geometría base (`geometriaEmbalses.shp`).
-3. (Opcional) Abrir los espacios de trabajo en FME para visualizar y adaptar las transformaciones ETL generadas.
+## Ejecución de la Interfaz Visual (Dashboard)
+El dashboard se alimenta de los datos procesados en la etapa de ETL (`data.geojson`). Para iniciarlo en otro dispositivo:
+1. Instala [Node.js](https://nodejs.org/).
+2. Entra a la carpeta del frontend: `cd dashboard`
+3. Instala las dependencias: `npm install`
+4. Lanza el servidor en modo desarrollo: `npm run dev`
+5. Abre en tu navegador la URL que devuelve la terminal (normalmente `http://localhost:5173/`).
 
-> **Nota sobre Base de Datos:** Los scripts que interactúan con PostgreSQL requieren que tengas una instancia local activa. Por defecto conectan al puerto `5432`, base de datos `TIIG` con el usuario `postgres`. Se debe proveer la contraseña en las variables del código (marcado como `TU_PASSWORD_AQUI`).
+## Ejecución del flujo de datos (Backend / ETL)
+1. Ejecutar `descarga_saih.py` y `scraping.py` para recolectar datos de los embalses y sistemas SAIH.
+2. Ejecutar `geom.py` para realizar el cruce espacial de los datos obtenidos con la capa de geometría base (`geometriaEmbalses.shp`) y generar el fichero estático `data.geojson`.
+3. Copiar/Mover el resultado de `data.geojson` a la carpeta `dashboard/public/`.
+
+> **Nota sobre Base de Datos:** Los scripts que interactúan con PostgreSQL requieren que tengas una instancia local activa.
