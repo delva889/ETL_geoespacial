@@ -29,3 +29,8 @@ __pycache__/
 *.csv
 *.json
 *.html
+
+# Scripts locales
+*.bat
+
+src/consolidate_caudales.py

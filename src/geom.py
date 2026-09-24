@@ -15,7 +15,7 @@ PG_CONN = dict(
     port=5432,
     dbname="TIIG",
     user="postgres",
-    password="TU_PASSWORD_AQUI",
+    password="8806",
 )
 
 df = pd.read_csv(CSV_PATH)
@@ -76,13 +76,7 @@ gdf_final.to_file(SALIDA, layer="embalses", driver="GPKG")
 print(f"\nCapa guardada en: {SALIDA}")
 
 import os
-dashboard_path = r"dashboard\public\data.geojson"
-try:
-    gdf_web = gdf_final.to_crs(epsg=4326)
-    gdf_web.to_file(dashboard_path, driver="GeoJSON")
-    print(f"Capa exportada para el Dashboard web en: {dashboard_path}")
-except Exception as e:
-    print(f"[AVISO] No se pudo guardar el GeoJSON: {e}")
+
 
 cmd = [
     r"C:\Program Files\QGIS 3.40.11\bin\ogr2ogr.exe",

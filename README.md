@@ -7,12 +7,12 @@ Este proyecto se centra en la obtención, transformación e integración de dato
   * Librerías destacadas: `requests`, `BeautifulSoup`, `pandas`, `geopandas`, `selenium`, `sqlalchemy`.
 * **FME (Feature Manipulation Engine)**: Flujos de trabajo (`.fmw`) para la integración y procesamiento de los datos espaciales.
 * **Bases de Datos Espaciales**: Uso de SQLite, GeoPackage y PostgreSQL (PostGIS) para almacenar las geometrías de los embalses y sus atributos actualizados.
-* **React & Vite**: Frontend y Dashboard Interactivo de misión crítica.
+* **React & Vite**: Frontend y Plataforma Web Interactiva.
 * **Leaflet & Recharts**: Librerías de visualización web (mapas interactivos y gráficas analíticas reactivas).
 
-## Dashboard Interactivo en Vivo
-El resultado final de este proyecto (la integración ETL servida en un mapa analítico) está desplegado y accesible públicamente. Puedes visualizar el cuadro de mando directamente aquí:
-**[Ver Dashboard de Energía Hidráulica (Mission Control)](https://delva889.github.io/ETL_geoespacial/)**
+## Plataforma Web en Vivo
+El resultado final de este proyecto (la integración ETL servida en un mapa analítico) está desplegado y accesible públicamente. Puedes visualizar la plataforma web directamente aquí:
+**[Ver Plataforma Web de Energía Hidráulica ](https://delva889.github.io/ETL_geoespacial/)**
 
 ## Estructura del Proyecto
 
@@ -22,10 +22,10 @@ El resultado final de este proyecto (la integración ETL servida en un mapa anal
   * `geom.py`: Combina los datos obtenidos con las geometrías (Shapefile) mediante métricas de similitud textual y exporta capas en formato GeoJSON para consumo web.
 * `/fme_workspaces`: Espacios de trabajo de FME (`.fmw`) usados para el procesamiento avanzado.
 * `/docs`: Memoria del proyecto en formato documento y manuales técnicos.
-* `/dashboard`: Código fuente del Frontend interactivo (Mission Control). Construido con React, TypeScript, TailwindCSS y Vite.
+* `/dashboard`: Código fuente del Frontend interactivo . Construido con React, TypeScript, TailwindCSS y Vite.
 
-## Ejecución de la Interfaz Visual (Dashboard)
-El dashboard se alimenta de los datos procesados en la etapa de ETL (`data.geojson`). Para iniciarlo en otro dispositivo:
+## Ejecución de la Interfaz Visual (Plataforma Web)
+La plataforma web se alimenta de los datos procesados en la etapa de ETL (`data.geojson`). Para iniciarlo en otro dispositivo:
 1. Instala [Node.js](https://nodejs.org/).
 2. Entra a la carpeta del frontend: `cd dashboard`
 3. Instala las dependencias: `npm install`

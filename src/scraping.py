@@ -125,7 +125,7 @@ PG_CONN = dict(
     port=5432,
     dbname="TIIG",
     user="postgres",
-    password="TU_PASSWORD_AQUI",
+    password="8806",
 )
 
 def guardar_en_postgres(registros, timestamp_actual):

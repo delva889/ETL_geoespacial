@@ -2,8 +2,8 @@
 
 @layer base {
   body {
-    background-color: #0f172a; 
-    color: #f1f5f9; 
+    background-color: #ffffff; 
+    color: #0f172a; 
   }
 }
 
@@ -14,6 +14,7 @@
   background-color: #0f172a;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-  background: #1e293b;
-  color: #f1f5f9;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
