@@ -1,0 +1,83 @@
+name: Actualizar datos y desplegar web
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-datos
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    env:
+      DATA_DIR: dataPH
+      PGPASSWORD: ${{ secrets.PGPASSWORD || 'no-configurado-en-ci' }}
+      PGHOST: ${{ secrets.PGHOST || 'localhost' }}
+      PGPORT: ${{ secrets.PGPORT || '5432' }}
+      PGDATABASE: ${{ secrets.PGDATABASE || 'TIIG' }}
+      PGUSER: ${{ secrets.PGUSER || 'postgres' }}
+      GUADIANA_JWT: ${{ secrets.GUADIANA_JWT }}
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias Python
+        run: pip install -r requirements.txt
+
+      - name: Configurar Chrome para Selenium
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Descargar datos SAIH (caudales)
+        working-directory: src
+        run: python descarga_saih.py
+        continue-on-error: false
+
+      - name: Descargar niveles de embalses
+        working-directory: src
+        run: python scraping.py
+        continue-on-error: false
+
+      - name: Consolidar caudales para la web
+        working-directory: src
+        run: python consolidate_caudales.py
+        continue-on-error: false
+
+      - name: Fusionar niveles frescos en data.geojson
+        working-directory: src
+        run: python actualizar_geojson.py
+
+      - name: Commitear datos actualizados
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(datos): actualización automática de embalses y caudales"
+          file_pattern: "dashboard/public/data.geojson dashboard/public/caudales.json dashboard/public/last_update.json"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+
+      - name: Instalar dependencias del dashboard
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Compilar dashboard
+        working-directory: dashboard
+        run: npm run build
+
+      - name: Publicar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dashboard/dist
+          publish_branch: gh-pages

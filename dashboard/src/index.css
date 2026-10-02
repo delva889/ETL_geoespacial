@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0e2422;
+  --color-ink-soft: #1a332f;
+  --color-paper: #f2f4f1;
+  --color-surface: #ffffff;
+  --color-teal: #0f6b66;
+  --color-teal-soft: #e4ede9;
+  --color-deep: #1f3b57;
+  --color-deep-soft: #e6ebf1;
+  --color-ochre: #b4793a;
+  --color-ochre-soft: #f3e7d7;
+  --color-rust: #9b3b2e;
+  --color-rust-soft: #f1e0dc;
+  --color-line: #d7dcd3;
+  --color-muted: #5b6b62;
+
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--color-teal);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+  }
+}
+
+.font-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-radius: 2px;
+  box-shadow: 0 2px 16px rgba(14, 36, 34, 0.18);
+}
+.leaflet-popup-content {
+  margin: 0;
+}
+.leaflet-popup-tip {
+  background: var(--color-surface);
+}
+.leaflet-control-zoom a {
+  color: var(--color-ink) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.leaflet-interactive:focus,
+.leaflet-container path:focus,
+.leaflet-container svg:focus,
+.leaflet-container:focus {
+  outline: none;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: var(--color-muted) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  line-height: 1.3;
+  padding: 2px 6px !important;
+  border-radius: 2px;
+  box-shadow: none !important;
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaflet-control-attribution a {
+  color: var(--color-muted) !important;
+}
+
+@keyframes linesDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 160px 160px; }
+}
+
+.lines-bg {
+  background-image: repeating-linear-gradient(
+    135deg,
+    currentColor 0px, currentColor 1px,
+    transparent 1px, transparent 32px
+  );
+  animation: linesDrift 14s linear infinite;
+}
+
+@keyframes linesDriftSoft {
+  0% { background-position: 0 0; }
+  100% { background-position: -120px 120px; }
+}
+
+.lines-bg-soft {
+  background-image: repeating-linear-gradient(
+    -40deg,
+    currentColor 0px, currentColor 1px,
+    transparent 1px, transparent 26px
+  );
+  animation: linesDriftSoft 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lines-bg, .lines-bg-soft, .flow-divider, .marquee-track, .marquee-icon {
+    animation: none !important;
+  }
+}

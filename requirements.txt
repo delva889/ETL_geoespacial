@@ -1,0 +1,10 @@
+requests
+beautifulsoup4
+pandas
+geopandas
+selenium
+psycopg2-binary
+rapidfuzz
+python-dotenv
+geovoronoi
+scipy

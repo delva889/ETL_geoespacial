@@ -1,0 +1,592 @@
+[
+  {
+    "nombre": "Salida Ulldecona",
+    "cuenca": "Júcar",
+    "caudal": 0.4
+  },
+  {
+    "nombre": "Mc La Sènia",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Traiguera",
+    "cuenca": "Júcar",
+    "caudal": 0.05
+  },
+  {
+    "nombre": "Mc Cervera Del Maestre",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De Valbona",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "El Terde",
+    "cuenca": "Júcar",
+    "caudal": 0.11
+  },
+  {
+    "nombre": "Embalse De Mora",
+    "cuenca": "Júcar",
+    "caudal": 0.01
+  },
+  {
+    "nombre": "Embalse De Balagueras",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Los Cantos",
+    "cuenca": "Júcar",
+    "caudal": 2.86
+  },
+  {
+    "nombre": "Salida De Arenós",
+    "cuenca": "Júcar",
+    "caudal": 4.61
+  },
+  {
+    "nombre": "Embalse De Sichar",
+    "cuenca": "Júcar",
+    "caudal": 1.23
+  },
+  {
+    "nombre": "La Presa De Vila-real",
+    "cuenca": "Júcar",
+    "caudal": 1.38
+  },
+  {
+    "nombre": "Mc Atzeneta Del Maestrat",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De L'alcora",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Vall D'alba",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De María Cristina",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Jérica",
+    "cuenca": "Júcar",
+    "caudal": 0.16
+  },
+  {
+    "nombre": "Fuente Del Baño",
+    "cuenca": "Júcar",
+    "caudal": 0.25
+  },
+  {
+    "nombre": "Embalse De Algar",
+    "cuenca": "Júcar",
+    "caudal": 0.42
+  },
+  {
+    "nombre": "Tramacastilla",
+    "cuenca": "Júcar",
+    "caudal": 0.61
+  },
+  {
+    "nombre": "Gea De Albarracín",
+    "cuenca": "Júcar",
+    "caudal": 0.61
+  },
+  {
+    "nombre": "Salida De Arquillo",
+    "cuenca": "Júcar",
+    "caudal": 0.18
+  },
+  {
+    "nombre": "Villalba Alta",
+    "cuenca": "Júcar",
+    "caudal": 0.13
+  },
+  {
+    "nombre": "Teruel Alfambra",
+    "cuenca": "Júcar",
+    "caudal": 0.32
+  },
+  {
+    "nombre": "Teruel Turia",
+    "cuenca": "Júcar",
+    "caudal": 1.14
+  },
+  {
+    "nombre": "Torrealta",
+    "cuenca": "Júcar",
+    "caudal": 2.13
+  },
+  {
+    "nombre": "Los Santos",
+    "cuenca": "Júcar",
+    "caudal": 1.34
+  },
+  {
+    "nombre": "Zagra",
+    "cuenca": "Júcar",
+    "caudal": 7.15
+  },
+  {
+    "nombre": "Embalse De Benagéber",
+    "cuenca": "Júcar",
+    "caudal": 3.1
+  },
+  {
+    "nombre": "Calles",
+    "cuenca": "Júcar",
+    "caudal": 0.77
+  },
+  {
+    "nombre": "Mc Carraixet Bétera",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Salida Loriguilla",
+    "cuenca": "Júcar",
+    "caudal": 1.42
+  },
+  {
+    "nombre": "Bugarra",
+    "cuenca": "Júcar",
+    "caudal": 3.57
+  },
+  {
+    "nombre": "Mc Rambla Castellana",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Rambla Primera",
+    "cuenca": "Júcar",
+    "caudal": 0.55
+  },
+  {
+    "nombre": "Mc Vilamarxant",
+    "cuenca": "Júcar",
+    "caudal": 5.77
+  },
+  {
+    "nombre": "Aguas Potables",
+    "cuenca": "Júcar",
+    "caudal": 6.57
+  },
+  {
+    "nombre": "Azud Repartiment",
+    "cuenca": "Júcar",
+    "caudal": 1.84
+  },
+  {
+    "nombre": "Mc Rambla Poyo N-iii",
+    "cuenca": "Júcar",
+    "caudal": 0.04
+  },
+  {
+    "nombre": "Requena",
+    "cuenca": "Júcar",
+    "caudal": 0.08
+  },
+  {
+    "nombre": "Embalse De Forata",
+    "cuenca": "Júcar",
+    "caudal": 0.25
+  },
+  {
+    "nombre": "Macastre",
+    "cuenca": "Júcar",
+    "caudal": 0.25
+  },
+  {
+    "nombre": "Mc Guadassuar",
+    "cuenca": "Júcar",
+    "caudal": 0.6
+  },
+  {
+    "nombre": "Molino De Juan Romero",
+    "cuenca": "Júcar",
+    "caudal": 1.03
+  },
+  {
+    "nombre": "Cuenca",
+    "cuenca": "Júcar",
+    "caudal": 3.89
+  },
+  {
+    "nombre": "San Lorenzo De La Parrilla",
+    "cuenca": "Júcar",
+    "caudal": 2.88
+  },
+  {
+    "nombre": "Marimota",
+    "cuenca": "Júcar",
+    "caudal": 0.1
+  },
+  {
+    "nombre": "Salida Alarcón",
+    "cuenca": "Júcar",
+    "caudal": 9.91
+  },
+  {
+    "nombre": "Pajaroncillo",
+    "cuenca": "Júcar",
+    "caudal": 2.95
+  },
+  {
+    "nombre": "Víllora",
+    "cuenca": "Júcar",
+    "caudal": 6.74
+  },
+  {
+    "nombre": "Rio Huércemes",
+    "cuenca": "Júcar",
+    "caudal": 0.53
+  },
+  {
+    "nombre": "San Martín",
+    "cuenca": "Júcar",
+    "caudal": 0.03
+  },
+  {
+    "nombre": "Salida Contreras",
+    "cuenca": "Júcar",
+    "caudal": 8.71
+  },
+  {
+    "nombre": "El Picazo",
+    "cuenca": "Júcar",
+    "caudal": 5.36
+  },
+  {
+    "nombre": "El Carrasco",
+    "cuenca": "Júcar",
+    "caudal": 4.44
+  },
+  {
+    "nombre": "Los Frailes",
+    "cuenca": "Júcar",
+    "caudal": 3.6
+  },
+  {
+    "nombre": "Tíriez",
+    "cuenca": "Júcar",
+    "caudal": 0.12
+  },
+  {
+    "nombre": "Río Jardín",
+    "cuenca": "Júcar",
+    "caudal": 0.67
+  },
+  {
+    "nombre": "Montemayor",
+    "cuenca": "Júcar",
+    "caudal": 0.37
+  },
+  {
+    "nombre": "Balazote",
+    "cuenca": "Júcar",
+    "caudal": 0.17
+  },
+  {
+    "nombre": "Alcalá Del Júcar",
+    "cuenca": "Júcar",
+    "caudal": 4.55
+  },
+  {
+    "nombre": "Mc Villatoya",
+    "cuenca": "Júcar",
+    "caudal": 14.68
+  },
+  {
+    "nombre": "Salida De Tous",
+    "cuenca": "Júcar",
+    "caudal": 14.0
+  },
+  {
+    "nombre": "Mc Estubeny",
+    "cuenca": "Júcar",
+    "caudal": 0.12
+  },
+  {
+    "nombre": "Montaverner",
+    "cuenca": "Júcar",
+    "caudal": 0.45
+  },
+  {
+    "nombre": "Embalse De Bellús",
+    "cuenca": "Júcar",
+    "caudal": 0.14
+  },
+  {
+    "nombre": "Mc Moixent",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Canals",
+    "cuenca": "Júcar",
+    "caudal": 0.79
+  },
+  {
+    "nombre": "Mc Manuel",
+    "cuenca": "Júcar",
+    "caudal": 1.67
+  },
+  {
+    "nombre": "Huerto Mulet",
+    "cuenca": "Júcar",
+    "caudal": 29.6
+  },
+  {
+    "nombre": "Embalse De Terrateig",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Vernissa",
+    "cuenca": "Júcar",
+    "caudal": 0.28
+  },
+  {
+    "nombre": "Embalse De Beniarrés",
+    "cuenca": "Júcar",
+    "caudal": 0.15
+  },
+  {
+    "nombre": "Villalonga",
+    "cuenca": "Júcar",
+    "caudal": 1.22
+  },
+  {
+    "nombre": "Azud Font D'en Carrós",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Gallinera L'atzúbia",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De Isbert",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De Guadalest",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Embalse De Amadorio",
+    "cuenca": "Júcar",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Mc Sax",
+    "cuenca": "Júcar",
+    "caudal": 0.01
+  },
+  {
+    "nombre": "Pedro Marín",
+    "cuenca": "Guadalquivir",
+    "caudal": 5.22
+  },
+  {
+    "nombre": "A08 Río Gdquivir Mengíbar",
+    "cuenca": "Guadalquivir",
+    "caudal": 12.01
+  },
+  {
+    "nombre": "Marmolejo",
+    "cuenca": "Guadalquivir",
+    "caudal": 32.09
+  },
+  {
+    "nombre": "El Carpio",
+    "cuenca": "Guadalquivir",
+    "caudal": 10.7
+  },
+  {
+    "nombre": "Villafranca",
+    "cuenca": "Guadalquivir",
+    "caudal": 8.8
+  },
+  {
+    "nombre": "Fuente Palmera",
+    "cuenca": "Guadalquivir",
+    "caudal": 17.89
+  },
+  {
+    "nombre": "E53 Peñaflor",
+    "cuenca": "Guadalquivir",
+    "caudal": 11.78
+  },
+  {
+    "nombre": "Alcalá Del Río",
+    "cuenca": "Guadalquivir",
+    "caudal": 5.3
+  },
+  {
+    "nombre": "A15 Río Genil Loja",
+    "cuenca": "Guadalquivir",
+    "caudal": 4.86
+  },
+  {
+    "nombre": "I15 El Villar",
+    "cuenca": "Guadalquivir",
+    "caudal": 5.41
+  },
+  {
+    "nombre": "Río Miño En Cela Brazo Izquierdo",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.47
+  },
+  {
+    "nombre": "Río Miño En Cela Brazo Derecho",
+    "cuenca": "Miño-Sil",
+    "caudal": 1.09
+  },
+  {
+    "nombre": "Río Ladra En Begonte",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.61
+  },
+  {
+    "nombre": "Río Sarria En Pobra De San Xulián",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.45
+  },
+  {
+    "nombre": "Río Neira En Páramo (o)",
+    "cuenca": "Miño-Sil",
+    "caudal": 2.1
+  },
+  {
+    "nombre": "Río Sil En O Barco",
+    "cuenca": "Miño-Sil",
+    "caudal": 25.1
+  },
+  {
+    "nombre": "Río Cabe En Monforte",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.86
+  },
+  {
+    "nombre": "Río Arnoia En Arnoia",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.56
+  },
+  {
+    "nombre": "Río Tea En Ponteareas",
+    "cuenca": "Miño-Sil",
+    "caudal": 2.48
+  },
+  {
+    "nombre": "Río Limia En Ponteliñares",
+    "cuenca": "Miño-Sil",
+    "caudal": 0.49
+  },
+  {
+    "nombre": "Río Miño En Lugo",
+    "cuenca": "Miño-Sil",
+    "caudal": 3.19
+  },
+  {
+    "nombre": "Río Miño En Ourense",
+    "cuenca": "Miño-Sil",
+    "caudal": 37.94
+  },
+  {
+    "nombre": "Río Mundo Azud De Liétor",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Salida Directa Río Segura Agabj Sifón Orihuela",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Salida Huertos+norias+ptamurcia (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Río Segura Azud De Los Huertos",
+    "cuenca": "Segura",
+    "caudal": 4.228
+  },
+  {
+    "nombre": "Río Segura Aguas Abajo Sifón Orihuela",
+    "cuenca": "Segura",
+    "caudal": 4.228
+  },
+  {
+    "nombre": "Salida Directa Río Segura Agarrb Sifón Orihuela",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Río Segura Jacarilla",
+    "cuenca": "Segura",
+    "caudal": 2.654
+  },
+  {
+    "nombre": "Río Segura Azud De San Antonio",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Nive Canal Salida",
+    "cuenca": "Tajo",
+    "caudal": 0.96
+  },
+  {
+    "nombre": "Suarón - Mazo De Meredo",
+    "cuenca": "Cantábrico",
+    "caudal": 0.01
+  },
+  {
+    "nombre": "Navia - San Pelayo",
+    "cuenca": "Cantábrico",
+    "caudal": 3.99
+  },
+  {
+    "nombre": "Pigüeña - Canal Pigüeña",
+    "cuenca": "Cantábrico",
+    "caudal": 0.05
+  },
+  {
+    "nombre": "Narcea - Puente Quinzanas",
+    "cuenca": "Cantábrico",
+    "caudal": 0.77
+  },
+  {
+    "nombre": "Nalón - Grullos",
+    "cuenca": "Cantábrico",
+    "caudal": 0.69
+  },
+  {
+    "nombre": "Escudo - Roiz",
+    "cuenca": "Cantábrico",
+    "caudal": 0.11
+  },
+  {
+    "nombre": "Bidasoa - Legasa",
+    "cuenca": "Cantábrico",
+    "caudal": 0.33
+  }
+]
