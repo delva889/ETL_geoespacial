@@ -2,7 +2,7 @@
   {
     "nombre": "Pedro Marín",
     "cuenca": "Guadalquivir",
-    "caudal": 0.66
+    "caudal": 1.4
   },
   {
     "nombre": "Marmolejo",
@@ -12,42 +12,37 @@
   {
     "nombre": "El Carpio",
     "cuenca": "Guadalquivir",
-    "caudal": 11.15
+    "caudal": 19.07
   },
   {
     "nombre": "Villafranca",
     "cuenca": "Guadalquivir",
-    "caudal": 12.38
+    "caudal": 12.64
   },
   {
     "nombre": "Fuente Palmera",
     "cuenca": "Guadalquivir",
-    "caudal": 17.08
+    "caudal": 7.27
   },
   {
     "nombre": "E53 Peñaflor",
     "cuenca": "Guadalquivir",
-    "caudal": 33.37
+    "caudal": 26.75
   },
   {
     "nombre": "Alcalá Del Río",
     "cuenca": "Guadalquivir",
-    "caudal": 15.45
+    "caudal": 24.44
   },
   {
     "nombre": "A15 Río Genil Loja",
     "cuenca": "Guadalquivir",
-    "caudal": 7.47
+    "caudal": 6.4
   },
   {
     "nombre": "I15 El Villar",
     "cuenca": "Guadalquivir",
-    "caudal": 3.9
-  },
-  {
-    "nombre": "Alconada, 2712",
-    "cuenca": "Duero",
-    "caudal": 0.0
+    "caudal": 2.32
   },
   {
     "nombre": "Camarzana-regato, 2716",
@@ -57,72 +52,72 @@
   {
     "nombre": "Río Miño En Cela Brazo Izquierdo",
     "cuenca": "Miño-sil",
-    "caudal": 2.14
+    "caudal": 4.45
   },
   {
     "nombre": "Río Miño En Cela Brazo Derecho",
     "cuenca": "Miño-sil",
-    "caudal": 3.26
+    "caudal": 5.78
   },
   {
     "nombre": "Río Ladra En Begonte",
     "cuenca": "Miño-sil",
-    "caudal": 2.91
+    "caudal": 9.77
   },
   {
     "nombre": "Río Sarria En Pobra De San Xulián",
     "cuenca": "Miño-sil",
-    "caudal": 1.91
+    "caudal": 2.37
   },
   {
     "nombre": "Río Neira En Páramo (o)",
     "cuenca": "Miño-sil",
-    "caudal": 4.97
+    "caudal": 6.72
   },
   {
     "nombre": "Río Cúa En Quilós",
     "cuenca": "Miño-sil",
-    "caudal": 7.35
+    "caudal": 13.85
   },
   {
     "nombre": "Río Sil En O Barco",
     "cuenca": "Miño-sil",
-    "caudal": 52.03
+    "caudal": 149.07
   },
   {
     "nombre": "Río Cabe En Monforte",
     "cuenca": "Miño-sil",
-    "caudal": 3.1
+    "caudal": 3.85
   },
   {
     "nombre": "Río Arnoia En Arnoia",
     "cuenca": "Miño-sil",
-    "caudal": 13.21
+    "caudal": 10.96
   },
   {
     "nombre": "Río Tea En Ponteareas",
     "cuenca": "Miño-sil",
-    "caudal": 27.65
+    "caudal": 31.68
   },
   {
     "nombre": "Río Limia En Ponteliñares",
     "cuenca": "Miño-sil",
-    "caudal": 1.03
+    "caudal": 1.54
   },
   {
     "nombre": "Río Miño En Lugo",
     "cuenca": "Miño-sil",
-    "caudal": 8.15
+    "caudal": 26.73
   },
   {
     "nombre": "Río Miño En Ourense",
     "cuenca": "Miño-sil",
-    "caudal": 117.11
+    "caudal": 466.78
   },
   {
     "nombre": "Río Mundo Azud De Liétor",
     "cuenca": "Segura",
-    "caudal": 2.173
+    "caudal": 4.078
   },
   {
     "nombre": "Salida Directa Río Segura Agabj Sifón Orihuela",
@@ -132,27 +127,27 @@
   {
     "nombre": "Salida Huertos+norias+ptamurcia (sifón Orihuela)",
     "cuenca": "Segura",
-    "caudal": 0.192
+    "caudal": 0.189
   },
   {
     "nombre": "Río Segura Azud De Los Huertos",
     "cuenca": "Segura",
-    "caudal": 3.158
+    "caudal": 0.853
   },
   {
     "nombre": "Río Segura Aguas Abajo Sifón Orihuela",
     "cuenca": "Segura",
-    "caudal": 3.461
+    "caudal": 1.163
   },
   {
     "nombre": "Salida Directa Río Segura Agarrb Sifón Orihuela",
     "cuenca": "Segura",
-    "caudal": 0.302
+    "caudal": 0.309
   },
   {
     "nombre": "Río Segura Jacarilla",
     "cuenca": "Segura",
-    "caudal": 2.956
+    "caudal": 2.798
   },
   {
     "nombre": "Río Segura Azud De San Antonio",
@@ -162,17 +157,32 @@
   {
     "nombre": "Nive Canal Salida",
     "cuenca": "Tajo",
-    "caudal": 0.0
+    "caudal": -0.44
+  },
+  {
+    "nombre": "Eo - A Pontenova",
+    "cuenca": "Cantábrica",
+    "caudal": 0.24
   },
   {
     "nombre": "Navia - San Pelayo",
     "cuenca": "Cantábrica",
-    "caudal": 3.26
+    "caudal": 3.16
+  },
+  {
+    "nombre": "Navelgas - Vega De Muñalén",
+    "cuenca": "Cantábrica",
+    "caudal": 0.13
   },
   {
     "nombre": "Narcea - Pte. De La Barca",
     "cuenca": "Cantábrica",
-    "caudal": 0.26
+    "caudal": 0.2
+  },
+  {
+    "nombre": "Pigüeña - Almurfe",
+    "cuenca": "Cantábrica",
+    "caudal": 0.63
   },
   {
     "nombre": "Pigüeña - Canal Pigüeña",
@@ -180,48 +190,43 @@
     "caudal": 0.16
   },
   {
-    "nombre": "Nalón - El Condado",
+    "nombre": "Narcea - Puente Quinzanas",
     "cuenca": "Cantábrica",
-    "caudal": 0.1
+    "caudal": 1.82
   },
   {
-    "nombre": "Nalón - Sama De Langreo",
+    "nombre": "Nalón - Bueño",
     "cuenca": "Cantábrica",
-    "caudal": 0.21
+    "caudal": 0.54
   },
   {
-    "nombre": "Aller - Valdefarrucos",
+    "nombre": "Cares - Mier",
     "cuenca": "Cantábrica",
-    "caudal": 0.16
+    "caudal": 0.38
   },
   {
-    "nombre": "Nalón - Grullos",
-    "cuenca": "Cantábrica",
-    "caudal": 0.52
-  },
-  {
-    "nombre": "Nalón - Peñaullán",
-    "cuenca": "Cantábrica",
-    "caudal": 0.97
-  },
-  {
-    "nombre": "Casaño - Las Arenas",
+    "nombre": "Besaya - Puente De Torres",
     "cuenca": "Cantábrica",
     "caudal": 0.12
   },
   {
-    "nombre": "Nansa - Rábago",
+    "nombre": "Nervión - Arrigorriaga",
     "cuenca": "Cantábrica",
     "caudal": 0.08
   },
   {
-    "nombre": "Cadagua - Alonsotegi",
+    "nombre": "Araxes - Betelu",
     "cuenca": "Cantábrica",
-    "caudal": 0.02
+    "caudal": 0.05
   },
   {
-    "nombre": "Bidasoa - Endarlatsa",
+    "nombre": "Tximista - Etxalar",
     "cuenca": "Cantábrica",
-    "caudal": 0.12
+    "caudal": 0.04
+  },
+  {
+    "nombre": "Zia - Bera - Zia",
+    "cuenca": "Cantábrica",
+    "caudal": 0.06
   }
 ]
