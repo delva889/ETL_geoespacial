@@ -1,121 +1,143 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
+/*
+  Referencia: hoja del Mapa Topográfico Nacional + anuario hidrológico impreso.
+  Papel, tinta y un único acento: el azul cobalto del agua en cartografía.
+*/
 @theme {
-  /* Superficies */
-  --color-void: #05080c;
-  --color-base: #0a0f15;
-  --color-panel: #0f161e;
-  --color-raised: #151e28;
-  --color-line: #1f2b37;
-  --color-line-strong: #2c3b4a;
+  --color-paper: #f5f4ef;
+  --color-paper-2: #ebe9e1;   /* superficies hundidas: tablas, márgenes */
+  --color-ink: #111110;
+  --color-ink-2: #3c3a35;     /* texto secundario sobre papel */
+  --color-muted: #6b685f;     /* metadatos (contraste ≥ 4,5:1 sobre papel) */
+  --color-rule: #d6d3c8;      /* filetes de 1px */
+  --color-rule-strong: #b7b3a6;
+  --color-cobalt: #0038ff;
+  --color-cobalt-ink: #0029bd; /* hover sobre cobalto */
 
-  /* Texto */
-  --color-fg: #e8eef4;
-  --color-fg-soft: #b6c3cf;
-  --color-muted: #7d8d9c;
+  /* Estado de llenado: del cobalto (lleno) al naranja (crítico) */
+  --color-st-excelente: #0038ff;
+  --color-st-optimo: #6e95ff;
+  --color-st-alerta: #d99a0b;
+  --color-st-critico: #e0400f;
+  --color-st-nodata: #9a978e;
 
-  /* Acentos */
-  --color-signal: #35d0c3;      /* agua / acento principal */
-  --color-signal-dim: #35d0c31a;
-  --color-amber: #f2b84b;       /* energía */
-  --color-amber-dim: #f2b84b1a;
-
-  /* Estado de llenado */
-  --color-st-critico: #ef5b5b;
-  --color-st-alerta: #f2b84b;
-  --color-st-optimo: #35d0c3;
-  --color-st-excelente: #5b9dff;
-  --color-st-nodata: #55636f;
-
-  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
-  --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-sans: "Geist Sans", "Geist", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 @layer base {
-  html { color-scheme: dark; }
-
-  body {
-    background-color: var(--color-base);
-    color: var(--color-fg);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  h1, h2, h3, h4 { font-family: var(--font-display); }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-  ::selection { background-color: var(--color-signal); color: var(--color-void); }
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    text-wrap: balance;
+  }
 
-  :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; }
+  p { text-wrap: pretty; }
+
+  ::selection { background-color: var(--color-cobalt); color: var(--color-paper); }
+
+  :focus-visible { outline: 2px solid var(--color-cobalt); outline-offset: 3px; }
+
+  a { text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+
+  select {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  * { scrollbar-width: thin; scrollbar-color: var(--color-rule-strong) transparent; }
 }
 
-.font-data {
+/* Cifras y coordenadas: siempre tabulares */
+.num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-.eyebrow {
+/* Marginalia de hoja cartográfica: pequeña, en mayúsculas, solo para metadatos */
+.margin-note {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-signal);
+  color: var(--color-muted);
 }
 
-/* Retícula técnica de fondo */
-.grid-bg {
+@layer components {
+/* Enlace editorial: subrayado que se engrosa, sin flechas ni rebotes */
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule-strong);
+  transition: text-decoration-color 200ms, color 200ms;
+}
+.link:hover { text-decoration-color: currentColor; color: var(--color-cobalt); }
+
+/* Botón primario: bloque de tinta que se invierte a cobalto */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid var(--color-ink);
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+}
+.btn-ink { background: var(--color-ink); color: var(--color-paper); }
+.btn-ink:hover { background: var(--color-cobalt); border-color: var(--color-cobalt); }
+.btn-line { background: transparent; color: var(--color-ink); }
+.btn-line:hover { background: var(--color-ink); color: var(--color-paper); }
+}
+
+/* Marco de lámina con marcas de graticula en los bordes */
+.plate-ticks {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
+    repeating-linear-gradient(to right, var(--color-ink) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(to right, var(--color-ink) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(to bottom, var(--color-ink) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(to bottom, var(--color-ink) 0 1px, transparent 1px 64px);
+  background-size: 100% 6px, 100% 6px, 6px 100%, 6px 100%;
+  background-position: top left, bottom left, top left, top right;
+  background-repeat: no-repeat;
 }
-
-/* Esquinas tipo visor */
-.corners { position: relative; }
-.corners::before,
-.corners::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: var(--color-signal);
-  pointer-events: none;
-}
-.corners::before { top: -1px; left: -1px; border-top: 1px solid; border-left: 1px solid; }
-.corners::after { bottom: -1px; right: -1px; border-bottom: 1px solid; border-right: 1px solid; }
 
 /* ---------- Leaflet ---------- */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  background-color: var(--color-void);
+  background-color: var(--color-paper-2);
   font-family: var(--font-sans);
 }
 
-.leaflet-bar a,
-.leaflet-bar a:hover {
-  background-color: rgba(10, 15, 21, 0.9) !important;
-  color: var(--color-fg) !important;
-  border-bottom-color: var(--color-line) !important;
-}
-.leaflet-bar {
-  border: 1px solid var(--color-line-strong) !important;
-  border-radius: 2px !important;
-  box-shadow: none !important;
-}
-.leaflet-bar a:hover { color: var(--color-signal) !important; }
-
 .leaflet-control-scale-line {
-  background: rgba(10, 15, 21, 0.85) !important;
-  color: var(--color-fg-soft) !important;
-  border-color: var(--color-fg-soft) !important;
+  background: rgba(245, 244, 239, 0.92) !important;
+  color: var(--color-ink) !important;
+  border-color: var(--color-ink) !important;
   font-family: var(--font-mono);
   font-size: 10px !important;
 }
 
 .leaflet-control-attribution {
-  background: rgba(5, 8, 12, 0.75) !important;
+  background: rgba(245, 244, 239, 0.9) !important;
   color: var(--color-muted) !important;
   font-family: var(--font-mono) !important;
   font-size: 9px !important;
@@ -126,17 +148,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.leaflet-control-attribution a { color: var(--color-fg-soft) !important; }
+.leaflet-control-attribution a { color: var(--color-ink-2) !important; }
 
 .leaflet-tooltip.embalse-tip {
-  background: rgba(5, 8, 12, 0.92);
-  color: var(--color-fg);
-  border: 1px solid var(--color-line-strong);
-  border-radius: 2px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
   font-family: var(--font-mono);
   font-size: 11px;
-  padding: 4px 8px;
+  padding: 3px 7px;
 }
 .leaflet-tooltip.embalse-tip::before { display: none; }
 
@@ -145,31 +167,6 @@
 .leaflet-container svg:focus,
 .leaflet-container:focus { outline: none; }
 
-/* ---------- Animaciones ---------- */
-@keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-.scanline {
-  background: linear-gradient(to bottom, transparent, rgba(53, 208, 195, 0.08), transparent);
-  animation: scan 7s linear infinite;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-up { animation: fadeUp 0.7s ease-out both; }
-
-@keyframes pulseDot {
-  0% { box-shadow: 0 0 0 0 rgba(53, 208, 195, 0.6); }
-  100% { box-shadow: 0 0 0 8px rgba(53, 208, 195, 0); }
-}
-.live-dot { animation: pulseDot 1.8s ease-out infinite; }
-
 @media (prefers-reduced-motion: reduce) {
-  .scanline, .fade-up, .live-dot { animation: none !important; }
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
-
-/* Barras de desplazamiento discretas */
-.thin-scroll { scrollbar-width: thin; scrollbar-color: var(--color-line-strong) transparent; }

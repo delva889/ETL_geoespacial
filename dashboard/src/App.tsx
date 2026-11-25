@@ -7,7 +7,7 @@ import Metodologia from './pages/Metodologia';
 const Visor = lazy(() => import('./pages/Visor'));
 
 const Cargando = () => (
-  <div className="flex-1 flex items-center justify-center p-16 font-data text-xs text-muted">Cargando visor…</div>
+  <div className="flex-1 flex items-center justify-center p-16 text-ink-2">Cargando el visor…</div>
 );
 
 export default function App() {

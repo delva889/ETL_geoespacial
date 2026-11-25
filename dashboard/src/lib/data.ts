@@ -78,11 +78,11 @@ export const fmt = (n: number, decimals = 0) =>
 export type Estado = 'critico' | 'alerta' | 'optimo' | 'excelente' | 'nodata';
 
 export const ESTADOS: Record<Estado, { label: string; rango: string; color: string }> = {
-  excelente: { label: 'Excelente', rango: '≥ 80 %', color: '#5b9dff' },
-  optimo: { label: 'Óptimo', rango: '60–80 %', color: '#35d0c3' },
-  alerta: { label: 'Alerta', rango: '35–60 %', color: '#f2b84b' },
-  critico: { label: 'Crítico', rango: '< 35 %', color: '#ef5b5b' },
-  nodata: { label: 'Sin lectura', rango: '—', color: '#55636f' },
+  excelente: { label: 'Excelente', rango: '≥ 80 %', color: '#0038ff' },
+  optimo: { label: 'Óptimo', rango: '60–80 %', color: '#6e95ff' },
+  alerta: { label: 'Alerta', rango: '35–60 %', color: '#d99a0b' },
+  critico: { label: 'Crítico', rango: '< 35 %', color: '#e0400f' },
+  nodata: { label: 'Sin lectura', rango: '—', color: '#9a978e' },
 };
 
 export const estadoDe = (pct: number | null): Estado => {

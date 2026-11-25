@@ -1,6 +1,5 @@
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Github, FileText } from 'lucide-react';
 import { REPO_URL, MEMORIA_URL, AUTHOR } from '../lib/data';
 
 const NAV = [
@@ -16,88 +15,60 @@ export default function MainLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-base text-fg">
-      <header className="sticky top-0 z-[1000] border-b border-line bg-void/85 backdrop-blur-md">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-            <Logo />
-            <span className="font-display text-[15px] font-semibold tracking-tight">
-              Hidro<span className="text-signal">GEO</span>
-            </span>
-            <span className="hidden md:inline font-data text-[10px] text-muted border-l border-line pl-2.5 ml-0.5">
-              Embalses de España · ETL geoespacial
-            </span>
+    <div className="min-h-screen flex flex-col bg-paper text-ink">
+      <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[3000] focus:bg-ink focus:text-paper focus:px-3 focus:py-2">
+        Saltar al contenido
+      </a>
+
+      <header className="sticky top-0 z-[1000] bg-paper/95 backdrop-blur-sm border-b border-rule">
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
+          <Link to="/" className="font-serif text-[26px] leading-none tracking-tight" translate="no">
+            HidroGEO
           </Link>
 
-          <nav className="flex items-center gap-1 sm:gap-2">
+          <nav aria-label="Principal" className="flex items-center gap-1 sm:gap-6 text-[15px]">
             {NAV.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end={item.path === '/'}
                 className={({ isActive }) =>
-                  `px-2.5 sm:px-3 py-1.5 text-[13px] sm:text-sm transition-colors ${
-                    isActive ? 'text-fg bg-raised' : 'text-muted hover:text-fg'
+                  `px-2 sm:px-0 py-3 border-b transition-colors duration-200 ${
+                    isActive ? 'border-ink text-ink' : 'border-transparent text-muted hover:text-ink'
                   }`
                 }
               >
                 {item.name}
               </NavLink>
             ))}
-            <span className="hidden sm:block w-px h-5 bg-line mx-1" />
-            <a
-              href={REPO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-sm text-muted hover:text-fg transition-colors"
-              title="Código en GitHub"
-            >
-              <Github size={16} />
-              <span className="hidden lg:inline">Código</span>
+            <a href={REPO_URL} target="_blank" rel="noopener noreferrer"
+              className="hidden sm:block py-3 text-muted hover:text-ink transition-colors duration-200">
+              GitHub
             </a>
           </nav>
         </div>
       </header>
 
-      <main className="flex-grow w-full flex flex-col">
+      <main id="contenido" className="flex-grow w-full flex flex-col">
         <Outlet />
       </main>
 
-      <footer className="border-t border-line bg-void">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-          <div className="max-w-2xl">
-            <p className="font-display text-sm font-semibold text-fg">{AUTHOR}</p>
-            <p className="text-xs text-muted mt-1">
-              Ingeniería de datos geoespaciales · SIG · Observación de la Tierra
-            </p>
-            <p className="text-[11px] text-muted/80 leading-relaxed mt-4">
-              Fuentes: embalses.net · MITECO/SAIH · OMIE · IGN (MDT200) · Copernicus Sentinel-2 vía Earth Search (STAC).
-              Las cifras de energía y valor de mercado son estimaciones orientativas, no lecturas operativas oficiales.
-            </p>
+      <footer className="border-t border-ink">
+        <div className="max-w-[1360px] mx-auto w-full px-5 sm:px-8 py-12 grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="font-serif text-3xl leading-none">{AUTHOR}</p>
+            <p className="text-ink-2 mt-3">Ingeniería de datos geoespaciales, SIG y observación de la Tierra.</p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-line hover:border-signal px-3 py-2 text-xs text-fg-soft hover:text-fg transition-colors">
-              <Github size={14} /> Repositorio
-            </a>
-            <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-line hover:border-signal px-3 py-2 text-xs text-fg-soft hover:text-fg transition-colors">
-              <FileText size={14} /> Memoria técnica (PDF)
-            </a>
-          </div>
+          <ul className="md:col-span-3 space-y-2 text-[15px]">
+            <li><a className="link" href={REPO_URL} target="_blank" rel="noopener noreferrer">Repositorio en GitHub</a></li>
+            <li><a className="link" href={MEMORIA_URL} target="_blank" rel="noopener noreferrer">Memoria técnica (PDF)</a></li>
+          </ul>
+          <p className="md:col-span-4 text-[13px] text-muted leading-relaxed">
+            Datos de embalses.net, SAIH del MITECO, OMIE, MDT200 del IGN y Copernicus Sentinel-2 a través de Earth Search.
+            La energía y el valor de mercado son estimaciones, no lecturas de explotación.
+          </p>
         </div>
       </footer>
     </div>
-  );
-}
-
-function Logo() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="10.5" stroke="#35d0c3" strokeWidth="1.2" opacity="0.5" />
-      <circle cx="12" cy="12" r="6" stroke="#35d0c3" strokeWidth="1.2" />
-      <path d="M12 1v5M12 18v5M1 12h5M18 12h5" stroke="#35d0c3" strokeWidth="1.2" />
-      <circle cx="12" cy="12" r="1.6" fill="#35d0c3" />
-    </svg>
   );
 }

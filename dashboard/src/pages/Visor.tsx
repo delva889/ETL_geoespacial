@@ -6,9 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RTooltip, ResponsiveContainer, Cell, ReferenceLine,
 } from 'recharts';
-import { Search, X, Satellite, Download, ExternalLink, Waves, Layers, Crosshair, ChevronRight } from 'lucide-react';
+import { Search, X, Plus, Minus, LocateFixed } from 'lucide-react';
 import {
-  loadEmbalses, loadCaudales, useLastUpdate, normalizar, estadoDe, ESTADOS, fmt, fechaLarga, copernicusBrowserUrl,
+  loadEmbalses, loadCaudales, useLastUpdate, normalizar, estadoDe, ESTADOS, fmt, copernicusBrowserUrl,
   type Embalse, type CaudalEntry, type EmbalseFeature, type Estado,
 } from '../lib/data';
 
@@ -24,9 +24,9 @@ const BASEMAPS = {
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
     attribution: '© Esri y colaboradores',
   },
-  oscuro: {
-    label: 'Oscuro',
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  claro: {
+    label: 'Claro',
+    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     attribution: '© OpenStreetMap · © CARTO',
   },
 } as const;
@@ -34,8 +34,10 @@ type BasemapKey = keyof typeof BASEMAPS;
 
 const POLY_ZOOM = 9;
 const initialZoom = () => (typeof window !== 'undefined' && window.innerWidth < 640 ? 5 : 6);
-const AXIS = { fontSize: 11, fill: '#7d8d9c', fontFamily: "'IBM Plex Mono', monospace" };
-const TOOLTIP_STYLE = { backgroundColor: '#0a0f15', border: '1px solid #2c3b4a', borderRadius: 2, fontSize: 12, color: '#e8eef4' };
+const AXIS = { fontSize: 12, fill: '#3c3a35', fontFamily: "'JetBrains Mono', monospace" };
+const TOOLTIP_STYLE = { backgroundColor: '#111110', border: 0, borderRadius: 0, fontSize: 12, color: '#f5f4ef' };
+const fechaCorta = (iso: string) =>
+  new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso));
 
 function MapEvents({ onZoom, onMove }: { onZoom: (z: number) => void; onMove: (ll: [number, number] | null) => void }) {
   const map = useMapEvents({
@@ -89,7 +91,6 @@ export default function Visor() {
 
   const selected = useMemo(() => embalses?.find((e) => e.id === selectedId) ?? null, [embalses, selectedId]);
 
-  // ---------- Estadísticas ----------
   const stats = useMemo(() => {
     const conDatos = visibles.filter((e) => e.pct !== null);
     const cap = conDatos.reduce((s, e) => s + e.capacidad, 0);
@@ -102,7 +103,6 @@ export default function Visor() {
       variacion: conDatos.reduce((s, e) => s + e.variacion, 0),
       gwh: visibles.reduce((s, e) => s + e.mwh, 0) / 1000,
       valor: visibles.reduce((s, e) => s + e.valor, 0) / 1e6,
-      conDatos: conDatos.length,
       conteo,
       top: [...visibles].filter((e) => e.mwh > 0).sort((a, b) => b.mwh - a.mwh).slice(0, 10),
     };
@@ -131,7 +131,6 @@ export default function Visor() {
       .slice(0, 8);
   }, [query, embalses]);
 
-  // ---------- Acciones ----------
   const select = useCallback((e: Embalse, fly = true) => {
     setSelectedId(e.id);
     setQuery('');
@@ -162,7 +161,6 @@ export default function Visor() {
     return () => window.removeEventListener('keydown', onKey);
   }, [showCaudales]);
 
-  // ---------- Estilos de capa ----------
   const polyStyle = useCallback(
     (f?: GeoJSON.Feature): PathOptions => {
       const e = f ? byFeature.get(f as unknown as EmbalseFeature) : undefined;
@@ -191,140 +189,86 @@ export default function Visor() {
   const bm = BASEMAPS[basemap];
 
   if (error) {
-    return <Centered>No se pudieron cargar los datos del modelo.</Centered>;
+    return (
+      <div className="flex-1 flex items-center justify-center p-16 text-ink-2">
+        No se han podido cargar los datos. Recarga la página; si persiste, el fichero data.geojson no está publicado.
+      </div>
+    );
   }
 
   return (
-    <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
+    <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-8 pt-12 pb-24 flex flex-col gap-10">
       {/* Cabecera */}
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-        <div>
-          <p className="eyebrow mb-2">Visor cartográfico</p>
-          <h1 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Estado de los embalses de España</h1>
-        </div>
+      <div className="grid md:grid-cols-12 gap-x-8 gap-y-4 items-end">
+        <h1 className="md:col-span-8 text-[48px] sm:text-[72px] leading-[0.92] tracking-[-0.02em]">
+          Estado de los embalses de España
+        </h1>
         {info?.timestamp && (
-          <p className="font-data text-[11px] text-muted flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-signal live-dot" />
-            Actualizado <span className="text-fg-soft">{fechaLarga(info.timestamp)}</span>
-            <span className="text-line-strong">·</span> actualización semanal automática
+          <p className="md:col-span-4 text-[15px] text-ink-2 md:text-right">
+            Datos del {fechaCorta(info.timestamp)}.<br className="hidden md:block" /> Se actualizan cada lunes.
           </p>
         )}
       </div>
 
-      {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-line border border-line">
-        <Kpi label="Llenado medio" sub={cuenca === 'Todas' ? 'España' : cuenca}>
-          <span style={{ color: ESTADOS[estadoDe(stats.pct)].color }}>{embalses ? fmt(stats.pct, 1) : '—'}</span>
-          <span className="text-sm text-muted ml-1">%</span>
-        </Kpi>
-        <Kpi label="Volumen embalsado" sub={`de ${fmt(stats.cap)} hm³ de capacidad`}>
-          {embalses ? fmt(stats.emb) : '—'}<span className="text-sm text-muted ml-1">hm³</span>
-        </Kpi>
-        <Kpi label="Variación semanal" sub="suma de embalses con lectura">
-          <span className={stats.variacion < 0 ? 'text-st-critico' : 'text-signal'}>
-            {embalses ? `${stats.variacion > 0 ? '+' : ''}${fmt(stats.variacion, 1)}` : '—'}
+      {/* Cifras */}
+      <dl className="grid grid-cols-2 lg:grid-cols-5 border-y border-ink">
+        <Cifra label="Llenado medio" nota={cuenca === 'Todas' ? 'España' : cuenca}>
+          <span style={{ color: ESTADOS[estadoDe(stats.pct)].color }}>{embalses ? fmt(stats.pct, 1) : '–'}</span>
+          <Unidad>%</Unidad>
+        </Cifra>
+        <Cifra label="Agua embalsada" nota={`de ${fmt(stats.cap)} hm³ de capacidad`} border>
+          {embalses ? fmt(stats.emb) : '–'}<Unidad>hm³</Unidad>
+        </Cifra>
+        <Cifra label="Cambio semanal" nota="embalses con lectura" borderLg>
+          <span className={stats.variacion < 0 ? 'text-st-critico' : 'text-cobalt'}>
+            {embalses ? `${stats.variacion > 0 ? '+' : ''}${fmt(stats.variacion, 1)}` : '–'}
           </span>
-          <span className="text-sm text-muted ml-1">hm³</span>
-        </Kpi>
-        <Kpi label="Energía almacenada" sub="estimación (MDT + volumen)">
-          <span className="text-amber">{embalses ? fmt(stats.gwh, 1) : '—'}</span>
-          <span className="text-sm text-muted ml-1">GWh</span>
-        </Kpi>
-        <Kpi label="Valor estimado" sub="a precio OMIE, orientativo" className="col-span-2 lg:col-span-1">
-          {embalses ? fmt(stats.valor, 1) : '—'}<span className="text-sm text-muted ml-1">M€</span>
-        </Kpi>
-      </div>
+          <Unidad>hm³</Unidad>
+        </Cifra>
+        <Cifra label="Energía almacenada" nota="estimación" border>
+          {embalses ? fmt(stats.gwh, 1) : '–'}<Unidad>GWh</Unidad>
+        </Cifra>
+        <Cifra label="Valor orientativo" nota="a precio OMIE" borderLg className="col-span-2 lg:col-span-1 border-t lg:border-t-0 border-rule">
+          {embalses ? fmt(stats.valor, 1) : '–'}<Unidad>M€</Unidad>
+        </Cifra>
+      </dl>
 
-      {/* Mapa + panel */}
-      <div className="grid lg:grid-cols-[1fr_380px] gap-4">
-        <div ref={mapBoxRef} className="relative border border-line bg-void h-[62vh] min-h-[480px] lg:h-[72vh] lg:min-h-[600px] scroll-mt-20 overflow-hidden">
-          <MapContainer
-            center={[39.6, -3.6]}
-            zoom={initialZoom()}
-            minZoom={4}
-            maxZoom={17}
-            preferCanvas
-            zoomControl={false}
-            ref={mapRef}
-            style={{ height: '100%', width: '100%' }}
-          >
-            <TileLayer key={basemap} url={bm.url} attribution={bm.attribution} maxZoom={19} />
-            {basemap === 'satelite' && <TileLayer key="labels" url={BASEMAPS.satelite.labels} opacity={0.7} />}
-            <ScaleControl position="bottomleft" imperial={false} />
-            <MapEvents onZoom={setZoom} onMove={setCursor} />
-
-            {zoom >= POLY_ZOOM ? (
-              <GeoJSON
-                key={`poly-${cuenca}-${visibles.length}`}
-                ref={geoRef}
-                data={featureCollection}
-                style={polyStyle}
-                onEachFeature={(f, layer) => {
-                  const e = byFeature.get(f as unknown as EmbalseFeature);
-                  if (!e) return;
-                  layer.bindTooltip(
-                    `${e.nombre} · ${e.pct !== null ? `${fmt(e.pct, 1)} %` : 'sin lectura'}`,
-                    { className: 'embalse-tip', sticky: true },
-                  );
-                  layer.on('click', () => select(e, false));
-                }}
-              />
-            ) : (
-              visibles.map((e) => {
-                if (!e.center) return null;
-                const estado = estadoDe(e.pct);
-                const isSel = e.id === selectedId;
-                const radius = estado === 'nodata' ? 3 : Math.max(4, Math.sqrt(e.capacidad) * 0.36);
-                return (
-                  <CircleMarker
-                    key={e.id}
-                    center={e.center}
-                    radius={isSel ? radius + 3 : radius}
-                    pathOptions={{
-                      fillColor: ESTADOS[estado].color,
-                      fillOpacity: estado === 'nodata' ? 0.55 : 0.85,
-                      color: isSel ? '#ffffff' : '#05080c',
-                      weight: isSel ? 2.5 : 1,
-                    }}
-                    eventHandlers={{ click: () => select(e) }}
-                  >
-                    <Tooltip className="embalse-tip" direction="top" offset={[0, -radius]}>
-                      {e.nombre} · {e.pct !== null ? `${fmt(e.pct, 1)} %` : 'sin lectura'}
-                    </Tooltip>
-                  </CircleMarker>
-                );
-              })
-            )}
-          </MapContainer>
-
-          {/* Controles superpuestos */}
-          <div className="absolute top-3 left-3 right-3 z-[500] flex flex-col sm:flex-row gap-2 pointer-events-none">
-            <div className="relative pointer-events-auto sm:w-72">
-              <div className="flex items-center bg-void/90 backdrop-blur border border-line-strong focus-within:border-signal">
-                <Search size={15} className="text-muted ml-3 shrink-0" />
+      {/* Mapa y ficha */}
+      <div className="grid lg:grid-cols-[1fr_400px] gap-6">
+        <div className="flex flex-col min-w-0">
+          {/* Controles sobre el mapa, fuera de la imagen */}
+          <div className="flex flex-col sm:flex-row sm:items-end gap-3 pb-3">
+            <div className="relative sm:w-80">
+              <label htmlFor="buscar" className="margin-note block mb-1.5">Buscar embalse</label>
+              <div className="flex items-center border border-ink bg-paper focus-within:outline focus-within:outline-2 focus-within:outline-cobalt">
+                <Search size={16} strokeWidth={1.5} className="ml-3 shrink-0 text-ink-2" aria-hidden="true" />
                 <input
+                  id="buscar"
+                  name="buscar"
+                  autoComplete="off"
+                  spellCheck={false}
                   value={query}
                   onChange={(ev) => { setQuery(ev.target.value); setSearchOpen(true); }}
                   onFocus={() => setSearchOpen(true)}
                   onBlur={() => setTimeout(() => setSearchOpen(false), 150)}
                   onKeyDown={(ev) => { if (ev.key === 'Enter' && resultados[0]) select(resultados[0]); }}
-                  placeholder="Buscar embalse…"
-                  aria-label="Buscar embalse"
-                  className="w-full bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-muted"
+                  placeholder="Almendra, Mequinenza…"
+                  className="w-full bg-transparent px-2.5 h-11 text-[15px] outline-none placeholder:text-muted"
                 />
               </div>
               {searchOpen && resultados.length > 0 && (
-                <ul className="absolute mt-1 w-full bg-void/95 backdrop-blur border border-line-strong max-h-72 overflow-auto thin-scroll">
+                <ul className="absolute z-[700] mt-px w-full bg-paper border border-ink max-h-72 overflow-auto">
                   {resultados.map((r) => (
                     <li key={r.id}>
                       <button
+                        type="button"
                         onMouseDown={(ev) => ev.preventDefault()}
                         onClick={() => select(r)}
-                        className="w-full text-left px-3 py-2 hover:bg-raised flex items-center gap-2.5"
+                        className="w-full text-left px-3 py-2.5 hover:bg-ink hover:text-paper flex items-center gap-2.5 transition-colors duration-200"
                       >
-                        <span className="w-2 h-2 shrink-0" style={{ backgroundColor: ESTADOS[estadoDe(r.pct)].color }} />
-                        <span className="text-sm truncate">{r.nombre}</span>
-                        <span className="font-data text-[10px] text-muted ml-auto shrink-0">{r.cuenca}</span>
+                        <span className="w-2.5 h-2.5 shrink-0" style={{ backgroundColor: ESTADOS[estadoDe(r.pct)].color }} aria-hidden="true" />
+                        <span className="text-[15px] truncate">{r.nombre}</span>
+                        <span className="text-[12px] opacity-70 ml-auto shrink-0">{r.cuenca}</span>
                       </button>
                     </li>
                   ))}
@@ -332,107 +276,165 @@ export default function Visor() {
               )}
             </div>
 
-            <select
-              value={cuenca}
-              onChange={(ev) => { setCuenca(ev.target.value); setSelectedId(null); }}
-              aria-label="Filtrar por cuenca"
-              className="pointer-events-auto bg-void/90 backdrop-blur border border-line-strong px-3 py-2 text-sm outline-none focus:border-signal sm:w-48"
+            <div className="sm:w-52">
+              <label htmlFor="cuenca" className="margin-note block mb-1.5">Cuenca</label>
+              <select
+                id="cuenca"
+                value={cuenca}
+                onChange={(ev) => { setCuenca(ev.target.value); setSelectedId(null); }}
+                className="w-full h-[46px] border border-ink px-3 text-[15px] outline-none focus-visible:outline-2 focus-visible:outline-cobalt"
+              >
+                {cuencas.map((c) => <option key={c} value={c}>{c === 'Todas' ? 'Todas las cuencas' : c}</option>)}
+              </select>
+            </div>
+
+            <fieldset className="sm:ml-auto">
+              <legend className="margin-note mb-1.5">Mapa base</legend>
+              <div className="flex border border-ink">
+                {(Object.keys(BASEMAPS) as BasemapKey[]).map((k, i) => (
+                  <button
+                    key={k}
+                    type="button"
+                    aria-pressed={basemap === k}
+                    onClick={() => setBasemap(k)}
+                    className={`h-11 px-4 text-[14px] transition-colors duration-200 ${i > 0 ? 'border-l border-ink' : ''} ${
+                      basemap === k ? 'bg-ink text-paper' : 'hover:bg-paper-2'
+                    }`}
+                  >
+                    {BASEMAPS[k].label}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          </div>
+
+          <div ref={mapBoxRef} className="relative border border-ink h-[62vh] min-h-[460px] lg:h-[70vh] lg:min-h-[600px] scroll-mt-20 overflow-hidden">
+            <MapContainer
+              center={[39.6, -3.6]}
+              zoom={initialZoom()}
+              minZoom={4}
+              maxZoom={17}
+              preferCanvas
+              zoomControl={false}
+              ref={mapRef}
+              style={{ height: '100%', width: '100%' }}
             >
-              {cuencas.map((c) => <option key={c} value={c}>{c === 'Todas' ? 'Todas las cuencas' : c}</option>)}
-            </select>
+              <TileLayer key={basemap} url={bm.url} attribution={bm.attribution} maxZoom={19} />
+              {basemap === 'satelite' && <TileLayer key="labels" url={BASEMAPS.satelite.labels} opacity={0.7} />}
+              <ScaleControl position="bottomleft" imperial={false} />
+              <MapEvents onZoom={setZoom} onMove={setCursor} />
 
-            <div className="pointer-events-auto sm:ml-auto flex border border-line-strong bg-void/90 backdrop-blur self-start">
-              <Layers size={14} className="text-muted mx-2.5 self-center" />
-              {(Object.keys(BASEMAPS) as BasemapKey[]).map((k) => (
-                <button
-                  key={k}
-                  onClick={() => setBasemap(k)}
-                  className={`px-3 py-2 text-xs transition-colors ${basemap === k ? 'bg-signal text-void font-medium' : 'text-fg-soft hover:text-fg'}`}
-                >
-                  {BASEMAPS[k].label}
-                </button>
-              ))}
+              {zoom >= POLY_ZOOM ? (
+                <GeoJSON
+                  key={`poly-${cuenca}-${visibles.length}`}
+                  ref={geoRef}
+                  data={featureCollection}
+                  style={polyStyle}
+                  onEachFeature={(f, layer) => {
+                    const e = byFeature.get(f as unknown as EmbalseFeature);
+                    if (!e) return;
+                    layer.bindTooltip(
+                      `${e.nombre}  ${e.pct !== null ? `${fmt(e.pct, 1)} %` : 'sin lectura'}`,
+                      { className: 'embalse-tip', sticky: true },
+                    );
+                    layer.on('click', () => select(e, false));
+                  }}
+                />
+              ) : (
+                visibles.map((e) => {
+                  if (!e.center) return null;
+                  const estado = estadoDe(e.pct);
+                  const isSel = e.id === selectedId;
+                  const radius = estado === 'nodata' ? 3 : Math.max(4, Math.sqrt(e.capacidad) * 0.36);
+                  return (
+                    <CircleMarker
+                      key={e.id}
+                      center={e.center}
+                      radius={isSel ? radius + 3 : radius}
+                      pathOptions={{
+                        fillColor: ESTADOS[estado].color,
+                        fillOpacity: estado === 'nodata' ? 0.6 : 0.9,
+                        color: isSel ? '#111110' : '#ffffff',
+                        weight: isSel ? 2.5 : 1,
+                      }}
+                      eventHandlers={{ click: () => select(e) }}
+                    >
+                      <Tooltip className="embalse-tip" direction="top" offset={[0, -radius]}>
+                        {e.nombre}  {e.pct !== null ? `${fmt(e.pct, 1)} %` : 'sin lectura'}
+                      </Tooltip>
+                    </CircleMarker>
+                  );
+                })
+              )}
+            </MapContainer>
+
+            {/* Zoom */}
+            <div className="absolute right-3 top-3 z-[500] flex flex-col border border-ink bg-paper">
+              <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.5} /></MapBtn>
+              <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.5} /></MapBtn>
+              <MapBtn label="Ver toda España" onClick={resetView}><LocateFixed size={16} strokeWidth={1.5} /></MapBtn>
             </div>
+
+            {/* Coordenadas */}
+            <p className="hidden sm:block absolute right-3 bottom-6 z-[500] num text-[11px] bg-paper border border-ink px-2 py-1">
+              {cursor ? `${cursor[0].toFixed(4)}° N  ${Math.abs(cursor[1]).toFixed(4)}° ${cursor[1] < 0 ? 'W' : 'E'}` : 'EPSG:4326'}
+              <span className="text-muted">  z{zoom}</span>
+            </p>
+
+            {!embalses && (
+              <div className="absolute inset-0 z-[600] flex items-center justify-center bg-paper/80" aria-live="polite">
+                <p className="text-ink-2">Cargando 805 embalses…</p>
+              </div>
+            )}
           </div>
 
-          {/* Zoom + reset */}
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 z-[500] flex flex-col border border-line-strong bg-void/90 backdrop-blur">
-            <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}>+</MapBtn>
-            <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}>−</MapBtn>
-            <MapBtn label="Vista de España" onClick={resetView}><Crosshair size={14} /></MapBtn>
+          {/* Leyenda, bajo el mapa como en una hoja */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3 text-[13px] text-ink-2">
+            <span className="margin-note">Llenado</span>
+            {(Object.keys(ESTADOS) as Estado[]).map((k) => (
+              <span key={k} className="inline-flex items-center gap-2">
+                <span className="w-3 h-3 shrink-0" style={{ backgroundColor: ESTADOS[k].color }} aria-hidden="true" />
+                {ESTADOS[k].label}
+                {k !== 'nodata' && <span className="text-muted">{ESTADOS[k].rango}</span>}
+                <span className="num text-[11px] text-muted">({stats.conteo[k]})</span>
+              </span>
+            ))}
           </div>
-
-          {/* Leyenda */}
-          <div className="absolute left-3 right-14 sm:right-auto bottom-8 sm:bottom-10 z-[500] bg-void/90 backdrop-blur border border-line-strong px-3 py-2 sm:py-2.5">
-            <p className="hidden sm:block font-data text-[10px] text-muted mb-1.5 tracking-wider">LLENADO</p>
-            <ul className="flex flex-wrap gap-x-3 gap-y-1 sm:block sm:space-y-1">
-              {(Object.keys(ESTADOS) as Estado[]).map((k) => (
-                <li key={k} className="flex items-center gap-2 text-[11px]">
-                  <span className="w-2.5 h-2.5 shrink-0" style={{ backgroundColor: ESTADOS[k].color }} />
-                  <span className="text-fg-soft sm:w-[70px]">{ESTADOS[k].label}</span>
-                  <span className="hidden sm:inline font-data text-[10px] text-muted w-12">{ESTADOS[k].rango}</span>
-                  <span className="hidden sm:inline font-data text-[10px] text-fg-soft w-7 text-right">{stats.conteo[k]}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Coordenadas */}
-          <div className="hidden sm:block absolute right-3 bottom-7 z-[500] font-data text-[10.5px] text-fg-soft bg-void/85 border border-line-strong px-2.5 py-1">
-            {cursor ? `${cursor[0].toFixed(4)}° N  ${Math.abs(cursor[1]).toFixed(4)}° ${cursor[1] < 0 ? 'W' : 'E'}` : 'EPSG:4326'}
-            <span className="text-muted"> · z{zoom}</span>
-          </div>
-
-          {!embalses && (
-            <div className="absolute inset-0 z-[600] flex items-center justify-center bg-void/70">
-              <p className="font-data text-xs text-fg-soft flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-signal live-dot" /> Cargando modelo geoespacial…
-              </p>
-            </div>
-          )}
         </div>
 
-        {/* Panel lateral */}
-        <aside className="border border-line bg-panel flex flex-col lg:h-[72vh] lg:min-h-[600px] overflow-hidden">
+        {/* Ficha */}
+        <aside className="border border-ink bg-paper flex flex-col lg:mt-[80px] lg:h-[70vh] lg:min-h-[600px] overflow-hidden" aria-live="polite">
           {selected ? (
-            <Detalle e={selected} onClose={() => setSelectedId(null)} />
+            <Ficha e={selected} onClose={() => setSelectedId(null)} />
           ) : (
             <>
-              <div className="px-5 pt-5 pb-3 border-b border-line">
-                <p className="eyebrow mb-1">Ranking</p>
-                <h2 className="font-display font-semibold">Mayor energía almacenada</h2>
-                <p className="text-xs text-muted mt-1">Selecciona un embalse en la lista o en el mapa.</p>
+              <div className="px-5 pt-5 pb-4 border-b border-ink">
+                <h2 className="text-[32px] leading-none">Más energía almacenada</h2>
+                <p className="text-[14px] text-ink-2 mt-2">Elige un embalse aquí o en el mapa para ver su ficha.</p>
               </div>
-              <ol className="flex-1 overflow-y-auto thin-scroll divide-y divide-line">
-                {stats.top.map((e, i) => {
-                  const share = stats.top[0] ? (e.mwh / stats.top[0].mwh) * 100 : 0;
-                  return (
-                    <li key={e.id}>
-                      <button onClick={() => select(e)} className="w-full text-left px-5 py-3 hover:bg-raised transition-colors group">
-                        <div className="flex items-baseline gap-3">
-                          <span className="font-data text-[11px] text-muted w-5">{String(i + 1).padStart(2, '0')}</span>
-                          <span className="text-sm truncate flex-1">{e.nombre}</span>
-                          <span className="font-data text-xs text-amber shrink-0">{fmt(e.mwh / 1000, 1)} GWh</span>
-                        </div>
-                        <div className="ml-8 mt-1.5 h-[3px] bg-line">
-                          <div className="h-full bg-amber/80" style={{ width: `${share}%` }} />
-                        </div>
-                      </button>
-                    </li>
-                  );
-                })}
-                {embalses && stats.top.length === 0 && <li className="p-5 text-sm text-muted">Sin datos para esta cuenca.</li>}
+              <ol className="flex-1 overflow-y-auto">
+                {stats.top.map((e, i) => (
+                  <li key={e.id} className="border-b border-rule">
+                    <button
+                      type="button"
+                      onClick={() => select(e)}
+                      className="w-full text-left px-5 py-3 flex items-baseline gap-3 hover:bg-ink hover:text-paper transition-colors duration-200"
+                    >
+                      <span className="num text-[11px] opacity-60 w-5">{i + 1}</span>
+                      <span className="text-[15px] truncate flex-1">{e.nombre}</span>
+                      <span className="num text-[13px] shrink-0">{fmt(e.mwh / 1000, 1)} GWh</span>
+                    </button>
+                  </li>
+                ))}
+                {embalses && stats.top.length === 0 && <li className="p-5 text-ink-2">Esta cuenca no tiene embalses con estimación de energía.</li>}
               </ol>
               <button
+                type="button"
                 onClick={() => setShowCaudales(true)}
-                className="m-4 flex items-center gap-3 border border-line hover:border-signal p-3 text-left transition-colors group"
+                className="m-4 h-12 border border-ink px-4 flex items-center justify-between text-[15px] hover:bg-ink hover:text-paper transition-colors duration-200"
               >
-                <Waves size={18} className="text-signal shrink-0" strokeWidth={1.5} />
-                <span className="flex-1">
-                  <span className="block text-sm">Red fluvial y caudales</span>
-                  <span className="font-data text-[10px] text-muted">{caudales.length} estaciones SAIH</span>
-                </span>
-                <ChevronRight size={16} className="text-muted group-hover:text-signal group-hover:translate-x-0.5 transition-all" />
+                Ver caudales de {caudales.length} estaciones
+                <span className="num text-[11px] opacity-70">SAIH</span>
               </button>
             </>
           )}
@@ -440,173 +442,181 @@ export default function Visor() {
       </div>
 
       {/* Gráficos */}
-      <div className="grid lg:grid-cols-2 gap-4">
-        <ChartCard titulo="Llenado por cuenca" sub="Volumen embalsado / capacidad de los embalses con lectura (%)">
+      <div className="grid lg:grid-cols-2 gap-x-12 gap-y-16 pt-8 border-t border-ink">
+        <Grafico titulo="Llenado por cuenca" nota="Agua embalsada sobre capacidad, solo embalses con lectura.">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={porCuenca} layout="vertical" margin={{ top: 0, right: 24, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke="#1f2b37" horizontal={false} />
-              <XAxis type="number" domain={[0, 100]} tick={AXIS} axisLine={false} tickLine={false} unit=" %" />
-              <YAxis dataKey="name" type="category" width={100} tick={{ ...AXIS, fill: '#b6c3cf' }} axisLine={false} tickLine={false} />
-              <RTooltip cursor={{ fill: '#151e28' }} contentStyle={TOOLTIP_STYLE} formatter={(v: number) => [`${fmt(v, 1)} %`, 'Llenado']} />
+              <CartesianGrid stroke="#d6d3c8" horizontal={false} />
+              <XAxis type="number" domain={[0, 100]} tick={AXIS} axisLine={{ stroke: '#111110' }} tickLine={false} unit=" %" />
+              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#111110' }} axisLine={false} tickLine={false} />
+              <RTooltip cursor={{ fill: '#ebe9e1' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#f5f4ef' }} formatter={(v: number) => [`${fmt(v, 1)} %`, 'Llenado']} />
               <Bar dataKey="pct" barSize={14}>
                 {porCuenca.map((c) => <Cell key={c.name} fill={ESTADOS[estadoDe(c.pct)].color} />)}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </ChartCard>
-        <ChartCard titulo="Variación semanal por cuenca" sub="Cambio neto de volumen respecto a la semana anterior (hm³)">
+        </Grafico>
+        <Grafico titulo="Cambio en la última semana" nota="Variación neta de volumen por cuenca, en hm³.">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={porCuenca} layout="vertical" margin={{ top: 0, right: 24, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke="#1f2b37" horizontal={false} />
-              <XAxis type="number" tick={AXIS} axisLine={false} tickLine={false} />
-              <YAxis dataKey="name" type="category" width={100} tick={{ ...AXIS, fill: '#b6c3cf' }} axisLine={false} tickLine={false} />
-              <RTooltip cursor={{ fill: '#151e28' }} contentStyle={TOOLTIP_STYLE} formatter={(v: number) => [`${v > 0 ? '+' : ''}${fmt(v, 1)} hm³`, 'Variación']} />
-              <ReferenceLine x={0} stroke="#7d8d9c" />
+              <CartesianGrid stroke="#d6d3c8" horizontal={false} />
+              <XAxis type="number" tick={AXIS} axisLine={{ stroke: '#111110' }} tickLine={false} />
+              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#111110' }} axisLine={false} tickLine={false} />
+              <RTooltip cursor={{ fill: '#ebe9e1' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#f5f4ef' }} formatter={(v: number) => [`${v > 0 ? '+' : ''}${fmt(v, 1)} hm³`, 'Cambio']} />
+              <ReferenceLine x={0} stroke="#111110" />
               <Bar dataKey="variacion" barSize={14}>
-                {porCuenca.map((c) => <Cell key={c.name} fill={c.variacion < 0 ? '#ef5b5b' : '#35d0c3'} />)}
+                {porCuenca.map((c) => <Cell key={c.name} fill={c.variacion < 0 ? '#e0400f' : '#0038ff'} />)}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </ChartCard>
+        </Grafico>
       </div>
 
-      {showCaudales && <CaudalesModal data={caudales} onClose={() => setShowCaudales(false)} />}
+      {showCaudales && <Caudales data={caudales} onClose={() => setShowCaudales(false)} />}
     </div>
   );
 }
 
 // ---------------- Subcomponentes ----------------
 
-function Kpi({ label, sub, children, className = '' }: { label: string; sub: string; children: React.ReactNode; className?: string }) {
+function Unidad({ children }: { children: React.ReactNode }) {
+  return <span className="text-[15px] text-muted ml-1.5 font-sans">{children}</span>;
+}
+
+function Cifra({ label, nota, children, border, borderLg, className = '' }: {
+  label: string; nota: string; children: React.ReactNode; border?: boolean; borderLg?: boolean; className?: string;
+}) {
   return (
-    <div className={`bg-panel px-5 py-4 ${className}`}>
-      <p className="text-[11px] text-muted">{label}</p>
-      <p className="font-data text-2xl sm:text-[28px] leading-tight mt-1">{children}</p>
-      <p className="text-[10.5px] text-muted/80 mt-1 truncate">{sub}</p>
+    <div className={`py-6 pr-4 ${border ? 'border-l border-rule pl-5' : ''} ${borderLg ? 'lg:border-l lg:border-rule lg:pl-5' : ''} ${className}`}>
+      <dt className="text-[14px] text-ink-2">{label}</dt>
+      <dd className="num text-[34px] sm:text-[40px] leading-none tracking-[-0.03em] mt-3">{children}</dd>
+      <dd className="text-[13px] text-muted mt-2 truncate">{nota}</dd>
     </div>
   );
 }
 
 function MapBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button onClick={onClick} aria-label={label} title={label}
-      className="w-9 h-9 flex items-center justify-center text-fg-soft hover:text-signal border-b last:border-b-0 border-line text-lg leading-none">
+    <button type="button" onClick={onClick} aria-label={label} title={label}
+      className="w-11 h-11 flex items-center justify-center border-b last:border-b-0 border-ink hover:bg-ink hover:text-paper transition-colors duration-200">
       {children}
     </button>
   );
 }
 
-function ChartCard({ titulo, sub, children }: { titulo: string; sub: string; children: React.ReactNode }) {
+function Grafico({ titulo, nota, children }: { titulo: string; nota: string; children: React.ReactNode }) {
   return (
-    <div className="border border-line bg-panel p-5">
-      <h3 className="font-display font-semibold">{titulo}</h3>
-      <p className="text-xs text-muted mt-0.5 mb-5">{sub}</p>
-      <div className="h-[320px]">{children}</div>
-    </div>
+    <section>
+      <h2 className="text-[36px] leading-none">{titulo}</h2>
+      <p className="text-[14px] text-ink-2 mt-2 mb-6">{nota}</p>
+      <div className="h-[340px]">{children}</div>
+    </section>
   );
 }
 
-function Centered({ children }: { children: React.ReactNode }) {
-  return <div className="flex-1 flex items-center justify-center p-16 font-data text-sm text-muted">{children}</div>;
-}
-
-function Detalle({ e, onClose }: { e: Embalse; onClose: () => void }) {
+function Ficha({ e, onClose }: { e: Embalse; onClose: () => void }) {
   const estado = estadoDe(e.pct);
   const color = ESTADOS[estado].color;
   const energiaPct = e.mwhMax > 0 ? (e.mwh / e.mwhMax) * 100 : 0;
 
   return (
-    <div className="flex-1 overflow-y-auto thin-scroll">
-      <div className="px-5 pt-5 pb-4 border-b border-line flex items-start gap-3">
+    <div className="flex-1 overflow-y-auto">
+      <div className="px-5 pt-5 pb-4 border-b border-ink flex items-start gap-3">
         <div className="flex-1 min-w-0">
-          <p className="eyebrow mb-1">Cuenca · {e.cuenca}</p>
-          <h2 className="font-display text-xl font-semibold leading-tight">{e.nombre}</h2>
+          <p className="text-[14px] text-ink-2">Cuenca del {e.cuenca}</p>
+          <h2 className="text-[40px] leading-[0.95] mt-1 break-words">{e.nombre}</h2>
           {e.center && (
-            <p className="font-data text-[10.5px] text-muted mt-1">
-              {e.center[0].toFixed(4)}° N · {Math.abs(e.center[1]).toFixed(4)}° {e.center[1] < 0 ? 'W' : 'E'}
+            <p className="num text-[11px] text-muted mt-2">
+              {e.center[0].toFixed(4)}° N  {Math.abs(e.center[1]).toFixed(4)}° {e.center[1] < 0 ? 'W' : 'E'}
             </p>
           )}
         </div>
-        <button onClick={onClose} aria-label="Cerrar ficha" className="p-1 text-muted hover:text-fg"><X size={18} /></button>
+        <button type="button" onClick={onClose} aria-label="Cerrar ficha"
+          className="w-11 h-11 -mr-2 -mt-2 flex items-center justify-center hover:bg-ink hover:text-paper transition-colors duration-200">
+          <X size={18} strokeWidth={1.5} />
+        </button>
       </div>
 
-      {/* Estado hídrico */}
-      <section className="px-5 py-4 border-b border-line">
-        <p className="font-data text-[10px] text-muted tracking-wider mb-2">ESTADO HÍDRICO</p>
+      <Bloque titulo="Agua">
         {e.pct !== null ? (
           <>
-            <div className="flex items-end justify-between">
-              <p className="font-data text-4xl" style={{ color }}>{fmt(e.pct, 1)}<span className="text-base ml-1">%</span></p>
-              <span className="text-xs px-2 py-0.5 border" style={{ color, borderColor: color }}>{ESTADOS[estado].label}</span>
+            <div className="flex items-baseline justify-between">
+              <p className="num text-[48px] leading-none tracking-[-0.03em]" style={{ color }}>
+                {fmt(e.pct, 1)}<span className="text-[18px] ml-1">%</span>
+              </p>
+              <p className="text-[14px]" style={{ color }}>{ESTADOS[estado].label}</p>
             </div>
-            <div className="h-1.5 bg-line mt-3"><div className="h-full" style={{ width: `${e.pct}%`, backgroundColor: color }} /></div>
-            <dl className="grid grid-cols-3 gap-2 mt-4 text-center">
-              <Dato k="Embalsada" v={`${fmt(e.embalsada ?? 0)} hm³`} />
-              <Dato k="Capacidad" v={`${fmt(e.capacidad)} hm³`} />
-              <Dato k="Semana" v={`${e.variacion > 0 ? '+' : ''}${fmt(e.variacion, 1)} hm³`}
-                color={e.variacion < 0 ? '#ef5b5b' : e.variacion > 0 ? '#35d0c3' : undefined} />
-            </dl>
+            <div className="h-2 bg-paper-2 mt-4" role="presentation"><div className="h-full" style={{ width: `${e.pct}%`, backgroundColor: color }} /></div>
+            <Tabla filas={[
+              ['Embalsada', `${fmt(e.embalsada ?? 0)} hm³`],
+              ['Capacidad', `${fmt(e.capacidad)} hm³`],
+              ['Cambio semanal', `${e.variacion > 0 ? '+' : ''}${fmt(e.variacion, 1)} hm³`],
+            ]} />
           </>
         ) : (
-          <p className="text-sm text-muted">Sin lectura de nivel en el último ciclo de actualización.</p>
+          <p className="text-[15px] text-ink-2">Este embalse no tiene lectura de nivel en la última actualización.</p>
         )}
-      </section>
+      </Bloque>
 
-      {/* Energía */}
       {e.mwhMax > 0 && (
-        <section className="px-5 py-4 border-b border-line">
-          <p className="font-data text-[10px] text-muted tracking-wider mb-2">ENERGÍA POTENCIAL · ESTIMACIÓN</p>
+        <Bloque titulo="Energía estimada">
           <div className="flex items-baseline justify-between">
-            <p className="font-data text-xl text-amber">{fmt(e.mwh)} <span className="text-xs">MWh</span></p>
-            <p className="font-data text-[11px] text-muted">máx. {fmt(e.mwhMax)} MWh</p>
+            <p className="num text-[24px]">{fmt(e.mwh)} <span className="text-[13px] font-sans text-muted">MWh</span></p>
+            <p className="num text-[12px] text-muted">máx. {fmt(e.mwhMax)}</p>
           </div>
-          <div className="h-1.5 bg-line mt-2"><div className="h-full bg-amber" style={{ width: `${energiaPct}%` }} /></div>
-          <p className="text-xs text-muted mt-3">
-            Valor orientativo a precio OMIE: <span className="font-data text-fg-soft">{fmt(e.valor)} €</span>
-          </p>
-        </section>
+          <div className="h-2 bg-paper-2 mt-3" role="presentation"><div className="h-full bg-ink" style={{ width: `${energiaPct}%` }} /></div>
+          <p className="text-[14px] text-ink-2 mt-3">Valor orientativo a precio OMIE: <span className="num">{fmt(e.valor)} €</span></p>
+        </Bloque>
       )}
 
-      {/* Sentinel-2 */}
       {e.escena && (
-        <section className="px-5 py-4">
-          <p className="font-data text-[10px] text-muted tracking-wider mb-2 flex items-center gap-1.5">
-            <Satellite size={12} className="text-signal" /> ESCENA SENTINEL-2 VINCULADA
-          </p>
-          <dl className="grid grid-cols-3 gap-2 text-center">
-            <Dato k="Plataforma" v={e.escena.satelite} />
-            <Dato k="Tesela MGRS" v={e.escena.tile} />
-            <Dato k="Captura" v={new Date(e.escena.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })} />
-          </dl>
-          <p className="text-[11px] text-muted mt-3">Nivel L2A · color verdadero (TCI) · seleccionada por menor nubosidad.</p>
-          <div className="grid gap-2 mt-3">
+        <Bloque titulo="Escena Sentinel-2">
+          <Tabla filas={[
+            ['Satélite', e.escena.satelite],
+            ['Tesela MGRS', e.escena.tile],
+            ['Fecha de captura', new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(e.escena.fecha))],
+            ['Producto', 'L2A, color verdadero'],
+          ]} />
+          <div className="grid gap-2 mt-4">
             {e.center && (
               <a href={copernicusBrowserUrl(e.center[0], e.center[1], e.escena.fecha)} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-signal text-void text-sm font-medium px-3 py-2 hover:bg-fg transition-colors">
-                <ExternalLink size={14} /> Ver en Copernicus Browser
+                className="btn btn-ink justify-center">
+                Abrir en Copernicus Browser
               </a>
             )}
-            <a href={e.escena.url} target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 border border-line-strong text-sm px-3 py-2 text-fg-soft hover:text-fg hover:border-signal transition-colors">
-              <Download size={14} /> GeoTIFF (COG) de la tesela completa
+            <a href={e.escena.url} target="_blank" rel="noopener noreferrer" className="link text-[14px] text-center py-2">
+              Descargar el GeoTIFF de la tesela completa
             </a>
           </div>
-        </section>
+        </Bloque>
       )}
     </div>
   );
 }
 
-function Dato({ k, v, color }: { k: string; v: string; color?: string }) {
+function Bloque({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <div className="bg-void border border-line px-2 py-2">
-      <dt className="text-[10px] text-muted">{k}</dt>
-      <dd className="font-data text-[12px] mt-0.5" style={color ? { color } : undefined}>{v}</dd>
-    </div>
+    <section className="px-5 py-5 border-b border-rule last:border-b-0">
+      <h3 className="margin-note mb-3">{titulo}</h3>
+      {children}
+    </section>
   );
 }
 
-function CaudalesModal({ data, onClose }: { data: CaudalEntry[]; onClose: () => void }) {
+function Tabla({ filas }: { filas: [string, string][] }) {
+  return (
+    <dl className="mt-4 text-[14px]">
+      {filas.map(([k, v]) => (
+        <div key={k} className="flex justify-between gap-4 py-1.5 border-t border-rule">
+          <dt className="text-ink-2">{k}</dt>
+          <dd className="num text-[13px] text-right">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function Caudales({ data, onClose }: { data: CaudalEntry[]; onClose: () => void }) {
   const [q, setQ] = useState('');
   const lista = useMemo(() => {
     const t = q.toLowerCase();
@@ -617,38 +627,42 @@ function CaudalesModal({ data, onClose }: { data: CaudalEntry[]; onClose: () => 
   const max = lista[0]?.caudal || 1;
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-void/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-panel border border-line-strong w-full max-w-3xl max-h-[85vh] flex flex-col" onClick={(ev) => ev.stopPropagation()}
-        role="dialog" aria-modal="true" aria-label="Caudales de la red fluvial">
-        <div className="p-5 border-b border-line flex items-start gap-4">
+    <div className="fixed inset-0 z-[2000] bg-ink/60 flex items-center justify-center p-4 overscroll-contain" onClick={onClose}>
+      <div className="bg-paper border border-ink w-full max-w-3xl max-h-[85vh] flex flex-col" onClick={(ev) => ev.stopPropagation()}
+        role="dialog" aria-modal="true" aria-labelledby="caudales-titulo">
+        <div className="px-6 pt-6 pb-4 border-b border-ink flex items-start gap-4">
           <div className="flex-1">
-            <p className="eyebrow mb-1">SAIH · MITECO</p>
-            <h3 className="font-display text-lg font-semibold">Caudales de la red fluvial</h3>
-            <p className="text-xs text-muted mt-1">{data.length} estaciones de aforo consolidadas desde las confederaciones hidrográficas.</p>
+            <h2 id="caudales-titulo" className="text-[40px] leading-none">Caudales de los ríos</h2>
+            <p className="text-[14px] text-ink-2 mt-2">{data.length} estaciones de aforo de los SAIH, del caudal mayor al menor.</p>
           </div>
-          <button onClick={onClose} aria-label="Cerrar" className="p-1 text-muted hover:text-fg"><X size={20} /></button>
+          <button type="button" onClick={onClose} aria-label="Cerrar caudales"
+            className="w-11 h-11 flex items-center justify-center hover:bg-ink hover:text-paper transition-colors duration-200">
+            <X size={20} strokeWidth={1.5} />
+          </button>
         </div>
-        <div className="p-4 border-b border-line">
-          <div className="flex items-center bg-void border border-line focus-within:border-signal">
-            <Search size={15} className="text-muted ml-3" />
-            <input autoFocus value={q} onChange={(ev) => setQ(ev.target.value)} placeholder="Buscar río, estación o cuenca…"
-              className="w-full bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-muted" />
+        <div className="px-6 py-4 border-b border-rule">
+          <label htmlFor="buscar-caudal" className="sr-only">Buscar río, estación o cuenca</label>
+          <div className="flex items-center border border-ink">
+            <Search size={16} strokeWidth={1.5} className="ml-3 text-ink-2" aria-hidden="true" />
+            <input id="buscar-caudal" name="buscar-caudal" autoComplete="off" value={q} onChange={(ev) => setQ(ev.target.value)}
+              placeholder="Río Miño, Ebro…"
+              className="w-full bg-transparent px-2.5 h-11 text-[15px] outline-none placeholder:text-muted" />
           </div>
         </div>
-        <ul className="flex-1 overflow-auto thin-scroll divide-y divide-line">
+        <ul className="flex-1 overflow-auto overscroll-contain">
           {lista.map((c, i) => (
-            <li key={`${c.nombre}-${i}`} className="px-5 py-2.5 grid grid-cols-[1fr_auto] gap-x-4 items-center">
+            <li key={`${c.nombre}-${i}`} className="px-6 py-3 grid grid-cols-[1fr_auto] gap-x-6 items-center border-b border-rule">
               <div className="min-w-0">
-                <p className="text-sm truncate" title={c.nombre}>{c.nombre}</p>
-                <p className="font-data text-[10px] text-muted">{c.cuenca}</p>
+                <p className="text-[15px] truncate" title={c.nombre}>{c.nombre}</p>
+                <p className="text-[13px] text-muted">{c.cuenca}</p>
               </div>
               <div className="text-right">
-                <p className="font-data text-sm text-signal">{fmt(c.caudal, 2)} <span className="text-[10px] text-muted">m³/s</span></p>
-                <div className="w-24 h-[3px] bg-line mt-1 ml-auto"><div className="h-full bg-signal/70" style={{ width: `${(c.caudal / max) * 100}%` }} /></div>
+                <p className="num text-[14px]">{fmt(c.caudal, 2)} <span className="text-[11px] text-muted">m³/s</span></p>
+                <div className="w-28 h-1 bg-paper-2 mt-1.5 ml-auto"><div className="h-full bg-cobalt" style={{ width: `${(c.caudal / max) * 100}%` }} /></div>
               </div>
             </li>
           ))}
-          {lista.length === 0 && <li className="p-10 text-center text-sm text-muted">Sin resultados.</li>}
+          {lista.length === 0 && <li className="p-10 text-center text-ink-2">Ninguna estación coincide con «{q}».</li>}
         </ul>
       </div>
     </div>

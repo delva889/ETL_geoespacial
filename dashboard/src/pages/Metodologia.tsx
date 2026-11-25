@@ -1,130 +1,129 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileText, Github } from 'lucide-react';
 import { REPO_URL, MEMORIA_URL } from '../lib/data';
 
 const FUENTES = [
-  { fuente: 'embalses.net', dato: 'Capacidad, volumen embalsado y variación semanal', acceso: 'Web scraping (HTML)', ciclo: 'Semanal · CI' },
-  { fuente: 'MITECO · SAIH', dato: 'Caudal en estaciones de aforo de cada confederación', acceso: 'APIs REST, JWT, HTML, Selenium', ciclo: 'Semanal · CI' },
-  { fuente: 'OMIE', dato: 'Precio marginal del mercado diario (€/MWh)', acceso: 'Fichero marginalpdbc', ciclo: 'Semanal · CI' },
-  { fuente: 'IGN · MDT200', dato: 'Cotas del terreno para el salto hidráulico', acceso: 'GeoTIFF', ciclo: 'Estático · FME' },
-  { fuente: 'Geometrías de embalses', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile → PostGIS', ciclo: 'Estático' },
-  { fuente: 'Earth Search (STAC)', dato: 'Escenas Copernicus Sentinel-2 L2A', acceso: 'API STAC · COG en AWS', ciclo: 'Estático · FME' },
+  { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping de HTML', ciclo: 'Cada lunes' },
+  { fuente: 'SAIH del MITECO', dato: 'Caudal en las estaciones de aforo de cada confederación', acceso: 'API REST, JWT, HTML, Selenium', ciclo: 'Cada lunes' },
+  { fuente: 'OMIE', dato: 'Precio marginal del mercado diario', acceso: 'Fichero marginalpdbc', ciclo: 'Cada lunes' },
+  { fuente: 'IGN, MDT200', dato: 'Cotas del terreno para calcular el salto', acceso: 'GeoTIFF', ciclo: 'Fijo, en FME' },
+  { fuente: 'Geometrías de embalses', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile a PostGIS', ciclo: 'Fijo' },
+  { fuente: 'Earth Search (STAC)', dato: 'Escenas Sentinel-2 L2A', acceso: 'API STAC, COG en AWS', ciclo: 'Fijo, en FME' },
 ];
 
-const PASOS = [
-  { file: 'descarga_saih.py', txt: 'Descarga los caudales de cada SAIH adaptándose a su tecnología: API JSON, HTML con datos incrustados, tokens JWT o navegación con Selenium.' },
-  { file: 'scraping.py', txt: 'Extrae el estado de los embalses por cuenca, normaliza las cifras (hm³) y lo guarda en CSV y, si está disponible, en PostgreSQL.' },
-  { file: 'consolidate_caudales.py', txt: 'Unifica los ficheros heterogéneos de las confederaciones en un único caudales.json.' },
-  { file: 'geom.py', txt: 'Empareja nombres entre el inventario de geometrías y los datos tabulares con similitud textual (rapidfuzz) y exporta a PostGIS con ogr2ogr.' },
-  { file: 'FME · geocodingAPI / satelite / energia', txt: 'Geocodifica estaciones, vincula la mejor escena Sentinel-2 de cada embalse y calcula el salto y la energía sobre el MDT.' },
-  { file: 'actualizar_geojson.py', txt: 'Fusiona los niveles nuevos y el precio OMIE del día sobre el GeoJSON publicado, sin tocar geometría ni análisis ráster.' },
-  { file: 'actualizar-datos.yml', txt: 'GitHub Actions ejecuta la cadena cada lunes, commitea los datos, compila la web y la publica en GitHub Pages.' },
+const SCRIPTS = [
+  { file: 'descarga_saih.py', txt: 'Descarga los caudales de cada SAIH adaptándose a cómo publica cada uno: API JSON, HTML con datos incrustados, tokens JWT o navegación con Selenium.' },
+  { file: 'scraping.py', txt: 'Extrae el estado de los embalses por cuenca, normaliza las cifras a hm³ y lo guarda en CSV y, si hay conexión, en PostgreSQL.' },
+  { file: 'consolidate_caudales.py', txt: 'Une los ficheros de las distintas confederaciones en un solo caudales.json.' },
+  { file: 'geom.py', txt: 'Empareja los nombres del inventario de geometrías con los datos tabulares por similitud de texto (rapidfuzz) y exporta a PostGIS con ogr2ogr.' },
+  { file: 'geocodingAPI, satelite y energia.fmw', txt: 'Geocodifican las estaciones, vinculan la mejor escena Sentinel-2 de cada embalse y calculan salto y energía sobre el MDT.' },
+  { file: 'actualizar_geojson.py', txt: 'Fusiona los niveles nuevos y el precio OMIE del día sobre el GeoJSON publicado, sin tocar la geometría ni el análisis ráster.' },
+  { file: 'actualizar-datos.yml', txt: 'GitHub Actions ejecuta la cadena cada lunes, guarda los datos en el repositorio, compila la web y la publica en GitHub Pages.' },
 ];
 
 const DECISIONES = [
-  ['GeoJSON (EPSG:4326) como formato de salida', 'Interoperable, legible por cualquier SIG y servible como fichero estático sin backend.'],
-  ['Fallos aislados por fuente', 'Si una confederación cambia su web, el resto del pipeline sigue publicando.'],
-  ['Geometría simplificada para la web', 'Douglas-Peucker (≈10 m) en el build: ~80 % menos vértices sin cambio visible a escala de embalse.'],
-  ['Separar lo dinámico de lo costoso', 'Niveles y precios se refrescan cada semana; el geoprocesamiento pesado se reutiliza entre ciclos.'],
+  ['GeoJSON en EPSG:4326 como salida', 'Lo abre cualquier SIG y se sirve como fichero estático, sin servidor.'],
+  ['Cada fuente falla por separado', 'Si una confederación cambia su web, el resto del pipeline sigue publicando.'],
+  ['Geometría simplificada para la web', 'Douglas-Peucker con tolerancia de unos 10 m al compilar: un 80 % menos de vértices sin cambio visible a escala de embalse.'],
+  ['Lo que cambia, cada semana; lo costoso, una vez', 'Niveles y precio se refrescan solos. El geoprocesamiento en FME se reutiliza entre ciclos.'],
 ];
+
+const W = 'max-w-[1360px] mx-auto w-full px-5 sm:px-8';
 
 export default function Metodologia() {
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <header className="max-w-3xl">
-        <p className="eyebrow mb-3">Metodología</p>
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Cómo se construye el modelo</h1>
-        <p className="text-fg-soft leading-relaxed mt-4">
-          En España la información hidrológica es abierta, pero está repartida entre confederaciones que no comparten
-          formatos ni identificadores. El objetivo es convertir esas fuentes aisladas en un modelo geoespacial único,
-          trazable y actualizado, que permita analizar el estado de los embalses y su potencial energético a escala nacional.
-        </p>
-      </header>
-
-      {/* Fuentes */}
-      <section className="mt-14">
-        <h2 className="font-display text-xl font-semibold mb-4">Fuentes de datos</h2>
-        <div className="border border-line overflow-x-auto thin-scroll">
-          <table className="w-full text-sm min-w-[720px]">
-            <thead>
-              <tr className="bg-void text-left">
-                {['Fuente', 'Dato', 'Acceso', 'Ciclo'].map((h) => (
-                  <th key={h} className="font-data text-[10.5px] tracking-wider uppercase text-muted font-normal px-4 py-3">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {FUENTES.map((f) => (
-                <tr key={f.fuente} className="bg-panel hover:bg-raised transition-colors">
-                  <td className="px-4 py-3 font-medium whitespace-nowrap">{f.fuente}</td>
-                  <td className="px-4 py-3 text-fg-soft">{f.dato}</td>
-                  <td className="px-4 py-3 font-data text-[12px] text-muted">{f.acceso}</td>
-                  <td className="px-4 py-3 whitespace-nowrap">
-                    <span className={`font-data text-[11px] px-2 py-0.5 border ${f.ciclo.includes('CI') ? 'text-signal border-signal/40' : 'text-muted border-line-strong'}`}>
-                      {f.ciclo}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <>
+      <section className={`${W} pt-16 sm:pt-24 pb-20`}>
+        <div className="grid md:grid-cols-12 gap-x-8 gap-y-8">
+          <h1 className="md:col-span-7 text-[56px] sm:text-[88px] leading-[0.92] tracking-[-0.02em]">
+            Cómo se construye el modelo
+          </h1>
+          <p className="md:col-span-4 md:col-start-9 md:pt-24 text-[17px] leading-relaxed text-ink-2">
+            Seis fuentes, siete piezas de código y una tarea programada. Esta página explica de dónde sale
+            cada dato, qué script lo toca y qué limitaciones tiene el resultado.
+          </p>
         </div>
       </section>
 
-      {/* Proceso */}
-      <section className="mt-14 grid lg:grid-cols-[1fr_1fr] gap-10">
-        <div>
-          <h2 className="font-display text-xl font-semibold mb-4">Proceso, paso a paso</h2>
-          <ol className="relative border-l border-line-strong ml-2">
-            {PASOS.map((p, i) => (
-              <li key={p.file} className="pl-6 pb-6 last:pb-0 relative">
-                <span className="absolute -left-[5px] top-1.5 w-[9px] h-[9px] bg-base border border-signal" />
-                <p className="font-data text-[12px] text-signal">
-                  <span className="text-muted mr-2">{String(i + 1).padStart(2, '0')}</span>{p.file}
-                </p>
-                <p className="text-sm text-fg-soft leading-relaxed mt-1">{p.txt}</p>
+      {/* Fuentes */}
+      <section className="border-t border-ink">
+        <div className={`${W} py-20`}>
+          <h2 className="text-[44px] sm:text-[56px] leading-[0.95] mb-10">Fuentes de datos</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px] text-[15px] border-collapse">
+              <thead>
+                <tr className="border-y border-ink text-left">
+                  {['Fuente', 'Qué aporta', 'Cómo se obtiene', 'Se actualiza'].map((h) => (
+                    <th key={h} scope="col" className="margin-note font-normal py-3 pr-6">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {FUENTES.map((f) => (
+                  <tr key={f.fuente} className="border-b border-rule align-top">
+                    <th scope="row" className="font-serif font-normal text-[22px] leading-tight py-4 pr-6 text-left whitespace-nowrap">{f.fuente}</th>
+                    <td className="py-4 pr-6 text-ink-2">{f.dato}</td>
+                    <td className="py-4 pr-6 num text-[13px] text-ink-2">{f.acceso}</td>
+                    <td className={`py-4 whitespace-nowrap ${f.ciclo === 'Cada lunes' ? 'text-cobalt' : 'text-muted'}`}>{f.ciclo}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Scripts */}
+      <section className="border-t border-ink">
+        <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-10`}>
+          <h2 className="md:col-span-4 text-[44px] sm:text-[56px] leading-[0.95] md:sticky md:top-28 self-start">
+            El código, en el orden en que se ejecuta
+          </h2>
+          <ol className="md:col-span-7 md:col-start-6 border-t border-ink">
+            {SCRIPTS.map((s, i) => (
+              <li key={s.file} className="grid grid-cols-[3rem_1fr] gap-x-4 py-6 border-b border-rule">
+                <span className="num text-[13px] text-muted pt-0.5">{i + 1}</span>
+                <div>
+                  <p className="num text-[14px] text-cobalt" translate="no">{s.file}</p>
+                  <p className="text-[16px] leading-relaxed text-ink-2 mt-2 max-w-[62ch]">{s.txt}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
+      </section>
 
-        <div className="flex flex-col gap-6">
-          <div>
-            <h2 className="font-display text-xl font-semibold mb-4">Decisiones de diseño</h2>
-            <div className="grid gap-px bg-line border border-line">
+      {/* Decisiones y límites */}
+      <section className="border-t border-ink">
+        <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-16`}>
+          <div className="md:col-span-7">
+            <h2 className="text-[44px] sm:text-[56px] leading-[0.95] mb-10">Decisiones de diseño</h2>
+            <dl className="border-t border-ink">
               {DECISIONES.map(([t, d]) => (
-                <div key={t} className="bg-panel p-4">
-                  <p className="font-medium text-sm">{t}</p>
-                  <p className="text-sm text-muted leading-relaxed mt-1">{d}</p>
+                <div key={t} className="py-5 border-b border-rule grid sm:grid-cols-[1fr_1.3fr] gap-x-8 gap-y-1">
+                  <dt className="font-serif text-[22px] leading-tight">{t}</dt>
+                  <dd className="text-[15px] leading-relaxed text-ink-2">{d}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
-
-          <div className="border border-amber/30 bg-amber-dim p-5">
-            <p className="font-data text-[10.5px] tracking-wider uppercase text-amber mb-2">Limitaciones</p>
-            <ul className="text-sm text-fg-soft leading-relaxed space-y-1.5 list-disc pl-4 marker:text-amber">
-              <li>La energía y el valor de mercado son estimaciones de vaciado completo, no datos de explotación.</li>
-              <li>No todos los embalses del inventario tienen lectura semanal publicada; se muestran en gris.</li>
-              <li>El emparejamiento por nombre puede asignar alguna geometría de forma incorrecta y requiere revisión manual.</li>
+          <div className="md:col-span-4 md:col-start-9 md:pt-28">
+            <h2 className="text-[36px] leading-none pb-4 border-b border-ink">Límites conocidos</h2>
+            <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
+              <li>La energía y el valor de mercado suponen el vaciado completo del embalse. No son datos de explotación.</li>
+              <li>No todos los embalses del inventario publican nivel cada semana. En el visor aparecen en gris.</li>
+              <li>El emparejamiento por nombre puede asignar alguna geometría a un embalse equivocado y necesita revisión manual.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="mt-16 flex flex-wrap gap-3">
-        <Link to="/visor" className="group inline-flex items-center gap-2 bg-signal text-void font-medium px-5 py-3 text-sm hover:bg-fg transition-colors">
-          Ir al visor <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-        </Link>
-        <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 border border-line-strong px-5 py-3 text-sm hover:border-signal transition-colors">
-          <FileText size={16} /> Memoria técnica completa
-        </a>
-        <a href={REPO_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 border border-line-strong px-5 py-3 text-sm hover:border-signal transition-colors">
-          <Github size={16} /> Código fuente
-        </a>
+      <section className="border-t border-ink">
+        <div className={`${W} py-16 flex flex-wrap items-center gap-x-8 gap-y-4`}>
+          <Link to="/visor" className="btn btn-ink">Abrir el visor</Link>
+          <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Leer la memoria técnica (PDF)</a>
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Ver el código en GitHub</a>
+        </div>
       </section>
-    </div>
+    </>
   );
 }
