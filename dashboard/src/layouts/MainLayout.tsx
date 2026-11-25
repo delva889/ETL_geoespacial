@@ -73,7 +73,7 @@ export default function MainLayout() {
         <div className="max-w-[1280px] mx-auto w-full px-5 sm:px-8 py-14 grid gap-10 md:grid-cols-12">
           <div className="md:col-span-6">
             <p className="text-[18px] font-semibold tracking-tight leading-snug max-w-[34ch]">{PROYECTO} {PROYECTO_AMBITO}</p>
-            <p className="text-white/65 mt-3">Autores: {AUTORES}.</p>
+            <p className="text-white/65 mt-3">Autor: {AUTORES}.</p>
           </div>
           <ul className="md:col-span-2 space-y-2 text-[15px]">
             <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={REPO_URL} target="_blank" rel="noopener noreferrer">Código en GitHub</a></li>

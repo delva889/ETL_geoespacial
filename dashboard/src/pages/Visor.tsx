@@ -25,11 +25,6 @@ const BASEMAPS = {
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
     attribution: '© Esri y colaboradores',
   },
-  claro: {
-    label: 'Claro',
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution: '© OpenStreetMap · © CARTO',
-  },
 } as const;
 type BasemapKey = keyof typeof BASEMAPS;
 

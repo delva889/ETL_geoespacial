@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import HeroMap from '../components/HeroMap';
 import { TechMarquee, ToolRow } from '../components/Logos';
 import { REPO_URL, MEMORIA_URL, AUTORES, PROYECTO, PROYECTO_AMBITO, useLastUpdate, fmt } from '../lib/data';
 import { Captura, FIGURAS } from '../components/Figuras';
@@ -67,9 +66,8 @@ export default function Proyecto() {
   return (
     <>
 
-      <section className="relative flex flex-col bg-night text-white min-h-[calc(100svh-3.5rem)] sm:min-h-[620px] sm:h-[calc(100svh-3.5rem)] overflow-hidden">
-        <HeroMap />
-        <div className={`${W} relative z-10 flex-1 flex flex-col justify-center pt-12 pb-8 sm:pt-0 sm:pb-24`}>
+      <section className="bg-night text-white">
+        <div className={`${W} pt-20 pb-20 sm:pt-28 sm:pb-24`}>
           <div className="max-w-[860px] rise">
             {fecha && (
               <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 backdrop-blur px-3 py-1.5 text-[13px] text-white/85 mb-7">
@@ -89,7 +87,7 @@ export default function Proyecto() {
               hidrográficas y el precio de la electricidad, los cruza con el relieve del IGN y con imágenes Sentinel-2,
               y publica el resultado cada semana en un mapa.
             </p>
-            <p className="text-[14px] text-white/55 mt-4">Autores: {AUTORES}</p>
+            <p className="text-[14px] text-white/55 mt-4">Autor: {AUTORES}</p>
             <div className="flex flex-wrap items-center gap-3 mt-9">
               <Link to="/" className="btn btn-light">Abrir el visor</Link>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-dark">Ver el código</a>
@@ -212,7 +210,7 @@ export default function Proyecto() {
       </section>
 
       <section className={`${W} pb-24`}>
-        <div className="rounded-3xl bg-cobalt text-white px-8 sm:px-14 py-14 sm:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div className="rounded-3xl bg-[#1f3a6e] text-white px-8 sm:px-14 py-14 sm:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <h2 className="text-[32px] sm:text-[44px] leading-[1.05] max-w-[18ch]">Busca un embalse y mira cómo está esta semana.</h2>
           <Link to="/" className="btn btn-light self-start md:self-auto">Abrir el visor</Link>
         </div>
