@@ -2,16 +2,16 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import HeroMap from '../components/HeroMap';
 import { TechMarquee, ToolRow } from '../components/Logos';
-import { REPO_URL, MEMORIA_URL, useLastUpdate, fmt } from '../lib/data';
+import { REPO_URL, MEMORIA_URL, AUTORES, PROYECTO, PROYECTO_AMBITO, useLastUpdate, fmt } from '../lib/data';
+import { Captura, FIGURAS } from '../components/Figuras';
 
-const FIG = `${import.meta.env.BASE_URL}figuras/`;
 const W = 'max-w-[1280px] mx-auto w-full px-5 sm:px-8';
 
 const PASOS = [
   {
-    titulo: 'Descarga',
+    titulo: 'Scraping',
     logos: ['python', 'selenium'], extra: ['requests', 'BeautifulSoup'],
-    texto: 'Lee embalses.net y el SAIH de cada confederación: APIs JSON, tablas HTML, tokens JWT o páginas que hay que abrir con un navegador automatizado.',
+    texto: 'Extrae de forma automática los niveles de embalses.net, los caudales de los SAIH de cada confederación, el precio diario de OMIE y la meteorología de AEMET.',
   },
   {
     titulo: 'Limpieza y cruce',
@@ -52,18 +52,6 @@ function CountUp({ value, dec = 0 }: { value: number; dec?: number }) {
   return <>{fmt(v, dec)}</>;
 }
 
-function Captura({ file, w, h, alt, pie, oscuro = false }: { file: string; w: number; h: number; alt: string; pie: string; oscuro?: boolean }) {
-  return (
-    <figure className="m-0 min-w-0">
-      <a href={FIG + file} target="_blank" rel="noopener noreferrer" aria-label={`Abrir a tamaño completo: ${pie}`}
-        className={`block rounded-2xl bg-white p-3 sm:p-5 cursor-zoom-in transition-shadow duration-300 ${oscuro ? 'shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)]' : 'border border-rule hover:shadow-[0_16px_40px_-20px_rgba(11,18,32,0.3)]'}`}>
-        <img src={FIG + file} width={w} height={h} loading="lazy" alt={alt} className="w-full h-auto" />
-      </a>
-      <figcaption className={`text-[13px] mt-3 ${oscuro ? 'text-white/55' : 'text-muted'}`}>{pie}</figcaption>
-    </figure>
-  );
-}
-
 export default function Proyecto() {
   const info = useLastUpdate();
   const fecha = info?.timestamp
@@ -80,9 +68,9 @@ export default function Proyecto() {
   return (
     <>
       {/* Portada: satélite a pantalla completa */}
-      <section className="relative bg-night text-white min-h-[640px] h-[100svh] overflow-hidden">
+      <section className="relative flex flex-col bg-night text-white min-h-[calc(100svh-4rem)] sm:min-h-[620px] sm:h-[calc(100svh-4rem)] overflow-hidden">
         <HeroMap />
-        <div className={`${W} relative z-10 h-full flex flex-col justify-center pt-16 pb-40 sm:pb-24`}>
+        <div className={`${W} relative z-10 flex-1 flex flex-col justify-center pt-12 pb-8 sm:pt-0 sm:pb-24`}>
           <div className="max-w-[860px] rise">
             {fecha && (
               <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 backdrop-blur px-3 py-1.5 text-[13px] text-white/85 mb-7">
@@ -90,16 +78,19 @@ export default function Proyecto() {
                   <span className="absolute inset-0 rounded-full bg-[#4ade80] animate-ping opacity-60" />
                   <span className="relative w-2 h-2 rounded-full bg-[#4ade80]" />
                 </span>
-                Datos del {fecha}. Se actualizan solos cada lunes.
+                Datos del {fecha}. Se actualizan cada lunes.
               </p>
             )}
-            <h1 className="text-[44px] sm:text-[68px] lg:text-[84px] leading-[0.98] tracking-[-0.045em]">
-              Los embalses de España, en un mapa que se actualiza solo.
+            <h1 className="text-[38px] sm:text-[56px] lg:text-[68px] leading-[1.02] tracking-[-0.045em]">
+              {PROYECTO}
+              <span className="block mt-2 text-[24px] sm:text-[32px] lg:text-[38px] leading-[1.1] tracking-[-0.03em] font-normal text-white/70">{PROYECTO_AMBITO}</span>
             </h1>
-            <p className="text-[17px] sm:text-[19px] leading-relaxed text-white/75 mt-6 max-w-[56ch]">
-              Un pipeline de datos geoespaciales que une niveles de embalses, caudales de nueve confederaciones,
-              relieve del IGN, imágenes Sentinel-2 y precio de la electricidad, y lo publica cada semana sin intervención.
+            <p className="text-[17px] sm:text-[18px] leading-relaxed text-white/75 mt-6 max-w-[60ch]">
+              Un pipeline que extrae por scraping los niveles de los embalses, los caudales de las confederaciones
+              hidrográficas y el precio de la electricidad, los cruza con el relieve del IGN y con imágenes Sentinel-2,
+              y publica el resultado cada semana en un mapa.
             </p>
+            <p className="text-[14px] text-white/55 mt-4">Autores: {AUTORES}</p>
             <div className="flex flex-wrap items-center gap-3 mt-9">
               <Link to="/visor" className="btn btn-light">Abrir el visor</Link>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-dark">Ver el código</a>
@@ -178,9 +169,7 @@ export default function Proyecto() {
             <Link to="/visor" className="btn btn-light mt-9">Ver las escenas en el visor</Link>
           </div>
           <div className="lg:col-span-7">
-            <Captura oscuro file="fme-sentinel2.webp" w={1181} h={320}
-              alt="Flujo de FME: lee los polígonos de PostGIS, calcula su caja envolvente, consulta la API STAC, ordena por nubosidad y guarda el enlace a la escena."
-              pie="Captura real de satelite.fmw: 956 polígonos, 4692 escenas candidatas, 939 escenas elegidas." />
+            <Captura oscuro fig={FIGURAS.sentinel} pie="satelite.fmw: 956 polígonos, 4692 escenas candidatas, 939 escenas elegidas. Pulsa para ampliar." />
           </div>
         </div>
       </section>
@@ -225,9 +214,7 @@ export default function Proyecto() {
           </div>
         </div>
         <div className="mt-14">
-          <Captura file="fme-energia.webp" w={1245} h={393}
-            alt="Flujo de FME del cálculo energético: extrae cotas del MDT, crea un buffer, calcula estadísticas ráster y aplica la fórmula a cada embalse."
-            pie="Captura real de energia.fmw, que cruza el MDT con los polígonos de PostGIS." />
+          <Captura fig={FIGURAS.energia} pie="energia.fmw: cruza el MDT con los polígonos de PostGIS. Pulsa para ampliar." />
         </div>
       </section>
 

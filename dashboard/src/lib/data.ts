@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 export const REPO_URL = 'https://github.com/delva889/ETL_geoespacial';
 export const MEMORIA_URL = `${REPO_URL}/blob/main/docs/Memoria_Tecnica_ETL_GIS.pdf`;
 export const AUTHOR = 'Carlos del Valle';
+export const AUTORES = 'Carlos del Valle y Manuel Torija';
+/** Título de la memoria técnica, usado como nombre del proyecto. */
+export const PROYECTO = 'Modelo de transformación e integración de datos geoespaciales';
+export const PROYECTO_AMBITO = 'aplicados a la energía hidráulica y solar en España';
 
 const BASE = import.meta.env.BASE_URL;
 

@@ -1,6 +1,7 @@
 import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { REPO_URL, MEMORIA_URL, AUTHOR } from '../lib/data';
+import { useEffect } from 'react';
+import { Github } from 'lucide-react';
+import { REPO_URL, MEMORIA_URL, AUTORES, PROYECTO, PROYECTO_AMBITO } from '../lib/data';
 
 const NAV = [
   { name: 'Proyecto', path: '/' },
@@ -10,63 +11,45 @@ const NAV = [
 
 export default function MainLayout() {
   const { pathname } = useLocation();
-  const enPortada = pathname === '/';
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.6);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Sobre la portada oscura la barra es transparente; al bajar (o en otras páginas) es clara
-  const oscura = enPortada && !scrolled;
-
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[3000] focus:bg-ink focus:text-white focus:px-3 focus:py-2 focus:rounded-lg">
+      <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[3000] focus:bg-white focus:text-ink focus:px-3 focus:py-2 focus:rounded-lg">
         Saltar al contenido
       </a>
 
-      <header
-        className={`${enPortada ? 'fixed' : 'sticky'} top-0 inset-x-0 z-[1000] transition-colors duration-300 ${
-          oscura ? 'bg-transparent text-white' : 'bg-white/85 backdrop-blur-md text-ink border-b border-rule'
-        }`}
-      >
+      <header className="sticky top-0 z-[1000] bg-night text-white border-b border-white/10">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-3 min-w-0" aria-label={`${AUTHOR}, inicio`}>
-            <span className={`grid place-items-center w-8 h-8 rounded-lg text-[13px] font-semibold shrink-0 ${oscura ? 'bg-white text-night' : 'bg-ink text-white'}`} aria-hidden="true">
-              CV
+          <Link to="/" className="hidden sm:block min-w-0 leading-tight group" aria-label={`${PROYECTO}, inicio`}>
+            <span className="block text-[14px] sm:text-[15px] font-semibold tracking-tight truncate group-hover:text-white/85">
+              {PROYECTO}
             </span>
-            <span className="hidden sm:inline text-[15px] font-semibold tracking-tight whitespace-nowrap" translate="no">{AUTHOR}</span>
-            <span className={`hidden lg:inline text-[14px] whitespace-nowrap ${oscura ? 'text-white/60' : 'text-muted'}`}>Datos geoespaciales</span>
+            <span className="block text-[12px] text-white/55 truncate">Energía hidráulica y solar en España</span>
           </Link>
 
-          <nav aria-label="Principal" className="flex items-center gap-1 text-[14px] shrink-0">
+          <nav aria-label="Principal" className="flex items-stretch h-full shrink-0 text-[15px] sm:text-[14px] -ml-2.5 sm:ml-0">
             {NAV.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end={item.path === '/'}
                 className={({ isActive }) =>
-                  `px-3 py-2 rounded-full transition-colors duration-200 ${
-                    isActive
-                      ? oscura ? 'bg-white/15 text-white' : 'bg-paper-2 text-ink'
-                      : oscura ? 'text-white/70 hover:text-white' : 'text-muted hover:text-ink'
+                  `relative flex items-center px-2.5 sm:px-4 transition-colors duration-200 ${
+                    isActive ? 'text-white after:absolute after:left-2.5 after:right-2.5 sm:after:left-4 sm:after:right-4 after:bottom-0 after:h-[2px] after:bg-cobalt' : 'text-white/60 hover:text-white'
                   }`
                 }
               >
                 {item.name}
               </NavLink>
             ))}
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer"
-              className={`hidden sm:inline-flex ml-2 btn !min-h-[36px] !px-4 !text-[14px] ${oscura ? 'btn-light' : 'btn-ink'}`}>
-              GitHub
+            <a href={REPO_URL} target="_blank" rel="noopener noreferrer" aria-label="Repositorio en GitHub"
+              className="hidden sm:flex items-center gap-2 pl-4 ml-2 border-l border-white/10 text-white/60 hover:text-white transition-colors duration-200">
+              <Github size={16} aria-hidden="true" />
+              <span className="hidden lg:inline">Código</span>
             </a>
           </nav>
         </div>
@@ -78,16 +61,16 @@ export default function MainLayout() {
 
       <footer className="bg-night text-white">
         <div className="max-w-[1280px] mx-auto w-full px-5 sm:px-8 py-14 grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <p className="text-2xl font-semibold tracking-tight">{AUTHOR}</p>
-            <p className="text-white/65 mt-2">Ingeniería de datos geoespaciales, SIG y observación de la Tierra.</p>
+          <div className="md:col-span-6">
+            <p className="text-[18px] font-semibold tracking-tight leading-snug max-w-[34ch]">{PROYECTO} {PROYECTO_AMBITO}</p>
+            <p className="text-white/65 mt-3">Autores: {AUTORES}.</p>
           </div>
-          <ul className="md:col-span-3 space-y-2 text-[15px]">
-            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={REPO_URL} target="_blank" rel="noopener noreferrer">Repositorio en GitHub</a></li>
-            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={MEMORIA_URL} target="_blank" rel="noopener noreferrer">Memoria técnica (PDF)</a></li>
+          <ul className="md:col-span-2 space-y-2 text-[15px]">
+            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={REPO_URL} target="_blank" rel="noopener noreferrer">Código en GitHub</a></li>
+            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={MEMORIA_URL} target="_blank" rel="noopener noreferrer">Memoria técnica</a></li>
           </ul>
           <p className="md:col-span-4 text-[13px] text-white/55 leading-relaxed">
-            Datos de embalses.net, SAIH del MITECO, OMIE, MDT200 del IGN y Copernicus Sentinel-2 a través de Earth Search.
+            Datos de embalses.net, SAIH del MITECO, OMIE, AEMET, MDT200 del IGN y Copernicus Sentinel-2 a través de Earth Search.
             La energía y el valor de mercado son estimaciones, no lecturas de explotación.
           </p>
         </div>

@@ -1,44 +1,66 @@
 import { Link } from 'react-router-dom';
 import { REPO_URL, MEMORIA_URL } from '../lib/data';
 import { FloatingLogos } from '../components/Logos';
+import { Captura, FIGURAS, type Figura } from '../components/Figuras';
 
-const FIG = `${import.meta.env.BASE_URL}figuras/`;
-
-const FLUJOS = [
-  { file: 'fme-geocodificacion.webp', w: 1207, h: 278, titulo: 'Geocodificación de estaciones de aforo', texto: 'geocodingAPI.fmw. Las confederaciones no publican la posición de muchas estaciones, así que se geocodifican a partir de su nombre y su cuenca con la API de Google y se reproyectan. Procesa 498 estaciones.' },
-  { file: 'fme-sentinel2.webp', w: 1181, h: 320, titulo: 'Escena Sentinel-2 por embalse', texto: 'satelite.fmw. Caja envolvente de cada polígono, petición al catálogo STAC, orden por nubosidad y una escena por embalse.' },
-  { file: 'fme-energia.webp', w: 1245, h: 393, titulo: 'Análisis ráster y energía', texto: 'energia.fmw. Cotas del MDT de 200 m, buffer alrededor del embalse, estadísticas ráster y fórmula de energía para cada polígono.' },
-  { file: 'pdi-caudales.webp', w: 912, h: 710, titulo: 'Normalización de caudales en Pentaho', texto: 'Transformación de PDI que une los CSV de cada confederación, añade constantes, renombra campos y carga el resultado en PostgreSQL.' },
-];
+const W = 'max-w-[1280px] mx-auto w-full px-5 sm:px-8';
+const FME_URL = `${REPO_URL}/tree/main/fme_workspaces`;
 
 const FUENTES = [
-  { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping de HTML', ciclo: 'Cada lunes' },
-  { fuente: 'SAIH del MITECO', dato: 'Caudal en las estaciones de aforo de cada confederación', acceso: 'API REST, JWT, HTML, Selenium', ciclo: 'Cada lunes' },
-  { fuente: 'OMIE', dato: 'Precio marginal del mercado diario', acceso: 'Fichero marginalpdbc', ciclo: 'Cada lunes' },
+  { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping', ciclo: 'Cada lunes' },
+  { fuente: 'SAIH del MITECO', dato: 'Caudal en las estaciones de aforo', acceso: 'Scraping', ciclo: 'Cada lunes' },
+  { fuente: 'OMIE', dato: 'Precio marginal del mercado diario', acceso: 'Descarga de fichero', ciclo: 'Cada lunes' },
+  { fuente: 'AEMET', dato: 'Observación meteorológica horaria', acceso: 'CSV y API OpenData', ciclo: 'Proyecto solar' },
   { fuente: 'IGN, MDT200', dato: 'Cotas del terreno para calcular el salto', acceso: 'GeoTIFF', ciclo: 'Fijo, en FME' },
-  { fuente: 'Geometrías de embalses', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile a PostGIS', ciclo: 'Fijo' },
-  { fuente: 'Earth Search (STAC)', dato: 'Escenas Sentinel-2 L2A', acceso: 'API STAC, COG en AWS', ciclo: 'Fijo, en FME' },
+  { fuente: 'Inventario de presas y embalses (MITECO)', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile a PostGIS', ciclo: 'Fijo' },
+  { fuente: 'Earth Search (STAC)', dato: 'Escenas Copernicus Sentinel-2 L2A', acceso: 'API STAC', ciclo: 'Fijo, en FME' },
 ];
 
-const SCRIPTS = [
-  { file: 'descarga_saih.py', txt: 'Descarga los caudales de cada SAIH adaptándose a cómo publica cada uno: API JSON, HTML con datos incrustados, tokens JWT o navegación con Selenium.' },
-  { file: 'scraping.py', txt: 'Extrae el estado de los embalses por cuenca, normaliza las cifras a hm³ y lo guarda en CSV y, si hay conexión, en PostgreSQL.' },
-  { file: 'consolidate_caudales.py', txt: 'Une los ficheros de las distintas confederaciones en un solo caudales.json.' },
-  { file: 'geom.py y emparejamiento.py', txt: 'Empareja cada embalse con su polígono del inventario del MITECO comparando nombre normalizado, demarcación y capacidad, y exporta a PostGIS con ogr2ogr.' },
-  { file: 'geocodingAPI, satelite y energia.fmw', txt: 'Geocodifican las estaciones, vinculan la mejor escena Sentinel-2 de cada embalse y calculan salto y energía sobre el MDT.' },
-  { file: 'actualizar_geojson.py', txt: 'Fusiona los niveles nuevos sobre el GeoJSON publicado y recalcula energía (109 MWh por hm³) y valor al precio OMIE del día, sin tocar la geometría.' },
-  { file: 'actualizar-datos.yml', txt: 'GitHub Actions ejecuta la cadena cada lunes, guarda los datos en el repositorio, compila la web y la publica en GitHub Pages.' },
+const SCRAPING = [
+  {
+    origen: 'embalses.net',
+    que: 'La tabla de cada cuenca hidrográfica: nombre del embalse, capacidad, agua embalsada y variación respecto a la semana anterior, en hm³.',
+    como: 'Lectura del HTML de cada página de cuenca.',
+  },
+  {
+    origen: 'SAIH de las confederaciones',
+    que: 'El caudal más reciente de las estaciones de aforo de Duero, Tajo, Segura, Júcar, Ebro, Guadalquivir, Miño-Sil, Cantábrico y Guadiana.',
+    como: 'Cada portal publica distinto: APIs JSON, tablas HTML, valores incrustados en la página o datos que solo aparecen tras abrirla con un navegador automatizado y obtener un token.',
+  },
+  {
+    origen: 'OMIE',
+    que: 'El precio marginal del mercado eléctrico diario, que se usa para valorar la energía almacenada.',
+    como: 'Descarga del fichero diario publicado por el operador del mercado.',
+  },
 ];
 
 const DECISIONES = [
   ['GeoJSON en EPSG:4326 como salida', 'Lo abre cualquier SIG y se sirve como fichero estático, sin servidor.'],
-  ['Cada fuente falla por separado', 'Si una confederación cambia su web, el resto del pipeline sigue publicando.'],
-  ['Geometría simplificada para la web', 'Douglas-Peucker con tolerancia de unos 10 m al compilar: un 80 % menos de vértices sin cambio visible a escala de embalse.'],
+  ['Cada fuente falla por separado', 'Si una confederación cambia su web, el resto del proceso sigue publicando.'],
+  ['Cada embalse con su polígono oficial', 'Se emparejan por nombre, demarcación y capacidad. Si no hay un polígono fiable, el embalse no se dibuja.'],
+  ['Geometría simplificada para la web', 'Douglas-Peucker con tolerancia de unos 10 m: un 80 % menos de vértices sin cambio visible a escala de embalse.'],
   ['Lo que cambia, cada semana; lo costoso, una vez', 'Niveles y precio se refrescan solos. El geoprocesamiento en FME se reutiliza entre ciclos.'],
-  ['Mejor sin dibujar que mal dibujado', 'Si un embalse no tiene un polígono fiable por nombre, demarcación y capacidad, no se publica. Cada decisión queda en docs/revision_geometrias.csv.'],
 ];
 
-const W = 'max-w-[1280px] mx-auto w-full px-5 sm:px-8';
+function Flujo({ fig }: { fig: Figura }) {
+  return (
+    <div className="grid lg:grid-cols-12 gap-x-10 gap-y-5 items-start">
+      <div className="lg:col-span-4">
+        <h3 className="text-[22px] leading-tight">{fig.titulo}</h3>
+        <p className="text-[15px] leading-relaxed text-ink-2 mt-3">{fig.texto}</p>
+        {fig.fuente && (
+          <a href={`${REPO_URL}/blob/main/fme_workspaces/${fig.fuente}`} target="_blank" rel="noopener noreferrer"
+            className="inline-flex mt-4 num text-[13px] text-cobalt hover:underline underline-offset-4">
+            {fig.fuente}
+          </a>
+        )}
+      </div>
+      <div className="lg:col-span-8">
+        <Captura fig={fig} />
+      </div>
+    </div>
+  );
+}
 
 export default function Metodologia() {
   return (
@@ -49,9 +71,9 @@ export default function Metodologia() {
           <h1 className="md:col-span-7 text-[44px] sm:text-[68px] leading-[1] tracking-[-0.045em]">
             Cómo se construye el modelo
           </h1>
-          <p className="md:col-span-4 md:col-start-9 md:pt-24 text-[17px] leading-relaxed text-ink-2">
-            Seis fuentes, siete piezas de código y una tarea programada. Esta página explica de dónde sale
-            cada dato, qué script lo toca y qué limitaciones tiene el resultado.
+          <p className="md:col-span-4 md:col-start-9 md:pt-16 text-[17px] leading-relaxed text-ink-2">
+            De dónde sale cada dato, qué se extrae por scraping y cómo se transforma en FME y Pentaho
+            hasta llegar al mapa.
           </p>
         </div>
       </section>
@@ -71,11 +93,13 @@ export default function Metodologia() {
               </thead>
               <tbody>
                 {FUENTES.map((f) => (
-                  <tr key={f.fuente} className="border-b border-rule align-top">
-                    <th scope="row" className="font-semibold text-[15px] py-4 px-5 text-left whitespace-nowrap">{f.fuente}</th>
+                  <tr key={f.fuente} className="border-b border-rule last:border-b-0 align-top">
+                    <th scope="row" className="font-semibold text-[15px] py-4 px-5 text-left">{f.fuente}</th>
                     <td className="py-4 px-5 text-ink-2">{f.dato}</td>
-                    <td className="py-4 px-5 num text-[13px] text-ink-2">{f.acceso}</td>
-                    <td className="py-4 px-5 whitespace-nowrap"><span className={`inline-flex rounded-full px-2.5 py-1 text-[13px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span></td>
+                    <td className="py-4 px-5 text-ink-2">{f.acceso}</td>
+                    <td className="py-4 px-5 whitespace-nowrap">
+                      <span className={`inline-flex rounded-full px-2.5 py-1 text-[13px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -84,53 +108,66 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* Scripts */}
-      <section className="border-t border-rule">
-        <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-10`}>
-          <h2 className="md:col-span-4 text-[34px] sm:text-[46px] leading-[1.02] md:sticky md:top-28 self-start">
-            El código, en el orden en que se ejecuta
-          </h2>
-          <ol className="md:col-span-7 md:col-start-6 border-t border-rule">
-            {SCRIPTS.map((s, i) => (
-              <li key={s.file} className="grid grid-cols-[3rem_1fr] gap-x-4 py-6 border-b border-rule">
-                <span className="num text-[13px] text-muted pt-0.5">{i + 1}</span>
+      {/* Scraping */}
+      <section className="bg-white border-y border-rule">
+        <div className={`${W} py-20 grid lg:grid-cols-12 gap-x-10 gap-y-10`}>
+          <div className="lg:col-span-4">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02]">Qué se extrae por scraping</h2>
+            <p className="text-[16px] leading-relaxed text-ink-2 mt-5">
+              Ninguna de estas fuentes ofrece una descarga unificada, así que la información se extrae de sus webs de forma
+              automática cada lunes con Python (requests, BeautifulSoup y Selenium).
+            </p>
+          </div>
+          <ul className="lg:col-span-7 lg:col-start-6 divide-y divide-rule border-y border-rule">
+            {SCRAPING.map((s) => (
+              <li key={s.origen} className="py-6 grid sm:grid-cols-[200px_1fr] gap-x-6 gap-y-2">
+                <p className="font-semibold text-[17px]">{s.origen}</p>
                 <div>
-                  <p className="num text-[14px] text-cobalt" translate="no">{s.file}</p>
-                  <p className="text-[16px] leading-relaxed text-ink-2 mt-2 max-w-[62ch]">{s.txt}</p>
+                  <p className="text-[16px] leading-relaxed">{s.que}</p>
+                  <p className="text-[14px] leading-relaxed text-muted mt-2">{s.como}</p>
                 </div>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
-      {/* Flujos */}
-      <section className="border-t border-rule">
+      {/* FME */}
+      <section>
         <div className={`${W} py-20`}>
-          <div className="grid md:grid-cols-12 gap-x-8 mb-12">
-            <h2 className="md:col-span-7 text-[34px] sm:text-[46px] leading-[1.02]">Los flujos de FME y Pentaho, tal como son</h2>
-            <p className="md:col-span-4 md:col-start-9 text-[15px] text-ink-2 self-end mt-4 md:mt-0">Capturas sacadas de los proyectos originales. Pulsa una para verla a tamaño completo.</p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02]">Flujos de FME</h2>
+            <a href={FME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-line self-start md:self-auto">
+              Ver los archivos .fmw en GitHub
+            </a>
           </div>
-          <div className="space-y-16">
-            {FLUJOS.map((f) => (
-              <figure key={f.file} className="m-0 grid md:grid-cols-12 gap-x-8 gap-y-5 items-start">
-                <figcaption className="md:col-span-3">
-                  <h3 className="text-[22px] leading-tight">{f.titulo}</h3>
-                  <p className="text-[15px] leading-relaxed text-ink-2 mt-3">{f.texto}</p>
-                </figcaption>
-                <a href={FIG + f.file} target="_blank" rel="noopener noreferrer"
-                  className="md:col-span-9 block bg-white rounded-2xl border border-rule p-3 sm:p-5 cursor-zoom-in hover:shadow-[0_16px_40px_-20px_rgba(11,18,32,0.3)] transition-shadow duration-300"
-                  aria-label={`Abrir a tamaño completo: ${f.titulo}`}>
-                  <img src={FIG + f.file} width={f.w} height={f.h} loading="lazy" alt={`Captura del flujo: ${f.titulo}`} className="w-full h-auto" />
-                </a>
-              </figure>
-            ))}
+          <div className="space-y-20">
+            <Flujo fig={FIGURAS.geocodificacion} />
+            <Flujo fig={FIGURAS.sentinel} />
+            <Flujo fig={FIGURAS.energia} />
+          </div>
+        </div>
+      </section>
+
+      {/* Pentaho */}
+      <section className="bg-white border-y border-rule">
+        <div className={`${W} py-20`}>
+          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-4">Flujos de Pentaho PDI</h2>
+          <p className="text-[16px] text-ink-2 mb-14 max-w-[60ch]">
+            Normalización de las tablas antes de cargarlas en PostgreSQL: caudales para la parte hidráulica y
+            meteorología y alertas para la parte solar.
+          </p>
+          <div className="space-y-20">
+            <Flujo fig={FIGURAS.caudales} />
+            <Flujo fig={FIGURAS.meteoHistorico} />
+            <Flujo fig={FIGURAS.meteoActual} />
+            <Flujo fig={FIGURAS.alertasSolares} />
           </div>
         </div>
       </section>
 
       {/* Decisiones y límites */}
-      <section className="border-t border-rule">
+      <section>
         <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-16`}>
           <div className="md:col-span-7">
             <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Decisiones de diseño</h2>
@@ -143,14 +180,16 @@ export default function Metodologia() {
               ))}
             </dl>
           </div>
-          <div className="md:col-span-4 md:col-start-9 md:pt-24"><div className="panel p-6 bg-[#fff8eb] border-[#f5dfb3]">
-            <h2 className="text-[24px] leading-tight pb-4 border-b border-rule">Límites conocidos</h2>
-            <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
-              <li>La energía publicada usa un salto medio de 50 m para todos los embalses; el cálculo con el MDT de cada uno se hizo en FME. Supone el vaciado completo y no es un dato de explotación.</li>
-              <li>No todos los embalses del inventario publican nivel cada semana. En el visor aparecen en gris.</li>
-              <li>17 embalses de embalses.net no tienen un polígono fiable en el inventario y no aparecen en el mapa. Otros 23 se aceptaron con dudas y están marcados para revisar.</li>
-            </ul>
-          </div></div>
+          <div className="md:col-span-4 md:col-start-9 md:pt-24">
+            <div className="panel p-6 bg-[#fff8eb] border-[#f5dfb3]">
+              <h2 className="text-[22px] leading-tight pb-4 border-b border-[#f5dfb3]">Límites conocidos</h2>
+              <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
+                <li>La energía publicada usa un salto medio de 50 m para todos los embalses; el cálculo con el MDT de cada uno se hizo en FME. Supone el vaciado completo y no es un dato de explotación.</li>
+                <li>No todos los embalses publican nivel cada semana. En el visor aparecen en gris.</li>
+                <li>Algunos portales SAIH no responden desde servidores fuera de España, así que sus caudales pueden faltar en una semana concreta.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -158,7 +197,7 @@ export default function Metodologia() {
         <div className={`${W} py-16 flex flex-wrap items-center gap-x-8 gap-y-4`}>
           <Link to="/visor" className="btn btn-ink">Abrir el visor</Link>
           <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Leer la memoria técnica (PDF)</a>
-          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Ver el código en GitHub</a>
+          <a href={FME_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Archivos de FME en GitHub</a>
         </div>
       </section>
     </>

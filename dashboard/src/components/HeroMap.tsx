@@ -64,7 +64,7 @@ export default function HeroMap() {
       </div>
 
       {/* Ficha del embalse que se está viendo */}
-      <div className="absolute right-5 sm:right-8 bottom-6 sm:bottom-8 z-10 w-[min(320px,calc(100%-2.5rem))] rounded-2xl bg-night/60 backdrop-blur-md border border-white/15 text-white p-4">
+      <div className="order-last relative mx-5 mb-8 sm:mx-0 sm:mb-0 sm:absolute sm:right-8 sm:bottom-8 z-10 sm:w-[320px] rounded-2xl bg-night/60 backdrop-blur-md border border-white/15 text-white p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[12px] text-white/60">Embalse en pantalla</p>
@@ -91,7 +91,7 @@ export default function HeroMap() {
           </div>
         </div>
       </div>
-      <p className="absolute left-5 sm:left-8 bottom-3 z-10 text-[10px] text-white/45">Imagen: Esri World Imagery</p>
+      <p className="hidden sm:block absolute left-8 bottom-3 z-10 text-[10px] text-white/45">Imagen: Esri World Imagery</p>
     </>
   );
 }
