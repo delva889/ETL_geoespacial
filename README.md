@@ -1,57 +1,115 @@
-# Modelo de Transformación e Integración de Datos Geoespaciales aplicado a la Energía Hidráulica en España
+# Modelo de transformación e integración de datos geoespaciales aplicados a la energía hidráulica en España
 
-Este proyecto se centra en la obtención, transformación e integración de datos espaciales y tabulares procedentes de diversas cuencas hidrográficas de España, con aplicación al análisis de energías renovables (hidráulica y solar).
+**[Abrir la web](https://delva889.github.io/ETL_geoespacial/)** · [Memoria técnica (PDF)](docs/Memoria_Tecnica_ETL_GIS.pdf)
 
-## Tecnologías Utilizadas
-* **Python**: Scripts principales para la obtención de datos mediante web scraping y geoprocesamiento espacial.
-  * Librerías destacadas: `requests`, `BeautifulSoup`, `pandas`, `geopandas`, `selenium`, `sqlalchemy`.
-* **FME (Feature Manipulation Engine)**: Flujos de trabajo (`.fmw`) para la integración y procesamiento de los datos espaciales.
-* **Bases de Datos Espaciales**: Uso de SQLite, GeoPackage y PostgreSQL (PostGIS) para almacenar las geometrías de los embalses y sus atributos actualizados.
-* **React & Vite**: Frontend y Plataforma Web Interactiva.
-* **Leaflet & Recharts**: Librerías de visualización web (mapas interactivos y gráficas analíticas reactivas).
+Cada semana, embalses.net publica el nivel de los embalses españoles, cada confederación hidrográfica publica sus caudales en su propio sistema SAIH y OMIE publica el precio de la electricidad. Son datos públicos, pero llegan en formatos distintos, con nombres que no coinciden de una fuente a otra y sin una geometría común.
 
-## Plataforma Web en Vivo
-El resultado final de este proyecto (la integración ETL servida en un mapa analítico) está desplegado y accesible públicamente. Puedes visualizar la plataforma web directamente aquí:
-**[Ver Plataforma Web de Energía Hidráulica ](https://delva889.github.io/ETL_geoespacial/)**
+Este proyecto los junta. Un proceso ETL los descarga, los limpia, cruza cada embalse con su polígono oficial del MITECO, le añade el relieve del IGN y una imagen Sentinel-2, estima cuánta energía podría generar el agua embalsada y lo publica todo en un mapa que se actualiza solo cada lunes.
 
-## Estructura del Proyecto
+## Qué hay en la web
 
-* `/src`: Contiene los scripts en Python (ETL espacial).
-  * `scraping.py`: Extrae datos de embalses de España agrupados por cuenca y los almacena en PostgreSQL (si hay una instancia disponible) y CSV.
-  * `descarga_saih.py`: Descarga caudales de las distintas confederaciones hidrográficas (SAIH) mediante técnicas avanzadas, manejando APIs y tokens.
-  * `consolidate_caudales.py`: Unifica los ficheros heterogéneos que genera `descarga_saih.py` en un único `caudales.json` para la web.
-  * `geom.py`: Combina los datos de `scraping.py` con las geometrías (Shapefile) mediante métricas de similitud textual y las exporta a PostGIS (requiere PostgreSQL + `ogr2ogr` locales). El cruce con las estimaciones energéticas (MWh, mercado estimado) y la capa de geometría definitiva del `data.geojson` publicado se realiza con los workspaces de `/fme_workspaces` (requiere FME, no está automatizado).
-  * `actualizar_geojson.py`: Fusiona los niveles/variaciones recién descargados por `scraping.py` sobre el `dashboard/public/data.geojson` ya publicado, sin tocar la geometría ni las estimaciones energéticas, y escribe `dashboard/public/last_update.json`.
-* `/fme_workspaces`: Espacios de trabajo de FME (`.fmw`) usados para el procesamiento avanzado (geocodificación, imágenes de satélite y estimación energética). No son ejecutables desde Python ni desde la automatización en CI.
-* `/docs`: Memoria del proyecto en formato documento y manuales técnicos.
-* `/dashboard`: Código fuente del Frontend interactivo . Construido con React, TypeScript, TailwindCSS y Vite.
+- **Visor.** Es la página de inicio. Un mapa de España con los 777 embalses coloreados según su llenado. Se puede buscar un embalse, filtrar por cuenca y cambiar entre imagen de satélite y relieve. Al acercarse aparecen los polígonos reales. La ficha de cada embalse muestra su capacidad, su variación semanal, la energía estimada y un enlace a su escena Sentinel-2 en Copernicus Browser. Desde ahí también se consultan los caudales de las estaciones de aforo.
+- **Proyecto.** Explica en pocos minutos el problema, el proceso en cinco pasos y las herramientas usadas.
+- **Metodología.** Detalla las fuentes, qué se extrae de cada una y los flujos de FME y Pentaho con sus diagramas. También recoge las decisiones de diseño y los límites conocidos.
 
-## Actualización automática de la web
-El workflow `.github/workflows/actualizar-datos.yml` se ejecuta semanalmente (lunes, también lanzable a mano desde la pestaña Actions) y:
-1. Ejecuta `descarga_saih.py`, `scraping.py` y `consolidate_caudales.py` (cada fuente falla de forma aislada, sin bloquear al resto).
-2. Ejecuta `actualizar_geojson.py` para refrescar los niveles/variaciones de `data.geojson` y generar `caudales.json` y `last_update.json` en `dashboard/public/`.
-3. Commitea esos ficheros a `main` si han cambiado.
-4. Compila el dashboard y publica el resultado en la rama `gh-pages`, que es la que sirve GitHub Pages.
+La web funciona en móvil, tablet y escritorio.
 
-Esto solo cubre los datos que pueden obtenerse por scraping/API (niveles de embalses y caudales). La geometría de los embalses y las estimaciones energéticas/de mercado (`mwh_conocidos`, `precio_actual`, etc.) se generan con los workspaces de FME de `/fme_workspaces`, que requieren FME de escritorio y **no** se ejecutan en CI; esos campos se conservan tal cual estén en el `data.geojson` publicado hasta que se vuelvan a regenerar manualmente con FME.
+## Cómo funciona
 
-> El cron de GitHub Actions solo se dispara desde la rama por defecto del repositorio (`main`), así que la actualización semanal no arrancará hasta que esta rama se fusione en `main`.
+```
+Fuentes públicas ──► Scraping (Python) ──► Limpieza y cruce ──► Geoprocesamiento (FME + PostGIS) ──► GeoJSON ──► Web
+embalses.net          requests, BS4,        pandas, Pentaho,      MDT200, Sentinel-2,                    React + Leaflet
+SAIH, OMIE            Selenium              rapidfuzz             fórmula de energía                     GitHub Pages
+```
 
-## Ejecución de la Interfaz Visual (Plataforma Web)
-La plataforma web se alimenta de los datos procesados en la etapa de ETL (`data.geojson`). Para iniciarlo en otro dispositivo:
-1. Instala [Node.js](https://nodejs.org/).
-2. Entra a la carpeta del frontend: `cd dashboard`
-3. Instala las dependencias: `npm install`
-4. Lanza el servidor en modo desarrollo: `npm run dev`
-5. Abre en tu navegador la URL que devuelve la terminal (normalmente `http://localhost:5173/`).
+1. **Scraping.** `scraping.py` lee la tabla de cada cuenca en embalses.net. `descarga_saih.py` obtiene los caudales de los SAIH: unos tienen API JSON, otros tablas HTML y otros solo se pueden leer abriendo la página con un navegador automatizado. El precio del mercado diario se descarga de OMIE.
+2. **Limpieza y cruce.** `consolidate_caudales.py` unifica unidades y formatos de todas las confederaciones. `emparejamiento.py` une cada embalse con su polígono del inventario del MITECO por nombre normalizado, demarcación y capacidad. Si no encuentra un polígono fiable, el embalse se queda fuera del mapa en lugar de dibujarse en un sitio equivocado.
+3. **Geoprocesamiento.** Los flujos de FME de `fme_workspaces/` cargan los polígonos en PostGIS, toman del MDT de 200 m la cota del embalse y la mínima de su entorno para calcular el salto, y geocodifican las estaciones de aforo.
+4. **Satélite.** Otro flujo de FME consulta el catálogo STAC de Earth Search y guarda, para cada embalse, la escena Sentinel-2 L2A con menos nubes.
+5. **Publicación.** Todo acaba en un `data.geojson` en EPSG:4326 que la web lee directamente, sin servidor. Al compilar se genera además una versión simplificada (Douglas-Peucker, unos 10 m de tolerancia) para que el mapa cargue rápido.
 
-## Ejecución del flujo de datos (Backend / ETL)
-1. Copia `.env.example` a `.env` dentro de `/src` y rellena tus credenciales (`PGPASSWORD` es obligatorio aunque no tengas PostgreSQL local, ya que solo se usa si hay conexión disponible; `OGR2OGR_PATH` y `GUADIANA_JWT` son opcionales).
-2. Instala las dependencias de Python: `pip install -r requirements.txt` (o `requests beautifulsoup4 pandas geopandas selenium psycopg2-binary rapidfuzz python-dotenv`).
-3. Ejecutar `descarga_saih.py` y `scraping.py` para recolectar datos de los embalses y sistemas SAIH.
-4. Ejecutar `consolidate_caudales.py` para generar `caudales.json` y `actualizar_geojson.py` para refrescar `dashboard/public/data.geojson` con los niveles nuevos (requiere que ya exista un `data.geojson` con geometría, generado previamente con `geom.py` + FME).
-5. Si quieres regenerar la geometría o las estimaciones energéticas desde cero, ejecuta `geom.py` (cruce espacial + export a PostGIS) y después los workspaces de `/fme_workspaces` en FME para producir el `data.geojson` definitivo.
+La energía se estima con `E = ρ·g·V·ΔH·η / 3,6·10⁹` (MWh) y se valora al precio OMIE del día. Es una cifra orientativa de vaciado completo, no un dato de explotación.
 
-> **Nota sobre Base de Datos:** Los scripts que interactúan con PostgreSQL requieren que tengas una instancia local activa, con las credenciales configuradas en `/src/.env`. Si no la tienes, `scraping.py` sigue generando el CSV igualmente y solo avisa por consola de que no pudo escribir en PostgreSQL.
+## Actualización automática
 
-> Para ver cómo se ejecuta todo esto de forma automática y semanal, consulta la sección "Actualización automática de la web" más arriba.
+El workflow [`actualizar-datos.yml`](.github/workflows/actualizar-datos.yml) se ejecuta cada lunes a las 05:00 UTC (también se puede lanzar a mano desde *Actions*). Hace cinco cosas:
+
+1. Descarga niveles, caudales y precio. Si una fuente falla, las demás siguen adelante.
+2. Fusiona los datos nuevos en `dashboard/public/data.geojson` sin tocar la geometría ni el resto de campos.
+3. Escribe `caudales.json` y `last_update.json`.
+4. Hace commit de esos ficheros en `main`.
+5. Compila la web y la publica en la rama `gh-pages`.
+
+En Windows, `deploy.bat` hace lo mismo desde tu equipo con un doble clic. Es útil cuando los SAIH bloquean las peticiones que llegan desde fuera de España.
+
+Los flujos de FME necesitan FME Desktop, así que no corren en CI. La geometría, las cotas y las escenas Sentinel-2 se regeneran a mano cuando hace falta.
+
+## Estructura
+
+```
+├── src/                       Scripts de Python del ETL
+│   ├── scraping.py            Niveles de embalses.net
+│   ├── descarga_saih.py       Caudales de los SAIH de cada confederación
+│   ├── consolidate_caudales.py
+│   ├── actualizar_geojson.py  Fusiona los datos nuevos en el GeoJSON publicado
+│   ├── emparejamiento.py      Reglas para unir cada embalse con su polígono
+│   ├── corregir_geometrias.py Revisa todo el GeoJSON contra el inventario del MITECO
+│   ├── geom.py                Cruce con el shapefile y carga en PostGIS
+│   └── config.py              Rutas y variables de entorno
+├── fme_workspaces/            Flujos de FME: geocodificación, satélite y energía
+├── dashboard/                 Web (React, TypeScript, Vite, Tailwind, Leaflet, Recharts)
+│   └── public/                data.geojson, caudales.json y last_update.json
+├── docs/                      Memoria técnica y registro de revisión de geometrías
+└── .github/workflows/         Actualización semanal y despliegue
+```
+
+## Ejecutarlo en local
+
+### Web
+
+Necesitas Node.js 18 o superior (en CI se usa la 20).
+
+```bash
+cd dashboard
+npm install
+npm run dev        # http://localhost:5173/
+npm run build      # genera dashboard/dist
+```
+
+### ETL
+
+Necesitas Python 3.11 o superior y Google Chrome, que Selenium usa para algunos SAIH.
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env               # rellena PGPASSWORD; el resto es opcional
+cd src
+python descarga_saih.py
+python scraping.py
+python consolidate_caudales.py
+python actualizar_geojson.py
+```
+
+PostgreSQL es opcional para el ciclo semanal. Si no hay una base de datos disponible, o si `GUARDAR_EN_POSTGRES=0`, los scripts guardan CSV y JSON y siguen adelante. Sí hace falta PostGIS, junto con `ogr2ogr`, para `geom.py` y para los flujos de FME.
+
+Para revisar las geometrías contra el inventario del MITECO:
+
+```bash
+python corregir_geometrias.py ruta/a/geometriaEmbalses.shp
+```
+
+El resultado de cada embalse queda registrado en `docs/revision_geometrias.csv`.
+
+## Límites conocidos
+
+- No todos los embalses publican su nivel todas las semanas. Los que no tienen lectura aparecen en gris y se pueden ocultar en el visor.
+- Los SAIH del Júcar, el Ebro y el Guadiana no responden a peticiones desde fuera de España, así que desde GitHub Actions sus caudales pueden faltar alguna semana. El del Guadiana necesita además el secreto `GUADIANA_JWT`.
+- La energía publicada usa un salto medio de 50 m (109 MWh por hm³) para todos los embalses. El cálculo con el salto de cada uno se hace en FME.
+
+## Fuentes
+
+embalses.net · SAIH de las confederaciones hidrográficas (MITECO) · OMIE · MDT200 del IGN · Inventario de presas y embalses del MITECO · Copernicus Sentinel-2 vía Earth Search (Element 84).
+
+## Autor
+
+Carlos del Valle. Proyecto de la asignatura *Transformación e Integración de la Información Geográfica* (UPM).

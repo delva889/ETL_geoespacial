@@ -1,152 +1,205 @@
-import { Droplets, Leaf, Compass, Zap, Waves, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { REPO_URL, MEMORIA_URL } from '../lib/data';
+import { FloatingLogos } from '../components/Logos';
+import { Captura, FIGURAS, type Figura } from '../components/Figuras';
 
-export default function Metodologia() {
-  const bgIcons = [
-    { Icon: Droplets, top: '10%', left: '80%', size: 38, delay: 0, duration: 7 },
-    { Icon: Waves, top: '65%', left: '90%', size: 44, delay: 1.1, duration: 8 },
-    { Icon: Compass, top: '20%', left: '60%', size: 28, delay: 2, duration: 6.5 },
-    { Icon: MapPin, top: '80%', left: '68%', size: 26, delay: 0.6, duration: 7.2 },
-    { Icon: Zap, top: '45%', left: '85%', size: 24, delay: 1.7, duration: 6.8 },
-  ];
+const W = 'max-w-[1280px] mx-auto w-full px-5 sm:px-8';
+const FME_URL = `${REPO_URL}/tree/main/fme_workspaces`;
 
-  const dataSources = [
-    {
-      name: 'embalses.net',
-      subtitle: 'Estado de embalses',
-      icon: <Droplets size={22} strokeWidth={1.5} className="text-teal" />,
-    },
-    {
-      name: 'MITECO / SAIH',
-      subtitle: 'Transición ecológica',
-      icon: <Leaf size={22} strokeWidth={1.5} className="text-teal" />,
-    },
-    {
-      name: 'IGN',
-      subtitle: 'Instituto Geográfico Nacional',
-      icon: <Compass size={22} strokeWidth={1.5} className="text-teal" />,
-    },
-    {
-      name: 'OMIE',
-      subtitle: 'Mercado eléctrico mayorista',
-      icon: <Zap size={22} strokeWidth={1.5} className="text-teal" />,
-    },
-  ];
+const FUENTES = [
+  { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping', ciclo: 'Cada lunes' },
+  { fuente: 'SAIH del MITECO', dato: 'Caudal en las estaciones de aforo', acceso: 'Scraping', ciclo: 'Cada lunes' },
+  { fuente: 'OMIE', dato: 'Precio marginal del mercado diario', acceso: 'Descarga de fichero', ciclo: 'Cada lunes' },
+  { fuente: 'IGN, MDT200', dato: 'Cotas del terreno para calcular el salto', acceso: 'GeoTIFF', ciclo: 'Fijo, en FME' },
+  { fuente: 'Inventario de presas y embalses (MITECO)', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile a PostGIS', ciclo: 'Fijo' },
+  { fuente: 'Earth Search (STAC)', dato: 'Escenas Copernicus Sentinel-2 L2A', acceso: 'API STAC', ciclo: 'Fijo, en FME' },
+];
 
+const SCRAPING = [
+  {
+    origen: 'embalses.net',
+    que: 'La tabla de cada cuenca hidrográfica: nombre del embalse, capacidad, agua embalsada y variación respecto a la semana anterior, en hm³.',
+    como: 'Lectura del HTML de cada página de cuenca.',
+  },
+  {
+    origen: 'SAIH de las confederaciones',
+    que: 'El caudal más reciente de las estaciones de aforo de Duero, Tajo, Segura, Júcar, Ebro, Guadalquivir, Miño-Sil, Cantábrico y Guadiana.',
+    como: 'Cada portal publica distinto: APIs JSON, tablas HTML, valores incrustados en la página o datos que solo aparecen tras abrirla con un navegador automatizado y obtener un token.',
+  },
+  {
+    origen: 'OMIE',
+    que: 'El precio marginal del mercado eléctrico diario, que se usa para valorar la energía almacenada.',
+    como: 'Descarga del fichero diario publicado por el operador del mercado.',
+  },
+];
+
+const DECISIONES = [
+  ['GeoJSON en EPSG:4326 como salida', 'Lo abre cualquier SIG y se sirve como fichero estático, sin servidor.'],
+  ['Cada fuente falla por separado', 'Si una confederación cambia su web, el resto del proceso sigue publicando.'],
+  ['Cada embalse con su polígono oficial', 'Se emparejan por nombre, demarcación y capacidad. Si no hay un polígono fiable, el embalse no se dibuja.'],
+  ['Geometría simplificada para la web', 'Douglas-Peucker con tolerancia de unos 10 m: un 80 % menos de vértices sin cambio visible a escala de embalse.'],
+  ['Lo que cambia, cada semana; lo costoso, una vez', 'Niveles y precio se refrescan solos. El geoprocesamiento en FME se reutiliza entre ciclos.'],
+];
+
+function Flujo({ fig }: { fig: Figura }) {
   return (
-    <div className="max-w-5xl mx-auto w-full">
-      <style>{`
-        @keyframes bgIconFloat {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-14px) rotate(-4deg); }
-        }
-      `}</style>
-
-      <div className="mb-10 pb-6 border-b border-line relative overflow-hidden">
-        <div className="lines-bg absolute inset-0 text-line opacity-60 pointer-events-none hidden sm:block" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-0 hidden sm:block" aria-hidden="true">
-          {bgIcons.map(({ Icon, top, left, size, delay, duration }, i) => (
-            <Icon
-              key={i}
-              size={size}
-              strokeWidth={1.5}
-              className="text-teal absolute"
-              style={{
-                top, left,
-                opacity: 0.16,
-                animation: `bgIconFloat ${duration}s ease-in-out infinite`,
-                animationDelay: `${delay}s`,
-              }}
-            />
-          ))}
-        </div>
-        <div className="relative">
-          <p className="font-data text-xs text-teal mb-2">Datos y fuentes</p>
-          <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-ink">
-            Procedencia de la información
-          </h1>
-          <p className="text-base text-muted leading-relaxed mt-3 max-w-xl">
-            Recopilación, tratamiento y procedencia de la información hidrológica en España.
-          </p>
-        </div>
+    <div className="grid lg:grid-cols-12 gap-x-10 gap-y-5 items-start">
+      <div className="lg:col-span-4">
+        <h3 className="text-[22px] leading-tight">{fig.titulo}</h3>
+        <p className="text-[15px] leading-relaxed text-ink-2 mt-3">{fig.texto}</p>
+        {fig.fuente && (
+          <a href={`${REPO_URL}/blob/main/fme_workspaces/${fig.fuente}`} target="_blank" rel="noopener noreferrer"
+            className="inline-flex mt-4 num text-[13px] text-cobalt hover:underline underline-offset-4">
+            {fig.fuente}
+          </a>
+        )}
       </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 border border-line divide-x divide-y md:divide-y-0 divide-line mb-12">
-        {dataSources.map((source) => (
-          <div key={source.name} className="flex flex-col items-center justify-center text-center p-6 bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(14,36,34,0.1)] hover:z-10 relative">
-            {source.icon}
-            <h3 className="font-display text-base font-semibold text-ink mt-3">{source.name}</h3>
-            <p className="font-data text-[10px] text-muted mt-1">{source.subtitle}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="space-y-10">
-        <section>
-          <h2 className="font-display text-xl font-semibold text-ink mb-3">
-            3.1 — Ámbito de hidrología
-          </h2>
-          <p className="text-[15px] text-ink leading-relaxed mb-6 max-w-2xl">
-            La recopilación de datos hidrológicos se ha estructurado en dos ejes principales, atendiendo a la naturaleza de la información y a su disponibilidad en la red.
-          </p>
-
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="border border-line bg-surface p-6 border-t-2 border-t-teal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(14,36,34,0.1)] hover:z-10 relative">
-              <div className="flex items-center gap-2.5 mb-3">
-                <Droplets size={18} className="text-teal" strokeWidth={1.5} />
-                <h3 className="font-display font-semibold text-ink">Infraestructura de embalses</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-4">
-                La información relativa al estado, capacidad y variación de los embalses se ha obtenido del portal <strong className="text-ink font-medium">embalses.net</strong>. Debido a que los datos se presentan en formato HTML y se encuentran separados por demarcaciones, el proceso ha requerido descarga y tratamiento individualizado.
-              </p>
-              <div className="border-t border-line pt-3 text-xs text-muted leading-relaxed">
-                <span className="text-ink font-medium">Proceso aplicado: </span>
-                extracción mediante parsing HTML (web scraping), normalización de campos numéricos (hm³) y consolidación de un registro único nacional.
-              </div>
-            </div>
-
-            <div className="border border-line bg-surface p-6 border-t-2 border-t-teal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(14,36,34,0.1)] hover:z-10 relative">
-              <div className="flex items-center gap-2.5 mb-3">
-                <Leaf size={18} className="text-teal" strokeWidth={1.5} />
-                <h3 className="font-display font-semibold text-ink">Red fluvial y caudales</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed mb-4">
-                Los datos relativos a los ríos proceden del <strong className="text-ink font-medium">Ministerio para la Transición Ecológica (MITECO)</strong> a través de los Sistemas Automáticos de Información Hidrológica (SAIH), que controlan las cuencas de manera individualizada.
-              </p>
-              <div className="border-t border-line pt-3 text-xs text-muted leading-relaxed">
-                <span className="text-ink font-medium">Formatos descentralizados: </span>
-                a pesar de la disparidad inicial entre confederaciones, se ha logrado mapear las variables clave hacia un formato interoperable GeoJSON.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="pt-6 border-t border-line">
-          <h2 className="font-display text-xl font-semibold text-ink mb-5">
-            3.2 — Modelado espacial y mercado
-          </h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            <div className="border border-line bg-surface p-6 border-t-2 border-t-ochre transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(14,36,34,0.1)] hover:z-10 relative">
-              <div className="flex items-center gap-2.5 mb-3">
-                <Compass size={18} className="text-ochre" strokeWidth={1.5} />
-                <h3 className="font-display font-semibold text-ink text-sm">Modelado geográfico (IGN)</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed">
-                Para dotar a los datos de contexto geográfico se emplean geometrías proporcionadas por entidades estatales (IGN) que definen el polígono y la localización exacta de las presas. La transformación de geometrías se ejecuta mediante herramientas ETL geoespaciales.
-              </p>
-            </div>
-
-            <div className="border border-line bg-surface p-6 border-t-2 border-t-ochre transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(14,36,34,0.1)] hover:z-10 relative">
-              <div className="flex items-center gap-2.5 mb-3">
-                <Zap size={18} className="text-ochre" strokeWidth={1.5} />
-                <h3 className="font-display font-semibold text-ink text-sm">Mercado energético (OMIE)</h3>
-              </div>
-              <p className="text-sm text-muted leading-relaxed">
-                Finalmente, se cruzan las métricas de capacidad (volumen embalsado) con las tasas de conversión energética y los precios de cotización del <strong className="text-ink font-medium">OMIE (Operador del Mercado Ibérico de Energía)</strong>, estimando el valor del recurso hídrico.
-              </p>
-            </div>
-          </div>
-        </section>
+      <div className="lg:col-span-8">
+        <Captura fig={fig} />
       </div>
     </div>
+  );
+}
+
+export default function Metodologia() {
+  return (
+    <>
+      <section className={`${W} pt-16 sm:pt-24 pb-20 relative`}>
+        <FloatingLogos ids={['python', 'postgresql', 'gdal', 'qgis', 'pandas', 'githubactions']} />
+        <div className="relative grid md:grid-cols-12 gap-x-8 gap-y-8">
+          <h1 className="md:col-span-7 text-[44px] sm:text-[68px] leading-[1] tracking-[-0.045em]">
+            Cómo se construye el modelo
+          </h1>
+          <p className="md:col-span-4 md:col-start-9 md:pt-16 text-[17px] leading-relaxed text-ink-2">
+            De dónde sale cada dato, qué se extrae por scraping y cómo se transforma en FME y Pentaho
+            hasta llegar al visor.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-t border-rule">
+        <div className={`${W} py-20`}>
+          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Fuentes de datos</h2>
+          <ul className="md:hidden panel divide-y divide-rule">
+            {FUENTES.map((f) => (
+              <li key={f.fuente} className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="font-semibold text-[15px]">{f.fuente}</p>
+                  <span className={`shrink-0 inline-flex rounded-full px-2.5 py-1 text-[12px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span>
+                </div>
+                <p className="text-[15px] text-ink-2 mt-2">{f.dato}</p>
+                <p className="text-[14px] text-muted mt-1.5">{f.acceso}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden md:block overflow-x-auto panel">
+            <table className="w-full text-[15px] border-collapse">
+              <thead>
+                <tr className="border-b border-rule text-left bg-paper-2">
+                  {['Fuente', 'Qué aporta', 'Cómo se obtiene', 'Se actualiza'].map((h) => (
+                    <th key={h} scope="col" className="margin-note font-normal py-3 px-5">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {FUENTES.map((f) => (
+                  <tr key={f.fuente} className="border-b border-rule last:border-b-0 align-top">
+                    <th scope="row" className="font-semibold text-[15px] py-4 px-5 text-left">{f.fuente}</th>
+                    <td className="py-4 px-5 text-ink-2">{f.dato}</td>
+                    <td className="py-4 px-5 text-ink-2">{f.acceso}</td>
+                    <td className="py-4 px-5 whitespace-nowrap">
+                      <span className={`inline-flex rounded-full px-2.5 py-1 text-[13px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white border-y border-rule">
+        <div className={`${W} py-20 grid lg:grid-cols-12 gap-x-10 gap-y-10`}>
+          <div className="lg:col-span-4">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02]">Qué se extrae por scraping</h2>
+            <p className="text-[16px] leading-relaxed text-ink-2 mt-5">
+              Ninguna de estas fuentes ofrece una descarga unificada, así que la información se extrae de sus webs de forma
+              automática cada lunes con Python (requests, BeautifulSoup y Selenium).
+            </p>
+          </div>
+          <ul className="lg:col-span-7 lg:col-start-6 divide-y divide-rule border-y border-rule">
+            {SCRAPING.map((s) => (
+              <li key={s.origen} className="py-6 grid sm:grid-cols-[200px_1fr] gap-x-6 gap-y-2">
+                <p className="font-semibold text-[17px]">{s.origen}</p>
+                <div>
+                  <p className="text-[16px] leading-relaxed">{s.que}</p>
+                  <p className="text-[14px] leading-relaxed text-muted mt-2">{s.como}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div className={`${W} py-20`}>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02]">Flujos de FME</h2>
+            <a href={FME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-line self-start md:self-auto">
+              Ver los archivos .fmw en GitHub
+            </a>
+          </div>
+          <div className="space-y-20">
+            <Flujo fig={FIGURAS.geocodificacion} />
+            <Flujo fig={FIGURAS.sentinel} />
+            <Flujo fig={FIGURAS.energia} />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white border-y border-rule">
+        <div className={`${W} py-20`}>
+          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-4">Flujo de Pentaho PDI</h2>
+          <p className="text-[16px] text-ink-2 mb-14 max-w-[60ch]">
+            Normalización de los caudales de las confederaciones antes de cargarlos en PostgreSQL.
+          </p>
+          <Flujo fig={FIGURAS.caudales} />
+        </div>
+      </section>
+
+      <section>
+        <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-16`}>
+          <div className="md:col-span-7">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Decisiones de diseño</h2>
+            <dl className="border-t border-rule">
+              {DECISIONES.map(([t, d]) => (
+                <div key={t} className="py-5 border-b border-rule grid sm:grid-cols-[1fr_1.3fr] gap-x-8 gap-y-1">
+                  <dt className="font-semibold text-[16px] leading-snug">{t}</dt>
+                  <dd className="text-[15px] leading-relaxed text-ink-2">{d}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="md:col-span-4 md:col-start-9 md:pt-24">
+            <div className="panel p-6 bg-[#fff8eb] border-[#f5dfb3]">
+              <h2 className="text-[22px] leading-tight pb-4 border-b border-[#f5dfb3]">Límites conocidos</h2>
+              <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
+                <li>La energía publicada usa un salto medio de 50 m para todos los embalses; el cálculo con el MDT de cada uno se hizo en FME. Supone el vaciado completo y no es un dato de explotación.</li>
+                <li>No todos los embalses publican nivel cada semana. En el visor aparecen en gris.</li>
+                <li>Algunos portales SAIH no responden desde servidores fuera de España, así que sus caudales pueden faltar en una semana concreta.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-rule">
+        <div className={`${W} py-16 flex flex-wrap items-center gap-x-8 gap-y-4`}>
+          <Link to="/" className="btn btn-ink">Abrir el visor</Link>
+          <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Leer la memoria técnica (PDF)</a>
+          <a href={FME_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Archivos de FME en GitHub</a>
+        </div>
+      </section>
+    </>
   );
 }

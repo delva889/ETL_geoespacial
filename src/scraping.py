@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import psycopg2
@@ -236,11 +237,14 @@ if __name__ == "__main__":
         print()
 
     print(f"\nTotal de registros: {len(todos)}")
-    print("Guardando en base de datos PostgreSQL...")
-    try:
-        guardar_en_postgres(todos, ahora)
-    except Exception as e:
-        print(f"  [AVISO] No se pudo guardar en PostgreSQL, se continúa solo con el CSV: {e}")
+    if os.environ.get("GUARDAR_EN_POSTGRES", "1") == "0":
+        print("PostgreSQL desactivado (GUARDAR_EN_POSTGRES=0); se guarda solo el CSV.")
+    else:
+        print("Guardando en base de datos PostgreSQL...")
+        try:
+            guardar_en_postgres(todos, ahora)
+        except Exception as e:
+            print(f"  [AVISO] No se pudo guardar en PostgreSQL, se continúa solo con el CSV: {e}")
     print("Guardando en CSV...")
     with open(DATA_DIR / "embalses.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

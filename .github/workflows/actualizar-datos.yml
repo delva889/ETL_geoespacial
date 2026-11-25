@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATA_DIR: dataPH
+      GUARDAR_EN_POSTGRES: '0'
       PGPASSWORD: ${{ secrets.PGPASSWORD || 'no-configurado-en-ci' }}
       PGHOST: ${{ secrets.PGHOST || 'localhost' }}
       PGPORT: ${{ secrets.PGPORT || '5432' }}
@@ -66,6 +67,13 @@ jobs:
           file_pattern: "dashboard/public/data.geojson dashboard/public/caudales.json dashboard/public/last_update.json"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
 
       - name: Instalar dependencias del dashboard
         working-directory: dashboard

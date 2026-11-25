@@ -21,15 +21,15 @@ def limpiar_nombre(nombre):
     if n_lower.startswith('aportaci') or n_lower.startswith('nivel'):
         return None
         
-    if n_lower.startswith('caudal'):
-        if n_lower.startswith('caudal r'):
-            nombre = re.sub(r'(?i)^caudal\s+', '', nombre)
-        else:
-            return None
+    # "Caudal Cabecera Canal de Hellín", "CAUDAL RIO TAJO EN ..." -> se quita el prefijo, no la estación
+    nombre = re.sub(r'(?i)^caudal(?:es)?\s+(?:total\s+|medio\s+)?(?:de(?:l)?\s+)?', '', nombre).strip()
+    if not nombre:
+        return None
 
     # Remove generic codes
     nombre = re.sub(r'^(?:EA\s+\d+|[A-Z]\d{2}\s+(?:CH|CR|EA)?)\s+', '', nombre, flags=re.IGNORECASE)
     nombre = re.sub(r'(?i)\bbde local\b', '', nombre).strip()
+    nombre = re.sub(r',\s*\d+$', '', nombre).strip()   # "La Fuentona, 2153" -> "La Fuentona"
     
     # Capitalize
     nombre = ' '.join(word.capitalize() for word in nombre.split())
@@ -47,6 +47,11 @@ def to_float(v):
             return None
         if s.upper().startswith("ERROR"):
             return None
+        # Algunos SAIH incluyen la unidad en el valor: "0,19m³/s"
+        m = re.search(r"-?\d[\d.,]*", s)
+        if not m:
+            return None
+        s = m.group(0)
         if "," in s and "." in s:
             s = s.replace(".", "").replace(",", ".")
         elif "," in s:
@@ -59,13 +64,18 @@ def to_float(v):
         return None
 
 
-def desde_csv(nombre_archivo, cuenca, col_nombre, col_caudal):
+def desde_csv(nombre_archivo, cuenca, col_nombre, col_caudal, filtro=None):
     ruta = DATA_DIR / nombre_archivo
     if not ruta.exists():
         return []
-    df = pd.read_csv(ruta)
+    try:
+        df = pd.read_csv(ruta)
+    except pd.errors.EmptyDataError:
+        return []
     registros = []
     for _, row in df.iterrows():
+        if filtro and not filtro(row):
+            continue
         caudal = to_float(row.get(col_caudal))
         nombre = limpiar_nombre(row.get(col_nombre, ""))
         if caudal is None or not nombre or nombre.lower() == "nan":
@@ -152,8 +162,10 @@ def main():
     todos += desde_csv("saih_guadalquivir.csv", "Guadalquivir", "nombre", "caudal_m3s")
     todos += desde_csv("saih_duero.csv", "Duero", "nombre", "caudal")
     todos += desde_csv("saih_mino.csv", "Miño-sil", "nombre", "valor")
+    # En el Segura, las señales de caudal tienen código Q (las N son niveles)
     todos += desde_csv(
-        "saih_segura.csv", "Segura", "descripcion", "valor"
+        "saih_segura.csv", "Segura", "descripcion", "valor",
+        filtro=lambda r: str(r.get("codigo", "")).upper().startswith("Q"),
     )
     todos += desde_tajo()
     todos += desde_cantabrico()
@@ -167,6 +179,16 @@ def main():
         ["estacion", "nombre", "descripcion"],
         ["caudal", "valor", "dato", "ultimoValor"],
     )
+
+    # Una estación por nombre y cuenca (algunos SAIH repiten la señal)
+    unicos = {}
+    for r in todos:
+        unicos.setdefault((r["nombre"], r["cuenca"]), r)
+    todos = list(unicos.values())
+
+    from collections import Counter
+    for cuenca, n in sorted(Counter(r["cuenca"] for r in todos).items()):
+        print(f"  {cuenca}: {n} estaciones")
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(

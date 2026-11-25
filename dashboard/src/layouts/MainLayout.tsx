@@ -1,99 +1,88 @@
-import { Outlet, NavLink } from 'react-router-dom';
-import { Github } from 'lucide-react';
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Github, Map as MapIcon, BookOpen, Layers } from 'lucide-react';
+import { REPO_URL, MEMORIA_URL, AUTORES, PROYECTO, PROYECTO_AMBITO } from '../lib/data';
 
-const REPO_URL = 'https://github.com/delva889/ETL_geoespacial';
+const NAV = [
+  { name: 'Visor', path: '/', icon: MapIcon },
+  { name: 'Proyecto', path: '/proyecto', icon: Layers },
+  { name: 'Metodología', path: '/metodologia', icon: BookOpen },
+];
 
 export default function MainLayout() {
-  const navItems = [
-    { name: 'Introducción', path: '/', code: '01' },
-    { name: 'Objetivos', path: '/objetivos', code: '02' },
-    { name: 'Datos y fuentes', path: '/metodologia', code: '03' },
-    { name: 'Visor', path: '/visor', code: '04' },
-  ];
+  const { pathname } = useLocation();
+  const enVisor = pathname === '/';
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <header className="bg-ink text-paper sticky top-0 z-50 relative overflow-hidden">
-        <div className="lines-bg absolute inset-0 text-teal opacity-[0.08] pointer-events-none" aria-hidden="true" />
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 py-4 lg:py-0 lg:h-20">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-baseline gap-3">
-                <span className="font-data text-xs text-teal tracking-wider shrink-0">HGE&nbsp;/&nbsp;ES</span>
-                <h1 className="font-display text-base sm:text-lg font-semibold leading-none tracking-tight">
-                  Modelo de integración geoespacial
-                  <span className="block font-sans font-normal text-[11px] text-paper/60 mt-1 tracking-normal">
-                    Energía hidráulica en España
-                  </span>
-                </h1>
-              </div>
-              <a
-                href={REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lg:hidden flex items-center gap-1.5 text-paper/70 hover:text-paper transition-colors text-xs shrink-0"
-              >
-                <Github size={16} />
-                Código
-              </a>
-            </div>
+      <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[3000] focus:bg-ink focus:text-white focus:px-3 focus:py-2 focus:rounded-lg">
+        Saltar al contenido
+      </a>
 
-            <nav className="flex flex-wrap items-stretch gap-x-6 gap-y-1 lg:gap-x-8 lg:h-full">
-              {navItems.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `group flex items-center gap-2 text-[15px] py-1.5 lg:py-0 lg:border-t-2 transition-colors ${
-                      isActive
-                        ? 'border-teal text-paper'
-                        : 'border-transparent text-paper/55 hover:text-paper hover:border-paper/30'
-                    }`
-                  }
-                >
-                  <span className="font-data text-[10px] text-paper/40 group-hover:text-paper/60">
-                    {item.code}
-                  </span>
-                  {item.name}
-                </NavLink>
-              ))}
-              <a
-                href={REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:flex items-center gap-1.5 text-paper/50 hover:text-paper transition-colors text-sm shrink-0"
-                title="Ver repositorio en GitHub"
+      <header className="sticky top-0 z-[1000] bg-white/80 backdrop-blur-xl border-b border-rule">
+        <div className={`${enVisor ? 'max-w-[1680px] px-3 sm:px-4' : 'max-w-[1280px] px-5 sm:px-8'} mx-auto h-16 flex items-center gap-2 sm:gap-4`}>
+
+          <Link to="/proyecto" className="hidden lg:flex items-center gap-3 min-w-0 flex-1 group" title={`${PROYECTO} ${PROYECTO_AMBITO}`}>
+            <span className="min-w-0 leading-tight">
+              <span className="block text-[14px] xl:text-[15px] leading-[1.25] font-semibold tracking-tight line-clamp-2 xl:line-clamp-1 group-hover:text-cobalt transition-colors duration-200">{PROYECTO}</span>
+              <span className="hidden xl:block text-[13px] text-muted truncate">{PROYECTO_AMBITO.charAt(0).toUpperCase() + PROYECTO_AMBITO.slice(1)}</span>
+            </span>
+          </Link>
+
+          <nav aria-label="Principal" className="flex items-center p-1 rounded-xl bg-paper-2 border border-rule shrink-0">
+            {NAV.map(({ name, path, icon: Icon }) => (
+              <NavLink
+                key={path}
+                to={path}
+                end={path === '/'}
+                className={({ isActive }) =>
+                  `inline-flex items-center gap-1.5 h-9 px-2 sm:px-3.5 rounded-lg text-[14px] sm:text-[15px] transition-colors duration-200 ${
+                    isActive ? 'bg-white text-ink font-medium shadow-[0_1px_2px_rgba(11,18,32,0.08),0_0_0_1px_rgba(11,18,32,0.04)]' : 'text-ink-2 hover:text-ink'
+                  }`
+                }
               >
-                <Github size={16} />
-              </a>
-            </nav>
+                <Icon size={16} strokeWidth={1.75} aria-hidden="true" className="hidden sm:block" />
+                {name}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2 ml-auto shrink-0">
+            <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer"
+              className="hidden lg:inline-flex h-10 items-center px-3 rounded-lg text-[15px] text-ink-2 hover:text-ink hover:bg-paper-2 transition-colors duration-200">
+              Memoria
+            </a>
+            <a href={REPO_URL} target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub"
+              className="inline-flex h-10 items-center justify-center gap-2 w-10 sm:w-auto sm:px-3 rounded-lg bg-ink text-white text-[15px] hover:bg-cobalt transition-colors duration-200">
+              <Github size={16} aria-hidden="true" />
+              <span className="hidden sm:inline">GitHub</span>
+            </a>
           </div>
         </div>
       </header>
 
-      <main className="flex-grow w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex flex-col">
+      <main id="contenido" className="flex-grow w-full flex flex-col">
         <Outlet />
       </main>
 
-      <footer className="border-t border-line">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row md:items-start justify-between gap-6">
-          <div className="max-w-xl">
-            <p className="font-data text-[11px] text-muted tracking-wide mb-2">
-              FUENTES: EMBALSES.NET · MITECO/SAIH · OMIE · IGN
-            </p>
-            <p className="text-xs text-muted leading-relaxed">
-              Las métricas de energía y valor de mercado son estimaciones orientativas obtenidas
-              por integración de datos públicos y no corresponden a lecturas operativas oficiales.
-            </p>
+      <footer className="bg-night text-white">
+        <div className="max-w-[1280px] mx-auto w-full px-5 sm:px-8 py-14 grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-6">
+            <p className="text-[18px] font-semibold tracking-tight leading-snug max-w-[34ch]">{PROYECTO} {PROYECTO_AMBITO}</p>
+            <p className="text-white/65 mt-3">Autor: {AUTORES}.</p>
           </div>
-          <a
-            href={REPO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-data text-xs text-teal hover:text-ink transition-colors shrink-0"
-          >
-            github.com/delva889/ETL_geoespacial
-          </a>
+          <ul className="md:col-span-2 space-y-2 text-[15px]">
+            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={REPO_URL} target="_blank" rel="noopener noreferrer">Código en GitHub</a></li>
+            <li><a className="text-white/85 hover:text-white underline-offset-4 hover:underline" href={MEMORIA_URL} target="_blank" rel="noopener noreferrer">Memoria técnica</a></li>
+          </ul>
+          <p className="md:col-span-4 text-[13px] text-white/55 leading-relaxed">
+            Datos de embalses.net, SAIH del MITECO, OMIE, MDT200 del IGN e inventario de presas y embalses del MITECO;
+            imágenes Copernicus Sentinel-2 a través de Earth Search. La energía y el valor de mercado son estimaciones.
+          </p>
         </div>
       </footer>
     </div>
