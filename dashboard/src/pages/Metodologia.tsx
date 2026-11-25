@@ -80,8 +80,20 @@ export default function Metodologia() {
       <section className="border-t border-rule">
         <div className={`${W} py-20`}>
           <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Fuentes de datos</h2>
-          <div className="overflow-x-auto panel">
-            <table className="w-full min-w-[720px] text-[15px] border-collapse">
+          <ul className="md:hidden panel divide-y divide-rule">
+            {FUENTES.map((f) => (
+              <li key={f.fuente} className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="font-semibold text-[15px]">{f.fuente}</p>
+                  <span className={`shrink-0 inline-flex rounded-full px-2.5 py-1 text-[12px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span>
+                </div>
+                <p className="text-[15px] text-ink-2 mt-2">{f.dato}</p>
+                <p className="text-[14px] text-muted mt-1.5">{f.acceso}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden md:block overflow-x-auto panel">
+            <table className="w-full text-[15px] border-collapse">
               <thead>
                 <tr className="border-b border-rule text-left bg-paper-2">
                   {['Fuente', 'Qué aporta', 'Cómo se obtiene', 'Se actualiza'].map((h) => (

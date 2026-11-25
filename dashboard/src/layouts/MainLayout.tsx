@@ -24,12 +24,12 @@ export default function MainLayout() {
       </a>
 
       <header className="sticky top-0 z-[1000] bg-white/80 backdrop-blur-xl border-b border-rule">
-        <div className={`${enVisor ? 'max-w-[1680px] px-3 sm:px-4' : 'max-w-[1280px] px-5 sm:px-8'} mx-auto h-14 flex items-center gap-4`}>
+        <div className={`${enVisor ? 'max-w-[1680px] px-3 sm:px-4' : 'max-w-[1280px] px-5 sm:px-8'} mx-auto h-16 flex items-center gap-2 sm:gap-4`}>
 
-          <Link to="/proyecto" className="hidden md:flex items-center gap-3 min-w-0 flex-1 group" title={`${PROYECTO} ${PROYECTO_AMBITO}`}>
+          <Link to="/proyecto" className="hidden lg:flex items-center gap-3 min-w-0 flex-1 group" title={`${PROYECTO} ${PROYECTO_AMBITO}`}>
             <span className="min-w-0 leading-tight">
-              <span className="block text-[13.5px] font-semibold tracking-tight truncate group-hover:text-cobalt transition-colors duration-200">{PROYECTO}</span>
-              <span className="block text-[12px] text-muted truncate">{PROYECTO_AMBITO.charAt(0).toUpperCase() + PROYECTO_AMBITO.slice(1)}</span>
+              <span className="block text-[14px] xl:text-[15px] leading-[1.25] font-semibold tracking-tight line-clamp-2 xl:line-clamp-1 group-hover:text-cobalt transition-colors duration-200">{PROYECTO}</span>
+              <span className="hidden xl:block text-[13px] text-muted truncate">{PROYECTO_AMBITO.charAt(0).toUpperCase() + PROYECTO_AMBITO.slice(1)}</span>
             </span>
           </Link>
 
@@ -40,25 +40,25 @@ export default function MainLayout() {
                 to={path}
                 end={path === '/'}
                 className={({ isActive }) =>
-                  `inline-flex items-center gap-1.5 h-8 px-3 rounded-lg text-[14px] transition-colors duration-200 ${
+                  `inline-flex items-center gap-1.5 h-9 px-2 sm:px-3.5 rounded-lg text-[14px] sm:text-[15px] transition-colors duration-200 ${
                     isActive ? 'bg-white text-ink font-medium shadow-[0_1px_2px_rgba(11,18,32,0.08),0_0_0_1px_rgba(11,18,32,0.04)]' : 'text-ink-2 hover:text-ink'
                   }`
                 }
               >
-                <Icon size={15} strokeWidth={1.75} aria-hidden="true" />
+                <Icon size={16} strokeWidth={1.75} aria-hidden="true" className="hidden sm:block" />
                 {name}
               </NavLink>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 ml-auto md:ml-0 md:flex-1 md:justify-end shrink-0">
+          <div className="flex items-center gap-2 ml-auto shrink-0">
             <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer"
-              className="hidden lg:inline-flex h-9 items-center px-3 rounded-lg text-[14px] text-ink-2 hover:text-ink hover:bg-paper-2 transition-colors duration-200">
+              className="hidden lg:inline-flex h-10 items-center px-3 rounded-lg text-[15px] text-ink-2 hover:text-ink hover:bg-paper-2 transition-colors duration-200">
               Memoria
             </a>
             <a href={REPO_URL} target="_blank" rel="noopener noreferrer" aria-label="Código en GitHub"
-              className="inline-flex h-9 items-center gap-2 px-3 rounded-lg bg-ink text-white text-[14px] hover:bg-cobalt transition-colors duration-200">
-              <Github size={15} aria-hidden="true" />
+              className="inline-flex h-10 items-center justify-center gap-2 w-10 sm:w-auto sm:px-3 rounded-lg bg-ink text-white text-[15px] hover:bg-cobalt transition-colors duration-200">
+              <Github size={16} aria-hidden="true" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
           </div>

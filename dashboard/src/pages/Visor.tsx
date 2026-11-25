@@ -197,7 +197,7 @@ export default function Visor() {
     <div className="w-full flex flex-col">
 
       <section className="max-w-[1680px] w-full mx-auto px-3 sm:px-4 pt-3 pb-4">
-        <div className="grid lg:grid-cols-[minmax(0,1fr)_400px] gap-3 lg:h-[calc(100svh-3.5rem-1.75rem)] lg:min-h-[620px]">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_400px] gap-3 lg:h-[calc(100svh-4rem-1.75rem)] lg:min-h-[620px]">
           <div ref={mapBoxRef} className="relative rounded-2xl border border-rule overflow-hidden h-[68svh] min-h-[440px] lg:h-full scroll-mt-16 bg-paper-2">
             <MapContainer
               center={[39.6, -3.6]}

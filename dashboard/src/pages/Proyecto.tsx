@@ -52,9 +52,6 @@ function CountUp({ value, dec = 0 }: { value: number; dec?: number }) {
 
 export default function Proyecto() {
   const info = useLastUpdate();
-  const fecha = info?.timestamp
-    ? new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(info.timestamp))
-    : null;
 
   const cifras = [
     { valor: info?.total_geometrias, texto: 'embalses dibujados con su polígono oficial' },
@@ -69,15 +66,6 @@ export default function Proyecto() {
       <section className="bg-night text-white">
         <div className={`${W} pt-20 pb-20 sm:pt-28 sm:pb-24`}>
           <div className="max-w-[860px] rise">
-            {fecha && (
-              <p className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 backdrop-blur px-3 py-1.5 text-[13px] text-white/85 mb-7">
-                <span className="relative flex w-2 h-2" aria-hidden="true">
-                  <span className="absolute inset-0 rounded-full bg-[#4ade80] animate-ping opacity-60" />
-                  <span className="relative w-2 h-2 rounded-full bg-[#4ade80]" />
-                </span>
-                Datos del {fecha}. Se actualizan cada lunes.
-              </p>
-            )}
             <h1 className="text-[38px] sm:text-[56px] lg:text-[68px] leading-[1.02] tracking-[-0.045em]">
               {PROYECTO}
               <span className="block mt-2 text-[24px] sm:text-[32px] lg:text-[38px] leading-[1.1] tracking-[-0.03em] font-normal text-white/70">{PROYECTO_AMBITO}</span>
@@ -91,7 +79,7 @@ export default function Proyecto() {
             <div className="flex flex-wrap items-center gap-3 mt-9">
               <Link to="/" className="btn btn-light">Abrir el visor</Link>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-dark">Ver el código</a>
-              <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/75 hover:text-white underline underline-offset-4 decoration-white/30 hover:decoration-white ml-2">
+              <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/75 hover:text-white underline underline-offset-4 decoration-white/30 hover:decoration-white sm:ml-2">
                 Memoria técnica (PDF)
               </a>
             </div>
@@ -102,9 +90,9 @@ export default function Proyecto() {
       <section className={`${W} pt-16 sm:pt-20`}>
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-rule rounded-2xl overflow-hidden border border-rule">
           {cifras.map((c) => (
-            <div key={c.texto} className="bg-white p-6 sm:p-8">
+            <div key={c.texto} className="bg-white p-5 sm:p-8 min-w-0">
               <dt className="sr-only">{c.texto}</dt>
-              <dd className="num text-[36px] sm:text-[48px] leading-none font-medium tracking-[-0.04em]">
+              <dd className="num text-[30px] sm:text-[48px] leading-none font-medium tracking-[-0.04em]">
                 {c.valor !== undefined ? <CountUp value={c.valor} dec={c.dec ?? 0} /> : '–'}
               </dd>
               <dd className="text-[14px] text-ink-2 mt-3 max-w-[24ch]">{c.texto}</dd>
@@ -177,12 +165,12 @@ export default function Proyecto() {
             </p>
             <p className="text-[14px] text-muted mt-4">Estimación orientativa de vaciado completo, no un dato de explotación.</p>
           </div>
-          <div className="lg:col-span-7 panel p-8 sm:p-10">
-            <p className="text-center text-[30px] sm:text-[44px] font-medium tracking-[-0.03em] text-ink">
-              <span className="inline-flex items-center gap-4">
+          <div className="lg:col-span-7 panel p-5 sm:p-10">
+            <p className="text-center text-[22px] sm:text-[36px] lg:text-[44px] whitespace-nowrap font-medium tracking-[-0.03em] text-ink">
+              <span className="inline-flex items-center gap-2 sm:gap-4">
                 <span>E =</span>
                 <span className="inline-flex flex-col items-center">
-                  <span className="px-3 pb-2 border-b-2 border-ink">ρ · g · V · ΔH · η</span>
+                  <span className="px-2 sm:px-3 pb-2 border-b-2 border-ink">ρ · g · V · ΔH · η</span>
                   <span className="pt-2">3,6 · 10<sup className="text-[0.5em]">9</sup></span>
                 </span>
               </span>
