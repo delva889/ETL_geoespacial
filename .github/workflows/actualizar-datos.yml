@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATA_DIR: dataPH
+      GUARDAR_EN_POSTGRES: '0'
       PGPASSWORD: ${{ secrets.PGPASSWORD || 'no-configurado-en-ci' }}
       PGHOST: ${{ secrets.PGHOST || 'localhost' }}
       PGPORT: ${{ secrets.PGPORT || '5432' }}

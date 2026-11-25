@@ -38,7 +38,7 @@ const DECISIONES = [
   ['Mejor sin dibujar que mal dibujado', 'Si un embalse no tiene un polígono fiable por nombre, demarcación y capacidad, no se publica. Cada decisión queda en docs/revision_geometrias.csv.'],
 ];
 
-const W = 'max-w-[1360px] mx-auto w-full px-5 sm:px-8';
+const W = 'max-w-[1280px] mx-auto w-full px-5 sm:px-8';
 
 export default function Metodologia() {
   return (
@@ -46,7 +46,7 @@ export default function Metodologia() {
       <section className={`${W} pt-16 sm:pt-24 pb-20 relative`}>
         <FloatingLogos ids={['python', 'postgresql', 'gdal', 'qgis', 'pandas', 'githubactions']} />
         <div className="relative grid md:grid-cols-12 gap-x-8 gap-y-8">
-          <h1 className="md:col-span-7 text-[56px] sm:text-[88px] leading-[0.92] tracking-[-0.02em]">
+          <h1 className="md:col-span-7 text-[44px] sm:text-[68px] leading-[1] tracking-[-0.045em]">
             Cómo se construye el modelo
           </h1>
           <p className="md:col-span-4 md:col-start-9 md:pt-24 text-[17px] leading-relaxed text-ink-2">
@@ -57,25 +57,25 @@ export default function Metodologia() {
       </section>
 
       {/* Fuentes */}
-      <section className="border-t border-ink">
+      <section className="border-t border-rule">
         <div className={`${W} py-20`}>
-          <h2 className="text-[44px] sm:text-[56px] leading-[0.95] mb-10">Fuentes de datos</h2>
-          <div className="overflow-x-auto">
+          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Fuentes de datos</h2>
+          <div className="overflow-x-auto panel">
             <table className="w-full min-w-[720px] text-[15px] border-collapse">
               <thead>
-                <tr className="border-y border-ink text-left">
+                <tr className="border-b border-rule text-left bg-paper-2">
                   {['Fuente', 'Qué aporta', 'Cómo se obtiene', 'Se actualiza'].map((h) => (
-                    <th key={h} scope="col" className="margin-note font-normal py-3 pr-6">{h}</th>
+                    <th key={h} scope="col" className="margin-note font-normal py-3 px-5">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {FUENTES.map((f) => (
                   <tr key={f.fuente} className="border-b border-rule align-top">
-                    <th scope="row" className="font-serif font-normal text-[22px] leading-tight py-4 pr-6 text-left whitespace-nowrap">{f.fuente}</th>
-                    <td className="py-4 pr-6 text-ink-2">{f.dato}</td>
-                    <td className="py-4 pr-6 num text-[13px] text-ink-2">{f.acceso}</td>
-                    <td className={`py-4 whitespace-nowrap ${f.ciclo === 'Cada lunes' ? 'text-cobalt' : 'text-muted'}`}>{f.ciclo}</td>
+                    <th scope="row" className="font-semibold text-[15px] py-4 px-5 text-left whitespace-nowrap">{f.fuente}</th>
+                    <td className="py-4 px-5 text-ink-2">{f.dato}</td>
+                    <td className="py-4 px-5 num text-[13px] text-ink-2">{f.acceso}</td>
+                    <td className="py-4 px-5 whitespace-nowrap"><span className={`inline-flex rounded-full px-2.5 py-1 text-[13px] ${f.ciclo === 'Cada lunes' ? 'bg-cobalt/10 text-cobalt' : 'bg-paper-2 text-muted'}`}>{f.ciclo}</span></td>
                   </tr>
                 ))}
               </tbody>
@@ -85,12 +85,12 @@ export default function Metodologia() {
       </section>
 
       {/* Scripts */}
-      <section className="border-t border-ink">
+      <section className="border-t border-rule">
         <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-10`}>
-          <h2 className="md:col-span-4 text-[44px] sm:text-[56px] leading-[0.95] md:sticky md:top-28 self-start">
+          <h2 className="md:col-span-4 text-[34px] sm:text-[46px] leading-[1.02] md:sticky md:top-28 self-start">
             El código, en el orden en que se ejecuta
           </h2>
-          <ol className="md:col-span-7 md:col-start-6 border-t border-ink">
+          <ol className="md:col-span-7 md:col-start-6 border-t border-rule">
             {SCRIPTS.map((s, i) => (
               <li key={s.file} className="grid grid-cols-[3rem_1fr] gap-x-4 py-6 border-b border-rule">
                 <span className="num text-[13px] text-muted pt-0.5">{i + 1}</span>
@@ -105,21 +105,21 @@ export default function Metodologia() {
       </section>
 
       {/* Flujos */}
-      <section className="border-t border-ink">
+      <section className="border-t border-rule">
         <div className={`${W} py-20`}>
           <div className="grid md:grid-cols-12 gap-x-8 mb-12">
-            <h2 className="md:col-span-7 text-[44px] sm:text-[56px] leading-[0.95]">Los flujos de FME y Pentaho, tal como son</h2>
+            <h2 className="md:col-span-7 text-[34px] sm:text-[46px] leading-[1.02]">Los flujos de FME y Pentaho, tal como son</h2>
             <p className="md:col-span-4 md:col-start-9 text-[15px] text-ink-2 self-end mt-4 md:mt-0">Capturas sacadas de los proyectos originales. Pulsa una para verla a tamaño completo.</p>
           </div>
           <div className="space-y-16">
             {FLUJOS.map((f) => (
               <figure key={f.file} className="m-0 grid md:grid-cols-12 gap-x-8 gap-y-5 items-start">
                 <figcaption className="md:col-span-3">
-                  <h3 className="text-[28px] leading-[1.05]">{f.titulo}</h3>
+                  <h3 className="text-[22px] leading-tight">{f.titulo}</h3>
                   <p className="text-[15px] leading-relaxed text-ink-2 mt-3">{f.texto}</p>
                 </figcaption>
                 <a href={FIG + f.file} target="_blank" rel="noopener noreferrer"
-                  className="md:col-span-9 block bg-white border border-rule p-3 sm:p-4 cursor-zoom-in hover:border-ink transition-colors duration-200"
+                  className="md:col-span-9 block bg-white rounded-2xl border border-rule p-3 sm:p-5 cursor-zoom-in hover:shadow-[0_16px_40px_-20px_rgba(11,18,32,0.3)] transition-shadow duration-300"
                   aria-label={`Abrir a tamaño completo: ${f.titulo}`}>
                   <img src={FIG + f.file} width={f.w} height={f.h} loading="lazy" alt={`Captura del flujo: ${f.titulo}`} className="w-full h-auto" />
                 </a>
@@ -130,31 +130,31 @@ export default function Metodologia() {
       </section>
 
       {/* Decisiones y límites */}
-      <section className="border-t border-ink">
+      <section className="border-t border-rule">
         <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-16`}>
           <div className="md:col-span-7">
-            <h2 className="text-[44px] sm:text-[56px] leading-[0.95] mb-10">Decisiones de diseño</h2>
-            <dl className="border-t border-ink">
+            <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Decisiones de diseño</h2>
+            <dl className="border-t border-rule">
               {DECISIONES.map(([t, d]) => (
                 <div key={t} className="py-5 border-b border-rule grid sm:grid-cols-[1fr_1.3fr] gap-x-8 gap-y-1">
-                  <dt className="font-serif text-[22px] leading-tight">{t}</dt>
+                  <dt className="font-semibold text-[16px] leading-snug">{t}</dt>
                   <dd className="text-[15px] leading-relaxed text-ink-2">{d}</dd>
                 </div>
               ))}
             </dl>
           </div>
-          <div className="md:col-span-4 md:col-start-9 md:pt-28">
-            <h2 className="text-[36px] leading-none pb-4 border-b border-ink">Límites conocidos</h2>
+          <div className="md:col-span-4 md:col-start-9 md:pt-24"><div className="panel p-6 bg-[#fff8eb] border-[#f5dfb3]">
+            <h2 className="text-[24px] leading-tight pb-4 border-b border-rule">Límites conocidos</h2>
             <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
               <li>La energía publicada usa un salto medio de 50 m para todos los embalses; el cálculo con el MDT de cada uno se hizo en FME. Supone el vaciado completo y no es un dato de explotación.</li>
               <li>No todos los embalses del inventario publican nivel cada semana. En el visor aparecen en gris.</li>
               <li>17 embalses de embalses.net no tienen un polígono fiable en el inventario y no aparecen en el mapa. Otros 23 se aceptaron con dudas y están marcados para revisar.</li>
             </ul>
-          </div>
+          </div></div>
         </div>
       </section>
 
-      <section className="border-t border-ink">
+      <section className="border-t border-rule">
         <div className={`${W} py-16 flex flex-wrap items-center gap-x-8 gap-y-4`}>
           <Link to="/visor" className="btn btn-ink">Abrir el visor</Link>
           <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Leer la memoria técnica (PDF)</a>

@@ -34,8 +34,8 @@ type BasemapKey = keyof typeof BASEMAPS;
 
 const POLY_ZOOM = 9;
 const initialZoom = () => (typeof window !== 'undefined' && window.innerWidth < 640 ? 5 : 6);
-const AXIS = { fontSize: 12, fill: '#3c3a35', fontFamily: "'JetBrains Mono', monospace" };
-const TOOLTIP_STYLE = { backgroundColor: '#111110', border: 0, borderRadius: 0, fontSize: 12, color: '#f5f4ef' };
+const AXIS = { fontSize: 12, fill: '#3a4353', fontFamily: "'Geist Mono', monospace" };
+const TOOLTIP_STYLE = { backgroundColor: '#0b1220', border: 0, borderRadius: 8, fontSize: 12, color: '#ffffff' };
 const fechaCorta = (iso: string) =>
   new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso));
 
@@ -197,10 +197,10 @@ export default function Visor() {
   }
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-5 sm:px-8 pt-12 pb-24 flex flex-col gap-10">
+    <div className="w-full max-w-[1280px] mx-auto px-5 sm:px-8 pt-12 pb-24 flex flex-col gap-10">
       {/* Cabecera */}
       <div className="grid md:grid-cols-12 gap-x-8 gap-y-4 items-end">
-        <h1 className="md:col-span-8 text-[48px] sm:text-[72px] leading-[0.92] tracking-[-0.02em]">
+        <h1 className="md:col-span-8 text-[38px] sm:text-[56px] leading-[1] tracking-[-0.045em]">
           Estado de los embalses de España
         </h1>
         {info?.timestamp && (
@@ -211,7 +211,7 @@ export default function Visor() {
       </div>
 
       {/* Cifras */}
-      <dl className="grid grid-cols-2 lg:grid-cols-5 border-y border-ink">
+      <dl className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-rule rounded-2xl overflow-hidden border border-rule">
         <Cifra label="Llenado medio" nota={cuenca === 'Todas' ? 'España' : cuenca}>
           <span style={{ color: ESTADOS[estadoDe(stats.pct)].color }}>{embalses ? fmt(stats.pct, 1) : '–'}</span>
           <Unidad>%</Unidad>
@@ -228,7 +228,7 @@ export default function Visor() {
         <Cifra label="Energía almacenada" nota="estimación, 109 MWh/hm³" border>
           {embalses ? fmt(stats.gwh, 1) : '–'}<Unidad>GWh</Unidad>
         </Cifra>
-        <Cifra label="Valor orientativo" nota="a precio OMIE" borderLg className="col-span-2 lg:col-span-1 border-t lg:border-t-0 border-rule">
+        <Cifra label="Valor orientativo" nota="a precio OMIE" borderLg className="col-span-2 lg:col-span-1">
           {embalses ? fmt(stats.valor, 1) : '–'}<Unidad>M€</Unidad>
         </Cifra>
       </dl>
@@ -240,7 +240,7 @@ export default function Visor() {
           <div className="flex flex-col sm:flex-row sm:items-end gap-3 pb-3">
             <div className="relative sm:w-80">
               <label htmlFor="buscar" className="margin-note block mb-1.5">Buscar embalse</label>
-              <div className="flex items-center border border-ink bg-paper focus-within:outline focus-within:outline-2 focus-within:outline-cobalt">
+              <div className="flex items-center rounded-full border border-rule bg-white focus-within:border-cobalt focus-within:ring-2 focus-within:ring-cobalt/20">
                 <Search size={16} strokeWidth={1.5} className="ml-3 shrink-0 text-ink-2" aria-hidden="true" />
                 <input
                   id="buscar"
@@ -257,14 +257,14 @@ export default function Visor() {
                 />
               </div>
               {searchOpen && resultados.length > 0 && (
-                <ul className="absolute z-[700] mt-px w-full bg-paper border border-ink max-h-72 overflow-auto">
+                <ul className="absolute z-[700] mt-2 w-full bg-white rounded-xl border border-rule shadow-[0_16px_40px_-12px_rgba(11,18,32,0.25)] max-h-72 overflow-auto py-1">
                   {resultados.map((r) => (
                     <li key={r.id}>
                       <button
                         type="button"
                         onMouseDown={(ev) => ev.preventDefault()}
                         onClick={() => select(r)}
-                        className="w-full text-left px-3 py-2.5 hover:bg-ink hover:text-paper flex items-center gap-2.5 transition-colors duration-200"
+                        className="w-full text-left px-3 py-2.5 hover:bg-paper-2 flex items-center gap-2.5 transition-colors duration-200"
                       >
                         <span className="w-2.5 h-2.5 shrink-0" style={{ backgroundColor: ESTADOS[estadoDe(r.pct)].color }} aria-hidden="true" />
                         <span className="text-[15px] truncate">{r.nombre}</span>
@@ -282,7 +282,7 @@ export default function Visor() {
                 id="cuenca"
                 value={cuenca}
                 onChange={(ev) => { setCuenca(ev.target.value); setSelectedId(null); }}
-                className="w-full h-[46px] border border-ink px-3 text-[15px] outline-none focus-visible:outline-2 focus-visible:outline-cobalt"
+                className="w-full h-11 rounded-full border border-rule bg-white px-4 text-[15px] outline-none focus-visible:border-cobalt"
               >
                 {cuencas.map((c) => <option key={c} value={c}>{c === 'Todas' ? 'Todas las cuencas' : c}</option>)}
               </select>
@@ -290,15 +290,15 @@ export default function Visor() {
 
             <fieldset className="sm:ml-auto">
               <legend className="margin-note mb-1.5">Mapa base</legend>
-              <div className="flex border border-ink">
+              <div className="flex p-1 rounded-full bg-paper-2 border border-rule">
                 {(Object.keys(BASEMAPS) as BasemapKey[]).map((k, i) => (
                   <button
                     key={k}
                     type="button"
                     aria-pressed={basemap === k}
                     onClick={() => setBasemap(k)}
-                    className={`h-11 px-4 text-[14px] transition-colors duration-200 ${i > 0 ? 'border-l border-ink' : ''} ${
-                      basemap === k ? 'bg-ink text-paper' : 'hover:bg-paper-2'
+                    className={`h-9 px-4 rounded-full text-[14px] transition-colors duration-200 ${
+                      basemap === k ? 'bg-white text-ink shadow-sm font-medium' : 'text-ink-2 hover:text-ink'
                     }`}
                   >
                     {BASEMAPS[k].label}
@@ -308,7 +308,7 @@ export default function Visor() {
             </fieldset>
           </div>
 
-          <div ref={mapBoxRef} className="relative border border-ink h-[62vh] min-h-[460px] lg:h-[70vh] lg:min-h-[600px] scroll-mt-20 overflow-hidden">
+          <div ref={mapBoxRef} className="relative rounded-2xl border border-rule h-[62vh] min-h-[460px] lg:h-[70vh] lg:min-h-[600px] scroll-mt-20 overflow-hidden">
             <MapContainer
               center={[39.6, -3.6]}
               zoom={initialZoom()}
@@ -354,7 +354,7 @@ export default function Visor() {
                       pathOptions={{
                         fillColor: ESTADOS[estado].color,
                         fillOpacity: estado === 'nodata' ? 0.6 : 0.9,
-                        color: isSel ? '#111110' : '#ffffff',
+                        color: isSel ? '#0b1220' : '#ffffff',
                         weight: isSel ? 2.5 : 1,
                       }}
                       eventHandlers={{ click: () => select(e) }}
@@ -369,14 +369,14 @@ export default function Visor() {
             </MapContainer>
 
             {/* Zoom */}
-            <div className="absolute right-3 top-3 z-[500] flex flex-col border border-ink bg-paper">
+            <div className="absolute right-3 top-3 z-[500] flex flex-col rounded-xl bg-white shadow-[0_8px_24px_-8px_rgba(11,18,32,0.3)] overflow-hidden">
               <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.5} /></MapBtn>
               <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.5} /></MapBtn>
               <MapBtn label="Ver toda España" onClick={resetView}><LocateFixed size={16} strokeWidth={1.5} /></MapBtn>
             </div>
 
             {/* Coordenadas */}
-            <p className="hidden sm:block absolute right-3 bottom-6 z-[500] num text-[11px] bg-paper border border-ink px-2 py-1">
+            <p className="hidden sm:block absolute right-3 bottom-6 z-[500] num text-[11px] bg-white/90 rounded-md px-2 py-1 shadow-sm">
               {cursor ? `${cursor[0].toFixed(4)}° N  ${Math.abs(cursor[1]).toFixed(4)}° ${cursor[1] < 0 ? 'W' : 'E'}` : 'EPSG:4326'}
               <span className="text-muted">  z{zoom}</span>
             </p>
@@ -403,13 +403,13 @@ export default function Visor() {
         </div>
 
         {/* Ficha */}
-        <aside className="border border-ink bg-paper flex flex-col lg:mt-[80px] lg:h-[70vh] lg:min-h-[600px] overflow-hidden" aria-live="polite">
+        <aside className="rounded-2xl border border-rule bg-white flex flex-col lg:mt-[80px] lg:h-[70vh] lg:min-h-[600px] overflow-hidden" aria-live="polite">
           {selected ? (
             <Ficha e={selected} onClose={() => setSelectedId(null)} />
           ) : (
             <>
-              <div className="px-5 pt-5 pb-4 border-b border-ink">
-                <h2 className="text-[32px] leading-none">Más energía almacenada</h2>
+              <div className="px-5 pt-5 pb-4 border-b border-rule">
+                <h2 className="text-[22px] leading-tight">Más energía almacenada</h2>
                 <p className="text-[14px] text-ink-2 mt-2">Elige un embalse aquí o en el mapa para ver su ficha.</p>
               </div>
               <ol className="flex-1 overflow-y-auto">
@@ -418,7 +418,7 @@ export default function Visor() {
                     <button
                       type="button"
                       onClick={() => select(e)}
-                      className="w-full text-left px-5 py-3 flex items-baseline gap-3 hover:bg-ink hover:text-paper transition-colors duration-200"
+                      className="w-full text-left px-5 py-3 flex items-baseline gap-3 hover:bg-paper-2 transition-colors duration-200"
                     >
                       <span className="num text-[11px] opacity-60 w-5">{i + 1}</span>
                       <span className="text-[15px] truncate flex-1">{e.nombre}</span>
@@ -431,7 +431,7 @@ export default function Visor() {
               <button
                 type="button"
                 onClick={() => setShowCaudales(true)}
-                className="m-4 h-12 border border-ink px-4 flex items-center justify-between text-[15px] hover:bg-ink hover:text-paper transition-colors duration-200"
+                className="m-4 h-12 rounded-full border border-rule px-5 flex items-center justify-between text-[15px] hover:border-ink transition-colors duration-200"
               >
                 Ver caudales de {caudales.length} estaciones
                 <span className="num text-[11px] opacity-70">SAIH</span>
@@ -442,14 +442,14 @@ export default function Visor() {
       </div>
 
       {/* Gráficos */}
-      <div className="grid lg:grid-cols-2 gap-x-12 gap-y-16 pt-8 border-t border-ink">
+      <div className="grid lg:grid-cols-2 gap-6">
         <Grafico titulo="Llenado por cuenca" nota="Agua embalsada sobre capacidad, solo embalses con lectura.">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={porCuenca} layout="vertical" margin={{ top: 0, right: 24, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke="#d6d3c8" horizontal={false} />
-              <XAxis type="number" domain={[0, 100]} tick={AXIS} axisLine={{ stroke: '#111110' }} tickLine={false} unit=" %" />
-              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#111110' }} axisLine={false} tickLine={false} />
-              <RTooltip cursor={{ fill: '#ebe9e1' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#f5f4ef' }} formatter={(v: number) => [`${fmt(v, 1)} %`, 'Llenado']} />
+              <CartesianGrid stroke="#e3e6eb" horizontal={false} />
+              <XAxis type="number" domain={[0, 100]} tick={AXIS} axisLine={{ stroke: '#0b1220' }} tickLine={false} unit=" %" />
+              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#0b1220' }} axisLine={false} tickLine={false} />
+              <RTooltip cursor={{ fill: '#eef0f4' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#ffffff' }} formatter={(v: number) => [`${fmt(v, 1)} %`, 'Llenado']} />
               <Bar dataKey="pct" barSize={14}>
                 {porCuenca.map((c) => <Cell key={c.name} fill={ESTADOS[estadoDe(c.pct)].color} />)}
               </Bar>
@@ -459,13 +459,13 @@ export default function Visor() {
         <Grafico titulo="Cambio en la última semana" nota="Variación neta de volumen por cuenca, en hm³.">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={porCuenca} layout="vertical" margin={{ top: 0, right: 24, left: 0, bottom: 0 }}>
-              <CartesianGrid stroke="#d6d3c8" horizontal={false} />
-              <XAxis type="number" tick={AXIS} axisLine={{ stroke: '#111110' }} tickLine={false} />
-              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#111110' }} axisLine={false} tickLine={false} />
-              <RTooltip cursor={{ fill: '#ebe9e1' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#f5f4ef' }} formatter={(v: number) => [`${v > 0 ? '+' : ''}${fmt(v, 1)} hm³`, 'Cambio']} />
-              <ReferenceLine x={0} stroke="#111110" />
+              <CartesianGrid stroke="#e3e6eb" horizontal={false} />
+              <XAxis type="number" tick={AXIS} axisLine={{ stroke: '#0b1220' }} tickLine={false} />
+              <YAxis dataKey="name" type="category" width={104} tick={{ ...AXIS, fontFamily: "'Geist Sans', sans-serif", fontSize: 13, fill: '#0b1220' }} axisLine={false} tickLine={false} />
+              <RTooltip cursor={{ fill: '#eef0f4' }} contentStyle={TOOLTIP_STYLE} itemStyle={{ color: '#ffffff' }} formatter={(v: number) => [`${v > 0 ? '+' : ''}${fmt(v, 1)} hm³`, 'Cambio']} />
+              <ReferenceLine x={0} stroke="#0b1220" />
               <Bar dataKey="variacion" barSize={14}>
-                {porCuenca.map((c) => <Cell key={c.name} fill={c.variacion < 0 ? '#e0400f' : '#0038ff'} />)}
+                {porCuenca.map((c) => <Cell key={c.name} fill={c.variacion < 0 ? '#ef5130' : '#2f5bff'} />)}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -487,9 +487,9 @@ function Cifra({ label, nota, children, border, borderLg, className = '' }: {
   label: string; nota: string; children: React.ReactNode; border?: boolean; borderLg?: boolean; className?: string;
 }) {
   return (
-    <div className={`py-6 pr-4 ${border ? 'border-l border-rule pl-5' : ''} ${borderLg ? 'lg:border-l lg:border-rule lg:pl-5' : ''} ${className}`}>
+    <div className={`bg-white p-5 sm:p-6 ${className}`} data-border={border || borderLg ? '' : undefined}>
       <dt className="text-[14px] text-ink-2">{label}</dt>
-      <dd className="num text-[34px] sm:text-[40px] leading-none tracking-[-0.03em] mt-3">{children}</dd>
+      <dd className="num text-[30px] sm:text-[36px] leading-none font-medium tracking-[-0.04em] mt-3">{children}</dd>
       <dd className="text-[13px] text-muted mt-2 truncate">{nota}</dd>
     </div>
   );
@@ -498,7 +498,7 @@ function Cifra({ label, nota, children, border, borderLg, className = '' }: {
 function MapBtn({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
   return (
     <button type="button" onClick={onClick} aria-label={label} title={label}
-      className="w-11 h-11 flex items-center justify-center border-b last:border-b-0 border-ink hover:bg-ink hover:text-paper transition-colors duration-200">
+      className="w-11 h-11 flex items-center justify-center border-b last:border-b-0 border-rule hover:bg-paper-2 transition-colors duration-200">
       {children}
     </button>
   );
@@ -506,8 +506,8 @@ function MapBtn({ label, onClick, children }: { label: string; onClick: () => vo
 
 function Grafico({ titulo, nota, children }: { titulo: string; nota: string; children: React.ReactNode }) {
   return (
-    <section>
-      <h2 className="text-[36px] leading-none">{titulo}</h2>
+    <section className="panel p-6 sm:p-8">
+      <h2 className="text-[24px] leading-tight">{titulo}</h2>
       <p className="text-[14px] text-ink-2 mt-2 mb-6">{nota}</p>
       <div className="h-[340px]">{children}</div>
     </section>
@@ -521,10 +521,10 @@ function Ficha({ e, onClose }: { e: Embalse; onClose: () => void }) {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="px-5 pt-5 pb-4 border-b border-ink flex items-start gap-3">
+      <div className="px-5 pt-5 pb-4 border-b border-rule flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <p className="text-[14px] text-ink-2">Cuenca del {e.cuenca}</p>
-          <h2 className="text-[40px] leading-[0.95] mt-1 break-words">{e.nombre}</h2>
+          <h2 className="text-[30px] leading-[1.05] mt-1 break-words">{e.nombre}</h2>
           {e.center && (
             <p className="num text-[11px] text-muted mt-2">
               {e.center[0].toFixed(4)}° N  {Math.abs(e.center[1]).toFixed(4)}° {e.center[1] < 0 ? 'W' : 'E'}
@@ -532,7 +532,7 @@ function Ficha({ e, onClose }: { e: Embalse; onClose: () => void }) {
           )}
         </div>
         <button type="button" onClick={onClose} aria-label="Cerrar ficha"
-          className="w-11 h-11 -mr-2 -mt-2 flex items-center justify-center hover:bg-ink hover:text-paper transition-colors duration-200">
+          className="w-10 h-10 -mr-2 -mt-1 rounded-full flex items-center justify-center hover:bg-paper-2 transition-colors duration-200">
           <X size={18} strokeWidth={1.5} />
         </button>
       </div>
@@ -636,22 +636,22 @@ function Caudales({ data, onClose }: { data: CaudalEntry[]; onClose: () => void 
   const max = lista[0]?.caudal || 1;
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-ink/60 flex items-center justify-center p-4 overscroll-contain" onClick={onClose}>
-      <div className="bg-paper border border-ink w-full max-w-3xl max-h-[85vh] flex flex-col" onClick={(ev) => ev.stopPropagation()}
+    <div className="fixed inset-0 z-[2000] bg-night/60 backdrop-blur-sm flex items-center justify-center p-4 overscroll-contain" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden" onClick={(ev) => ev.stopPropagation()}
         role="dialog" aria-modal="true" aria-labelledby="caudales-titulo">
-        <div className="px-6 pt-6 pb-4 border-b border-ink flex items-start gap-4">
+        <div className="px-6 pt-6 pb-4 border-b border-rule flex items-start gap-4">
           <div className="flex-1">
-            <h2 id="caudales-titulo" className="text-[40px] leading-none">Caudales de los ríos</h2>
+            <h2 id="caudales-titulo" className="text-[28px] leading-tight">Caudales de los ríos</h2>
             <p className="text-[14px] text-ink-2 mt-2">{data.length} estaciones de aforo de los SAIH, del caudal mayor al menor.</p>
           </div>
           <button type="button" onClick={onClose} aria-label="Cerrar caudales"
-            className="w-11 h-11 flex items-center justify-center hover:bg-ink hover:text-paper transition-colors duration-200">
+            className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-paper-2 transition-colors duration-200">
             <X size={20} strokeWidth={1.5} />
           </button>
         </div>
         <div className="px-6 py-4 border-b border-rule">
           <label htmlFor="buscar-caudal" className="sr-only">Buscar río, estación o cuenca</label>
-          <div className="flex items-center border border-ink">
+          <div className="flex items-center rounded-full border border-rule focus-within:border-cobalt">
             <Search size={16} strokeWidth={1.5} className="ml-3 text-ink-2" aria-hidden="true" />
             <input id="buscar-caudal" name="buscar-caudal" autoComplete="off" value={q} onChange={(ev) => setQ(ev.target.value)}
               placeholder="Río Miño, Ebro…"

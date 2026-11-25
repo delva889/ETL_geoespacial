@@ -22,6 +22,14 @@ def normaliza(s):
     return s
 
 
+def precio_anterior():
+    """Último precio publicado, para no inventar uno si OMIE no responde."""
+    try:
+        return json.loads(LAST_UPDATE_PATH.read_text(encoding='utf-8')).get('precio_omie_eur_mwh')
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
 def get_omie_price():
     d = datetime.now()
     url = f'https://www.omie.es/es/file-download?parents%5B0%5D=marginalpdbc&filename=marginalpdbc_{d.strftime("%Y%m%d")}.1'
@@ -39,11 +47,13 @@ def get_omie_price():
                     prices.append(float(parts[5].replace(',', '.')))
                 except ValueError:
                     pass
-        if not prices: return 95.5
+        if not prices:
+            raise ValueError('fichero sin precios')
         return round(sum(prices) / len(prices), 2)
     except Exception as e:
-        print("[ERROR] OMIE:", e)
-        return 95.5
+        anterior = precio_anterior()
+        print(f"[AVISO] OMIE no disponible ({e}); se mantiene el último precio publicado: {anterior}")
+        return anterior
 
 
 def main():
@@ -56,7 +66,10 @@ def main():
 
     print("[INFO] Cargando precios OMIE...")
     precio_omie = get_omie_price()
-    print(f"[INFO] Precio OMIE (hoy): {precio_omie} EUR/MWh")
+    if precio_omie is None:
+        print("[ERROR] Sin precio OMIE actual ni anterior; no se actualiza el valor de mercado.")
+    else:
+        print(f"[INFO] Precio OMIE: {precio_omie} EUR/MWh")
 
     df = pd.read_csv(CSV_PATH)
     frescos = {}
@@ -99,13 +112,15 @@ def main():
             
             # Recalculate metrics based on 109.0 constant
             props['mwh_conocidos'] = round(props['embalsada'] * 109.0, 2)
-            props['precio_actual'] = round(props['mwh_conocidos'] * precio_omie, 2)
+            if precio_omie is not None:
+                props['precio_actual'] = round(props['mwh_conocidos'] * precio_omie, 2)
         else:
             props['embalsada'] = 'NoData'
             
         if props.get('capacidad'):
             props['mwh_max'] = round(float(props['capacidad']) * 109.0, 2)
-            props['precio_max'] = round(props['mwh_max'] * precio_omie, 2)
+            if precio_omie is not None:
+                props['precio_max'] = round(props['mwh_max'] * precio_omie, 2)
 
         if dato['variacion'] != 'NoData':
             props['variacion'] = round(float(dato['variacion']), 2)

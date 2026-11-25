@@ -1,37 +1,38 @@
 @import "tailwindcss";
 
 /*
-  Referencia: hoja del Mapa Topográfico Nacional + anuario hidrológico impreso.
-  Papel, tinta y un único acento: el azul cobalto del agua en cartografía.
+  Híbrido moderno: portada nocturna con satélite a sangre y contenido claro.
+  Una sola familia (Geist) y un único acento azul.
 */
 @theme {
-  --color-paper: #f5f4ef;
-  --color-paper-2: #ebe9e1;   /* superficies hundidas: tablas, márgenes */
-  --color-ink: #111110;
-  --color-ink-2: #3c3a35;     /* texto secundario sobre papel */
-  --color-muted: #6b685f;     /* metadatos (contraste ≥ 4,5:1 sobre papel) */
-  --color-rule: #d6d3c8;      /* filetes de 1px */
-  --color-rule-strong: #b7b3a6;
-  --color-cobalt: #0038ff;
-  --color-cobalt-ink: #0029bd; /* hover sobre cobalto */
+  --color-night: #070a10;
+  --color-night-2: #111722;
+  --color-paper: #f6f7f9;      /* lienzo */
+  --color-paper-2: #eef0f4;    /* superficies hundidas */
+  --color-surface: #ffffff;
+  --color-ink: #0b1220;
+  --color-ink-2: #3a4353;
+  --color-muted: #667085;      /* ≥ 4,5:1 sobre el lienzo */
+  --color-rule: #e3e6eb;
+  --color-rule-strong: #c9cfd8;
+  --color-cobalt: #2f5bff;
+  --color-cobalt-ink: #1e46e0;
 
-  /* Estado de llenado: del cobalto (lleno) al naranja (crítico) */
-  --color-st-excelente: #0038ff;
-  --color-st-optimo: #6e95ff;
-  --color-st-alerta: #d99a0b;
-  --color-st-critico: #e0400f;
-  --color-st-nodata: #9a978e;
+  --color-st-excelente: #2f5bff;
+  --color-st-optimo: #6fa3ff;
+  --color-st-alerta: #e9a10f;
+  --color-st-critico: #ef5130;
+  --color-st-nodata: #a3aab5;
 
-  --font-serif: "Instrument Serif", "Times New Roman", serif;
-  --font-sans: "Geist Sans", "Geist", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Geist Sans", "Inter", system-ui, sans-serif;
+  --font-serif: "Geist Sans", "Inter", system-ui, sans-serif; /* alias: el diseño ya no usa serif */
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  --radius-panel: 16px;
 }
 
 @layer base {
-  html {
-    color-scheme: light;
-    -webkit-tap-highlight-color: transparent;
-  }
+  html { color-scheme: light; -webkit-tap-highlight-color: transparent; }
 
   body {
     background-color: var(--color-paper);
@@ -40,96 +41,80 @@
     font-size: 16px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
   p { text-wrap: pretty; }
 
-  ::selection { background-color: var(--color-cobalt); color: var(--color-paper); }
+  ::selection { background-color: var(--color-cobalt); color: #fff; }
 
-  :focus-visible { outline: 2px solid var(--color-cobalt); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--color-cobalt); outline-offset: 3px; border-radius: 6px; }
 
   a { text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
 
-  select {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
-  }
+  select { background-color: var(--color-surface); color: var(--color-ink); }
 
   * { scrollbar-width: thin; scrollbar-color: var(--color-rule-strong) transparent; }
 }
 
-/* Cifras y coordenadas: siempre tabulares */
-.num {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
-}
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 
-/* Marginalia de hoja cartográfica: pequeña, en mayúsculas, solo para metadatos */
+/* Metadatos pequeños: solo donde informan (márgenes de mapa, cabeceras de tabla) */
 .margin-note {
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 
 @layer components {
-/* Enlace editorial: subrayado que se engrosa, sin flechas ni rebotes */
-.link {
-  text-decoration: underline;
-  text-decoration-color: var(--color-rule-strong);
-  transition: text-decoration-color 200ms, color 200ms;
-}
-.link:hover { text-decoration-color: currentColor; color: var(--color-cobalt); }
+  .link {
+    text-decoration: underline;
+    text-decoration-color: var(--color-rule-strong);
+    transition: text-decoration-color 200ms, color 200ms;
+  }
+  .link:hover { text-decoration-color: currentColor; color: var(--color-cobalt); }
 
-/* Botón primario: bloque de tinta que se invierte a cobalto */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  padding: 0 1.25rem;
-  font-size: 15px;
-  font-weight: 500;
-  border: 1px solid var(--color-ink);
-  transition: background-color 200ms, color 200ms, border-color 200ms;
-}
-.btn-ink { background: var(--color-ink); color: var(--color-paper); }
-.btn-ink:hover { background: var(--color-cobalt); border-color: var(--color-cobalt); }
-.btn-line { background: transparent; color: var(--color-ink); }
-.btn-line:hover { background: var(--color-ink); color: var(--color-paper); }
-}
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 1.25rem;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: background-color 200ms, color 200ms, border-color 200ms, transform 120ms;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-ink { background: var(--color-ink); color: #fff; }
+  .btn-ink:hover { background: var(--color-cobalt); }
+  .btn-accent { background: var(--color-cobalt); color: #fff; }
+  .btn-accent:hover { background: var(--color-cobalt-ink); }
+  .btn-light { background: #fff; color: var(--color-ink); }
+  .btn-light:hover { background: var(--color-paper-2); }
+  .btn-line { background: transparent; color: var(--color-ink); border-color: var(--color-rule-strong); }
+  .btn-line:hover { border-color: var(--color-ink); }
+  .btn-ghost-dark { background: rgba(255, 255, 255, 0.08); color: #fff; border-color: rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px); }
+  .btn-ghost-dark:hover { background: rgba(255, 255, 255, 0.16); }
 
-/* Marco de lámina con marcas de graticula en los bordes */
-.plate-ticks {
-  background-image:
-    repeating-linear-gradient(to right, var(--color-ink) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(to right, var(--color-ink) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(to bottom, var(--color-ink) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(to bottom, var(--color-ink) 0 1px, transparent 1px 64px);
-  background-size: 100% 6px, 100% 6px, 6px 100%, 6px 100%;
-  background-position: top left, bottom left, top left, top right;
-  background-repeat: no-repeat;
+  .panel { background: var(--color-surface); border: 1px solid var(--color-rule); border-radius: var(--radius-panel); }
 }
 
 /* ---------- Leaflet ---------- */
-.leaflet-container {
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-paper-2);
-  font-family: var(--font-sans);
-}
+.leaflet-container { width: 100%; height: 100%; background-color: var(--color-paper-2); font-family: var(--font-sans); }
 
 .leaflet-control-scale-line {
-  background: rgba(245, 244, 239, 0.92) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
   color: var(--color-ink) !important;
   border-color: var(--color-ink) !important;
   font-family: var(--font-mono);
@@ -137,12 +122,13 @@
 }
 
 .leaflet-control-attribution {
-  background: rgba(245, 244, 239, 0.9) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   color: var(--color-muted) !important;
   font-family: var(--font-mono) !important;
   font-size: 9px !important;
   line-height: 1.3;
   padding: 2px 6px !important;
+  border-radius: 6px 0 0 0;
   max-width: calc(100vw - 32px);
   white-space: nowrap;
   overflow: hidden;
@@ -152,20 +138,17 @@
 
 .leaflet-tooltip.embalse-tip {
   background: var(--color-ink);
-  color: var(--color-paper);
+  color: #fff;
   border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 3px 7px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.25);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 4px 9px;
 }
 .leaflet-tooltip.embalse-tip::before { display: none; }
 
-.leaflet-interactive:focus,
-.leaflet-container path:focus,
-.leaflet-container svg:focus,
-.leaflet-container:focus { outline: none; }
+.leaflet-interactive:focus, .leaflet-container path:focus, .leaflet-container svg:focus, .leaflet-container:focus { outline: none; }
 
 /* ---------- Logotipos ---------- */
 @keyframes marquee { to { transform: translateX(-50%); } }
@@ -181,24 +164,20 @@
 .marquee-icon {
   animation: bob 3.4s ease-in-out infinite;
   filter: grayscale(0.25);
-  opacity: 0.7;
+  opacity: 0.75;
   transition: filter 300ms, opacity 300ms, transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.marquee-item:hover .marquee-icon {
-  filter: none;
-  opacity: 1;
-  animation-play-state: paused;
-  transform: scale(1.25);
-}
-.float-logo { opacity: 0.14; animation: drift 7s ease-in-out infinite; }
+.marquee-item:hover .marquee-icon { filter: none; opacity: 1; animation-play-state: paused; transform: scale(1.25); }
+.float-logo { opacity: 0.16; animation: drift 7s ease-in-out infinite; }
+
+/* Entrada única de la portada */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   .marquee { -webkit-mask-image: none; mask-image: none; }
   .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
   .marquee-track > li[aria-hidden="true"] { display: none; }
-  .marquee-icon, .float-logo { animation: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+  .marquee-icon, .float-logo, .rise { animation: none; }
+  *, *::before, *::after { transition-duration: 0ms !important; }
 }
