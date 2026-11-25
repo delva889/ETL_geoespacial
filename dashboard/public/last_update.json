@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-23T16:08:42+00:00",
+  "timestamp": "2026-11-25T12:24:17+00:00",
   "total_geometrias": 777,
   "embalses_con_datos": 293,
   "embalses_sin_datos": 484,
-  "precio_omie_eur_mwh": 205.41,
-  "estaciones_caudal": 46
+  "precio_omie_eur_mwh": 110.87,
+  "estaciones_caudal": 287
 }
