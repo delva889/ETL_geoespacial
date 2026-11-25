@@ -2,7 +2,7 @@
   {
     "nombre": "Pedro Marín",
     "cuenca": "Guadalquivir",
-    "caudal": 1.4
+    "caudal": 1.17
   },
   {
     "nombre": "Marmolejo",
@@ -12,112 +12,1087 @@
   {
     "nombre": "El Carpio",
     "cuenca": "Guadalquivir",
-    "caudal": 19.07
+    "caudal": 3.99
   },
   {
     "nombre": "Villafranca",
     "cuenca": "Guadalquivir",
-    "caudal": 12.64
+    "caudal": 1.0
   },
   {
     "nombre": "Fuente Palmera",
     "cuenca": "Guadalquivir",
-    "caudal": 7.27
+    "caudal": 3.42
   },
   {
     "nombre": "E53 Peñaflor",
     "cuenca": "Guadalquivir",
-    "caudal": 26.75
+    "caudal": 21.52
   },
   {
     "nombre": "Alcalá Del Río",
     "cuenca": "Guadalquivir",
-    "caudal": 24.44
+    "caudal": 29.93
   },
   {
     "nombre": "A15 Río Genil Loja",
     "cuenca": "Guadalquivir",
-    "caudal": 6.4
+    "caudal": 6.09
   },
   {
     "nombre": "I15 El Villar",
     "cuenca": "Guadalquivir",
-    "caudal": 2.32
+    "caudal": 2.0
   },
   {
-    "nombre": "Camarzana-regato, 2716",
+    "nombre": "La Fuentona",
+    "cuenca": "Duero",
+    "caudal": 3.61
+  },
+  {
+    "nombre": "Ávila",
+    "cuenca": "Duero",
+    "caudal": 1.65
+  },
+  {
+    "nombre": "Salida Del Embalse De Castro De Las Cogotas",
+    "cuenca": "Duero",
+    "caudal": 0.4
+  },
+  {
+    "nombre": "Mingorría",
+    "cuenca": "Duero",
+    "caudal": 0.5
+  },
+  {
+    "nombre": "Arévalo",
+    "cuenca": "Duero",
+    "caudal": 1.26
+  },
+  {
+    "nombre": "Olmedo",
+    "cuenca": "Duero",
+    "caudal": 0.85
+  },
+  {
+    "nombre": "Valdestillas",
+    "cuenca": "Duero",
+    "caudal": 3.45
+  },
+  {
+    "nombre": "Zamarra",
+    "cuenca": "Duero",
+    "caudal": 4.49
+  },
+  {
+    "nombre": "Robleda-águeda",
+    "cuenca": "Duero",
+    "caudal": 8.63
+  },
+  {
+    "nombre": "Salida Del Embalse De Irueña",
+    "cuenca": "Duero",
+    "caudal": 7.95
+  },
+  {
+    "nombre": "Salida Del Embalse Del Águeda",
+    "cuenca": "Duero",
+    "caudal": 16.57
+  },
+  {
+    "nombre": "Ciudad Rodrigo",
+    "cuenca": "Duero",
+    "caudal": 20.4
+  },
+  {
+    "nombre": "Saelices El Chico",
+    "cuenca": "Duero",
+    "caudal": 24.94
+  },
+  {
+    "nombre": "Alhándiga",
+    "cuenca": "Duero",
+    "caudal": 11.28
+  },
+  {
+    "nombre": "Vegalatrave",
+    "cuenca": "Duero",
+    "caudal": 2.47
+  },
+  {
+    "nombre": "Alconada",
+    "cuenca": "Duero",
+    "caudal": 0.06
+  },
+  {
+    "nombre": "Brime De Urz",
+    "cuenca": "Duero",
+    "caudal": 0.28
+  },
+  {
+    "nombre": "Palacios De La Sierra",
+    "cuenca": "Duero",
+    "caudal": 11.38
+  },
+  {
+    "nombre": "Salida Del Embalse De Castrovido",
+    "cuenca": "Duero",
+    "caudal": 3.25
+  },
+  {
+    "nombre": "Salas De Los Infantes",
+    "cuenca": "Duero",
+    "caudal": 3.07
+  },
+  {
+    "nombre": "Covarrubias",
+    "cuenca": "Duero",
+    "caudal": 24.66
+  },
+  {
+    "nombre": "Lerma",
+    "cuenca": "Duero",
+    "caudal": 29.43
+  },
+  {
+    "nombre": "Peral De Arlanza",
+    "cuenca": "Duero",
+    "caudal": 23.39
+  },
+  {
+    "nombre": "Quintana Del Puente",
+    "cuenca": "Duero",
+    "caudal": 31.45
+  },
+  {
+    "nombre": "Pineda De La Sierra",
+    "cuenca": "Duero",
+    "caudal": 5.37
+  },
+  {
+    "nombre": "Salida Del Embalse De Arlanzón",
+    "cuenca": "Duero",
+    "caudal": 0.64
+  },
+  {
+    "nombre": "Salida Del Embalse De Úzquiza",
+    "cuenca": "Duero",
+    "caudal": 0.58
+  },
+  {
+    "nombre": "Burgos-arlanzón",
+    "cuenca": "Duero",
+    "caudal": 1.33
+  },
+  {
+    "nombre": "Celada Del Camino",
+    "cuenca": "Duero",
+    "caudal": 9.34
+  },
+  {
+    "nombre": "Villamanín",
+    "cuenca": "Duero",
+    "caudal": 3.02
+  },
+  {
+    "nombre": "Cascantes",
+    "cuenca": "Duero",
+    "caudal": 6.46
+  },
+  {
+    "nombre": "León",
+    "cuenca": "Duero",
+    "caudal": 5.36
+  },
+  {
+    "nombre": "Alija De La Ribera",
+    "cuenca": "Duero",
+    "caudal": 15.27
+  },
+  {
+    "nombre": "Besande",
+    "cuenca": "Duero",
+    "caudal": 1.08
+  },
+  {
+    "nombre": "Otero De Guardo",
+    "cuenca": "Duero",
+    "caudal": 0.77
+  },
+  {
+    "nombre": "La Granja",
+    "cuenca": "Duero",
+    "caudal": 0.79
+  },
+  {
+    "nombre": "Villaescusa De Las Torres",
+    "cuenca": "Duero",
+    "caudal": 1.08
+  },
+  {
+    "nombre": "Cardaño De Arriba",
+    "cuenca": "Duero",
+    "caudal": 2.13
+  },
+  {
+    "nombre": "Triollo",
+    "cuenca": "Duero",
+    "caudal": 3.08
+  },
+  {
+    "nombre": "Salida Del Embalse De Camporredondo",
+    "cuenca": "Duero",
+    "caudal": 0.26
+  },
+  {
+    "nombre": "Salida Del Embalse De Compuerto",
+    "cuenca": "Duero",
+    "caudal": 1.04
+  },
+  {
+    "nombre": "Guardo",
+    "cuenca": "Duero",
+    "caudal": 4.55
+  },
+  {
+    "nombre": "Celadilla Del Río",
+    "cuenca": "Duero",
+    "caudal": 1.36
+  },
+  {
+    "nombre": "Villoldo",
+    "cuenca": "Duero",
+    "caudal": 11.23
+  },
+  {
+    "nombre": "Ribas De Campos",
+    "cuenca": "Duero",
+    "caudal": 11.46
+  },
+  {
+    "nombre": "Palencia",
+    "cuenca": "Duero",
+    "caudal": 15.44
+  },
+  {
+    "nombre": "Salida Del Embalse De Casares",
+    "cuenca": "Duero",
+    "caudal": 0.12
+  },
+  {
+    "nombre": "Vañes",
+    "cuenca": "Duero",
+    "caudal": 0.24
+  },
+  {
+    "nombre": "Villaveza De Valverde",
+    "cuenca": "Duero",
+    "caudal": 0.12
+  },
+  {
+    "nombre": "Villaverde De Arcayos",
+    "cuenca": "Duero",
+    "caudal": 3.35
+  },
+  {
+    "nombre": "Sahagún",
+    "cuenca": "Duero",
+    "caudal": 4.76
+  },
+  {
+    "nombre": "Valderas",
+    "cuenca": "Duero",
+    "caudal": 7.25
+  },
+  {
+    "nombre": "Navafría",
+    "cuenca": "Duero",
+    "caudal": 1.69
+  },
+  {
+    "nombre": "Pajares De Pedraza",
+    "cuenca": "Duero",
+    "caudal": 1.77
+  },
+  {
+    "nombre": "Aguilafuente",
+    "cuenca": "Duero",
+    "caudal": 1.02
+  },
+  {
+    "nombre": "Megeces",
+    "cuenca": "Duero",
+    "caudal": 3.91
+  },
+  {
+    "nombre": "Tolibia De Abajo",
+    "cuenca": "Duero",
+    "caudal": 2.78
+  },
+  {
+    "nombre": "Caldas De Nocedo",
+    "cuenca": "Duero",
+    "caudal": 4.9
+  },
+  {
+    "nombre": "Ambasaguas",
+    "cuenca": "Duero",
+    "caudal": 5.17
+  },
+  {
+    "nombre": "Crémenes",
+    "cuenca": "Duero",
+    "caudal": 1.56
+  },
+  {
+    "nombre": "Boisán",
+    "cuenca": "Duero",
+    "caudal": 3.17
+  },
+  {
+    "nombre": "Velilla De La Valduerna",
+    "cuenca": "Duero",
+    "caudal": 12.73
+  },
+  {
+    "nombre": "Santiago De La Valduerna",
+    "cuenca": "Duero",
+    "caudal": 4.17
+  },
+  {
+    "nombre": "Molinos De Duero",
+    "cuenca": "Duero",
+    "caudal": 5.67
+  },
+  {
+    "nombre": "Salida Del Embalse De La Cuerda Del Pozo",
+    "cuenca": "Duero",
+    "caudal": 1.13
+  },
+  {
+    "nombre": "Garray-soria",
+    "cuenca": "Duero",
+    "caudal": 9.64
+  },
+  {
+    "nombre": "Tardajos De Duero",
+    "cuenca": "Duero",
+    "caudal": 10.3
+  },
+  {
+    "nombre": "Almazán",
+    "cuenca": "Duero",
+    "caudal": 6.96
+  },
+  {
+    "nombre": "Gormaz",
+    "cuenca": "Duero",
+    "caudal": 12.82
+  },
+  {
+    "nombre": "Navapalos",
+    "cuenca": "Duero",
+    "caudal": 23.85
+  },
+  {
+    "nombre": "Vadocondes",
+    "cuenca": "Duero",
+    "caudal": 27.15
+  },
+  {
+    "nombre": "Aranda De Duero",
+    "cuenca": "Duero",
+    "caudal": 29.45
+  },
+  {
+    "nombre": "Quintanilla De Onésimo",
+    "cuenca": "Duero",
+    "caudal": 41.56
+  },
+  {
+    "nombre": "Herrera De Duero",
+    "cuenca": "Duero",
+    "caudal": 42.6
+  },
+  {
+    "nombre": "San Miguel Del Pino",
+    "cuenca": "Duero",
+    "caudal": 122.94
+  },
+  {
+    "nombre": "Toro-duero",
+    "cuenca": "Duero",
+    "caudal": 146.36
+  },
+  {
+    "nombre": "Zamora",
+    "cuenca": "Duero",
+    "caudal": 142.62
+  },
+  {
+    "nombre": "Saucelle-duero",
+    "cuenca": "Duero",
+    "caudal": 55.13
+  },
+  {
+    "nombre": "Sepúlveda",
+    "cuenca": "Duero",
+    "caudal": 2.62
+  },
+  {
+    "nombre": "Salida Del Embalse De Las Vencías",
+    "cuenca": "Duero",
+    "caudal": 2.77
+  },
+  {
+    "nombre": "Valsaín",
+    "cuenca": "Duero",
+    "caudal": 1.64
+  },
+  {
+    "nombre": "Salida Del Embalse De El Pontón Alto",
+    "cuenca": "Duero",
+    "caudal": 0.35
+  },
+  {
+    "nombre": "Segovia",
+    "cuenca": "Duero",
+    "caudal": 0.54
+  },
+  {
+    "nombre": "Bernardos",
+    "cuenca": "Duero",
+    "caudal": 1.28
+  },
+  {
+    "nombre": "Coca-eresma",
+    "cuenca": "Duero",
+    "caudal": 1.64
+  },
+  {
+    "nombre": "Morla De La Valdería",
+    "cuenca": "Duero",
+    "caudal": 4.85
+  },
+  {
+    "nombre": "Morales Del Rey",
+    "cuenca": "Duero",
+    "caudal": 4.31
+  },
+  {
+    "nombre": "Cabañes De Esgueva",
+    "cuenca": "Duero",
+    "caudal": 0.2
+  },
+  {
+    "nombre": "Torre De Esgueva",
+    "cuenca": "Duero",
+    "caudal": 1.02
+  },
+  {
+    "nombre": "Villanueva De Los Infantes",
+    "cuenca": "Duero",
+    "caudal": 0.84
+  },
+  {
+    "nombre": "Valladolid-esgueva",
+    "cuenca": "Duero",
+    "caudal": 0.4
+  },
+  {
+    "nombre": "Liegos",
+    "cuenca": "Duero",
+    "caudal": 1.83
+  },
+  {
+    "nombre": "Las Salas",
+    "cuenca": "Duero",
+    "caudal": 2.17
+  },
+  {
+    "nombre": "Cistierna",
+    "cuenca": "Duero",
+    "caudal": 6.36
+  },
+  {
+    "nombre": "Villómar",
+    "cuenca": "Duero",
+    "caudal": 7.64
+  },
+  {
+    "nombre": "Villalobar",
+    "cuenca": "Duero",
+    "caudal": 38.04
+  },
+  {
+    "nombre": "Benamariel 2",
+    "cuenca": "Duero",
+    "caudal": 47.62
+  },
+  {
+    "nombre": "Castropepe",
+    "cuenca": "Duero",
+    "caudal": 75.21
+  },
+  {
+    "nombre": "Bretó",
+    "cuenca": "Duero",
+    "caudal": 136.41
+  },
+  {
+    "nombre": "Toro-guareña",
+    "cuenca": "Duero",
+    "caudal": 1.3
+  },
+  {
+    "nombre": "Saucelle-huebra",
+    "cuenca": "Duero",
+    "caudal": 12.54
+  },
+  {
+    "nombre": "Genestacio",
+    "cuenca": "Duero",
+    "caudal": 0.24
+  },
+  {
+    "nombre": "Villallano",
+    "cuenca": "Duero",
+    "caudal": 1.13
+  },
+  {
+    "nombre": "Sena De Luna",
+    "cuenca": "Duero",
+    "caudal": 5.46
+  },
+  {
+    "nombre": "Barrios De Luna",
+    "cuenca": "Duero",
+    "caudal": 1.18
+  },
+  {
+    "nombre": "Salida Del Embalse De Barrios De Luna",
+    "cuenca": "Duero",
+    "caudal": 1.28
+  },
+  {
+    "nombre": "La Magdalena",
+    "cuenca": "Duero",
+    "caudal": 2.29
+  },
+  {
+    "nombre": "Santiago De La Puebla",
+    "cuenca": "Duero",
+    "caudal": 0.98
+  },
+  {
+    "nombre": "Robleda-mayas",
+    "cuenca": "Duero",
+    "caudal": 2.47
+  },
+  {
+    "nombre": "Monderio",
+    "cuenca": "Duero",
+    "caudal": 0.13
+  },
+  {
+    "nombre": "El Espinar",
+    "cuenca": "Duero",
+    "caudal": 0.13
+  },
+  {
+    "nombre": "Los Ángeles De San Rafael",
+    "cuenca": "Duero",
+    "caudal": 0.33
+  },
+  {
+    "nombre": "Guijas Albas",
+    "cuenca": "Duero",
+    "caudal": 0.15
+  },
+  {
+    "nombre": "Santa Eulalia De Rionegro",
+    "cuenca": "Duero",
+    "caudal": 4.74
+  },
+  {
+    "nombre": "Pedrosa Del Príncipe",
+    "cuenca": "Duero",
+    "caudal": 0.52
+  },
+  {
+    "nombre": "Castro De La Lomba",
+    "cuenca": "Duero",
+    "caudal": 7.34
+  },
+  {
+    "nombre": "Las Omañas",
+    "cuenca": "Duero",
+    "caudal": 10.43
+  },
+  {
+    "nombre": "Santa Marina Del Rey",
+    "cuenca": "Duero",
+    "caudal": 19.13
+  },
+  {
+    "nombre": "Cebrones Del Río",
+    "cuenca": "Duero",
+    "caudal": 34.43
+  },
+  {
+    "nombre": "Manganeses",
+    "cuenca": "Duero",
+    "caudal": 32.16
+  },
+  {
+    "nombre": "Santa Cristina De La Polvorosa",
+    "cuenca": "Duero",
+    "caudal": 25.11
+  },
+  {
+    "nombre": "Vegacerneja",
+    "cuenca": "Duero",
+    "caudal": 1.61
+  },
+  {
+    "nombre": "Barbadillo Del Pez",
+    "cuenca": "Duero",
+    "caudal": 14.87
+  },
+  {
+    "nombre": "Pinilla De Los Moros",
+    "cuenca": "Duero",
+    "caudal": 12.63
+  },
+  {
+    "nombre": "Villovela De Pirón",
+    "cuenca": "Duero",
+    "caudal": 0.2
+  },
+  {
+    "nombre": "San Salvador De Cantamuda",
+    "cuenca": "Duero",
+    "caudal": 1.62
+  },
+  {
+    "nombre": "Arbejal",
+    "cuenca": "Duero",
+    "caudal": 1.25
+  },
+  {
+    "nombre": "Salinas De Pisuerga",
+    "cuenca": "Duero",
+    "caudal": 8.66
+  },
+  {
+    "nombre": "Salida Del Embalse De Aguilar De Campoo",
+    "cuenca": "Duero",
+    "caudal": 3.32
+  },
+  {
+    "nombre": "Alar Del Rey",
+    "cuenca": "Duero",
+    "caudal": 2.84
+  },
+  {
+    "nombre": "Herrera De Pisuerga",
+    "cuenca": "Duero",
+    "caudal": 4.16
+  },
+  {
+    "nombre": "Cordovilla",
+    "cuenca": "Duero",
+    "caudal": 10.38
+  },
+  {
+    "nombre": "Cabezón De Pisuerga",
+    "cuenca": "Duero",
+    "caudal": 75.05
+  },
+  {
+    "nombre": "Valladolid-pisuerga",
+    "cuenca": "Duero",
+    "caudal": 78.78
+  },
+  {
+    "nombre": "Camposolillo",
+    "cuenca": "Duero",
+    "caudal": 3.2
+  },
+  {
+    "nombre": "Salida Del Embalse Del Porma",
+    "cuenca": "Duero",
+    "caudal": 2.18
+  },
+  {
+    "nombre": "Secos",
+    "cuenca": "Duero",
+    "caudal": 14.89
+  },
+  {
+    "nombre": "Camarzana-regato",
     "cuenca": "Duero",
     "caudal": 0.0
   },
   {
+    "nombre": "Remolina",
+    "cuenca": "Duero",
+    "caudal": 0.38
+  },
+  {
+    "nombre": "Resoba",
+    "cuenca": "Duero",
+    "caudal": 0.03
+  },
+  {
+    "nombre": "Vinuesa",
+    "cuenca": "Duero",
+    "caudal": 7.79
+  },
+  {
+    "nombre": "Riaza",
+    "cuenca": "Duero",
+    "caudal": 0.07
+  },
+  {
+    "nombre": "Languilla",
+    "cuenca": "Duero",
+    "caudal": 0.86
+  },
+  {
+    "nombre": "Salida Del Embalse De Linares",
+    "cuenca": "Duero",
+    "caudal": 0.23
+  },
+  {
+    "nombre": "Ventanilla",
+    "cuenca": "Duero",
+    "caudal": 1.21
+  },
+  {
+    "nombre": "Salida Del Embalse De Cervera",
+    "cuenca": "Duero",
+    "caudal": 6.68
+  },
+  {
+    "nombre": "Ruesga",
+    "cuenca": "Duero",
+    "caudal": 7.46
+  },
+  {
+    "nombre": "Menaza",
+    "cuenca": "Duero",
+    "caudal": 0.82
+  },
+  {
+    "nombre": "Medina De Rioseco",
+    "cuenca": "Duero",
+    "caudal": 0.43
+  },
+  {
+    "nombre": "Castrelo Do Val",
+    "cuenca": "Duero",
+    "caudal": 8.85
+  },
+  {
+    "nombre": "Rabal",
+    "cuenca": "Duero",
+    "caudal": 7.95
+  },
+  {
+    "nombre": "Puebla De Sanabria",
+    "cuenca": "Duero",
+    "caudal": 35.77
+  },
+  {
+    "nombre": "Camarzana De Tera",
+    "cuenca": "Duero",
+    "caudal": 6.03
+  },
+  {
+    "nombre": "Mózar De Valverde",
+    "cuenca": "Duero",
+    "caudal": 11.32
+  },
+  {
+    "nombre": "Tardesillas",
+    "cuenca": "Duero",
+    "caudal": 6.38
+  },
+  {
+    "nombre": "Matallana De Torio",
+    "cuenca": "Duero",
+    "caudal": 5.55
+  },
+  {
+    "nombre": "Hoyos Del Espino",
+    "cuenca": "Duero",
+    "caudal": 1.07
+  },
+  {
+    "nombre": "El Barco De Ávila",
+    "cuenca": "Duero",
+    "caudal": 34.61
+  },
+  {
+    "nombre": "Puente Congosto",
+    "cuenca": "Duero",
+    "caudal": 33.48
+  },
+  {
+    "nombre": "Salida Del Embalse De Santa Teresa",
+    "cuenca": "Duero",
+    "caudal": 45.44
+  },
+  {
+    "nombre": "Encinas De Abajo",
+    "cuenca": "Duero",
+    "caudal": 62.82
+  },
+  {
+    "nombre": "Salamanca",
+    "cuenca": "Duero",
+    "caudal": 56.68
+  },
+  {
+    "nombre": "Ledesma",
+    "cuenca": "Duero",
+    "caudal": 74.04
+  },
+  {
+    "nombre": "Quintana Del Castillo",
+    "cuenca": "Duero",
+    "caudal": 1.81
+  },
+  {
+    "nombre": "Villameca",
+    "cuenca": "Duero",
+    "caudal": 0.14
+  },
+  {
+    "nombre": "San Félix De La Vega",
+    "cuenca": "Duero",
+    "caudal": 2.34
+  },
+  {
+    "nombre": "Quintanadueñas",
+    "cuenca": "Duero",
+    "caudal": 0.72
+  },
+  {
+    "nombre": "Ucero",
+    "cuenca": "Duero",
+    "caudal": 4.2
+  },
+  {
+    "nombre": "Osma",
+    "cuenca": "Duero",
+    "caudal": 7.7
+  },
+  {
+    "nombre": "Villalcázar De Sirga",
+    "cuenca": "Duero",
+    "caudal": 0.6
+  },
+  {
+    "nombre": "Abia De Las Torres",
+    "cuenca": "Duero",
+    "caudal": 2.61
+  },
+  {
+    "nombre": "Emisario De La Nava",
+    "cuenca": "Duero",
+    "caudal": 2.14
+  },
+  {
+    "nombre": "Santervás De Campos",
+    "cuenca": "Duero",
+    "caudal": 0.45
+  },
+  {
+    "nombre": "Villárdiga",
+    "cuenca": "Duero",
+    "caudal": 0.58
+  },
+  {
+    "nombre": "Benegiles",
+    "cuenca": "Duero",
+    "caudal": 2.37
+  },
+  {
+    "nombre": "Burgos-vena",
+    "cuenca": "Duero",
+    "caudal": 0.37
+  },
+  {
+    "nombre": "Mediana De Voltoya",
+    "cuenca": "Duero",
+    "caudal": 0.06
+  },
+  {
+    "nombre": "Coca-voltoya",
+    "cuenca": "Duero",
+    "caudal": 0.04
+  },
+  {
+    "nombre": "Boca De Huérgano",
+    "cuenca": "Duero",
+    "caudal": 9.05
+  },
+  {
+    "nombre": "Bercial",
+    "cuenca": "Duero",
+    "caudal": 0.07
+  },
+  {
+    "nombre": "Medina Del Campo",
+    "cuenca": "Duero",
+    "caudal": 0.03
+  },
+  {
     "nombre": "Río Miño En Cela Brazo Izquierdo",
     "cuenca": "Miño-sil",
-    "caudal": 4.45
+    "caudal": 7.49
   },
   {
     "nombre": "Río Miño En Cela Brazo Derecho",
     "cuenca": "Miño-sil",
-    "caudal": 5.78
+    "caudal": 9.57
   },
   {
     "nombre": "Río Ladra En Begonte",
     "cuenca": "Miño-sil",
-    "caudal": 9.77
+    "caudal": 27.94
   },
   {
     "nombre": "Río Sarria En Pobra De San Xulián",
     "cuenca": "Miño-sil",
-    "caudal": 2.37
+    "caudal": 2.87
   },
   {
     "nombre": "Río Neira En Páramo (o)",
     "cuenca": "Miño-sil",
-    "caudal": 6.72
+    "caudal": 8.64
   },
   {
     "nombre": "Río Cúa En Quilós",
     "cuenca": "Miño-sil",
-    "caudal": 13.85
+    "caudal": 15.95
   },
   {
     "nombre": "Río Sil En O Barco",
     "cuenca": "Miño-sil",
-    "caudal": 149.07
+    "caudal": 141.84
   },
   {
     "nombre": "Río Cabe En Monforte",
     "cuenca": "Miño-sil",
-    "caudal": 3.85
+    "caudal": 6.76
   },
   {
     "nombre": "Río Arnoia En Arnoia",
     "cuenca": "Miño-sil",
-    "caudal": 10.96
+    "caudal": 12.29
   },
   {
     "nombre": "Río Tea En Ponteareas",
     "cuenca": "Miño-sil",
-    "caudal": 31.68
+    "caudal": 36.38
   },
   {
     "nombre": "Río Limia En Ponteliñares",
     "cuenca": "Miño-sil",
-    "caudal": 1.54
+    "caudal": 1.91
   },
   {
     "nombre": "Río Miño En Lugo",
     "cuenca": "Miño-sil",
-    "caudal": 26.73
+    "caudal": 29.44
   },
   {
     "nombre": "Río Miño En Ourense",
     "cuenca": "Miño-sil",
-    "caudal": 466.78
+    "caudal": 31.14
+  },
+  {
+    "nombre": "Cabecera Canal Alto Taibilla",
+    "cuenca": "Segura",
+    "caudal": 1.083
+  },
+  {
+    "nombre": "Cola Ats",
+    "cuenca": "Segura",
+    "caudal": 0.043
+  },
+  {
+    "nombre": "Cabecera Canal De Hellín",
+    "cuenca": "Segura",
+    "caudal": 0.978
   },
   {
     "nombre": "Río Mundo Azud De Liétor",
     "cuenca": "Segura",
-    "caudal": 4.078
+    "caudal": 3.187
+  },
+  {
+    "nombre": "Canal De Hellín A La Altura De Talave",
+    "cuenca": "Segura",
+    "caudal": 0.708
+  },
+  {
+    "nombre": "Cabecera Cpmi",
+    "cuenca": "Segura",
+    "caudal": 2.56
+  },
+  {
+    "nombre": "Cpmd",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "By Pass A Contraparada",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Toma Etap De Contraparada",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Detraído Del Cpmi Por Etap Campotéjar",
+    "cuenca": "Segura",
+    "caudal": 0.398
+  },
+  {
+    "nombre": "Aforador Cabecera Canal Crevillente",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Cpmd Lorca",
+    "cuenca": "Segura",
+    "caudal": 1.769
+  },
+  {
+    "nombre": "A Balsón/etap De Lorca",
+    "cuenca": "Segura",
+    "caudal": 0.527
+  },
+  {
+    "nombre": "Bombeo Al Embalse De Algeciras",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Tubería Izquierda (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.499
+  },
+  {
+    "nombre": "Tubería Derecha (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.374
   },
   {
     "nombre": "Salida Directa Río Segura Agabj Sifón Orihuela",
@@ -125,19 +1100,49 @@
     "caudal": 0.0
   },
   {
+    "nombre": "Tuberías (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.872
+  },
+  {
     "nombre": "Salida Huertos+norias+ptamurcia (sifón Orihuela)",
     "cuenca": "Segura",
-    "caudal": 0.189
+    "caudal": 0.192
+  },
+  {
+    "nombre": "Salida Ac.alquibla (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.0
   },
   {
     "nombre": "Río Segura Azud De Los Huertos",
     "cuenca": "Segura",
-    "caudal": 0.853
+    "caudal": 3.746
   },
   {
     "nombre": "Río Segura Aguas Abajo Sifón Orihuela",
     "cuenca": "Segura",
-    "caudal": 1.163
+    "caudal": 4.055
+  },
+  {
+    "nombre": "Salida Ac.huertos (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Sal.río Segura Azud Norias (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.192
+  },
+  {
+    "nombre": "Salida Toma Acequias (sifón Orihuela)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Cpmi Salida Sifón Orihuela",
+    "cuenca": "Segura",
+    "caudal": 0.372
   },
   {
     "nombre": "Salida Directa Río Segura Agarrb Sifón Orihuela",
@@ -145,9 +1150,19 @@
     "caudal": 0.309
   },
   {
+    "nombre": "Sal.ac.huertos (sifón Orihuela)(topológico)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
     "nombre": "Río Segura Jacarilla",
     "cuenca": "Segura",
-    "caudal": 2.798
+    "caudal": 3.025
+  },
+  {
+    "nombre": "Aforador Canal D. F. Pedrera (derramador)",
+    "cuenca": "Segura",
+    "caudal": 0.0
   },
   {
     "nombre": "Río Segura Azud De San Antonio",
@@ -155,59 +1170,224 @@
     "caudal": 0.0
   },
   {
-    "nombre": "Nive Canal Salida",
-    "cuenca": "Tajo",
-    "caudal": -0.44
+    "nombre": "Toma Canal Rlmi",
+    "cuenca": "Segura",
+    "caudal": 0.429
   },
   {
-    "nombre": "Eo - A Pontenova",
+    "nombre": "Canal De Alimentación Embalse La Pedrera",
+    "cuenca": "Segura",
+    "caudal": 0.267
+  },
+  {
+    "nombre": "Vertedero Pared Gruesa Cccc",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Cccc (vertedero + Compuerta Taintor)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Desagüe Embalse De La Pedrera",
+    "cuenca": "Segura",
+    "caudal": 1.29
+  },
+  {
+    "nombre": "Derramador Salida Pedrera",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Cpmi-santomera (aguas Abajo Partidor)",
+    "cuenca": "Segura",
+    "caudal": 1.665
+  },
+  {
+    "nombre": "Derivado Desde Cpmi A Canal De Abanilla",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Cpmi Aguas Arriba Partidor-santomera",
+    "cuenca": "Segura",
+    "caudal": 1.665
+  },
+  {
+    "nombre": "En Canal De Crevillente (torrealta)",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Detraído C. Crevillente Por Etap Torrealta",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "En Impulsión A Embalse De Crevillente",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Salida Embalse De Crevillente Por Toma",
+    "cuenca": "Segura",
+    "caudal": 1.518
+  },
+  {
+    "nombre": "By-pass Embalse De Crevillente",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Impulsión+by-pass A Embalse De Crevillente",
+    "cuenca": "Segura",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Salida Canal De Crevillente A Rlmi",
+    "cuenca": "Segura",
+    "caudal": 1.518
+  },
+  {
+    "nombre": "Aforador Cola Cpmd",
+    "cuenca": "Segura",
+    "caudal": 0.615
+  },
+  {
+    "nombre": "Vertedero Pared Delgada En Cpcc",
+    "cuenca": "Segura",
+    "caudal": 1.463
+  },
+  {
+    "nombre": "Aforador Canal De La Pedrera",
+    "cuenca": "Segura",
+    "caudal": 0.1
+  },
+  {
+    "nombre": "Etap La Pedrera",
+    "cuenca": "Segura",
+    "caudal": 1.29
+  },
+  {
+    "nombre": "Salida",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "A Buendia",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Trasvase",
+    "cuenca": "Tajo",
+    "caudal": 11.76
+  },
+  {
+    "nombre": "Canal",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Canal Salida",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Nive Canal Salida",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Circulante",
+    "cuenca": "Tajo",
+    "caudal": 0.02
+  },
+  {
+    "nombre": "Canal Iib",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Canal Iiib",
+    "cuenca": "Tajo",
+    "caudal": 0.0
+  },
+  {
+    "nombre": "Navia - Ponte Da Murias",
     "cuenca": "Cantábrica",
-    "caudal": 0.24
+    "caudal": 0.26
+  },
+  {
+    "nombre": "Ibias - San Antolín",
+    "cuenca": "Cantábrica",
+    "caudal": 0.33
   },
   {
     "nombre": "Navia - San Pelayo",
     "cuenca": "Cantábrica",
-    "caudal": 3.16
+    "caudal": 5.54
   },
   {
-    "nombre": "Navelgas - Vega De Muñalén",
+    "nombre": "Narcea - Corias",
     "cuenca": "Cantábrica",
-    "caudal": 0.13
-  },
-  {
-    "nombre": "Narcea - Pte. De La Barca",
-    "cuenca": "Cantábrica",
-    "caudal": 0.2
-  },
-  {
-    "nombre": "Pigüeña - Almurfe",
-    "cuenca": "Cantábrica",
-    "caudal": 0.63
+    "caudal": 0.55
   },
   {
     "nombre": "Pigüeña - Canal Pigüeña",
     "cuenca": "Cantábrica",
-    "caudal": 0.16
+    "caudal": 0.08
   },
   {
-    "nombre": "Narcea - Puente Quinzanas",
+    "nombre": "Nalón - Sama De Langreo",
     "cuenca": "Cantábrica",
-    "caudal": 1.82
+    "caudal": 0.23
   },
   {
-    "nombre": "Nalón - Bueño",
+    "nombre": "Nalón - Peñaullán",
     "cuenca": "Cantábrica",
-    "caudal": 0.54
+    "caudal": 1.97
   },
   {
-    "nombre": "Cares - Mier",
+    "nombre": "Piloña - Villamayor",
     "cuenca": "Cantábrica",
-    "caudal": 0.38
+    "caudal": 0.15
   },
   {
-    "nombre": "Besaya - Puente De Torres",
+    "nombre": "Deva - Puentellés",
     "cuenca": "Cantábrica",
-    "caudal": 0.12
+    "caudal": 0.18
+  },
+  {
+    "nombre": "Saja - Santa Lucía",
+    "cuenca": "Cantábrica",
+    "caudal": 0.09
+  },
+  {
+    "nombre": "Pas - Puente Viesgo",
+    "cuenca": "Cantábrica",
+    "caudal": 0.05
+  },
+  {
+    "nombre": "Miera - La Cavada",
+    "cuenca": "Cantábrica",
+    "caudal": 0.1
+  },
+  {
+    "nombre": "Asón - Ramales De La Victoria",
+    "cuenca": "Cantábrica",
+    "caudal": 0.27
+  },
+  {
+    "nombre": "Sámano - Castro-urdiales",
+    "cuenca": "Cantábrica",
+    "caudal": 0.01
+  },
+  {
+    "nombre": "Mioño - Mioño",
+    "cuenca": "Cantábrica",
+    "caudal": 0.05
   },
   {
     "nombre": "Nervión - Arrigorriaga",
@@ -220,13 +1400,38 @@
     "caudal": 0.05
   },
   {
+    "nombre": "Leitzaran - Leitza",
+    "cuenca": "Cantábrica",
+    "caudal": 0.07
+  },
+  {
+    "nombre": "Urumea - Ereñozu",
+    "cuenca": "Cantábrica",
+    "caudal": 0.24
+  },
+  {
+    "nombre": "Baztán - Elizondo",
+    "cuenca": "Cantábrica",
+    "caudal": 0.01
+  },
+  {
+    "nombre": "Bidasoa - Legasa",
+    "cuenca": "Cantábrica",
+    "caudal": 0.41
+  },
+  {
     "nombre": "Tximista - Etxalar",
     "cuenca": "Cantábrica",
-    "caudal": 0.04
+    "caudal": 0.07
+  },
+  {
+    "nombre": "Onín - Lesaka",
+    "cuenca": "Cantábrica",
+    "caudal": 0.14
   },
   {
     "nombre": "Zia - Bera - Zia",
     "cuenca": "Cantábrica",
-    "caudal": 0.06
+    "caudal": 0.05
   }
 ]
