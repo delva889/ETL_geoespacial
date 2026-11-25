@@ -22,18 +22,19 @@ export default function MainLayout() {
 
       <header className="sticky top-0 z-[1000] bg-paper/95 backdrop-blur-sm border-b border-rule">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
-          <Link to="/" className="font-serif text-[26px] leading-none tracking-tight" translate="no">
-            HidroGEO
+          <Link to="/" className="flex items-baseline gap-3 min-w-0" aria-label={`${AUTHOR}, inicio`}>
+            <span className="font-serif text-[24px] sm:text-[26px] leading-none tracking-tight whitespace-nowrap" translate="no">{AUTHOR}</span>
+            <span className="hidden lg:inline text-[14px] text-muted whitespace-nowrap">Ingeniería de datos geoespaciales</span>
           </Link>
 
-          <nav aria-label="Principal" className="flex items-center gap-1 sm:gap-6 text-[15px]">
+          <nav aria-label="Principal" className="flex items-center gap-0.5 sm:gap-6 text-[14px] sm:text-[15px] shrink-0">
             {NAV.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 end={item.path === '/'}
                 className={({ isActive }) =>
-                  `px-2 sm:px-0 py-3 border-b transition-colors duration-200 ${
+                  `px-1.5 sm:px-0 py-3 border-b transition-colors duration-200 ${
                     isActive ? 'border-ink text-ink' : 'border-transparent text-muted hover:text-ink'
                   }`
                 }

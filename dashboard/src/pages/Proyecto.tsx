@@ -1,43 +1,55 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import HeroMap from '../components/HeroMap';
+import { TechMarquee, ToolRow } from '../components/Logos';
 import { REPO_URL, MEMORIA_URL, useLastUpdate, fmt } from '../lib/data';
 
 const PASOS = [
   {
     titulo: 'Descarga',
-    herramientas: 'Python, requests, BeautifulSoup, Selenium',
+    logos: ['python', 'selenium'], extra: ['requests', 'BeautifulSoup'],
     texto: 'Lee embalses.net y el SAIH de cada confederación. Cada una publica distinto: una API JSON, una tabla HTML, un token JWT o una página que hay que abrir con un navegador automatizado.',
   },
   {
     titulo: 'Limpieza y cruce',
-    herramientas: 'pandas, Pentaho PDI, rapidfuzz',
+    logos: ['pandas'], extra: ['Pentaho PDI', 'rapidfuzz'],
     texto: 'Unifica unidades y esquemas. Como las fuentes no comparten identificadores, los embalses se emparejan por similitud de nombre.',
   },
   {
     titulo: 'Geoprocesamiento',
-    herramientas: 'FME, GeoPandas, PostGIS, ogr2ogr',
+    logos: ['postgresql', 'gdal', 'qgis'], extra: ['FME', 'PostGIS', 'GeoPandas'],
     texto: 'Reproyecta, une cada registro con su polígono y extrae del MDT de 200 m la cota del embalse y la del punto más bajo a su alrededor.',
   },
   {
     titulo: 'Imagen de satélite',
-    herramientas: 'STAC, Sentinel-2 L2A, COG',
+    logos: [], extra: ['FME', 'STAC', 'Sentinel-2 L2A', 'COG'],
     texto: 'Busca en el catálogo de Earth Search la escena con menos nubes sobre cada embalse y guarda el enlace al GeoTIFF.',
   },
   {
     titulo: 'Publicación',
-    herramientas: 'GeoJSON, React, Leaflet, GitHub Actions',
+    logos: ['githubactions', 'react', 'typescript', 'leaflet'], extra: ['GeoJSON'],
     texto: 'Cada lunes a las 05:00 UTC se refrescan niveles, caudales y precio, se compila la web y se publica en GitHub Pages.',
   },
 ];
 
-const HERRAMIENTAS: [string, string[]][] = [
-  ['Datos', ['Python', 'pandas', 'GeoPandas', 'BeautifulSoup', 'Selenium', 'rapidfuzz']],
-  ['SIG', ['FME', 'PostgreSQL y PostGIS', 'GDAL / ogr2ogr', 'Pentaho PDI']],
-  ['Observación de la Tierra', ['Sentinel-2 L2A', 'API STAC', 'Cloud Optimized GeoTIFF', 'MDT200 del IGN']],
-  ['Web y automatización', ['React y TypeScript', 'Leaflet', 'Recharts', 'GitHub Actions y Pages']],
-];
-
 const W = 'max-w-[1360px] mx-auto w-full px-5 sm:px-8';
+
+/** Cuenta hasta el valor una sola vez al cargar; sin animación si el usuario la ha reducido. */
+function CountUp({ value, dec = 0 }: { value: number; dec?: number }) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setV(value); return; }
+    let raf = 0; const t0 = performance.now(); const dur = 1200;
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / dur, 1);
+      setV(value * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  return <>{fmt(v, dec)}</>;
+}
 
 export default function Proyecto() {
   const info = useLastUpdate();
@@ -90,13 +102,24 @@ export default function Proyecto() {
               <div key={c.texto} className={`pr-6 border-rule ${i % 2 === 1 ? 'border-l pl-6' : ''} ${i > 0 ? 'lg:border-l lg:pl-8' : ''}`}>
                 <dt className="sr-only">{c.texto}</dt>
                 <dd className="num text-[40px] sm:text-[52px] leading-none tracking-[-0.03em]">
-                  {c.valor !== undefined ? fmt(c.valor, c.dec ?? 0) : '–'}
+                  {c.valor !== undefined ? <CountUp value={c.valor} dec={c.dec ?? 0} /> : '–'}
                 </dd>
                 <dd className="text-[14px] text-ink-2 mt-3 max-w-[22ch]">{c.texto}</dd>
               </div>
             ))}
           </dl>
         </div>
+      </section>
+
+      {/* Herramientas */}
+      <section className="pt-20 pb-6">
+        <div className={`${W} grid md:grid-cols-12 gap-x-8 mb-10`}>
+          <h2 className="md:col-span-6 text-[40px] sm:text-[52px] leading-[0.95] tracking-[-0.015em]">Las herramientas del proyecto</h2>
+          <p className="md:col-span-4 md:col-start-9 text-[15px] text-ink-2 self-end mt-4 md:mt-0">
+            De la descarga en Python al visor en React, pasando por FME, PostGIS y Sentinel-2. Pasa el ratón para ver cada logotipo en color.
+          </p>
+        </div>
+        <TechMarquee />
       </section>
 
       {/* El problema */}
@@ -132,8 +155,8 @@ export default function Proyecto() {
                 <span className="num text-[13px] text-muted pt-2">{i + 1}</span>
                 <div>
                   <h3 className="text-[32px] leading-none">{p.titulo}</h3>
-                  <p className="num text-[12.5px] text-cobalt mt-3">{p.herramientas}</p>
                   <p className="text-[16px] leading-relaxed text-ink-2 mt-3 max-w-[60ch]">{p.texto}</p>
+                  <ToolRow ids={p.logos} extra={p.extra} />
                 </div>
               </li>
             ))}
@@ -144,8 +167,8 @@ export default function Proyecto() {
       {/* Sentinel-2 */}
       <section className="border-t border-ink bg-ink text-paper">
         <div className={`${W} py-24 sm:py-32 grid md:grid-cols-12 gap-x-8 gap-y-12`}>
-          <div className="md:col-span-5">
-            <h2 className="text-[44px] sm:text-[64px] leading-[0.95] tracking-[-0.015em]">
+          <div className="md:col-span-4">
+            <h2 className="text-[44px] sm:text-[60px] leading-[0.95] tracking-[-0.015em]">
               Una escena de satélite por embalse, elegida sin abrir un visor.
             </h2>
             <p className="text-[17px] leading-relaxed text-paper/75 mt-8 max-w-[46ch]">
@@ -157,20 +180,14 @@ export default function Proyecto() {
               Ver las escenas en el visor
             </Link>
           </div>
-          <figure className="md:col-span-6 md:col-start-7 md:pt-20 m-0 min-w-0">
-            <pre className="num text-[13px] sm:text-[14px] leading-[1.9] text-paper/85 border-t border-b border-paper/30 py-6 overflow-x-auto whitespace-pre">
-{`PostGIS  embalses_geom
-  Reprojector        EPSG:4326
-  BoundsExtractor    bbox por embalse
-  HTTPCaller         POST /v1/search
-                     collections: sentinel-2-l2a
-  JSONFragmenter
-  JSONFlattener
-  Sorter             eo:cloud_cover, ascendente
-  Sampler            primera escena
-PostGIS  url_descarga = …/TCI.tif`}
-            </pre>
-            <figcaption className="margin-note !text-paper/60 mt-3">satelite.fmw, esquema simplificado</figcaption>
+          <figure className="md:col-span-7 md:col-start-6 md:pt-6 m-0 min-w-0">
+            <a href={`${import.meta.env.BASE_URL}figuras/fme-sentinel2.webp`} target="_blank" rel="noopener noreferrer"
+              className="block bg-white p-3 sm:p-4 cursor-zoom-in border border-paper/20 hover:border-paper transition-colors duration-200"
+              aria-label="Abrir a tamaño completo el flujo de FME que vincula Sentinel-2">
+              <img src={`${import.meta.env.BASE_URL}figuras/fme-sentinel2.webp`} width={1181} height={320} loading="lazy"
+                alt="Flujo de FME: lee los polígonos de PostGIS, calcula su caja envolvente, consulta la API STAC, ordena por nubosidad y guarda el enlace a la escena." className="w-full h-auto" />
+            </a>
+            <figcaption className="text-[13px] text-paper/60 mt-3">Captura real de satelite.fmw: 956 polígonos, 4692 escenas candidatas, 939 escenas elegidas.</figcaption>
           </figure>
         </div>
       </section>
@@ -219,20 +236,15 @@ PostGIS  url_descarga = …/TCI.tif`}
             </dl>
           </div>
         </div>
-      </section>
-
-      {/* Herramientas */}
-      <section className="border-t border-ink">
-        <div className={`${W} py-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-10`}>
-          {HERRAMIENTAS.map(([grupo, items]) => (
-            <div key={grupo}>
-              <h3 className="text-[26px] leading-none pb-3 border-b border-ink">{grupo}</h3>
-              <ul className="mt-4 space-y-1.5 text-[15px] text-ink-2">
-                {items.map((it) => <li key={it}>{it}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <figure className="mt-16 m-0">
+          <a href={`${import.meta.env.BASE_URL}figuras/fme-energia.webp`} target="_blank" rel="noopener noreferrer"
+            className="block bg-white border border-rule p-3 sm:p-5 cursor-zoom-in hover:border-ink transition-colors duration-200"
+            aria-label="Abrir a tamaño completo el flujo de FME del cálculo energético">
+            <img src={`${import.meta.env.BASE_URL}figuras/fme-energia.webp`} width={1245} height={393} loading="lazy"
+              alt="Flujo de FME del cálculo energético: extrae cotas del MDT, crea un buffer, calcula estadísticas ráster y aplica la fórmula a cada embalse." className="w-full h-auto" />
+          </a>
+          <figcaption className="text-[13px] text-muted mt-3">Captura real de energia.fmw, que cruza el MDT con los polígonos de PostGIS.</figcaption>
+        </figure>
       </section>
 
       {/* Cierre */}

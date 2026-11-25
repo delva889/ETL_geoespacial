@@ -1,5 +1,15 @@
 import { Link } from 'react-router-dom';
 import { REPO_URL, MEMORIA_URL } from '../lib/data';
+import { FloatingLogos } from '../components/Logos';
+
+const FIG = `${import.meta.env.BASE_URL}figuras/`;
+
+const FLUJOS = [
+  { file: 'fme-geocodificacion.webp', w: 1207, h: 278, titulo: 'Geocodificación de estaciones de aforo', texto: 'geocodingAPI.fmw. Las confederaciones no publican la posición de muchas estaciones, así que se geocodifican a partir de su nombre y su cuenca con la API de Google y se reproyectan. Procesa 498 estaciones.' },
+  { file: 'fme-sentinel2.webp', w: 1181, h: 320, titulo: 'Escena Sentinel-2 por embalse', texto: 'satelite.fmw. Caja envolvente de cada polígono, petición al catálogo STAC, orden por nubosidad y una escena por embalse.' },
+  { file: 'fme-energia.webp', w: 1245, h: 393, titulo: 'Análisis ráster y energía', texto: 'energia.fmw. Cotas del MDT de 200 m, buffer alrededor del embalse, estadísticas ráster y fórmula de energía para cada polígono.' },
+  { file: 'pdi-caudales.webp', w: 912, h: 710, titulo: 'Normalización de caudales en Pentaho', texto: 'Transformación de PDI que une los CSV de cada confederación, añade constantes, renombra campos y carga el resultado en PostgreSQL.' },
+];
 
 const FUENTES = [
   { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping de HTML', ciclo: 'Cada lunes' },
@@ -32,8 +42,9 @@ const W = 'max-w-[1360px] mx-auto w-full px-5 sm:px-8';
 export default function Metodologia() {
   return (
     <>
-      <section className={`${W} pt-16 sm:pt-24 pb-20`}>
-        <div className="grid md:grid-cols-12 gap-x-8 gap-y-8">
+      <section className={`${W} pt-16 sm:pt-24 pb-20 relative`}>
+        <FloatingLogos ids={['python', 'postgresql', 'gdal', 'qgis', 'pandas', 'githubactions']} />
+        <div className="relative grid md:grid-cols-12 gap-x-8 gap-y-8">
           <h1 className="md:col-span-7 text-[56px] sm:text-[88px] leading-[0.92] tracking-[-0.02em]">
             Cómo se construye el modelo
           </h1>
@@ -89,6 +100,31 @@ export default function Metodologia() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Flujos */}
+      <section className="border-t border-ink">
+        <div className={`${W} py-20`}>
+          <div className="grid md:grid-cols-12 gap-x-8 mb-12">
+            <h2 className="md:col-span-7 text-[44px] sm:text-[56px] leading-[0.95]">Los flujos de FME y Pentaho, tal como son</h2>
+            <p className="md:col-span-4 md:col-start-9 text-[15px] text-ink-2 self-end mt-4 md:mt-0">Capturas sacadas de los proyectos originales. Pulsa una para verla a tamaño completo.</p>
+          </div>
+          <div className="space-y-16">
+            {FLUJOS.map((f) => (
+              <figure key={f.file} className="m-0 grid md:grid-cols-12 gap-x-8 gap-y-5 items-start">
+                <figcaption className="md:col-span-3">
+                  <h3 className="text-[28px] leading-[1.05]">{f.titulo}</h3>
+                  <p className="text-[15px] leading-relaxed text-ink-2 mt-3">{f.texto}</p>
+                </figcaption>
+                <a href={FIG + f.file} target="_blank" rel="noopener noreferrer"
+                  className="md:col-span-9 block bg-white border border-rule p-3 sm:p-4 cursor-zoom-in hover:border-ink transition-colors duration-200"
+                  aria-label={`Abrir a tamaño completo: ${f.titulo}`}>
+                  <img src={FIG + f.file} width={f.w} height={f.h} loading="lazy" alt={`Captura del flujo: ${f.titulo}`} className="w-full h-auto" />
+                </a>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 

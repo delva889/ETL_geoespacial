@@ -167,6 +167,38 @@
 .leaflet-container svg:focus,
 .leaflet-container:focus { outline: none; }
 
+/* ---------- Logotipos ---------- */
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes drift { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(4deg); } }
+
+.marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track { animation: marquee 48s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-icon {
+  animation: bob 3.4s ease-in-out infinite;
+  filter: grayscale(0.35);
+  opacity: 0.75;
+  transition: filter 200ms, opacity 200ms, transform 200ms;
+}
+.marquee-item:hover .marquee-icon {
+  filter: none;
+  opacity: 1;
+  animation-play-state: paused;
+  transform: scale(1.12);
+}
+.float-logo { opacity: 0.14; animation: drift 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .marquee-track > li[aria-hidden="true"] { display: none; }
+  .marquee-icon, .float-logo { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
