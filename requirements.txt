@@ -2,9 +2,8 @@ requests
 beautifulsoup4
 pandas
 geopandas
+shapely
 selenium
 psycopg2-binary
 rapidfuzz
 python-dotenv
-geovoronoi
-scipy
