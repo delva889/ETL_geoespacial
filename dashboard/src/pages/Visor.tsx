@@ -197,118 +197,11 @@ export default function Visor() {
   }
 
   return (
-    <div className="w-full max-w-[1280px] mx-auto px-5 sm:px-8 pt-12 pb-24 flex flex-col gap-10">
-      {/* Cabecera */}
-      <div className="grid md:grid-cols-12 gap-x-8 gap-y-4 items-end">
-        <h1 className="md:col-span-8 text-[38px] sm:text-[56px] leading-[1] tracking-[-0.045em]">
-          Estado de los embalses de España
-        </h1>
-        {info?.timestamp && (
-          <p className="md:col-span-4 text-[15px] text-ink-2 md:text-right">
-            Datos del {fechaCorta(info.timestamp)}.<br className="hidden md:block" /> Se actualizan cada lunes.
-          </p>
-        )}
-      </div>
-
-      {/* Cifras */}
-      <dl className="grid grid-cols-2 lg:grid-cols-5 gap-px bg-rule rounded-2xl overflow-hidden border border-rule">
-        <Cifra label="Llenado medio" nota={cuenca === 'Todas' ? 'España' : cuenca}>
-          <span style={{ color: ESTADOS[estadoDe(stats.pct)].color }}>{embalses ? fmt(stats.pct, 1) : '–'}</span>
-          <Unidad>%</Unidad>
-        </Cifra>
-        <Cifra label="Agua embalsada" nota={`de ${fmt(stats.cap)} hm³ de capacidad`} border>
-          {embalses ? fmt(stats.emb) : '–'}<Unidad>hm³</Unidad>
-        </Cifra>
-        <Cifra label="Cambio semanal" nota="embalses con lectura" borderLg>
-          <span className={stats.variacion < 0 ? 'text-st-critico' : 'text-cobalt'}>
-            {embalses ? `${stats.variacion > 0 ? '+' : ''}${fmt(stats.variacion, 1)}` : '–'}
-          </span>
-          <Unidad>hm³</Unidad>
-        </Cifra>
-        <Cifra label="Energía almacenada" nota="estimación, 109 MWh/hm³" border>
-          {embalses ? fmt(stats.gwh, 1) : '–'}<Unidad>GWh</Unidad>
-        </Cifra>
-        <Cifra label="Valor orientativo" nota="a precio OMIE" borderLg className="col-span-2 lg:col-span-1">
-          {embalses ? fmt(stats.valor, 1) : '–'}<Unidad>M€</Unidad>
-        </Cifra>
-      </dl>
-
-      {/* Mapa y ficha */}
-      <div className="grid lg:grid-cols-[1fr_400px] gap-6">
-        <div className="flex flex-col min-w-0">
-          {/* Controles sobre el mapa, fuera de la imagen */}
-          <div className="flex flex-col sm:flex-row sm:items-end gap-3 pb-3">
-            <div className="relative sm:w-80">
-              <label htmlFor="buscar" className="margin-note block mb-1.5">Buscar embalse</label>
-              <div className="flex items-center rounded-full border border-rule bg-white focus-within:border-cobalt focus-within:ring-2 focus-within:ring-cobalt/20">
-                <Search size={16} strokeWidth={1.5} className="ml-3 shrink-0 text-ink-2" aria-hidden="true" />
-                <input
-                  id="buscar"
-                  name="buscar"
-                  autoComplete="off"
-                  spellCheck={false}
-                  value={query}
-                  onChange={(ev) => { setQuery(ev.target.value); setSearchOpen(true); }}
-                  onFocus={() => setSearchOpen(true)}
-                  onBlur={() => setTimeout(() => setSearchOpen(false), 150)}
-                  onKeyDown={(ev) => { if (ev.key === 'Enter' && resultados[0]) select(resultados[0]); }}
-                  placeholder="Almendra, Mequinenza…"
-                  className="w-full bg-transparent px-2.5 h-11 text-[15px] outline-none placeholder:text-muted"
-                />
-              </div>
-              {searchOpen && resultados.length > 0 && (
-                <ul className="absolute z-[700] mt-2 w-full bg-white rounded-xl border border-rule shadow-[0_16px_40px_-12px_rgba(11,18,32,0.25)] max-h-72 overflow-auto py-1">
-                  {resultados.map((r) => (
-                    <li key={r.id}>
-                      <button
-                        type="button"
-                        onMouseDown={(ev) => ev.preventDefault()}
-                        onClick={() => select(r)}
-                        className="w-full text-left px-3 py-2.5 hover:bg-paper-2 flex items-center gap-2.5 transition-colors duration-200"
-                      >
-                        <span className="w-2.5 h-2.5 shrink-0" style={{ backgroundColor: ESTADOS[estadoDe(r.pct)].color }} aria-hidden="true" />
-                        <span className="text-[15px] truncate">{r.nombre}</span>
-                        <span className="text-[12px] opacity-70 ml-auto shrink-0">{r.cuenca}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            <div className="sm:w-52">
-              <label htmlFor="cuenca" className="margin-note block mb-1.5">Cuenca</label>
-              <select
-                id="cuenca"
-                value={cuenca}
-                onChange={(ev) => { setCuenca(ev.target.value); setSelectedId(null); }}
-                className="w-full h-11 rounded-full border border-rule bg-white px-4 text-[15px] outline-none focus-visible:border-cobalt"
-              >
-                {cuencas.map((c) => <option key={c} value={c}>{c === 'Todas' ? 'Todas las cuencas' : c}</option>)}
-              </select>
-            </div>
-
-            <fieldset className="sm:ml-auto">
-              <legend className="margin-note mb-1.5">Mapa base</legend>
-              <div className="flex p-1 rounded-full bg-paper-2 border border-rule">
-                {(Object.keys(BASEMAPS) as BasemapKey[]).map((k, i) => (
-                  <button
-                    key={k}
-                    type="button"
-                    aria-pressed={basemap === k}
-                    onClick={() => setBasemap(k)}
-                    className={`h-9 px-4 rounded-full text-[14px] transition-colors duration-200 ${
-                      basemap === k ? 'bg-white text-ink shadow-sm font-medium' : 'text-ink-2 hover:text-ink'
-                    }`}
-                  >
-                    {BASEMAPS[k].label}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
-          </div>
-
-          <div ref={mapBoxRef} className="relative rounded-2xl border border-rule h-[62vh] min-h-[460px] lg:h-[70vh] lg:min-h-[600px] scroll-mt-20 overflow-hidden">
+    <div className="w-full flex flex-col">
+      {/* Aplicación: mapa y panel ocupan la pantalla */}
+      <section className="max-w-[1680px] w-full mx-auto px-3 sm:px-4 pt-3 pb-4">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_400px] gap-3 lg:h-[calc(100svh-3.5rem-1.75rem)] lg:min-h-[620px]">
+          <div ref={mapBoxRef} className="relative rounded-2xl border border-rule overflow-hidden h-[68svh] min-h-[440px] lg:h-full scroll-mt-16 bg-paper-2">
             <MapContainer
               center={[39.6, -3.6]}
               zoom={initialZoom()}
@@ -368,79 +261,174 @@ export default function Visor() {
               )}
             </MapContainer>
 
+            {/* Herramientas flotantes */}
+            <div className="absolute top-3 left-3 right-16 z-[600] flex flex-wrap items-start gap-2 pointer-events-none">
+              <div className="relative pointer-events-auto w-full sm:w-72">
+                <label htmlFor="buscar" className="sr-only">Buscar embalse</label>
+                <div className="flex items-center rounded-xl bg-white shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] focus-within:ring-2 focus-within:ring-cobalt/40">
+                  <Search size={16} strokeWidth={1.75} className="ml-3 shrink-0 text-ink-2" aria-hidden="true" />
+                  <input
+                    id="buscar"
+                    name="buscar"
+                    autoComplete="off"
+                    spellCheck={false}
+                    value={query}
+                    onChange={(ev) => { setQuery(ev.target.value); setSearchOpen(true); }}
+                    onFocus={() => setSearchOpen(true)}
+                    onBlur={() => setTimeout(() => setSearchOpen(false), 150)}
+                    onKeyDown={(ev) => { if (ev.key === 'Enter' && resultados[0]) select(resultados[0]); }}
+                    placeholder="Buscar embalse…"
+                    className="w-full bg-transparent px-2.5 h-11 text-[15px] outline-none placeholder:text-muted"
+                  />
+                </div>
+                {searchOpen && resultados.length > 0 && (
+                  <ul className="absolute mt-2 w-full bg-white rounded-xl border border-rule shadow-[0_16px_40px_-12px_rgba(11,18,32,0.3)] max-h-72 overflow-auto py-1">
+                    {resultados.map((r) => (
+                      <li key={r.id}>
+                        <button
+                          type="button"
+                          onMouseDown={(ev) => ev.preventDefault()}
+                          onClick={() => select(r)}
+                          className="w-full text-left px-3 py-2.5 hover:bg-paper-2 flex items-center gap-2.5 transition-colors duration-200"
+                        >
+                          <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: ESTADOS[estadoDe(r.pct)].color }} aria-hidden="true" />
+                          <span className="text-[15px] truncate">{r.nombre}</span>
+                          <span className="text-[12px] text-muted ml-auto shrink-0">{r.cuenca}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <label htmlFor="cuenca" className="sr-only">Cuenca</label>
+              <select
+                id="cuenca"
+                value={cuenca}
+                onChange={(ev) => { setCuenca(ev.target.value); setSelectedId(null); }}
+                className="pointer-events-auto h-11 rounded-xl bg-white shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] px-3 text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-cobalt/40"
+              >
+                {cuencas.map((c) => <option key={c} value={c}>{c === 'Todas' ? 'Todas las cuencas' : c}</option>)}
+              </select>
+
+              <div role="group" aria-label="Mapa base" className="pointer-events-auto flex p-1 rounded-xl bg-white shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)]">
+                {(Object.keys(BASEMAPS) as BasemapKey[]).map((k) => (
+                  <button
+                    key={k}
+                    type="button"
+                    aria-pressed={basemap === k}
+                    onClick={() => setBasemap(k)}
+                    className={`h-9 px-3 rounded-lg text-[14px] transition-colors duration-200 ${
+                      basemap === k ? 'bg-ink text-white font-medium' : 'text-ink-2 hover:bg-paper-2'
+                    }`}
+                  >
+                    {BASEMAPS[k].label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Zoom */}
-            <div className="absolute right-3 top-3 z-[500] flex flex-col rounded-xl bg-white shadow-[0_8px_24px_-8px_rgba(11,18,32,0.3)] overflow-hidden">
-              <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.5} /></MapBtn>
-              <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.5} /></MapBtn>
-              <MapBtn label="Ver toda España" onClick={resetView}><LocateFixed size={16} strokeWidth={1.5} /></MapBtn>
+            <div className="absolute right-3 top-3 z-[500] flex flex-col rounded-xl bg-white shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] overflow-hidden">
+              <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.75} /></MapBtn>
+              <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.75} /></MapBtn>
+              <MapBtn label="Ver toda España" onClick={resetView}><LocateFixed size={16} strokeWidth={1.75} /></MapBtn>
+            </div>
+
+            {/* Leyenda */}
+            <div className="absolute left-3 bottom-8 z-[500] max-w-[calc(100%-1.5rem)] rounded-xl bg-white/95 backdrop-blur shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] px-3 py-2 flex flex-wrap items-center gap-x-3.5 gap-y-1 text-[12.5px] text-ink-2">
+              <span className="font-medium text-ink">Llenado</span>
+              {(Object.keys(ESTADOS) as Estado[]).map((k) => (
+                <span key={k} className="inline-flex items-center gap-1.5" title={ESTADOS[k].rango}>
+                  <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: ESTADOS[k].color }} aria-hidden="true" />
+                  {ESTADOS[k].label}
+                  <span className="hidden md:inline num text-[11px] text-muted">{stats.conteo[k]}</span>
+                </span>
+              ))}
             </div>
 
             {/* Coordenadas */}
-            <p className="hidden sm:block absolute right-3 bottom-6 z-[500] num text-[11px] bg-white/90 rounded-md px-2 py-1 shadow-sm">
+            <p className="hidden md:block absolute right-3 bottom-8 z-[500] num text-[11px] bg-white/90 rounded-md px-2 py-1 shadow-sm">
               {cursor ? `${cursor[0].toFixed(4)}° N  ${Math.abs(cursor[1]).toFixed(4)}° ${cursor[1] < 0 ? 'W' : 'E'}` : 'EPSG:4326'}
               <span className="text-muted">  z{zoom}</span>
             </p>
 
             {!embalses && (
-              <div className="absolute inset-0 z-[600] flex items-center justify-center bg-paper/80" aria-live="polite">
-                <p className="text-ink-2">Cargando embalses…</p>
+              <div className="absolute inset-0 z-[650] flex items-center justify-center bg-paper/70" aria-live="polite">
+                <p className="rounded-full bg-white shadow px-4 py-2 text-ink-2">Cargando embalses…</p>
               </div>
             )}
           </div>
 
-          {/* Leyenda, bajo el mapa como en una hoja */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3 text-[13px] text-ink-2">
-            <span className="margin-note">Llenado</span>
-            {(Object.keys(ESTADOS) as Estado[]).map((k) => (
-              <span key={k} className="inline-flex items-center gap-2">
-                <span className="w-3 h-3 shrink-0" style={{ backgroundColor: ESTADOS[k].color }} aria-hidden="true" />
-                {ESTADOS[k].label}
-                {k !== 'nodata' && <span className="text-muted">{ESTADOS[k].rango}</span>}
-                <span className="num text-[11px] text-muted">({stats.conteo[k]})</span>
-              </span>
-            ))}
-          </div>
-        </div>
+          {/* Panel lateral */}
+          <aside className="rounded-2xl border border-rule bg-white flex flex-col lg:h-full overflow-hidden" aria-live="polite">
+            <div className="px-5 pt-5 pb-4 border-b border-rule">
+              <h1 className="text-[24px] leading-tight tracking-[-0.03em]">Estado de los embalses de España</h1>
+              {info?.timestamp && (
+                <p className="text-[13px] text-muted mt-1.5 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" aria-hidden="true" />
+                  Datos del {fechaCorta(info.timestamp)}. Se actualizan cada lunes.
+                </p>
+              )}
+              <dl className="grid grid-cols-2 gap-px bg-rule rounded-xl overflow-hidden border border-rule mt-4">
+                <CifraMini label={cuenca === 'Todas' ? 'Llenado en España' : `Llenado, ${cuenca}`}>
+                  <span style={{ color: ESTADOS[estadoDe(stats.pct)].color }}>{embalses ? fmt(stats.pct, 1) : '–'}</span><Unidad>%</Unidad>
+                </CifraMini>
+                <CifraMini label="Agua embalsada">
+                  {embalses ? fmt(stats.emb) : '–'}<Unidad>hm³</Unidad>
+                </CifraMini>
+                <CifraMini label="Cambio semanal">
+                  <span className={stats.variacion < 0 ? 'text-st-critico' : 'text-cobalt'}>
+                    {embalses ? `${stats.variacion > 0 ? '+' : ''}${fmt(stats.variacion, 1)}` : '–'}
+                  </span><Unidad>hm³</Unidad>
+                </CifraMini>
+                <CifraMini label="Energía estimada" nota={embalses ? `${fmt(stats.valor, 1)} M€ a precio OMIE` : undefined}>
+                  {embalses ? fmt(stats.gwh, 1) : '–'}<Unidad>GWh</Unidad>
+                </CifraMini>
+              </dl>
+            </div>
 
-        {/* Ficha */}
-        <aside className="rounded-2xl border border-rule bg-white flex flex-col lg:mt-[80px] lg:h-[70vh] lg:min-h-[600px] overflow-hidden" aria-live="polite">
+            <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
           {selected ? (
-            <Ficha e={selected} onClose={() => setSelectedId(null)} />
-          ) : (
-            <>
-              <div className="px-5 pt-5 pb-4 border-b border-rule">
-                <h2 className="text-[22px] leading-tight">Más energía almacenada</h2>
-                <p className="text-[14px] text-ink-2 mt-2">Elige un embalse aquí o en el mapa para ver su ficha.</p>
+              <Ficha e={selected} onClose={() => setSelectedId(null)} />
+            ) : (
+              <>
+                <div className="px-5 pt-5 pb-4 border-b border-rule">
+                  <h2 className="text-[17px] leading-tight">Más energía almacenada</h2>
+                  <p className="text-[13px] text-muted mt-1">Elige uno aquí o en el mapa para ver su ficha.</p>
+                </div>
+                <ol className="flex-1 overflow-y-auto">
+                  {stats.top.map((e, i) => (
+                    <li key={e.id} className="border-b border-rule">
+                      <button
+                        type="button"
+                        onClick={() => select(e)}
+                        className="w-full text-left px-5 py-3 flex items-baseline gap-3 hover:bg-paper-2 transition-colors duration-200"
+                      >
+                        <span className="num text-[11px] opacity-60 w-5">{i + 1}</span>
+                        <span className="text-[15px] truncate flex-1">{e.nombre}</span>
+                        <span className="num text-[13px] shrink-0">{fmt(e.mwh / 1000, 1)} GWh</span>
+                      </button>
+                    </li>
+                  ))}
+                  {embalses && stats.top.length === 0 && <li className="p-5 text-ink-2">Esta cuenca no tiene embalses con estimación de energía.</li>}
+                </ol>
+                <button
+                  type="button"
+                  onClick={() => setShowCaudales(true)}
+                  className="m-4 h-12 rounded-full border border-rule px-5 flex items-center justify-between text-[15px] hover:border-ink transition-colors duration-200"
+                >
+                  Ver caudales de {caudales.length} estaciones
+                  <span className="num text-[11px] opacity-70">SAIH</span>
+                </button>
+              </>
+            )}
               </div>
-              <ol className="flex-1 overflow-y-auto">
-                {stats.top.map((e, i) => (
-                  <li key={e.id} className="border-b border-rule">
-                    <button
-                      type="button"
-                      onClick={() => select(e)}
-                      className="w-full text-left px-5 py-3 flex items-baseline gap-3 hover:bg-paper-2 transition-colors duration-200"
-                    >
-                      <span className="num text-[11px] opacity-60 w-5">{i + 1}</span>
-                      <span className="text-[15px] truncate flex-1">{e.nombre}</span>
-                      <span className="num text-[13px] shrink-0">{fmt(e.mwh / 1000, 1)} GWh</span>
-                    </button>
-                  </li>
-                ))}
-                {embalses && stats.top.length === 0 && <li className="p-5 text-ink-2">Esta cuenca no tiene embalses con estimación de energía.</li>}
-              </ol>
-              <button
-                type="button"
-                onClick={() => setShowCaudales(true)}
-                className="m-4 h-12 rounded-full border border-rule px-5 flex items-center justify-between text-[15px] hover:border-ink transition-colors duration-200"
-              >
-                Ver caudales de {caudales.length} estaciones
-                <span className="num text-[11px] opacity-70">SAIH</span>
-              </button>
-            </>
-          )}
-        </aside>
-      </div>
+          </aside>
+        </div>
+      </section>
 
+      <section className="max-w-[1280px] mx-auto w-full px-5 sm:px-8 pt-10 pb-24">
       {/* Gráficos */}
       <div className="grid lg:grid-cols-2 gap-6">
         <Grafico titulo="Llenado por cuenca" nota="Agua embalsada sobre capacidad, solo embalses con lectura.">
@@ -471,6 +459,7 @@ export default function Visor() {
           </ResponsiveContainer>
         </Grafico>
       </div>
+      </section>
 
       {showCaudales && <Caudales data={caudales} onClose={() => setShowCaudales(false)} />}
     </div>
@@ -483,14 +472,13 @@ function Unidad({ children }: { children: React.ReactNode }) {
   return <span className="text-[15px] text-muted ml-1.5 font-sans">{children}</span>;
 }
 
-function Cifra({ label, nota, children, border, borderLg, className = '' }: {
-  label: string; nota: string; children: React.ReactNode; border?: boolean; borderLg?: boolean; className?: string;
-}) {
+
+function CifraMini({ label, nota, children }: { label: string; nota?: string; children: React.ReactNode }) {
   return (
-    <div className={`bg-white p-5 sm:p-6 ${className}`} data-border={border || borderLg ? '' : undefined}>
-      <dt className="text-[14px] text-ink-2">{label}</dt>
-      <dd className="num text-[30px] sm:text-[36px] leading-none font-medium tracking-[-0.04em] mt-3">{children}</dd>
-      <dd className="text-[13px] text-muted mt-2 truncate">{nota}</dd>
+    <div className="bg-white px-3.5 py-3">
+      <dt className="text-[12.5px] text-muted truncate">{label}</dt>
+      <dd className="num text-[22px] leading-none font-medium tracking-[-0.04em] mt-2">{children}</dd>
+      {nota && <dd className="text-[11.5px] text-muted mt-1.5 truncate">{nota}</dd>}
     </div>
   );
 }

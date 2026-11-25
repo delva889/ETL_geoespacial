@@ -35,21 +35,6 @@ export const FIGURAS: Record<string, Figura> = {
     titulo: 'Normalización de caudales',
     texto: 'Une los ficheros de cada confederación, añade la cuenca como constante, renombra los campos a un esquema común y carga el resultado en PostgreSQL.',
   },
-  meteoHistorico: {
-    file: 'pdi-meteorologia-historico.png', w: 591, h: 777, herramienta: 'Pentaho PDI',
-    titulo: 'Meteorología histórica',
-    texto: 'Une los CSV horarios de AEMET de 16 comunidades autónomas, ya limpiados con Python, añade la comunidad de origen, homogeneiza los nombres de las variables y carga la serie en PostgreSQL.',
-  },
-  meteoActual: {
-    file: 'pdi-meteorologia-actual.png', w: 575, h: 738, herramienta: 'Pentaho PDI',
-    titulo: 'Meteorología actual con localización',
-    texto: 'Versión que se sobrescribe en cada carga y añade la geometría aproximada de cada estación, obtenida con FME.',
-  },
-  alertasSolares: {
-    file: 'pdi-alertas-solares.png', w: 481, h: 202, herramienta: 'Pentaho PDI',
-    titulo: 'Alertas solares',
-    texto: 'Lee la tabla de monitorización solar, filtra las provincias donde la pérdida por exceso de temperatura supera 1000 € y envía una alerta por correo.',
-  },
 };
 
 /** Captura de un flujo. Nunca se muestra por encima de su tamaño real para que no se emborrone. */

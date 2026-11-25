@@ -10,7 +10,6 @@ const FUENTES = [
   { fuente: 'embalses.net', dato: 'Capacidad, agua embalsada y cambio semanal', acceso: 'Scraping', ciclo: 'Cada lunes' },
   { fuente: 'SAIH del MITECO', dato: 'Caudal en las estaciones de aforo', acceso: 'Scraping', ciclo: 'Cada lunes' },
   { fuente: 'OMIE', dato: 'Precio marginal del mercado diario', acceso: 'Descarga de fichero', ciclo: 'Cada lunes' },
-  { fuente: 'AEMET', dato: 'Observación meteorológica horaria', acceso: 'CSV y API OpenData', ciclo: 'Proyecto solar' },
   { fuente: 'IGN, MDT200', dato: 'Cotas del terreno para calcular el salto', acceso: 'GeoTIFF', ciclo: 'Fijo, en FME' },
   { fuente: 'Inventario de presas y embalses (MITECO)', dato: 'Polígonos de las láminas de agua', acceso: 'Shapefile a PostGIS', ciclo: 'Fijo' },
   { fuente: 'Earth Search (STAC)', dato: 'Escenas Copernicus Sentinel-2 L2A', acceso: 'API STAC', ciclo: 'Fijo, en FME' },
@@ -73,7 +72,7 @@ export default function Metodologia() {
           </h1>
           <p className="md:col-span-4 md:col-start-9 md:pt-16 text-[17px] leading-relaxed text-ink-2">
             De dónde sale cada dato, qué se extrae por scraping y cómo se transforma en FME y Pentaho
-            hasta llegar al mapa.
+            hasta llegar al visor.
           </p>
         </div>
       </section>
@@ -152,17 +151,11 @@ export default function Metodologia() {
       {/* Pentaho */}
       <section className="bg-white border-y border-rule">
         <div className={`${W} py-20`}>
-          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-4">Flujos de Pentaho PDI</h2>
+          <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-4">Flujo de Pentaho PDI</h2>
           <p className="text-[16px] text-ink-2 mb-14 max-w-[60ch]">
-            Normalización de las tablas antes de cargarlas en PostgreSQL: caudales para la parte hidráulica y
-            meteorología y alertas para la parte solar.
+            Normalización de los caudales de las confederaciones antes de cargarlos en PostgreSQL.
           </p>
-          <div className="space-y-20">
-            <Flujo fig={FIGURAS.caudales} />
-            <Flujo fig={FIGURAS.meteoHistorico} />
-            <Flujo fig={FIGURAS.meteoActual} />
-            <Flujo fig={FIGURAS.alertasSolares} />
-          </div>
+          <Flujo fig={FIGURAS.caudales} />
         </div>
       </section>
 
@@ -195,7 +188,7 @@ export default function Metodologia() {
 
       <section className="border-t border-rule">
         <div className={`${W} py-16 flex flex-wrap items-center gap-x-8 gap-y-4`}>
-          <Link to="/visor" className="btn btn-ink">Abrir el visor</Link>
+          <Link to="/" className="btn btn-ink">Abrir el visor</Link>
           <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Leer la memoria técnica (PDF)</a>
           <a href={FME_URL} target="_blank" rel="noopener noreferrer" className="link text-[15px]">Archivos de FME en GitHub</a>
         </div>

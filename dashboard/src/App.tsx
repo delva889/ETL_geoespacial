@@ -15,10 +15,12 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Proyecto />} />
-          <Route path="visor" element={<Suspense fallback={<Cargando />}><Visor /></Suspense>} />
+          {/* El visor es la portada: lo primero que ve quien entra */}
+          <Route index element={<Suspense fallback={<Cargando />}><Visor /></Suspense>} />
+          <Route path="proyecto" element={<Proyecto />} />
           <Route path="metodologia" element={<Metodologia />} />
-          <Route path="objetivos" element={<Navigate to="/metodologia" replace />} />
+          <Route path="visor" element={<Navigate to="/" replace />} />
+          <Route path="objetivos" element={<Navigate to="/proyecto" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

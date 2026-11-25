@@ -6,7 +6,7 @@ export const AUTHOR = 'Carlos del Valle';
 export const AUTORES = 'Carlos del Valle y Manuel Torija';
 /** Título de la memoria técnica, usado como nombre del proyecto. */
 export const PROYECTO = 'Modelo de transformación e integración de datos geoespaciales';
-export const PROYECTO_AMBITO = 'aplicados a la energía hidráulica y solar en España';
+export const PROYECTO_AMBITO = 'aplicados a la energía hidráulica en España';
 
 const BASE = import.meta.env.BASE_URL;
 

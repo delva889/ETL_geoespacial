@@ -11,7 +11,7 @@ const PASOS = [
   {
     titulo: 'Scraping',
     logos: ['python', 'selenium'], extra: ['requests', 'BeautifulSoup'],
-    texto: 'Extrae de forma automática los niveles de embalses.net, los caudales de los SAIH de cada confederación, el precio diario de OMIE y la meteorología de AEMET.',
+    texto: 'Extrae de forma automática los niveles de embalses.net, los caudales de los SAIH de cada confederación y el precio diario del mercado eléctrico (OMIE).',
   },
   {
     titulo: 'Limpieza y cruce',
@@ -68,7 +68,7 @@ export default function Proyecto() {
   return (
     <>
       {/* Portada: satélite a pantalla completa */}
-      <section className="relative flex flex-col bg-night text-white min-h-[calc(100svh-4rem)] sm:min-h-[620px] sm:h-[calc(100svh-4rem)] overflow-hidden">
+      <section className="relative flex flex-col bg-night text-white min-h-[calc(100svh-3.5rem)] sm:min-h-[620px] sm:h-[calc(100svh-3.5rem)] overflow-hidden">
         <HeroMap />
         <div className={`${W} relative z-10 flex-1 flex flex-col justify-center pt-12 pb-8 sm:pt-0 sm:pb-24`}>
           <div className="max-w-[860px] rise">
@@ -92,7 +92,7 @@ export default function Proyecto() {
             </p>
             <p className="text-[14px] text-white/55 mt-4">Autores: {AUTORES}</p>
             <div className="flex flex-wrap items-center gap-3 mt-9">
-              <Link to="/visor" className="btn btn-light">Abrir el visor</Link>
+              <Link to="/" className="btn btn-light">Abrir el visor</Link>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost-dark">Ver el código</a>
               <a href={MEMORIA_URL} target="_blank" rel="noopener noreferrer" className="text-[15px] text-white/75 hover:text-white underline underline-offset-4 decoration-white/30 hover:decoration-white ml-2">
                 Memoria técnica (PDF)
@@ -166,7 +166,7 @@ export default function Proyecto() {
               Un flujo de FME calcula la caja envolvente de cada polígono, consulta el catálogo STAC de Earth Search
               y se queda con la captura Sentinel-2 L2A con menos nubes. Cada ficha del visor enlaza su escena en Copernicus Browser.
             </p>
-            <Link to="/visor" className="btn btn-light mt-9">Ver las escenas en el visor</Link>
+            <Link to="/" className="btn btn-light mt-9">Ver las escenas en el visor</Link>
           </div>
           <div className="lg:col-span-7">
             <Captura oscuro fig={FIGURAS.sentinel} pie="satelite.fmw: 956 polígonos, 4692 escenas candidatas, 939 escenas elegidas. Pulsa para ampliar." />
@@ -222,7 +222,7 @@ export default function Proyecto() {
       <section className={`${W} pb-24`}>
         <div className="rounded-3xl bg-cobalt text-white px-8 sm:px-14 py-14 sm:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <h2 className="text-[32px] sm:text-[44px] leading-[1.05] max-w-[18ch]">Busca un embalse y mira cómo está esta semana.</h2>
-          <Link to="/visor" className="btn btn-light self-start md:self-auto">Abrir el visor</Link>
+          <Link to="/" className="btn btn-light self-start md:self-auto">Abrir el visor</Link>
         </div>
       </section>
     </>
