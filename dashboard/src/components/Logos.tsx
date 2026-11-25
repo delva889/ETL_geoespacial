@@ -27,35 +27,27 @@ export const TECH: Record<string, Tech> = {
 
 export const logoSrc = (id: string) => `${BASE}logos/${id}.svg`;
 
-/** Orden de la banda. Las herramientas sin logotipo libre se muestran por su nombre, nunca con un logo dibujado. */
-const ROL: Record<string, string> = {
-  FME: 'Safe Software', PostGIS: 'extensión espacial', 'Pentaho PDI': 'ETL tabular', 'Sentinel-2': 'Copernicus', STAC: 'catálogo de escenas',
-};
-
 const BANDA = [
-  'python', 'pandas', 'FME', 'selenium', 'postgresql', 'PostGIS', 'gdal', 'qgis', 'Pentaho PDI',
-  'leaflet', 'Sentinel-2', 'react', 'typescript', 'STAC', 'vitejs', 'tailwindcss', 'githubactions',
-  'github', 'javascript', 'html5', 'css3',
+  'python', 'pandas', 'selenium', 'postgresql', 'gdal', 'qgis', 'leaflet', 'react',
+  'typescript', 'vitejs', 'tailwindcss', 'githubactions', 'github', 'javascript', 'html5', 'css3',
 ];
 
-/** Banda continua de logotipos. Se detiene al pasar el ratón y queda fija con movimiento reducido. */
+/** Una línea de logotipos que se desplaza y flota. Se detiene al pasar el ratón; quieta con movimiento reducido. */
 export function TechMarquee() {
-  const items = BANDA.map((k) => ({ key: k, nombre: TECH[k]?.nombre ?? k, logo: TECH[k] ? k : null }));
-
   return (
-    <div className="marquee group relative overflow-hidden" role="region" aria-label="Herramientas usadas en el proyecto">
-      <ul className="marquee-track flex w-max">
+    <div className="marquee relative overflow-hidden py-10" role="region" aria-label="Herramientas usadas en el proyecto">
+      <ul className="marquee-track flex w-max items-center">
         {[0, 1].map((copia) =>
-          items.map((it, i) => (
-            <li key={`${copia}-${it.key}`} aria-hidden={copia === 1} className="marquee-item min-w-[132px] px-4 shrink-0 flex flex-col items-center gap-3 py-2">
-              <div className="marquee-icon h-14 flex items-center justify-center" style={{ animationDelay: `${(i % 5) * 0.55}s` }}>
-                {it.logo ? (
-                  <img src={logoSrc(it.logo)} alt="" width={52} height={52} loading="lazy" className="w-[52px] h-[52px] object-contain" />
-                ) : (
-                  <span className="font-serif text-[26px] leading-none whitespace-nowrap">{it.nombre}</span>
-                )}
-              </div>
-              <span className="text-[12.5px] text-ink-2 whitespace-nowrap">{it.logo ? it.nombre : ROL[it.key]}</span>
+          BANDA.map((id, i) => (
+            <li key={`${copia}-${id}`} aria-hidden={copia === 1} className="marquee-item w-[110px] shrink-0 flex items-center justify-center" title={TECH[id].nombre}>
+              <img
+                src={logoSrc(id)}
+                alt={copia === 0 ? TECH[id].nombre : ''}
+                width={52}
+                height={52}
+                className="marquee-icon w-[52px] h-[52px] object-contain"
+                style={{ animationDelay: `${(i % 4) * 0.6}s` }}
+              />
             </li>
           )),
         )}

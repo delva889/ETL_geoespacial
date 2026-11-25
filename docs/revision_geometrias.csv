@@ -1,0 +1,806 @@
+decision,revisar,pantano,cuenca,capacidad,antes,despues,nombre_score,ratio_capacidad
+correcta,,Arbón,Cantábrico Occidental,41.0,ARBON,ARBON,100,0.93
+correcta,,Doiras,Cantábrico Occidental,97.0,DOIRAS,DOIRAS,100,0.82
+correcta,,El Furacón,Cantábrico Occidental,1.0,"FURACON, EL","FURACON, EL",100,0.52
+correcta,,El Juncal,Cantábrico Occidental,2.0,"JUNCAL, EL","JUNCAL, EL",100,1.0
+correcta,,La Florida,Cantábrico Occidental,1.0,"FLORIDA, LA","FLORIDA, LA",100,0.98
+correcta,,La Jocica,Cantábrico Occidental,1.0,"JOCICA, LA","JOCICA, LA",100,0.4
+correcta,,Palombera,Cantábrico Occidental,2.0,PALOMBERA,PALOMBERA,100,0.52
+correcta,,Priañes,Cantábrico Occidental,2.0,PRIAÑES,PRIAÑES,100,0.95
+correcta,,Rioseco,Cantábrico Occidental,4.0,RIOSECO,RIOSECO,100,0.56
+correcta,,Saliencia,Cantábrico Occidental,,SALIENCIA,SALIENCIA,100,
+correcta,,Salime,Cantábrico Occidental,238.0,SALIME,SALIME,100,1.0
+correcta,,San Andrés Tacones,Cantábrico Occidental,4.0,SAN ANDRES TACONES,SAN ANDRES TACONES,100,1.0
+correcta,sí,Somiedo,Cantábrico Occidental,6.0,SOMIEDO,SOMIEDO,100,0.0
+correcta,,Tanes,Cantábrico Occidental,34.0,TANES,TANES,100,0.98
+correcta,sí,Trasona,Cantábrico Occidental,4.0,TRASONA,TRASONA,100,0.1
+correcta,,Valdemurio,Cantábrico Occidental,1.0,VALDEMURIO,VALDEMURIO,100,0.7
+correcta,,Arriarán,Cantábrico Oriental,3.0,ARRIARAN,ARRIARAN,100,0.94
+correcta,,Artiba,Cantábrico Oriental,0.0,ARTIBA,ARTIBA,100,
+correcta,,Artikutza,Cantábrico Oriental,2.0,ARTIKUTZA,ARTIKUTZA,100,0.74
+correcta,,Domico,Cantábrico Oriental,0.0,DOMICO,DOMICO,100,
+correcta,,Ibiur,Cantábrico Oriental,8.0,IBIUR,IBIUR,100,0.94
+correcta,,Lareo,Cantábrico Oriental,2.0,LAREO,LAREO,100,0.9
+correcta,,Lekubaso,Cantábrico Oriental,0.0,LEKUBASO,LEKUBASO,100,
+correcta,,Leurtza inferior,Cantábrico Oriental,1.0,LEURTZA INFERIOR,LEURTZA INFERIOR,100,0.78
+correcta,,Leurtza superior,Cantábrico Oriental,1.0,LEURTZA SUPERIOR,LEURTZA SUPERIOR,100,0.5
+correcta,,Llodio,Cantábrico Oriental,0.0,LLODIO,LLODIO,100,
+correcta,,Maroño,Cantábrico Oriental,2.0,MAROÑO,MAROÑO,100,0.8
+correcta,,Mendaur,Cantábrico Oriental,0.0,MENDAUR,MENDAUR,100,
+correcta,,Nocedal,Cantábrico Oriental,,NOCEDAL,NOCEDAL,100,
+correcta,,Ordunte,Cantábrico Oriental,22.0,ORDUNTE,ORDUNTE,100,0.99
+correcta,,Undurraga,Cantábrico Oriental,2.0,UNDURRAGA,UNDURRAGA,100,0.96
+correcta,,Zollo,Cantábrico Oriental,,ZOLLO,ZOLLO,100,
+correcta,,Foix,Cataluña Interna,4.0,FOIX,FOIX,100,0.94
+correcta,,La Llosa del Cavall,Cataluña Interna,80.0,"LLOSA DEL CAVALL, LA","LLOSA DEL CAVALL, LA",100,0.99
+correcta,,Riudecanyes,Cataluña Interna,5.0,RIUDECANYES,RIUDECANYES,100,0.94
+correcta,,Sau,Cataluña Interna,165.0,SAU,SAU,100,0.92
+correcta,,Susqueda,Cataluña Interna,233.0,SUSQUEDA,SUSQUEDA,100,1.0
+correcta,,Cecebre,Costa Galicia,22.0,CECEBRE,CECEBRE,100,0.99
+correcta,,Eiras,Costa Galicia,22.0,EIRAS,EIRAS,100,0.99
+correcta,,Eume,Costa Galicia,123.0,EUME,EUME,100,1.0
+correcta,,Fervenza,Costa Galicia,103.0,FERVENZA,FERVENZA,100,0.99
+correcta,,Forcadas,Costa Galicia,11.0,FORCADAS,FORCADAS,100,0.7
+correcta,,Portodemouros,Costa Galicia,297.0,PORTODEMOUROS,PORTODEMOUROS,100,1.0
+correcta,,Riocobo,Costa Galicia,6.0,RIO COVO,RIO COVO,80,0.95
+correcta,,Santa Eugenia,Costa Galicia,18.0,SANTA EUGENIA,SANTA EUGENIA,100,0.76
+correcta,,Villagudín,Costa Galicia,18.0,VILAGUDIN,VILAGUDIN,95,0.98
+correcta,,Aguilar de Campoo,Duero,247.0,AGUILAR DE CAMPOO,AGUILAR DE CAMPOO,100,1.0
+correcta,,Aldeadávila,Duero,114.0,ALDEADAVILA,ALDEADAVILA,100,1.0
+correcta,,Almendra,Duero,2649.0,ALMENDRA,ALMENDRA,100,0.98
+correcta,,Aravalle,Duero,0.0,ARAVALLE,ARAVALLE,100,
+correcta,,Arlanzón,Duero,22.0,ARLANZON,ARLANZON,100,0.98
+correcta,,Ayoó de Vidriales,Duero,,AYOO DE VIDRIALES,AYOO DE VIDRIALES,100,
+correcta,,Barrios de Luna,Duero,311.0,BARRIOS DE LUNA,BARRIOS DE LUNA,100,0.99
+correcta,,Becerril,Duero,2.0,BECERRIL,BECERRIL,100,0.87
+correcta,,Benamarias,Duero,0.0,BENAMARIAS,BENAMARIAS,100,
+correcta,,Besandino,Duero,3.0,BESANDINO,BESANDINO,100,0.8
+correcta,,Bodon de la Ibienza,Duero,0.0,BODON DE LA IBIENZA,BODON DE LA IBIENZA,100,
+correcta,,Burgomillodo,Duero,14.0,BURGOMILLODO,BURGOMILLODO,100,0.98
+correcta,,Campillo de Buitrago,Duero,2.0,CAMPILLO DE BUITRAGO,CAMPILLO DE BUITRAGO,100,1.0
+correcta,,Camporredondo,Duero,69.0,CAMPORREDONDO,CAMPORREDONDO,100,0.99
+correcta,,Casares de Arbas,Duero,37.0,CASARES DE ARBAS,CASARES DE ARBAS,100,1.0
+correcta,,Castro,Duero,27.0,CASTRO,CASTRO,100,0.99
+correcta,,Castro de las Cogotas,Duero,58.0,CASTRO DE LAS COGOTAS,CASTRO DE LAS COGOTAS,100,0.99
+correcta,,Castrovido 1,Duero,44.0,CASTROVIDO,CASTROVIDO,95,1.0
+correcta,,Cernadilla,Duero,255.0,CERNADILLA,CERNADILLA,100,1.0
+correcta,,Cervera,Duero,10.0,CERVERA,CERVERA,100,0.97
+correcta,,Compuerto,Duero,95.0,COMPUERTO,COMPUERTO,100,1.0
+correcta,sí,Congosta de Vidriales,Duero,1.0,CONGOSTA DE VIDRIALES,CONGOSTA DE VIDRIALES,100,0.09
+correcta,,Cuerda del Pozo,Duero,249.0,CUERDA DEL POZO,CUERDA DEL POZO,100,1.0
+correcta,,El Cobanallo,Duero,62.0,"COBANALLO, EL","COBANALLO, EL",100,1.0
+correcta,,El Milagro,Duero,1.0,"MILAGRO, EL","MILAGRO, EL",100,0.67
+correcta,,Encinas de Esgueva,Duero,1.0,ENCINAS DE ESGUEVA,ENCINAS DE ESGUEVA,100,0.77
+correcta,,Gallegos de Sobrinos,Duero,1.0,GALLEGOS DE SOBRINOS,GALLEGOS DE SOBRINOS,100,0.4
+correcta,,Garandones,Duero,1.0,GARANDONES,GARANDONES,100,0.78
+correcta,,Irueña,Duero,110.0,IRUEÑA,IRUEÑA,100,1.0
+correcta,,Linares del Arroyo,Duero,54.0,LINARES DEL ARROYO,LINARES DEL ARROYO,100,0.99
+correcta,,Lomilla de Aguilar,Duero,0.0,LOMILLA DE AGUILAR,LOMILLA DE AGUILAR,100,
+correcta,,Láncara,Duero,0.0,LANCARA (AZUD),LANCARA (AZUD),100,
+correcta,,Nª Sª del Agavanzal,Duero,36.0,NUESTRA SEÑORA DEL AGAVANZAL,NUESTRA SEÑORA DEL AGAVANZAL,100,1.0
+correcta,,Peces,Duero,,PECES,PECES,100,
+correcta,,Playa,Duero,,PLAYA,PLAYA,100,
+correcta,,Pontón Alto,Duero,7.0,PONTON ALTO,PONTON ALTO,100,0.94
+correcta,,Porma (Juan Benet),Duero,318.0,JUAN BENET,JUAN BENET,100,1.0
+correcta,,Puente Porto,Duero,23.0,PUENTE PORTO,PUENTE PORTO,100,0.98
+correcta,,Requejada,Duero,59.0,REQUEJADA,REQUEJADA,100,0.89
+correcta,,Riaza,Duero,1.0,RIAZA,RIAZA,100,1.0
+correcta,,Riaño,Duero,641.0,RIAÑO,RIAÑO,100,1.0
+correcta,,Ricobayo,Duero,1145.0,RICOBAYO,RICOBAYO,100,0.97
+correcta,,Riolobos,Duero,14.0,RIOLOBOS (AZUD),RIOLOBOS (AZUD),100,0.99
+correcta,,San Fernando,Duero,1.0,SAN FERNANDO,SAN FERNANDO,100,0.87
+correcta,,San Román,Duero,2.0,SAN ROMAN (AZUD),SAN ROMAN (AZUD),100,0.75
+correcta,,Santa Lucía de la Sierra,Duero,1.0,SANTA LUCIA DE LA SIERRA,SANTA LUCIA DE LA SIERRA,100,0.64
+correcta,,Santa Teresa,Duero,496.0,SANTA TERESA,SANTA TERESA,100,1.0
+correcta,,Saucelle,Duero,181.0,SAUCELLE,SAUCELLE,100,1.0
+correcta,,Selga de Ordás,Duero,2.0,SELGA DE ORDAS,SELGA DE ORDAS,100,0.95
+correcta,,Tabuyo del Monte,Duero,3.0,TABUYO DEL MONTE,TABUYO DEL MONTE,100,0.91
+correcta,,Tardajos,Duero,,TARDAJOS,TARDAJOS,100,
+correcta,,Torrecaballeros,Duero,0.0,TORRECABALLEROS,TORRECABALLEROS,100,
+correcta,,Torrelara,Duero,0.0,TORRELARA,TORRELARA,100,
+correcta,,Uzquiza,Duero,75.0,UZQUIZA,UZQUIZA,100,1.0
+correcta,,Valdespina,Duero,0.0,VALDESPINA,VALDESPINA,100,
+correcta,,Valparaiso,Duero,0.0,VALPARAISO,VALPARAISO,100,
+correcta,,Vega de Conde,Duero,1.0,VEGA DE CONDE,VEGA DE CONDE,100,0.92
+correcta,,Velilla de Guardo,Duero,2.0,VELILLA DE GUARDO,VELILLA DE GUARDO,100,0.9
+correcta,,Vilde,Duero,1.0,VILDE (AZUD),VILDE (AZUD),100,0.83
+correcta,,Villagonzalo,Duero,6.0,VILLAGONZALO (AZUD),VILLAGONZALO (AZUD),100,0.98
+correcta,,Villalcampo,Duero,66.0,VILLALCAMPO,VILLALCAMPO,100,0.99
+correcta,,Villameca,Duero,19.0,VILLAMECA,VILLAMECA,100,0.95
+correcta,,Virgen de las Viñas,Duero,1.0,VIRGEN DE LAS VIÑAS (AZUD),VIRGEN DE LAS VIÑAS (AZUD),100,0.91
+correcta,,Zorita de los Molinos,Duero,0.0,ZORITA DE LOS MOLINOS,ZORITA DE LOS MOLINOS,100,
+correcta,,Alba,Ebro,5.0,ALBA,ALBA,100,0.91
+correcta,,Aliaga,Ebro,1.0,ALIAGA,ALIAGA,100,0.9
+correcta,,Alloz,Ebro,66.0,ALLOZ,ALLOZ,100,0.99
+correcta,,Almochuel,Ebro,2.0,ALMOCHUEL,ALMOCHUEL,100,0.75
+correcta,,Alós,Ebro,,ALOS,ALOS,100,
+correcta,,Amitges de Ratera,Ebro,1.0,AMITGES DE RATERA,AMITGES DE RATERA,100,0.76
+correcta,,Arguis,Ebro,2.0,ARGUIS,ARGUIS,100,0.75
+correcta,,Arriel Alto,Ebro,,ARRIEL ALTO,ARRIEL ALTO,100,
+correcta,sí,Arrieta,Ebro,1.0,ARRIETA,ARRIETA,100,0.33
+correcta,,Ayala,Ebro,,AYALA,AYALA,100,
+correcta,,Azlor,Ebro,,AZLOR,AZLOR,100,
+correcta,,Azul,Ebro,1.0,AZULES,AZULES,80,0.73
+correcta,,Bachimaña Alto,Ebro,7.0,BACHIMAÑA ALTO,BACHIMAÑA ALTO,100,1.0
+correcta,,Barasona,Ebro,85.0,BARASONA,BARASONA,100,1.0
+correcta,,Baserca,Ebro,22.0,BASERCA,BASERCA,100,0.99
+correcta,,Biscarrués,Ebro,192.0,BISCARRUES,BISCARRUES,100,1.0
+correcta,,Bolaso,Ebro,0.0,BOLASO,BOLASO,100,
+correcta,,Boren,Ebro,1.0,BOREN,BOREN,100,0.86
+correcta,,Bramatuero Inferior,Ebro,1.0,BRAMATUERO INFERIOR,BRAMATUERO INFERIOR,100,0.83
+correcta,sí,Bramatuero Superior,Ebro,5.0,BRAMATUERO SUPERIOR,BRAMATUERO SUPERIOR,100,0.07
+correcta,,Brazato,Ebro,3.0,BRAZATO,BRAZATO,100,1.0
+correcta,,Búbal,Ebro,63.0,BUBAL,BUBAL,100,0.98
+correcta,,Cabriana,Ebro,5.0,CABRIANA (AZUD),CABRIANA (AZUD),100,0.93
+correcta,,Calanda,Ebro,54.0,CALANDA,CALANDA,100,0.99
+correcta,,Camarasa,Ebro,163.0,CAMARASA,CAMARASA,100,1.0
+correcta,,Camino Erentxun,Ebro,,CAMINO ERENTXUN,CAMINO ERENTXUN,100,
+correcta,,Canal Roya,Ebro,,CANAL ROYA,CANAL ROYA,100,
+correcta,,Canelles,Ebro,679.0,CANELLES,CANELLES,100,1.0
+correcta,,Canfranc,Ebro,1.0,CANFRANC,CANFRANC,100,0.5
+correcta,,Carcastillo,Ebro,5.0,CARCASTILLO,CARCASTILLO,100,0.93
+correcta,,Caspe II,Ebro,82.0,CASPE II,CASPE II,100,0.99
+correcta,,Cavallers,Ebro,16.0,CAVALLERS,CAVALLERS,100,1.0
+correcta,,Cañas,Ebro,1.0,CAÑAS,CAÑAS,100,0.8
+correcta,,Cereceda,Ebro,1.0,CERECEDA (AZUD),CERECEDA (AZUD),100,0.77
+correcta,,Certascán,Ebro,16.0,CERTASCAN,CERTASCAN,100,0.98
+correcta,,Chimo,Ebro,0.0,CHIMO,CHIMO,100,
+correcta,,Cienfuéns,Ebro,1.0,CIENFUENS,CIENFUENS,100,1.0
+correcta,,Cillaperlata,Ebro,2.0,CILLAPERLATA (AZUD),CILLAPERLATA (AZUD),100,0.89
+correcta,,Ciurana,Ebro,12.0,CIURANA,CIURANA,100,0.97
+correcta,,Colomina,Ebro,4.0,COLOMINA,COLOMINA,100,0.92
+correcta,sí,Cornago,Ebro,1.0,CORNAGO,CORNAGO,100,0.12
+correcta,,Cubieso,Ebro,4.0,CUBIESO,CUBIESO,100,0.93
+correcta,,Cueva Foradada,Ebro,22.0,CUEVA FORADADA,CUEVA FORADADA,100,1.0
+correcta,,Ebro,Ebro,541.0,EBRO,EBRO,100,1.0
+correcta,,El Ferial,Ebro,8.0,"FERIAL, EL","FERIAL, EL",100,0.99
+correcta,,El Val,Ebro,24.0,VAL,VAL,100,0.96
+correcta,,Enciso,Ebro,46.0,ENCISO,ENCISO,100,0.99
+correcta,,Escales,Ebro,152.0,ESCALES,ESCALES,100,1.0
+correcta,,Escuriza,Ebro,5.0,ESCURIZA,ESCURIZA,100,0.7
+correcta,,Estanca Alcañiz,Ebro,7.0,ESTANCA ALCAÑIZ (BALSA),ESTANCA ALCAÑIZ (BALSA),100,0.98
+correcta,,Estanca Perdiguero,Ebro,3.0,ESTANCA PERDIGUERO (BALSA),ESTANCA PERDIGUERO (BALSA),100,0.84
+correcta,,Estany Gento,Ebro,3.0,ESTANY GENTO,ESTANY GENTO,100,0.93
+correcta,,Estós,Ebro,0.0,ESTOS,ESTOS,100,
+correcta,,Eugui,Ebro,21.0,EUGUI,EUGUI,100,0.96
+correcta,,Flix,Ebro,11.0,FLIX,FLIX,100,0.96
+correcta,,Fosse,Ebro,1.0,FOSSE,FOSSE,100,0.39
+correcta,,Francis,Ebro,0.0,FRANCIS,FRANCIS,100,
+correcta,,Gallipuén,Ebro,4.0,GALLIPUEN,GALLIPUEN,100,0.88
+correcta,,Gonzale Lacasa,Ebro,33.0,GONZALEZ LACASA,GONZALEZ LACASA,97,1.0
+correcta,,Gorbea I,Ebro,0.0,GORBEA I,GORBEA I,100,
+correcta,,Graus,Ebro,,GRAUS,GRAUS,100,
+correcta,,Guara,Ebro,3.0,GUARA,GUARA,100,0.82
+correcta,,Guiamets,Ebro,10.0,GUIAMETS,GUIAMETS,100,0.89
+correcta,,Hoya de Gimileo,Ebro,,HOYA DE GIMILEO (BALSA),HOYA DE GIMILEO (BALSA),100,
+correcta,,Ibón de Ip,Ebro,5.0,IBON DE IP,IBON DE IP,100,1.0
+correcta,,Irabia,Ebro,14.0,IRABIA,IRABIA,100,0.97
+correcta,,Itoiz,Ebro,417.0,ITOIZ,ITOIZ,100,1.0
+correcta,,Jabarrella,Ebro,,JABARRELLA (AZUD),JABARRELLA (AZUD),100,
+correcta,,Jaca,Ebro,,JACA,JACA,100,
+correcta,,Javierrlatre,Ebro,,JAVIERRELATRE (AZUD),JAVIERRELATRE (AZUD),96,
+correcta,,La Loteta,Ebro,104.0,"LOTETA, LA","LOTETA, LA",100,1.0
+correcta,,La Palma D'Ebre,Ebro,1.0,"PALMA D'EBRE, LA","PALMA D'EBRE, LA",100,0.75
+correcta,,La Tranquera,Ebro,82.0,"TRANQUERA, LA","TRANQUERA, LA",100,0.97
+correcta,,La Vilella Baixa,Ebro,0.0,"VILELLA BAIXA, LA","VILELLA BAIXA, LA",100,
+correcta,,Lago Negro,Ebro,6.0,LAGO NEGRO,LAGO NEGRO,100,0.91
+correcta,,Lanuza,Ebro,17.0,LANUZA,LANUZA,100,0.68
+correcta,,Laspuña,Ebro,0.0,LASPUÑA,LASPUÑA,100,
+correcta,,Laverne,Ebro,38.0,LAVERNE,LAVERNE,100,0.87
+correcta,,Leiva,Ebro,3.0,LEIVA,LEIVA,100,0.88
+correcta,,Linsoles,Ebro,2.0,LINSOLES,LINSOLES,100,0.78
+correcta,,Llac de la Molina,Ebro,0.0,LLAC DE LA MOLINA (BALSA),LLAC DE LA MOLINA (BALSA),100,
+correcta,,Llauset,Ebro,17.0,LLAUSET,LLAUSET,100,0.99
+correcta,,Lleida,Ebro,,LLEIDA (AZUD),LLEIDA (AZUD),100,
+correcta,,Maidevera,Ebro,20.0,MAIDEVERA,MAIDEVERA,100,0.98
+correcta,,Mairaga,Ebro,2.0,MAIRAGA,MAIRAGA,100,0.85
+correcta,,Malvecino,Ebro,7.0,MALVECINO,MALVECINO,100,0.95
+correcta,,Mansilla,Ebro,68.0,MANSILLA,MANSILLA,100,1.0
+correcta,,Marboré,Ebro,2.0,MARBORE,MARBORE,100,0.85
+correcta,,Margalef,Ebro,3.0,MARGALEF,MARGALEF,100,0.99
+correcta,,Mariolo,Ebro,1.0,MARIOLO,MARIOLO,100,0.8
+correcta,,Mequinenza,Ebro,1373.0,MEQUINENZA,MEQUINENZA,100,0.9
+correcta,,Mezalocha,Ebro,4.0,MEZALOCHA,MEZALOCHA,100,0.89
+correcta,,Moneva,Ebro,8.0,MONEVA,MONEVA,100,1.0
+correcta,,Monreal,Ebro,0.0,MONREAL,MONREAL,100,
+correcta,,Montearagón,Ebro,52.0,MONTEARAGON,MONTEARAGON,100,0.83
+correcta,,Morgemut,Ebro,0.0,MORGEMUT,MORGEMUT,100,
+correcta,,Niño Jesús,Ebro,0.0,NIÑO JESUS,NIÑO JESUS,100,
+correcta,,Oliana,Ebro,84.0,OLIANA,OLIANA,100,1.0
+correcta,,Orera 2,Ebro,,ORERA 2,ORERA 2,100,
+correcta,,Ortauri,Ebro,,ORTAURI,ORTAURI,100,
+correcta,,Pajares,Ebro,35.0,PAJARES,PAJARES,100,1.0
+correcta,,Pecico,Ebro,,PECICO,PECICO,100,
+correcta,,Peña,Ebro,18.0,PENA,PENA,100,0.99
+correcta,,Pignatelli,Ebro,1.0,PIGNATELLI (AZUD),PIGNATELLI (AZUD),100,0.44
+correcta,,Pina,Ebro,1.0,PINA (AZUD),PINA (AZUD),100,1.0
+correcta,,Pineta,Ebro,0.0,PINETA,PINETA,100,
+correcta,,Plandescun,Ebro,1.0,PLANDESCUN,PLANDESCUN,100,0.87
+correcta,,Pont de Suert,Ebro,0.0,PONT DE SUERT,PONT DE SUERT,100,
+correcta,,Puente de Santolea,Ebro,18.0,PUENTE DE SANTOLEA,PUENTE DE SANTOLEA,100,0.98
+correcta,,Puentelarra,Ebro,2.0,PUENTELARRA (AZUD),PUENTELARRA (AZUD),100,0.75
+correcta,,Queiles,Ebro,,QUEILES (AZUD),QUEILES (AZUD),100,
+correcta,,Rabigel,Ebro,,RABIGEL (BALSA),RABIGEL (BALSA),100,
+correcta,,Reguera,Ebro,1.0,REGUERA,REGUERA,100,0.75
+correcta,,Respomuso,Ebro,18.0,RESPOMUSO,RESPOMUSO,100,0.99
+correcta,,Restanca,Ebro,1.0,RESTANCA,RESTANCA,100,0.81
+correcta,,Rialb,Ebro,404.0,RIALB,RIALB,100,1.0
+correcta,,Ribanegra,Ebro,,RIBANEGRA,RIBANEGRA,100,
+correcta,,Ribarroja,Ebro,210.0,RIBARROJA,RIBARROJA,100,1.0
+correcta,,Rumedo Inferior,Ebro,1.0,RUMEDO INFERIOR,RUMEDO INFERIOR,100,0.61
+correcta,,Sabiñánigo,Ebro,1.0,SABIÑANIGO,SABIÑANIGO,100,0.87
+correcta,sí,Saburo,Ebro,11.0,SABURO,SABURO,100,0.23
+correcta,,Salado,Ebro,1.0,SALADO,SALADO,100,0.87
+correcta,,Sallente,Ebro,6.0,SALLENTE,SALLENTE,100,0.93
+correcta,,San Bartolomé,Ebro,6.0,SAN BARTOLOME,SAN BARTOLOME,100,0.81
+correcta,,San Juan de Torán,Ebro,0.0,SAN JUAN DE TORAN,SAN JUAN DE TORAN,100,
+correcta,,San Lorenzo Mongay,Ebro,10.0,SAN LORENZO MONGAY,SAN LORENZO MONGAY,100,0.95
+correcta,,San Mauricio,Ebro,2.0,SAN MAURICIO,SAN MAURICIO,100,0.87
+correcta,,San Salvador,Ebro,137.0,SAN SALVADOR (BALSA),SAN SALVADOR (BALSA),100,0.97
+correcta,,Sans,Ebro,,SANS,SANS,100,
+correcta,,Santa Ana,Ebro,237.0,SANTA ANA,SANTA ANA,100,1.0
+correcta,,Santa María Belsué,Ebro,14.0,SANTA MARIA BELSUE,SANTA MARIA BELSUE,100,0.93
+correcta,,Sistema Escarra,Ebro,5.0,ESCARRA,ESCARRA,95,0.97
+correcta,,Sobrón,Ebro,20.0,SOBRON,SOBRON,100,1.0
+correcta,,Sopeira,Ebro,1.0,SOPEIRA,SOPEIRA,100,0.57
+correcta,,Tabescan,Ebro,1.0,TAVASCAN,TAVASCAN,75,0.64
+correcta,,Terradets,Ebro,33.0,TERRADETS,TERRADETS,100,0.99
+correcta,,Terroba,Ebro,8.0,SOTO TERROBA,SOTO TERROBA,95,0.98
+correcta,,Torrollon,Ebro,2.0,TORROLLON,TORROLLON,100,0.9
+correcta,,Tort Trullo,Ebro,1.0,TORT TRULLO,TORT TRULLO,100,0.76
+correcta,,Tramacastilla,Ebro,1.0,TRAMACASTILLA,TRAMACASTILLA,100,0.92
+correcta,,Tremp o Talarn,Ebro,227.0,TALARN,TALARN,100,1.0
+correcta,,Ullíbarri-Arrazua,Ebro,7.0,ULLIBARRI-ARRAZUA,ULLIBARRI-ARRAZUA,100,0.97
+correcta,,Ullívarri,Ebro,146.0,ULLIVARRI,ULLIVARRI,100,0.99
+correcta,,Urdalur,Ebro,6.0,URDALUR,URDALUR,100,0.9
+correcta,,Urdiceto,Ebro,5.0,URDICETO,URDICETO,100,0.99
+correcta,,Urrunaga,Ebro,72.0,URRUNAGA,URRUNAGA,100,1.0
+correcta,sí,Usoz,Ebro,2.0,USOZ,USOZ,100,0.34
+correcta,,Vadiello,Ebro,16.0,VADIELLO,VADIELLO,100,0.97
+correcta,,Valbornedo,Ebro,0.0,VALBORNEDO,VALBORNEDO,100,
+correcta,,Valdabra,Ebro,3.0,VALDABRA,VALDABRA,100,0.45
+correcta,,Valdepatao,Ebro,6.0,VALDEPATAO,VALDEPATAO,100,0.95
+correcta,,Vertedero,Ebro,0.0,VERTEDERO,VERTEDERO,100,
+correcta,,Villarta-Quintana,Ebro,,VILLARTA-QUINTANA (BALSA),VILLARTA-QUINTANA (BALSA),100,
+correcta,,Yalde,Ebro,4.0,YALDE,YALDE,100,0.9
+correcta,,Yesa,Ebro,447.0,YESA,YESA,100,1.0
+correcta,,Arcos,Guadalete Barbate,14.0,ARCOS,ARCOS,100,1.0
+correcta,,Barbate,Guadalete Barbate,228.0,BARBATE,BARBATE,100,0.99
+correcta,,Bornos,Guadalete Barbate,200.0,BORNOS,BORNOS,100,1.0
+correcta,,Celemín,Guadalete Barbate,45.0,CELEMIN,CELEMIN,100,1.0
+correcta,,Gallardo-los Yeseros,Guadalete Barbate,0.0,GALLARDO-LOS YESEROS,GALLARDO-LOS YESEROS,100,
+correcta,,Jarilla - Jareta,Guadalete Barbate,0.0,JARILLA - JARETA (BALSA),JARILLA - JARETA (BALSA),100,
+correcta,,Los Almeriques,Guadalete Barbate,0.0,"ALMERIQUES, LOS","ALMERIQUES, LOS",100,
+correcta,,Altarejos,Guadalquivir,1.0,ALTAREJOS,ALTAREJOS,100,0.95
+correcta,,Arenales de Maza,Guadalquivir,1.0,ARENALES DE MAZA,ARENALES DE MAZA,100,0.53
+correcta,,Arenoso,Guadalquivir,167.0,ARENOSO,ARENOSO,100,1.0
+correcta,,Azuaga,Guadalquivir,1.0,AZUAGA,AZUAGA,100,0.54
+correcta,,Bembézar,Guadalquivir,328.0,BEMBEZAR,BEMBEZAR,100,0.96
+correcta,,Cala,Guadalquivir,59.0,CALA,CALA,100,1.0
+correcta,,Cantalobos,Guadalquivir,,CANTALOBOS,CANTALOBOS,100,
+correcta,,Cantillana,Guadalquivir,14.0,CANTILLANA,CANTILLANA,100,0.55
+correcta,sí,Cardeña,Guadalquivir,0.0,CARDENA,CARDENA,100,
+correcta,,Castilblanco de los Arroyos,Guadalquivir,1.0,CASTILBLANCO DE LOS ARROYOS,CASTILBLANCO DE LOS ARROYOS,100,0.82
+correcta,,Cogollos de Guadix,Guadalquivir,0.0,COGOLLOS DE GUADIX,COGOLLOS DE GUADIX,100,
+correcta,,Colomera,Guadalquivir,40.0,COLOMERA,COLOMERA,100,0.96
+correcta,,Cordobilla,Guadalquivir,33.0,CORDOBILLA,CORDOBILLA,100,0.97
+correcta,,Cubillas,Guadalquivir,14.0,CUBILLAS,CUBILLAS,100,0.67
+correcta,,Culebrín,Guadalquivir,,CULEBRIN,CULEBRIN,100,
+correcta,,Dañador,Guadalquivir,4.0,DAÑADOR,DAÑADOR,100,1.0
+correcta,,Doña Aldonza,Guadalquivir,23.0,DOÑA ALDONZA,DOÑA ALDONZA,100,1.0
+correcta,,El Alisillo,Guadalquivir,28.0,"ALISILLO, EL","ALISILLO, EL",100,1.0
+correcta,,El Centenillo,Guadalquivir,2.0,"CENTENILLO, EL","CENTENILLO, EL",100,0.83
+correcta,,El Esparragal,Guadalquivir,2.0,"ESPARRAGAL, EL","ESPARRAGAL, EL",100,1.0
+correcta,,El Laberinto,Guadalquivir,,"LABERINTO, EL","LABERINTO, EL",100,
+correcta,,El Pintado,Guadalquivir,215.0,"PINTADO, EL","PINTADO, EL",100,0.99
+correcta,,El Portugués,Guadalquivir,,"PORTUGUES, EL","PORTUGUES, EL",100,
+correcta,,Encinarejo,Guadalquivir,15.0,ENCINAREJO,ENCINAREJO,100,1.0
+correcta,,Francisco Abellán,Guadalquivir,58.0,FRANCISCO ABELLAN,FRANCISCO ABELLAN,100,1.0
+correcta,,Giribaile,Guadalquivir,491.0,GIRIBAILE,GIRIBAILE,100,0.97
+correcta,,Guadalmellato,Guadalquivir,145.0,GUADALMELLATO,GUADALMELLATO,100,0.99
+correcta,,Guadalmena,Guadalquivir,345.0,GUADALMENA,GUADALMENA,100,1.0
+correcta,,Guadalén,Guadalquivir,163.0,GUADALEN,GUADALEN,100,0.97
+correcta,,Guadanuño,Guadalquivir,2.0,GUADANUÑO,GUADANUÑO,100,0.84
+correcta,,Guadarromán,Guadalquivir,1.0,GUADARROMAN,GUADARROMAN,100,0.86
+correcta,,Gérgal,Guadalquivir,35.0,GERGAL,GERGAL,100,0.97
+correcta,sí,Huerta,Guadalquivir,0.0,HUERTA,HUERTA,100,
+correcta,,Huesna,Guadalquivir,135.0,HUESNA,HUESNA,100,1.0
+correcta,,Iznájar,Guadalquivir,920.0,IZNAJAR,IZNAJAR,100,0.94
+correcta,,Jándula,Guadalquivir,325.0,JANDULA,JANDULA,100,0.99
+correcta,,La Breña II,Guadalquivir,823.0,"BREÑA II, LA","BREÑA II, LA",100,1.0
+correcta,,La Fernandina,Guadalquivir,247.0,"FERNANDINA, LA","FERNANDINA, LA",100,0.99
+correcta,,Laguna de las Yeguas,Guadalquivir,0.0,LAGUNA DE LAS YEGUAS,LAGUNA DE LAS YEGUAS,100,
+correcta,,Los Bermejales,Guadalquivir,91.0,"BERMEJALES, LOS","BERMEJALES, LOS",100,0.89
+correcta,,Los Melonares,Guadalquivir,186.0,"MELONARES, LOS","MELONARES, LOS",100,1.0
+correcta,,Los Membrillos,Guadalquivir,,"MEMBRILLOS, LOS","MEMBRILLOS, LOS",100,
+correcta,,Los rganos,Guadalquivir,,"ORGANOS, LOS","ORGANOS, LOS",95,
+correcta,,Malpasillo Jauja,Guadalquivir,6.0,MALPASILLO JAUJA (AZUD),MALPASILLO JAUJA (AZUD),100,1.0
+correcta,,Marmolejo,Guadalquivir,10.0,MARMOLEJO (AZUD),MARMOLEJO (AZUD),100,0.41
+correcta,,Maruanas-Charco Riañez,Guadalquivir,,MARUANAS-CHARCO RIAÑEZ (BALSA),MARUANAS-CHARCO RIAÑEZ (BALSA),100,
+correcta,,Mengíbar,Guadalquivir,2.0,MENGIBAR (AZUD),MENGIBAR (AZUD),100,0.83
+correcta,,Negratín,Guadalquivir,571.0,NEGRATIN,NEGRATIN,100,0.99
+correcta,,Olvera,Guadalquivir,,OLVERA (AZUD),OLVERA (AZUD),100,
+correcta,,Pedro Marín,Guadalquivir,19.0,PEDRO MARIN,PEDRO MARIN,100,1.0
+correcta,,Peñaflor,Guadalquivir,3.0,PEÑAFLOR (AZUD),PEÑAFLOR (AZUD),100,1.0
+correcta,,Puebla de Cazalla,Guadalquivir,63.0,PUEBLA DE CAZALLA,PUEBLA DE CAZALLA,100,0.85
+correcta,,Puente Nuevo,Guadalquivir,281.0,PUENTE NUEVO,PUENTE NUEVO,100,1.0
+correcta,,Puente de la Cerrada,Guadalquivir,8.0,PUENTE DE LA CERRADA (AZUD),PUENTE DE LA CERRADA (AZUD),100,1.0
+correcta,,Quiebrajano,Guadalquivir,33.0,QUIEBRAJANO,QUIEBRAJANO,100,0.96
+correcta,,Quéntar,Guadalquivir,14.0,QUENTAR,QUENTAR,100,0.97
+correcta,sí,Rancho Doñana,Guadalquivir,0.0,RANCHO DOÑANA,RANCHO DOÑANA,100,
+correcta,,Retortillo,Guadalquivir,61.0,RETORTILLO,RETORTILLO,100,1.0
+correcta,,Retortillo (derivación),Guadalquivir,4.0,RETORTILLO (AZUD DERIVACION),RETORTILLO (AZUD DERIVACION),100,0.95
+correcta,,Rumblar,Guadalquivir,140.0,RUMBLAR,RUMBLAR,100,0.9
+correcta,,San Nicolás,Guadalquivir,,SAN NICOLAS (BALSA 1),SAN NICOLAS (BALSA 1),100,
+correcta,,San Rafael de Navallana,Guadalquivir,160.0,SAN RAFAEL DE NAVALLANA,SAN RAFAEL DE NAVALLANA,100,0.98
+correcta,,Sierra Boyera,Guadalquivir,39.0,SIERRA BOYERA,SIERRA BOYERA,100,0.95
+correcta,,Siles,Guadalquivir,30.0,SILES,SILES,100,0.98
+correcta,,Tamujar,Guadalquivir,1.0,TAMUJAR,TAMUJAR,100,0.7
+correcta,,Tejoneras,Guadalquivir,0.0,TEJONERAS,TEJONERAS,100,
+correcta,,Tranco de Beas,Guadalquivir,506.0,TRANCO DE BEAS,TRANCO DE BEAS,100,0.98
+correcta,,Vadomojón,Guadalquivir,146.0,VADOMOJON,VADOMOJON,100,0.88
+correcta,,Villafranca,Guadalquivir,6.0,VILLAFRANCA,VILLAFRANCA,100,1.0
+correcta,,Viso del Marqués,Guadalquivir,0.0,VISO DEL MARQUES,VISO DEL MARQUES,100,
+correcta,,Víboras,Guadalquivir,17.0,VIBORAS,VIBORAS,100,0.89
+correcta,,Yeguas,Guadalquivir,229.0,YEGUAS,YEGUAS,100,1.0
+correcta,,Zocueca,Guadalquivir,5.0,ZOCUECA (AZUD),ZOCUECA (AZUD),100,1.0
+correcta,,Zufre,Guadalquivir,175.0,ZUFRE,ZUFRE,100,1.0
+correcta,,Albuera Casabaya,Guadiana,0.0,ALBUERA CASABAYA,ALBUERA CASABAYA,100,
+correcta,,Albuera de Feria,Guadiana,1.0,ALBUERA DE FERIA,ALBUERA DE FERIA,100,0.95
+correcta,,Alcollarin,Guadiana,52.0,ALCOLLARIN,ALCOLLARIN,100,0.99
+correcta,,Andévalo,Guadiana,634.0,ANDEVALO,ANDEVALO,100,0.95
+correcta,,Aroche,Guadiana,,AROCHE,AROCHE,100,
+correcta,sí,Arroyocuncos,Guadiana,4.0,ARROYOCUNCOS,ARROYOCUNCOS,100,0.29
+correcta,,Brovales,Guadiana,7.0,BROVALES,BROVALES,100,1.0
+correcta,,Buenas Hierbas,Guadiana,3.0,BUENAS HIERBAS,BUENAS HIERBAS,100,0.87
+correcta,,Burdalo,Guadiana,79.0,BURDALO,BURDALO,100,1.0
+correcta,,Burguillos del Cerro,Guadiana,3.0,BURGUILLOS DEL CERRO,BURGUILLOS DEL CERRO,100,0.84
+correcta,,Campoameno,Guadiana,1.0,CAMPOAMENO,CAMPOAMENO,100,0.6
+correcta,,Cascajoso,Guadiana,1.0,CASCAJOSO,CASCAJOSO,100,0.88
+correcta,,Castilserás,Guadiana,5.0,CASTILSERAS,CASTILSERAS,100,0.94
+correcta,,Chanza,Guadiana,338.0,CHANZA,CHANZA,100,0.99
+correcta,,Cornalvo,Guadiana,3.0,CORNALBO,CORNALBO,88,0.86
+correcta,,Cubilar,Guadiana,6.0,CUBILAR,CUBILAR,100,1.0
+correcta,,Dehesa de la Nava,Guadiana,,DEHESA DE LA NAVA,DEHESA DE LA NAVA,100,
+correcta,,Doña Inés,Guadiana,0.0,DOÑA INES,DOÑA INES,100,
+correcta,,El Aguijón,Guadiana,11.0,"AGUIJON, EL","AGUIJON, EL",100,0.96
+correcta,,El Entredicho,Guadiana,,"ENTREDICHO, EL","ENTREDICHO, EL",100,
+correcta,,El Mosquil,Guadiana,,"MOSQUIL, EL","MOSQUIL, EL",100,
+correcta,,El Pajonal I,Guadiana,,"PAJONAL I, EL","PAJONAL I, EL",100,
+correcta,,García de Sola,Guadiana,554.0,GARCIA DE SOLA,GARCIA DE SOLA,100,1.0
+correcta,,Gargaligas,Guadiana,21.0,GARGALIGAS,GARGALIGAS,100,1.0
+correcta,,Gasset,Guadiana,39.0,GASSET,GASSET,100,0.94
+correcta,,Guadalupe,Guadiana,,GUADALUPE,GUADALUPE,100,
+correcta,,Horno Tejero,Guadiana,24.0,HORNO TEJERO,HORNO TEJERO,100,0.98
+correcta,,Huerto de los Monjes,Guadiana,,HUERTO DE LOS MONJES,HUERTO DE LOS MONJES,100,
+correcta,,La Ropera I,Guadiana,0.0,"ROPERA I, LA","ROPERA I, LA",100,
+correcta,,La Tinajilla,Guadiana,1.0,"TINAJILLA, LA","TINAJILLA, LA",100,0.96
+correcta,,La Vega del Jabalón,Guadiana,34.0,"VEGA DEL JABALON, LA","VEGA DEL JABALON, LA",100,0.99
+correcta,sí,La Zorra 1,Guadiana,0.0,"ZORRA 1, LA","ZORRA 1, LA",100,
+correcta,,Lagunazo,Guadiana,0.0,LAGUNAZO,LAGUNAZO,100,
+correcta,,Llerena,Guadiana,8.0,LLERENA,LLERENA,100,0.91
+correcta,,Los Pastillos,Guadiana,,"PASTILLOS, LOS","PASTILLOS, LOS",100,
+correcta,,Los Pastizales,Guadiana,0.0,"PASTIZALES, LOS","PASTIZALES, LOS",100,
+correcta,,Maridiaz,Guadiana,1.0,MARIDIAZ (AZUD),MARIDIAZ (AZUD),100,0.69
+correcta,,Minas Herrerías 3,Guadiana,0.0,MINAS HERRERIAS 3,MINAS HERRERIAS 3,100,
+correcta,,Montijo,Guadiana,11.0,MONTIJO (AZUD),MONTIJO (AZUD),100,0.96
+correcta,,Navalespino / Río I,Guadiana,2.0,NAVALESPINO,NAVALESPINO,100,0.89
+correcta,,Nogales,Guadiana,18.0,NOGALES,NOGALES,100,0.83
+correcta,,Orellana,Guadiana,808.0,ORELLANA,ORELLANA,100,1.0
+correcta,,Peñarroya,Guadiana,51.0,PEÑARROYA,PEÑARROYA,100,0.99
+correcta,,Piedra Aguda,Guadiana,16.0,PIEDRA AGUDA,PIEDRA AGUDA,100,0.98
+correcta,,Proserpina,Guadiana,5.0,PROSERPINA,PROSERPINA,100,1.0
+correcta,,Pto. de Vallehermoso,Guadiana,7.0,PUERTO DE VALLEHERMOSO,PUERTO DE VALLEHERMOSO,93,0.99
+correcta,,Puente Navarro,Guadiana,2.0,PUENTE NAVARRO,PUENTE NAVARRO,100,0.91
+correcta,,Quintos de Valeria,Guadiana,1.0,QUINTOS DE VALERIA,QUINTOS DE VALERIA,100,0.95
+correcta,,Retama,Guadiana,3.0,RETAMA,RETAMA,100,0.99
+correcta,,Rincón de Ballesteros,Guadiana,,RINCON DE BALLESTEROS,RINCON DE BALLESTEROS,100,
+correcta,,Ruecas,Guadiana,42.0,RUECAS,RUECAS,100,0.95
+correcta,,Saucedilla,Guadiana,0.0,SAUCEDILLA,SAUCEDILLA,100,
+correcta,,Sierra Brava,Guadiana,233.0,SIERRA BRAVA,SIERRA BRAVA,100,1.0
+correcta,,Tejoneras Altas,Guadiana,1.0,TEJONERAS ALTAS,TEJONERAS ALTAS,100,0.81
+correcta,,Tejoneras Bajas,Guadiana,1.0,TEJONERAS BAJAS,TEJONERAS BAJAS,100,0.97
+correcta,,Tentudía,Guadiana,5.0,TENTUDIA,TENTUDIA,100,1.0
+correcta,,Torre de Abraham,Guadiana,183.0,TORRE DE ABRAHAM,TORRE DE ABRAHAM,100,1.0
+correcta,,Valle de Matamoros,Guadiana,0.0,VALLE DE MATAMOROS,VALLE DE MATAMOROS,100,
+correcta,,Valuengo,Guadiana,20.0,VALUENGO,VALUENGO,100,0.97
+correcta,,Villalba de los Barros,Guadiana,106.0,VILLALBA DE LOS BARROS,VILLALBA DE LOS BARROS,100,1.0
+correcta,,Villar del Rey,Guadiana,131.0,VILLAR DEL REY,VILLAR DEL REY,100,0.99
+correcta,,Zafra,Guadiana,2.0,ZAFRA,ZAFRA,100,0.83
+correcta,,Zalamea,Guadiana,0.0,ZALAMEA,ZALAMEA,100,
+correcta,,Zújar,Guadiana,302.0,ZUJAR,ZUJAR,100,1.0
+correcta,,Algar,Júcar,6.0,ALGAR,ALGAR,100,0.95
+correcta,,Almansa,Júcar,2.0,ALMANSA,ALMANSA,100,0.7
+correcta,,Amadorio,Júcar,16.0,AMADORIO,AMADORIO,100,0.99
+correcta,,Arenos,Júcar,137.0,ARENOS,ARENOS,100,1.0
+correcta,,Arquillo de San Blas,Júcar,21.0,ARQUILLO DE SAN BLAS,ARQUILLO DE SAN BLAS,100,1.0
+correcta,,Bellús,Júcar,69.0,BELLUS,BELLUS,100,1.0
+correcta,,Benagéber,Júcar,221.0,BENAGEBER,BENAGEBER,100,1.0
+correcta,,Beniarrés,Júcar,27.0,BENIARRES,BENIARRES,100,1.0
+correcta,,Buseo,Júcar,8.0,BUSEO,BUSEO,100,0.98
+correcta,,Cirat,Júcar,0.0,CIRAT,CIRAT,100,
+correcta,,Contreras,Júcar,361.0,CONTRERAS,CONTRERAS,100,0.42
+correcta,,Cortes II,Júcar,118.0,CORTES II,CORTES II,100,1.0
+correcta,,El Bujioso,Júcar,0.0,"BUJIOSO, EL","BUJIOSO, EL",100,
+correcta,,El Molinar,Júcar,4.0,"MOLINAR, EL","MOLINAR, EL",100,0.93
+correcta,,El Naranjero,Júcar,29.0,"NARANJERO, EL","NARANJERO, EL",100,1.0
+correcta,,Elche,Júcar,0.0,ELCHE,ELCHE,100,
+correcta,,Elda,Júcar,0.0,ELDA,ELDA,100,
+correcta,,Forata,Júcar,37.0,FORATA,FORATA,100,0.99
+correcta,,Francisco Mira Cánovas,Júcar,1.0,FRANCISCO MIRA CANOVAS (BALSA),FRANCISCO MIRA CANOVAS (BALSA),100,0.95
+correcta,,Guadalest,Júcar,13.0,GUADALEST,GUADALEST,100,1.0
+correcta,,Isbert,Júcar,0.0,ISBERT,ISBERT,100,
+correcta,,Loriguilla,Júcar,73.0,LORIGUILLA,LORIGUILLA,100,1.0
+correcta,,María Cristina,Júcar,18.0,MARIA CRISTINA,MARIA CRISTINA,100,0.98
+correcta,sí,Mora de Rubielos,Júcar,1.0,MORA DE RUBIELOS,MORA DE RUBIELOS,100,0.1
+correcta,,Onda,Júcar,1.0,ONDA,ONDA,100,0.72
+correcta,,Paraje de Galeno,Júcar,,PARAJE DE GALENO (BALSA),PARAJE DE GALENO (BALSA),100,
+correcta,,Relleu,Júcar,1.0,RELLEU,RELLEU,100,0.6
+correcta,,Ribesalbes,Júcar,0.0,RIBESALBES,RIBESALBES,100,
+correcta,,Sichar,Júcar,49.0,SICHAR,SICHAR,100,0.99
+correcta,,Tibi,Júcar,4.0,TIBI,TIBI,100,0.72
+correcta,,Toll de Carmelo I,Júcar,,TOLL DE CARMELO I (BALSA),TOLL DE CARMELO I (BALSA),100,
+correcta,,Ulldecona,Júcar,11.0,ULLDECONA,ULLDECONA,100,1.0
+correcta,,Valbona,Júcar,0.0,VALBONA,VALBONA,100,
+correcta,,Vallat,Júcar,1.0,VALLAT,VALLAT,100,0.6
+correcta,,Víllora,Júcar,0.0,VILLORA (AZUD),VILLORA (AZUD),100,
+correcta,,Bermuza,Med. Andaluza,,BERMUZA (AZUD),BERMUZA (AZUD),100,
+correcta,,Béznar,Med. Andaluza,53.0,BEZNAR,BEZNAR,100,0.98
+correcta,,Casasola,Med. Andaluza,22.0,CASASOLA,CASASOLA,100,0.96
+correcta,,Charco Redondo,Med. Andaluza,82.0,CHARCO REDONDO,CHARCO REDONDO,100,0.89
+correcta,,Conde Guadalhorce,Med. Andaluza,66.0,CONDE DE GUADALHORCE,CONDE DE GUADALHORCE,95,0.79
+correcta,,Cuevas de Almanzora,Med. Andaluza,161.0,CUEVAS DE ALMANZORA,CUEVAS DE ALMANZORA,100,0.95
+correcta,,El Limonero,Med. Andaluza,22.0,"LIMONERO, EL","LIMONERO, EL",100,0.88
+correcta,,Fiñana,Med. Andaluza,0.0,FIÑANA,FIÑANA,100,
+correcta,,Gaitanejo,Med. Andaluza,0.0,GAITANEJO,GAITANEJO,100,
+correcta,,Guadaiza,Med. Andaluza,0.0,GUADAIZA,GUADAIZA,100,
+correcta,,Guadalmansa,Med. Andaluza,0.0,GUADALMANSA,GUADALMANSA,100,
+correcta,,Guadalmina,Med. Andaluza,,GUADALMINA,GUADALMINA,100,
+correcta,,Guadalteba,Med. Andaluza,195.0,GUADALTEBA,GUADALTEBA,100,0.78
+correcta,,Guadarranque,Med. Andaluza,88.0,GUADARRANQUE,GUADARRANQUE,100,0.99
+correcta,,Isfalada,Med. Andaluza,0.0,ISFALADA,ISFALADA,100,
+correcta,,Llano de la Leche,Med. Andaluza,0.0,LLANO DE LA LECHE,LLANO DE LA LECHE,100,
+correcta,,Montejaque,Med. Andaluza,36.0,MONTEJAQUE,MONTEJAQUE,100,1.0
+correcta,,Nuevo del ngel,Med. Andaluza,,NUEVO DEL ANGEL,NUEVO DEL ANGEL,97,
+correcta,,Níjar,Med. Andaluza,1.0,NIJAR,NIJAR,100,0.5
+correcta,,Rubite,Med. Andaluza,0.0,RUBITE,RUBITE,100,
+correcta,,Rules,Med. Andaluza,111.0,RULES,RULES,100,0.98
+correcta,,Seco,Med. Andaluza,,SECO,SECO,100,
+correcta,,Sotogrande,Med. Andaluza,1.0,SOTOGRANDE 2,SOTOGRANDE 2,95,0.79
+correcta,,Viejo del ngel,Med. Andaluza,,VIEJO DEL ANGEL,VIEJO DEL ANGEL,97,
+correcta,,Bao,Miño-Sil,238.0,BAO,BAO,100,1.0
+correcta,,Bembibre,Miño-Sil,0.0,BEMBIBRE,BEMBIBRE,100,
+correcta,,Bárcena,Miño-Sil,341.0,BARCENA,BARCENA,100,1.0
+correcta,,Cabanelas,Miño-Sil,0.0,CABANELAS (AZUD),CABANELAS (AZUD),100,
+correcta,,Cachamuiña,Miño-Sil,2.0,CACHAMUIÑA,CACHAMUIÑA,100,1.0
+correcta,,Cameija / Viñao,Miño-Sil,0.0,CAMEIJA (AZUD),CAMEIJA (AZUD),100,
+correcta,,Casoyo,Miño-Sil,0.0,CASOYO,CASOYO,100,
+correcta,,Castadon,Miño-Sil,0.0,CASTADON,CASTADON,100,
+correcta,,Castrelo,Miño-Sil,60.0,CASTRELO,CASTRELO,100,1.0
+correcta,,Cea,Miño-Sil,,CEA,CEA,100,
+correcta,,Cenza,Miño-Sil,40.0,CENZA,CENZA,100,0.99
+correcta,,Chandreja,Miño-Sil,61.0,CHANDREJA,CHANDREJA,100,0.99
+correcta,,Eiros,Miño-Sil,,EIROS,EIROS,100,
+correcta,,Guitiriz,Miño-Sil,,GUITIRIZ,GUITIRIZ,100,
+correcta,,Güístolas,Miño-Sil,5.0,GUISTOLAS,GUISTOLAS,100,0.95
+correcta,,La Campañana,Miño-Sil,14.0,"CAMPAÑANA, LA","CAMPAÑANA, LA",100,1.0
+correcta,sí,La Mortera,Miño-Sil,0.0,"MORTERA, LA","MORTERA, LA",100,
+correcta,,Leboreiro / mao,Miño-Sil,4.0,LEBOREIRO,LEBOREIRO,100,0.93
+correcta,,Matalavilla,Miño-Sil,65.0,MATALAVILLA,MATALAVILLA,100,1.0
+correcta,,Montearenas,Miño-Sil,2.0,MONTEARENAS,MONTEARENAS,100,0.89
+correcta,,Montefurado,Miño-Sil,10.0,MONTEFURADO,MONTEFURADO,100,0.95
+correcta,,Mourela,Miño-Sil,,MOURELA,MOURELA,100,
+correcta,,Peñadrada,Miño-Sil,1.0,PEÑADRADA,PEÑADRADA,100,0.5
+correcta,,Peñarrubia,Miño-Sil,13.0,PEÑARRUBIA,PEÑARRUBIA,100,0.92
+correcta,,Prada,Miño-Sil,122.0,PRADA,PRADA,100,1.0
+correcta,,Pumares,Miño-Sil,4.0,PUMARES,PUMARES,100,0.95
+correcta,,Ribasaltas,Miño-Sil,0.0,RIBASALTAS (AZUD),RIBASALTAS (AZUD),100,
+correcta,,Salas,Miño-Sil,87.0,SALAS,SALAS,100,1.0
+correcta,,San Esteban,Miño-Sil,213.0,SAN ESTEBAN,SAN ESTEBAN,100,1.0
+correcta,,San Martín,Miño-Sil,10.0,SAN MARTIN (LUGO),SAN MARTIN (LUGO),100,0.96
+correcta,,San Miguel,Miño-Sil,0.0,SAN MIGUEL,SAN MIGUEL,100,
+correcta,,San Pedro,Miño-Sil,6.0,SAN PEDRO (NORTE),SAN PEDRO (NORTE),100,0.95
+correcta,,San Sebastián,Miño-Sil,46.0,SAN SEBASTIAN,SAN SEBASTIAN,100,0.98
+correcta,,Santa Eulalia,Miño-Sil,10.0,SANTA EULALIA,SANTA EULALIA,100,0.99
+correcta,,Santiago,Miño-Sil,2.0,SANTIAGO,SANTIAGO,100,0.86
+correcta,,Sequeiros,Miño-Sil,11.0,SEQUEIROS,SEQUEIROS,100,0.96
+correcta,,Tuimil,Miño-Sil,0.0,TUIMIL (AZUD),TUIMIL (AZUD),100,
+correcta,,Valdesirgas,Miño-Sil,2.0,VALDESIRGAS,VALDESIRGAS,100,0.88
+correcta,,Velle,Miño-Sil,17.0,VELLE,VELLE,100,1.0
+correcta,,Vilasouto,Miño-Sil,21.0,VILASOUTO,VILASOUTO,100,0.97
+correcta,,Vill,Miño-Sil,0.0,VILL (AZUD),VILL (AZUD),100,
+correcta,,Villar de Santiago,Miño-Sil,,VILLAR DE SANTIAGO,VILLAR DE SANTIAGO,100,
+correcta,,Villaseca,Miño-Sil,0.0,VILLASECA,VILLASECA,100,
+correcta,,Urkulu,País Vasco,10.0,URKULU,URKULU,100,1.0
+correcta,,Anchuricas,Segura,6.0,ANCHURICAS,ANCHURICAS,100,0.77
+correcta,,Argos,Segura,10.0,ARGOS,ARGOS,100,1.0
+correcta,,Camarillas,Segura,36.0,CAMARILLAS,CAMARILLAS,100,1.0
+correcta,,Crevillente,Segura,13.0,CREVILLENTE,CREVILLENTE,100,0.82
+correcta,sí,Doña Ana,Segura,3.0,DOÑA ANA,DOÑA ANA,100,0.04
+correcta,,El Talave,Segura,35.0,"TALAVE, EL","TALAVE, EL",100,1.0
+correcta,,Fuensanta,Segura,210.0,FUENSANTA,FUENSANTA,100,1.0
+correcta,,José Bautista,Segura,6.0,JOSE BAUTISTA,JOSE BAUTISTA,100,0.92
+correcta,,Mayes,Segura,2.0,MAYES,MAYES,100,0.75
+correcta,,Menju,Segura,0.0,MENJU (AZUD),MENJU (AZUD),100,
+correcta,,Moratalla,Segura,5.0,MORATALLA,MORATALLA,100,0.94
+correcta,,Ojos,Segura,3.0,OJOS (AZUD),OJOS (AZUD),100,0.95
+correcta,sí,Pliego,Segura,8.0,PLIEGO,PLIEGO,100,0.02
+correcta,,Rambla de Bayco,Segura,14.0,RAMBLA DE BAYCO,RAMBLA DE BAYCO,100,0.61
+correcta,sí,Rambla de los Charcos,Segura,2.0,RAMBLA DE LOS CHARCOS,RAMBLA DE LOS CHARCOS,100,0.17
+correcta,sí,Rambla del Boquerón,Segura,15.0,RAMBLA DEL BOQUERON,RAMBLA DEL BOQUERON,100,0.01
+correcta,sí,Rambla del Judío,Segura,9.0,RAMBLA DEL JUDIO,RAMBLA DEL JUDIO,100,0.2
+correcta,,Rambla del Moro,Segura,4.0,RAMBLA DEL MORO,RAMBLA DEL MORO,100,0.93
+correcta,,Santomera,Segura,26.0,SANTOMERA,SANTOMERA,100,0.84
+correcta,,Seca Salada,Segura,2.0,SECA SALADA,SECA SALADA,100,0.89
+correcta,,Valdeinfierno,Segura,12.0,VALDEINFIERNO,VALDEINFIERNO,100,0.93
+correcta,,Acehuche,Tajo,,ACEUCHE,ACEUCHE,93,
+correcta,,Ahigal,Tajo,5.0,AHIGAL,AHIGAL,100,0.93
+correcta,,Albuera san Jorge,Tajo,0.0,ALBUERA SAN JORGE,ALBUERA SAN JORGE,100,
+correcta,,Alcorlo,Tajo,180.0,ALCORLO,ALCORLO,100,1.0
+correcta,,Alcuéscar,Tajo,2.0,ALCUESCAR,ALCUESCAR,100,0.74
+correcta,,Aldea del Cano,Tajo,3.0,ALDEA DEL CANO,ALDEA DEL CANO,100,0.96
+correcta,,Aldeanueva,Tajo,0.0,ALDEANUEVA,ALDEANUEVA,100,
+correcta,,Aliseda,Tajo,,ALISEDA,ALISEDA,100,
+correcta,,Almoguera,Tajo,7.0,ALMOGUERA,ALMOGUERA,100,1.0
+correcta,,Alpotrel,Tajo,2.0,ALPOTREL,ALPOTREL,100,0.93
+correcta,,Araya de Arriba,Tajo,2.0,ARAYA DE ARRIBA,ARAYA DE ARRIBA,100,0.75
+correcta,,Arce de Abajo,Tajo,,ARCE DE ABAJO,ARCE DE ABAJO,100,
+correcta,,Arce de Arriba,Tajo,1.0,ARCE DE ARRIBA,ARCE DE ARRIBA,100,0.6
+correcta,,Arenas de San Pedro,Tajo,0.0,ARENAS DE SAN PEDRO,ARENAS DE SAN PEDRO,100,
+correcta,sí,Armiñan,Tajo,36.0,ARMIÑAN,ARMIÑAN,100,0.01
+correcta,,Arroyo de la Luz,Tajo,2.0,ARROYO DE LA LUZ,ARROYO DE LA LUZ,100,0.91
+correcta,,Arroyo de la Puebla,Tajo,0.0,ARROYO DE LA PUEBLA,ARROYO DE LA PUEBLA,100,
+correcta,,Arroyo de la Venta,Tajo,0.0,ARROYO DE LA VENTA,ARROYO DE LA VENTA,100,
+correcta,,Atalaya,Tajo,,ATALAYA,ATALAYA,100,
+correcta,,Aulencia,Tajo,0.0,AULENCIA,AULENCIA,100,
+correcta,,Ayuela,Tajo,2.0,AYUELA,AYUELA,100,0.77
+correcta,,Azután,Tajo,113.0,AZUTAN,AZUTAN,100,0.74
+correcta,,Barroso,Tajo,,BARROSO,BARROSO,100,
+correcta,,Barrueco de Abajo,Tajo,,BARRUECO DE ABAJO,BARRUECO DE ABAJO,100,
+correcta,,Barrueco de Arriba,Tajo,1.0,BARRUECO DE ARRIBA,BARRUECO DE ARRIBA,100,0.56
+correcta,,Bolarque,Tajo,31.0,BOLARQUE,BOLARQUE,100,0.99
+correcta,,Borbollón,Tajo,88.0,BORBOLLON,BORBOLLON,100,1.0
+correcta,,Brozas II,Tajo,1.0,BROZAS II,BROZAS II,100,0.86
+correcta,,Buenamesón,Tajo,,BUENAMESON (AZUD),BUENAMESON (AZUD),100,
+correcta,,Buendía,Tajo,1705.0,BUENDIA,BUENDIA,100,0.97
+correcta,,Caminomorisco,Tajo,,CAMINOMORISCO,CAMINOMORISCO,100,
+correcta,,Casar de Cáceres,Tajo,5.0,CASAR DE CACERES,CASAR DE CACERES,100,0.99
+correcta,,Casares de las Hurdes,Tajo,0.0,CASARES DE LAS HURDES,CASARES DE LAS HURDES,100,
+correcta,,Casavieja,Tajo,,CASAVIEJA,CASAVIEJA,100,
+correcta,,Castrejón,Tajo,44.0,CASTREJON,CASTREJON,100,0.99
+correcta,,Cazalegas,Tajo,7.0,CAZALEGAS,CAZALEGAS,100,0.94
+correcta,,Cañaveral,Tajo,,CAÑAVERAL,CAÑAVERAL,100,
+correcta,,Ceclavín,Tajo,,CECLAVIN,CECLAVIN,100,
+correcta,,Cedillo,Tajo,260.0,CEDILLO,CEDILLO,100,1.0
+correcta,,Cerro Alarcón,Tajo,1.0,CERRO ALARCON,CERRO ALARCON,100,0.96
+correcta,,Charca Arroyo de la Luz,Tajo,1.0,CHARCA ARROYO DE LA LUZ,CHARCA ARROYO DE LA LUZ,100,0.8
+correcta,,Charca de la Generala,Tajo,,CHARCA DE LA GENERALA,CHARCA DE LA GENERALA,100,
+correcta,,Charco del Cura,Tajo,3.0,CHARCO DEL CURA,CHARCO DEL CURA,100,0.86
+correcta,,Ciudad Ducal,Tajo,,CIUDAD DUCAL,CIUDAD DUCAL,100,
+correcta,,Cueto,Tajo,1.0,CUETO,CUETO,100,0.6
+correcta,,Cáceres - Guadiloba,Tajo,20.0,GUADILOBA,GUADILOBA,100,0.98
+correcta,,El Burguillo,Tajo,201.0,"BURGUILLO, EL","BURGUILLO, EL",100,0.98
+correcta,,El Corono,Tajo,,"CORONO, EL","CORONO, EL",100,
+correcta,,El Embocador,Tajo,0.0,"EMBOCADOR, EL (AZUD)","EMBOCADOR, EL (AZUD)",100,
+correcta,,El Pajarero,Tajo,1.0,"PAJARERO, EL","PAJARERO, EL",100,0.54
+correcta,,El Piornal,Tajo,0.0,"PIORNAL, EL","PIORNAL, EL",100,
+correcta,,El Valle de los Caídos,Tajo,0.0,"VALLE DE LOS CAIDOS, EL","VALLE DE LOS CAIDOS, EL",100,
+correcta,,Entrepeñas,Tajo,813.0,ENTREPEÑAS,ENTREPEÑAS,100,0.99
+correcta,,Estremera,Tajo,1.0,ESTREMERA,ESTREMERA,100,0.5
+correcta,,Finisterre,Tajo,133.0,FINISTERRE,FINISTERRE,100,1.0
+correcta,,Gabriel y Galán,Tajo,911.0,GABRIEL Y GALAN,GABRIEL Y GALAN,100,1.0
+correcta,,Garciaz,Tajo,0.0,GARCIAZ,GARCIAZ,100,
+correcta,,García (Cáceres),Tajo,1.0,GARCIA (CACERES),GARCIA (CACERES),100,0.5
+correcta,,Garganta de la Oliva,Tajo,,GARGANTA DE LA OLIVA,GARGANTA DE LA OLIVA,100,
+correcta,,Garganta del Obispo,Tajo,0.0,GARGANTA DEL OBISPO,GARGANTA DEL OBISPO,100,
+correcta,,Garguera,Tajo,3.0,GARGÜERA,GARGÜERA,100,1.0
+correcta,,Granjilla 1,Tajo,,GRANJILLA 1,GRANJILLA 1,100,
+correcta,,Guajaraz,Tajo,18.0,GUAJARAZ,GUAJARAZ,100,0.98
+correcta,,Guatel,Tajo,0.0,GUATEL (AZUD),GUATEL (AZUD),100,
+correcta,,Guijo de Granadilla,Tajo,13.0,GUIJO DE GRANADILLA,GUIJO DE GRANADILLA,100,0.98
+correcta,,Hervás,Tajo,0.0,HERVAS,HERVAS,100,
+correcta,,Ibahernando,Tajo,,IBAHERNANDO,IBAHERNANDO,100,
+correcta,,La Cerquilla,Tajo,,"CERQUILLA, LA","CERQUILLA, LA",100,
+correcta,,La Cumbre,Tajo,,"CUMBRE, LA","CUMBRE, LA",100,
+correcta,,La Encinilla,Tajo,0.0,"ENCINILLA, LA","ENCINILLA, LA",100,
+correcta,,La Hinchona,Tajo,1.0,"HINCHONA, LA","HINCHONA, LA",100,0.77
+correcta,,La Jarallana,Tajo,1.0,"JARALLANA, LA","JARALLANA, LA",100,0.54
+correcta,,Labros,Tajo,,LABROS,LABROS,100,
+correcta,,Las Machucas,Tajo,,"MACHUCAS, LAS","MACHUCAS, LAS",100,
+correcta,,Las Navas del Marqués,Tajo,2.0,"NAVAS DEL MARQUES, LAS","NAVAS DEL MARQUES, LAS",100,1.0
+correcta,,Linares de Ríofrío,Tajo,,LINARES DE RIOFRIO,LINARES DE RIOFRIO,100,
+correcta,,Los Carbajales,Tajo,0.0,"CARBAJALES, LOS","CARBAJALES, LOS",100,
+correcta,,Los Peñascales,Tajo,0.0,"PEÑASCALES, LOS","PEÑASCALES, LOS",100,
+correcta,,Los Prados de Casa Judío,Tajo,,"PRADOS DE CASA JUDIO, LOS","PRADOS DE CASA JUDIO, LOS",100,
+correcta,,Madroñeras,Tajo,0.0,MADROÑERAS,MADROÑERAS,100,
+correcta,,Malpartida de Plasencia,Tajo,,MALPARTIDA DE PLASENCIA,MALPARTIDA DE PLASENCIA,100,
+correcta,,Manufacturas Béjar,Tajo,0.0,MANUFACTURAS BEJAR,MANUFACTURAS BEJAR,100,
+correcta,,Mascalinas,Tajo,,MASCALINAS,MASCALINAS,100,
+correcta,,Mata de Alcántara II,Tajo,0.0,MATA DE ALCANTARA II,MATA DE ALCANTARA II,100,
+correcta,,Membrio,Tajo,1.0,MEMBRIO,MEMBRIO,100,1.0
+correcta,,Minchones,Tajo,,MINCHONES (AZUD),MINCHONES (AZUD),100,
+correcta,,Miraflores de la Sierra,Tajo,1.0,MIRAFLORES DE LA SIERRA,MIRAFLORES DE LA SIERRA,100,0.71
+correcta,,Molino de Cabra,Tajo,,MOLINO DE CABRA,MOLINO DE CABRA,100,
+correcta,,Molino de Chincha,Tajo,6.0,MOLINO DE CHINCHA,MOLINO DE CHINCHA,100,0.9
+correcta,,Molino de la Hoz,Tajo,,MOLINO DE LA HOZ,MOLINO DE LA HOZ,100,
+correcta,,Montehermoso,Tajo,0.0,MONTEHERMOSO,MONTEHERMOSO,100,
+correcta,,Navacerrada,Tajo,11.0,NAVACERRADA,NAVACERRADA,100,1.0
+correcta,,Navalagamella,Tajo,,NAVALAGAMELLA,NAVALAGAMELLA,100,
+correcta,,Navalcan,Tajo,34.0,NAVALCAN,NAVALCAN,100,1.0
+correcta,,Navalmoral,Tajo,0.0,NAVALMORAL,NAVALMORAL,100,
+correcta,,Navalmoral de la Mata,Tajo,3.0,NAVALMORAL DE LA MATA,NAVALMORAL DE LA MATA,100,0.94
+correcta,,Navalperal de Pinares,Tajo,0.0,NAVALPERAL DE PINARES,NAVALPERAL DE PINARES,100,
+correcta,,Navamuño,Tajo,14.0,BEJAR-NAVAMUÑO,BEJAR-NAVAMUÑO,95,0.99
+correcta,,Navarredonda,Tajo,1.0,NAVARREDONDA,NAVARREDONDA,100,0.96
+correcta,,Navas del Madroño,Tajo,1.0,NAVAS DEL MADROÑO,NAVAS DEL MADROÑO,100,0.63
+correcta,,Nuñomoral,Tajo,0.0,NUÑOMORAL,NUÑOMORAL,100,
+correcta,,Palomero,Tajo,0.0,PALOMERO,PALOMERO,100,
+correcta,,Pedrezuela,Tajo,41.0,PEDREZUELA,PEDREZUELA,100,0.99
+correcta,,Peguerinos,Tajo,0.0,PEGUERINOS,PEGUERINOS,100,
+correcta,,Peraleda de San Román,Tajo,1.0,PERALEDA DE SAN ROMAN,PERALEDA DE SAN ROMAN,100,0.8
+correcta,,Pescueza,Tajo,,PESCUEZA,PESCUEZA,100,
+correcta,,Petit,Tajo,1.0,PETIT I,PETIT I,95,1.0
+correcta,,Picadas,Tajo,15.0,PICADAS,PICADAS,100,0.99
+correcta,,Piedralaves,Tajo,0.0,PIEDRALAVES,PIEDRALAVES,100,
+correcta,,Pinilla,Tajo,38.0,"PINILLA, LA","PINILLA, LA",100,0.99
+correcta,,Pinofranqueado,Tajo,1.0,PINOFRANQUEADO,PINOFRANQUEADO,100,0.59
+correcta,,Pizarroso,Tajo,1.0,PIZARROSO,PIZARROSO,100,0.67
+correcta,,Pontón de la Oliva,Tajo,3.0,PONTON DE LA OLIVA,PONTON DE LA OLIVA,100,1.0
+correcta,,Pozo de los Ramos,Tajo,1.0,POZO DE LOS RAMOS (AZUD),POZO DE LOS RAMOS (AZUD),100,0.89
+correcta,,Puentes Viejas,Tajo,53.0,PUENTES VIEJAS,PUENTES VIEJAS,100,1.0
+correcta,,Pusa,Tajo,1.0,PUSA,PUSA,100,0.64
+correcta,,Pálmaces,Tajo,31.0,PALMACES,PALMACES,100,0.99
+correcta,,Quebrada de Tiendas,Tajo,,QUEBRADA DE TIENDAS,QUEBRADA DE TIENDAS,100,
+correcta,,Ribera de Mula,Tajo,1.0,RIBERA DE MULA,RIBERA DE MULA,100,0.7
+correcta,,Riosequillo,Tajo,50.0,RIOSEQUILLO,RIOSEQUILLO,100,1.0
+correcta,,Rivera de Gata,Tajo,49.0,RIVERA DE GATA,RIVERA DE GATA,100,0.95
+correcta,,Robledo de Chavela,Tajo,0.0,ROBLEDO DE CHAVELA,ROBLEDO DE CHAVELA,100,
+correcta,,Rosarito,Tajo,82.0,ROSARITO,ROSARITO,100,1.0
+correcta,,Salor,Tajo,14.0,SALOR,SALOR,100,0.98
+correcta,,Santa Cruz de Pinares,Tajo,1.0,SANTA CRUZ DE PINARES,SANTA CRUZ DE PINARES,100,0.8
+correcta,,Santa Marta de Magasca,Tajo,0.0,SANTA MARTA DE MAGASCA,SANTA MARTA DE MAGASCA,100,
+correcta,,Serradilla,Tajo,1.0,SERRADILLA,SERRADILLA,100,0.5
+correcta,,Serrejón,Tajo,0.0,SERREJON,SERREJON,100,
+correcta,,Talaván,Tajo,1.0,TALAVAN,TALAVAN,100,0.85
+correcta,,Torreherrera,Tajo,,TORREHERRERA,TORREHERRERA,100,
+correcta,,Torrejoncillo,Tajo,1.0,TORREJONCILLO,TORREJONCILLO,100,0.7
+correcta,,Torrejón Tiétar,Tajo,18.0,TORREJON TIETAR,TORREJON TIETAR,100,1.0
+correcta,,Torrejón el Rubio,Tajo,,TORREJON EL RUBIO,TORREJON EL RUBIO,100,
+correcta,,Torremocha,Tajo,1.0,TORREMOCHA,TORREMOCHA,100,0.72
+correcta,,Tozo,Tajo,0.0,TOZO,TOZO,100,
+correcta,,Tres Torres,Tajo,1.0,TRES TORRES,TRES TORRES,100,0.97
+correcta,,Trujillo,Tajo,1.0,TRUJILLO,TRUJILLO,100,0.67
+correcta,,Valdajos,Tajo,1.0,VALDAJOS,VALDAJOS,100,0.5
+correcta,,Valdecañas,Tajo,1446.0,VALDECAÑAS,VALDECAÑAS,100,1.0
+correcta,sí,Valdefuentes,Tajo,1.0,VALDEFUENTES,VALDEFUENTES,100,0.13
+correcta,,Valdeobispo,Tajo,53.0,VALDEOBISPO,VALDEOBISPO,100,1.0
+correcta,,Valdesimon,Tajo,,VALDESIMON,VALDESIMON,100,
+correcta,,Valmayor,Tajo,124.0,VALMAYOR,VALMAYOR,100,1.0
+correcta,,Vegas Altas,Tajo,0.0,VEGAS ALTAS,VEGAS ALTAS,100,
+correcta,,Villanueva de la Vera,Tajo,,VILLANUEVA DE LA VERA,VILLANUEVA DE LA VERA,100,
+correcta,,Villar de Plasencia,Tajo,0.0,VILLAR DE PLASENCIA,VILLAR DE PLASENCIA,100,
+correcta,,Zarza la Mayor,Tajo,1.0,ZARZA LA MAYOR,ZARZA LA MAYOR,100,0.8
+correcta,,Zorita,Tajo,3.0,ZORITA,ZORITA,100,0.87
+correcta,,Beas,"Tinto, Odiel y Piedras",3.0,BEAS,BEAS,100,0.91
+correcta,,Calabazal,"Tinto, Odiel y Piedras",2.0,CALABAZAL,CALABAZAL,100,0.84
+correcta,,Campofrío,"Tinto, Odiel y Piedras",4.0,CAMPOFRIO,CAMPOFRIO,100,0.93
+correcta,,Candoncillo,"Tinto, Odiel y Piedras",1.0,CANDONCILLO,CANDONCILLO,100,1.0
+correcta,,Cueva de la Mora,"Tinto, Odiel y Piedras",2.0,CUEVA DE LA MORA,CUEVA DE LA MORA,100,0.95
+correcta,,Dique Pino,"Tinto, Odiel y Piedras",0.0,DIQUE PINO,DIQUE PINO,100,
+correcta,,Jarrama,"Tinto, Odiel y Piedras",43.0,JARRAMA,JARRAMA,100,1.0
+correcta,,La Atalaya del Campillo,"Tinto, Odiel y Piedras",0.0,"ATALAYA DEL CAMPILLO, LA","ATALAYA DEL CAMPILLO, LA",100,
+correcta,,Marismilla,"Tinto, Odiel y Piedras",,MARISMILLA,MARISMILLA,100,
+correcta,,Monte Félix / Toril,"Tinto, Odiel y Piedras",0.0,MONTE FELIX,MONTE FELIX,100,
+correcta,,Montecarmona,"Tinto, Odiel y Piedras",,MONTECARMONA,MONTECARMONA,100,
+correcta,,Nerva,"Tinto, Odiel y Piedras",,NERVA,NERVA,100,
+correcta,,Odiel,"Tinto, Odiel y Piedras",8.0,ODIEL,ODIEL,100,0.92
+correcta,,Piedras,"Tinto, Odiel y Piedras",60.0,PIEDRAS,PIEDRAS,100,0.99
+correcta,,Silillos,"Tinto, Odiel y Piedras",1.0,SILILLOS,SILILLOS,100,0.95
+correcta,,Sur,"Tinto, Odiel y Piedras",1.0,SUR,SUR,100,0.5
+correcta,,Tres Picos,"Tinto, Odiel y Piedras",0.0,TRES PICOS,TRES PICOS,100,
+correcta,,Tumbanales,"Tinto, Odiel y Piedras",,TUMBANALES I,TUMBANALES I,91,
+correcta,,Zalamea la Real,"Tinto, Odiel y Piedras",,ZALAMEA LA REAL,ZALAMEA LA REAL,100,
+correcta,,Zumajo,"Tinto, Odiel y Piedras",2.0,ZUMAJO,ZUMAJO,100,1.0
+corregida,,La Cohilla,Cantábrico Occidental,12.0,ALCOBILLA,"COHILLA, LA",100,0.98
+corregida,,La Granda,Cantábrico Occidental,3.0,LAGUNA GRANDE,"GRANDA, LA",100,0.93
+corregida,,Lastra / La Nansa,Cantábrico Occidental,0.0,CONTRERAS,LASTRA,100,
+corregida,,La Baells,Cataluña Interna,109.0,ALBARELLOS,"BAELLS, LA",100,1.0
+corregida,,Casares,Duero,7.0,CASTELLARES,CASARES (INUNDADO),100,0.96
+corregida,,Fuentes Claras,Duero,0.0,FUENTE BLANCA,FUENTES CLARAS (DIQUE DE COLA),100,
+corregida,,Las Vencias,Duero,5.0,AGUAS VIVAS,"VENCIAS, LAS",100,0.9
+corregida,,Cardet (Llesp),Ebro,0.0,CARLET (BALSA),CARDET,100,
+corregida,,Cañón de Santolea,Ebro,82.0,PUENTE DE SANTOLEA,SANTOLEA (RTO),95,0.87
+corregida,,El Molino (Elburgo),Ebro,0.0,ESCALONA (EBRO),"MOLINO, EL",100,
+corregida,,Iruraiz,Ebro,,ARRAIZ,IRURAIZ (BALSA),100,
+corregida,,La Navas,Ebro,2.0,JANOVAS,"NAVAS, LAS",100,0.9
+corregida,,La Sotonera,Ebro,189.0,LASTRA,"SOTONERA, LA",100,1.0
+corregida,,La Torrasa,Ebro,2.0,VELADA TORRES,"TORRASA, LA",100,0.95
+corregida,,Las Canteras,Ebro,0.0,ALCANTARA,"CANTERAS, LAS",100,
+corregida,,Las Fitas,Ebro,9.0,LASTRA,"FITAS, LAS",100,0.9
+corregida,,Las Torcas,Ebro,7.0,LASTRA,"TORCAS, LAS",100,0.95
+corregida,,Lasarra,Ebro,1.0,SARRIA,"SARRA, LA",93,0.7
+corregida,,Mar Lago,Ebro,14.0,MAR LAGO,MAR,95,0.97
+corregida,,Minera Santa Marta,Ebro,3.0,MOLINO SANTA ANA,MINERA SANTA MARTA (BALSA MINERA),100,
+corregida,,Monteagudo,Ebro,10.0,MONTEAGUDO,MONTEAGUDO DE LAS VICARIAS,95,0.97
+corregida,,Nagore,Ebro,5.0,GOR,NAGORE (DIQUE DE COLA),100,0.94
+corregida,,Piedraluenga,Ebro,1.0,PIEDRABUENA,PIEDRALENGUA (BALSA),92,0.6
+corregida,,Tort Lago,Ebro,4.0,MAR LAGO,TORT,95,0.91
+corregida,,Villarejo,Ebro,0.0,"VILLAR, EL",VILLAREJO (BALSA),100,
+corregida,,Guadalcacín,Guadalete Barbate,800.0,GUADALCACIN,GUADALCACIN II,95,1.0
+corregida,,El Fontanal,Guadalquivir,,FONTANAR,"FONTANAL, EL",100,
+corregida,,El Montecillo,Guadalquivir,,MONTECILLO,"MONTECILLO, EL",100,
+corregida,,El Portillo,Guadalquivir,31.0,PORTILLO,"PORTILLO, EL",100,0.93
+corregida,,Guillena,Guadalquivir,2.0,CEGUILLA,GUILLENA SUPERIOR,95,0.86
+corregida,,La Bolera,Guadalquivir,54.0,CAN BORRA,"BOLERA, LA",100,0.99
+corregida,,La Gitana,Guadalquivir,9.0,GITANA,"GITANA, LA (BAJO GUADALQUIVIR)",100,0.92
+corregida,,La Minilla,Guadalquivir,58.0,SOLANILLA,"MINILLA, LA",100,1.0
+corregida,,Martín Gonzalo,Guadalquivir,20.0,MARTIN GONZALO I,MARTIN GONZALO II,95,0.75
+corregida,,Montoro,Guadalquivir,105.0,MONTORO (AZUD),MONTORO III,95,1.0
+corregida,,Panzacola II,Guadalquivir,2.0,"FERNANDINA, LA",PANZACOLA II,100,0.99
+corregida,,San Pablo,Guadalquivir,,SAN CALIXTO,SAN PABLO (BALSA 1),100,
+corregida,,Castillejos,Guadiana,1.0,CASTILLEJO,CASTILLEJOS 1,92,0.5
+corregida,,Covadonga,Guadiana,,COVADONGA 7,COVADONGA 4,90,
+corregida,,El Rosal / Río II,Guadiana,2.0,El Gachero II,"ROSAL, EL",100,0.85
+corregida,,El Sillo,Guadiana,0.0,VELILLOS,"SILLO, EL",100,
+corregida,,Fuenlabrada,Guadiana,1.0,FUENLABRADA,FUENLABRADA,100,0.68
+corregida,,La Colada,Guadiana,58.0,PEÑA CORADA (AZUD),"COLADA, LA",100,0.99
+corregida,,La Jarilla,Guadiana,2.0,ZAMARRILLA,"JARILLA, LA (GUADIANA)",100,0.85
+corregida,,La Serena,Guadiana,3219.0,LLERENA,"SERENA, LA",100,1.0
+corregida,,Moheda Alta,Guadiana,2.0,"MOHEDA, LA",MOHEDA ALTA (BALSA),100,0.75
+corregida,,Valdecaballeros,Guadiana,71.0,VALDECABALLOS,VALDECABALLEROS (DIQUE DE COLA),100,1.0
+corregida,,Beties I,Júcar,0.0,BECEDAS I,BETIES I (BALSA),100,
+corregida,,El Regajo,Júcar,6.0,ARROYO REGAJO,"REGAJO, EL",100,0.99
+corregida,,Escalona,Júcar,99.0,ESCALONA (AZUD),ESCALONA (JUCAR),100,1.0
+corregida,,Flora,Júcar,,FORATA,FLORA (BALSA),100,
+corregida,,La Muela,Júcar,20.0,MUELA,"MUELA, LA (BOMBEO) (BALSA DE IBERDROLA)",100,1.0
+corregida,,La Concepción,Med. Andaluza,62.0,La Concepción,"CONCEPCION, LA",100,1.0
+corregida,,Edrada,Miño-Sil,14.0,PEÑADRADA,EDRADA (MAO),100,1.0
+corregida,,Fuente del Azufre,Miño-Sil,3.0,FUENTE DEL REY,FUENTE DEL AZUFRE (CONTRAEMBALSE),100,0.83
+corregida,sí,Valle,Miño-Sil,0.0,VALLE I,VALLE (INUNDADO),100,
+corregida,,El Morrón,Segura,0.0,MORON,"MORRON, EL",100,
+corregida,,La Cierva,Segura,7.0,MACIÑEIRA,"CIERVA, LA",100,0.73
+corregida,,La Pedrera,Segura,246.0,PEREIRA,"PEDRERA, LA",100,1.0
+corregida,,Los Rodeos,Segura,15.0,MOLINO RODERO (AZUD),"RODEOS, LOS",100,1.0
+corregida,,Puentes,Segura,26.0,PENTES,PUENTES IV,95,0.99
+corregida,,Torre Alta,Segura,,"TORRE, LA",TORREALTA (BALSA),95,
+corregida,,Calzadilla,Tajo,0.0,CAÑADILLAS,CALZADILLA (ARROYO DE LAS PEDRERAS),100,
+corregida,,El Atazar,Tajo,426.0,EL AVELLANAR,"ATAZAR, EL",100,1.0
+corregida,,El Bronco,Tajo,1.0,EGO BLANCO,"BRONCO, EL",100,
+corregida,,El Romeral,Tajo,0.0,JOSE BAUTISTA,"ROMERAL, EL",100,
+corregida,,El Vado,Tajo,56.0,LAVADERO,"VADO, EL",100,0.99
+corregida,,El Villar,Tajo,23.0,EL AVELLANAR,"VILLAR, EL",100,0.97
+corregida,,Jerte - Plasencia,Tajo,59.0,VILLAR DE PLASENCIA,JERTE,100,0.99
+corregida,,La Bujeda,Tajo,7.0,AGUEDA,"BUJEDA, LA",100,0.96
+corregida,,Los Arroyos,Tajo,1.0,VALHONDO (ARROYO),"ARROYOS, LOS (DIQUE DE COLA)",100,0.6
+corregida,,Los Rosales,Tajo,0.0,ORJALES,"ROSALES, LOS",100,
+corregida,,Los morales,Tajo,2.0,ORJALES,"MORALES, LOS",100,0.85
+corregida,,Torrejón (Tajo - Tiétar),Tajo,188.0,TORREJON TIETAR,TORREJON TAJO,95,0.88
+corregida,,Árrago,Tajo,1.0,ARAGON,BORBOLLON (DERIVACION) - ARRAGO (CONTRAEMBALSE),95,0.7
+duplicado,,La Granda,Cantábrico Occidental,3.0,LAGUNA GRANDE,"GRANDA, LA",100,0.93
+duplicado,,Fuentes Claras,Duero,0.0,FUENTE BLANCA,FUENTES CLARAS (DIQUE DE COLA),100,
+duplicado,,Valparaíso,Duero,0.0,VALPARAISO,VALPARAISO,100,
+duplicado,,Azules,Ebro,1.0,AZULES,AZULES,100,0.73
+duplicado,,La peña,Ebro,15.0,PENA,PENA,100,0.84
+duplicado,,La Breña,Guadalquivir,823.0,ARENAL,"BREÑA II, LA",95,1.0
+duplicado,,Fuenlabrada,Guadiana,1.0,FUENLABRADA,FUENLABRADA,100,0.68
+duplicado,,Jarilla Nogales,Guadiana,14.0,JARILLA NOGALES,NOGALES,95,0.93
+duplicado,,Bárcena,Miño-Sil,341.0,BARCENA,BARCENA,100,1.0
+duplicado,,Castrelo,Miño-Sil,60.0,CASTRELO,CASTRELO,100,1.0
+duplicado,sí,Armiñán,Tajo,36.0,ARMIÑAN,ARMIÑAN,100,0.01
+retirado,,Valduno,Cantábrico Occidental,,VALDUNO I (AZUD),,,
+retirado,,Del Gállego,Ebro,6.0,CANTA EL GALLO,,,
+retirado,,Llano de Moncasau,Ebro,,LLANO MONTCASAU,,,
+retirado,,Montcasau,Ebro,,LLANO MONTCASAU,,,
+retirado,,Santolea,Ebro,5.0,SANTOLEA,,,
+retirado,,Utchesa,Ebro,4.0,UCEDA,,,
+retirado,,Utchesa Seca,Ebro,4.0,HOZ SECA,,,
+retirado,,Valle de Arán,Ebro,22.0,VALLE DEL MORO,,,
+retirado,,Guadalora,Guadalquivir,21.0,GUADALORA,,,
+retirado,,Rancho de los Ciervos,Guadalquivir,1.0,RANCHO DE LOS CIERVOS I,,,
+retirado,,Fuente Correas,Guadiana,,"FUENTE CORREA, ARROYO",,,
+retirado,,La Cabezuela,Guadiana,43.0,SACERUELA,,,
+retirado,,Guadalhorce-Guadalteba,Med. Andaluza,279.0,GUADALHORCE,,,
+retirado,,Moros,Segura,1.0,MOROS,,,
+retirado,,Casillas,Tajo,0.0,CASILLAS I,,,
+retirado,,Garnacha,"Tinto, Odiel y Piedras",0.0,GARNACHA I,,,
+retirado,,Olivargas,"Tinto, Odiel y Piedras",29.0,BOLIVAR,,,

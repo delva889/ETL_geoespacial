@@ -225,7 +225,7 @@ export default function Visor() {
           </span>
           <Unidad>hm³</Unidad>
         </Cifra>
-        <Cifra label="Energía almacenada" nota="estimación" border>
+        <Cifra label="Energía almacenada" nota="estimación, 109 MWh/hm³" border>
           {embalses ? fmt(stats.gwh, 1) : '–'}<Unidad>GWh</Unidad>
         </Cifra>
         <Cifra label="Valor orientativo" nota="a precio OMIE" borderLg className="col-span-2 lg:col-span-1 border-t lg:border-t-0 border-rule">
@@ -383,7 +383,7 @@ export default function Visor() {
 
             {!embalses && (
               <div className="absolute inset-0 z-[600] flex items-center justify-center bg-paper/80" aria-live="polite">
-                <p className="text-ink-2">Cargando 805 embalses…</p>
+                <p className="text-ink-2">Cargando embalses…</p>
               </div>
             )}
           </div>
@@ -566,6 +566,15 @@ function Ficha({ e, onClose }: { e: Embalse; onClose: () => void }) {
           </div>
           <div className="h-2 bg-paper-2 mt-3" role="presentation"><div className="h-full bg-ink" style={{ width: `${energiaPct}%` }} /></div>
           <p className="text-[14px] text-ink-2 mt-3">Valor orientativo a precio OMIE: <span className="num">{fmt(e.valor)} €</span></p>
+        </Bloque>
+      )}
+
+      {!e.escena && e.center && (
+        <Bloque titulo="Imagen de satélite">
+          <p className="text-[14px] text-ink-2">La escena Sentinel-2 de este embalse está pendiente de volver a seleccionarse tras corregir su geometría.</p>
+          <a href={copernicusBrowserUrl(e.center[0], e.center[1])} target="_blank" rel="noopener noreferrer" className="btn btn-ink justify-center w-full mt-4">
+            Abrir en Copernicus Browser
+          </a>
         </Bloque>
       )}
 

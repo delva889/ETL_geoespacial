@@ -176,19 +176,19 @@
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
-.marquee-track { animation: marquee 48s linear infinite; }
+.marquee-track { animation: marquee 32s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee-icon {
   animation: bob 3.4s ease-in-out infinite;
-  filter: grayscale(0.35);
-  opacity: 0.75;
-  transition: filter 200ms, opacity 200ms, transform 200ms;
+  filter: grayscale(0.25);
+  opacity: 0.7;
+  transition: filter 300ms, opacity 300ms, transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .marquee-item:hover .marquee-icon {
   filter: none;
   opacity: 1;
   animation-play-state: paused;
-  transform: scale(1.12);
+  transform: scale(1.25);
 }
 .float-logo { opacity: 0.14; animation: drift 7s ease-in-out infinite; }
 

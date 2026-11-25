@@ -70,7 +70,7 @@ export default function Proyecto() {
       <section className={`${W} pt-16 sm:pt-24 pb-20`}>
         <div className="grid md:grid-cols-12 gap-x-8 gap-y-10">
           <h1 className="md:col-span-7 text-[56px] sm:text-[88px] lg:text-[112px] leading-[0.92] tracking-[-0.02em]">
-            {fmt(info?.total_geometrias ?? 805)} embalses en un mapa que se actualiza solo.
+            {fmt(info?.total_geometrias ?? 777)} embalses en un mapa que se actualiza solo.
           </h1>
           <div className="md:col-span-4 md:col-start-9 md:pt-40 flex flex-col gap-8">
             <p className="text-[17px] leading-relaxed text-ink-2 max-w-[42ch]">
@@ -111,14 +111,8 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Herramientas */}
-      <section className="pt-20 pb-6">
-        <div className={`${W} grid md:grid-cols-12 gap-x-8 mb-10`}>
-          <h2 className="md:col-span-6 text-[40px] sm:text-[52px] leading-[0.95] tracking-[-0.015em]">Las herramientas del proyecto</h2>
-          <p className="md:col-span-4 md:col-start-9 text-[15px] text-ink-2 self-end mt-4 md:mt-0">
-            De la descarga en Python al visor en React, pasando por FME, PostGIS y Sentinel-2. Pasa el ratón para ver cada logotipo en color.
-          </p>
-        </div>
+      {/* Herramientas: una línea de logotipos en movimiento */}
+      <section aria-label="Herramientas del proyecto">
         <TechMarquee />
       </section>
 
@@ -200,12 +194,12 @@ export default function Proyecto() {
               La energía de un embalse sale de su volumen y de su desnivel.
             </h2>
             <p className="text-[17px] leading-relaxed text-ink-2 mt-8 max-w-[46ch]">
-              Sobre el MDT de 200 m del IGN se toma la cota del embalse y, como posición del generador,
-              la cota mínima en un buffer a su alrededor. Con ese salto se calcula la energía de vaciado
-              completo y se valora al precio del mercado diario.
+              En FME, sobre el MDT de 200 m del IGN, se toma la cota del embalse y, como posición del
+              generador, la cota mínima en un buffer a su alrededor. La actualización semanal, que corre
+              sin FME, aplica un salto medio de 50 m (109 MWh por hm³) y lo valora al precio OMIE del día.
             </p>
             <p className="text-[14px] text-muted mt-6 max-w-[46ch]">
-              Es una estimación orientativa, no un dato de explotación de las centrales.
+              Es una estimación orientativa de vaciado completo, no un dato de explotación de las centrales.
             </p>
           </div>
 

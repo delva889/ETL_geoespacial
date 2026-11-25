@@ -21,6 +21,8 @@ El resultado final de este proyecto (la integración ETL servida en un mapa anal
   * `descarga_saih.py`: Descarga caudales de las distintas confederaciones hidrográficas (SAIH) mediante técnicas avanzadas, manejando APIs y tokens.
   * `consolidate_caudales.py`: Unifica los ficheros heterogéneos que genera `descarga_saih.py` en un único `caudales.json` para la web.
   * `geom.py`: Combina los datos de `scraping.py` con las geometrías (Shapefile) mediante métricas de similitud textual y las exporta a PostGIS (requiere PostgreSQL + `ogr2ogr` locales). El cruce con las estimaciones energéticas (MWh, mercado estimado) y la capa de geometría definitiva del `data.geojson` publicado se realiza con los workspaces de `/fme_workspaces` (requiere FME, no está automatizado).
+  * `emparejamiento.py`: reglas compartidas para unir cada embalse de embalses.net con su polígono del inventario del MITECO (nombre normalizado, demarcación y capacidad). Si no hay un polígono fiable, el embalse no se dibuja.
+  * `corregir_geometrias.py`: vuelve a emparejar el `data.geojson` publicado con el inventario (`python corregir_geometrias.py ruta/geometriaEmbalses.shp`) y deja cada decisión en `docs/revision_geometrias.csv`.
   * `actualizar_geojson.py`: Fusiona los niveles/variaciones recién descargados por `scraping.py` sobre el `dashboard/public/data.geojson` ya publicado, sin tocar la geometría ni las estimaciones energéticas, y escribe `dashboard/public/last_update.json`.
 * `/fme_workspaces`: Espacios de trabajo de FME (`.fmw`) usados para el procesamiento avanzado (geocodificación, imágenes de satélite y estimación energética). No son ejecutables desde Python ni desde la automatización en CI.
 * `/docs`: Memoria del proyecto en formato documento y manuales técnicos.

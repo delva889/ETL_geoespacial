@@ -24,9 +24,9 @@ const SCRIPTS = [
   { file: 'descarga_saih.py', txt: 'Descarga los caudales de cada SAIH adaptándose a cómo publica cada uno: API JSON, HTML con datos incrustados, tokens JWT o navegación con Selenium.' },
   { file: 'scraping.py', txt: 'Extrae el estado de los embalses por cuenca, normaliza las cifras a hm³ y lo guarda en CSV y, si hay conexión, en PostgreSQL.' },
   { file: 'consolidate_caudales.py', txt: 'Une los ficheros de las distintas confederaciones en un solo caudales.json.' },
-  { file: 'geom.py', txt: 'Empareja los nombres del inventario de geometrías con los datos tabulares por similitud de texto (rapidfuzz) y exporta a PostGIS con ogr2ogr.' },
+  { file: 'geom.py y emparejamiento.py', txt: 'Empareja cada embalse con su polígono del inventario del MITECO comparando nombre normalizado, demarcación y capacidad, y exporta a PostGIS con ogr2ogr.' },
   { file: 'geocodingAPI, satelite y energia.fmw', txt: 'Geocodifican las estaciones, vinculan la mejor escena Sentinel-2 de cada embalse y calculan salto y energía sobre el MDT.' },
-  { file: 'actualizar_geojson.py', txt: 'Fusiona los niveles nuevos y el precio OMIE del día sobre el GeoJSON publicado, sin tocar la geometría ni el análisis ráster.' },
+  { file: 'actualizar_geojson.py', txt: 'Fusiona los niveles nuevos sobre el GeoJSON publicado y recalcula energía (109 MWh por hm³) y valor al precio OMIE del día, sin tocar la geometría.' },
   { file: 'actualizar-datos.yml', txt: 'GitHub Actions ejecuta la cadena cada lunes, guarda los datos en el repositorio, compila la web y la publica en GitHub Pages.' },
 ];
 
@@ -35,6 +35,7 @@ const DECISIONES = [
   ['Cada fuente falla por separado', 'Si una confederación cambia su web, el resto del pipeline sigue publicando.'],
   ['Geometría simplificada para la web', 'Douglas-Peucker con tolerancia de unos 10 m al compilar: un 80 % menos de vértices sin cambio visible a escala de embalse.'],
   ['Lo que cambia, cada semana; lo costoso, una vez', 'Niveles y precio se refrescan solos. El geoprocesamiento en FME se reutiliza entre ciclos.'],
+  ['Mejor sin dibujar que mal dibujado', 'Si un embalse no tiene un polígono fiable por nombre, demarcación y capacidad, no se publica. Cada decisión queda en docs/revision_geometrias.csv.'],
 ];
 
 const W = 'max-w-[1360px] mx-auto w-full px-5 sm:px-8';
@@ -145,9 +146,9 @@ export default function Metodologia() {
           <div className="md:col-span-4 md:col-start-9 md:pt-28">
             <h2 className="text-[36px] leading-none pb-4 border-b border-ink">Límites conocidos</h2>
             <ul className="mt-5 space-y-4 text-[15px] leading-relaxed text-ink-2">
-              <li>La energía y el valor de mercado suponen el vaciado completo del embalse. No son datos de explotación.</li>
+              <li>La energía publicada usa un salto medio de 50 m para todos los embalses; el cálculo con el MDT de cada uno se hizo en FME. Supone el vaciado completo y no es un dato de explotación.</li>
               <li>No todos los embalses del inventario publican nivel cada semana. En el visor aparecen en gris.</li>
-              <li>El emparejamiento por nombre puede asignar alguna geometría a un embalse equivocado y necesita revisión manual.</li>
+              <li>17 embalses de embalses.net no tienen un polígono fiable en el inventario y no aparecen en el mapa. Otros 23 se aceptaron con dudas y están marcados para revisar.</li>
             </ul>
           </div>
         </div>
