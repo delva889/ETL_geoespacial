@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
-import { MapContainer, TileLayer, CircleMarker, GeoJSON, Tooltip, ScaleControl, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, ScaleControl, useMapEvents } from 'react-leaflet';
+import Puntos from '../components/Puntos';
 import L from 'leaflet';
 import type { Map as LeafletMap, GeoJSON as LeafletGeoJSON, PathOptions } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -61,6 +62,7 @@ export default function Visor() {
   const [query, setQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const [showCaudales, setShowCaudales] = useState(false);
+  const [verSinLectura, setVerSinLectura] = useState(false);
 
   const mapRef = useRef<LeafletMap | null>(null);
   const geoRef = useRef<LeafletGeoJSON | null>(null);
@@ -198,7 +200,7 @@ export default function Visor() {
 
   return (
     <div className="w-full flex flex-col">
-      {/* Aplicación: mapa y panel ocupan la pantalla */}
+
       <section className="max-w-[1680px] w-full mx-auto px-3 sm:px-4 pt-3 pb-4">
         <div className="grid lg:grid-cols-[minmax(0,1fr)_400px] gap-3 lg:h-[calc(100svh-3.5rem-1.75rem)] lg:min-h-[620px]">
           <div ref={mapBoxRef} className="relative rounded-2xl border border-rule overflow-hidden h-[68svh] min-h-[440px] lg:h-full scroll-mt-16 bg-paper-2">
@@ -234,34 +236,10 @@ export default function Visor() {
                   }}
                 />
               ) : (
-                visibles.map((e) => {
-                  if (!e.center) return null;
-                  const estado = estadoDe(e.pct);
-                  const isSel = e.id === selectedId;
-                  const radius = estado === 'nodata' ? 3 : Math.max(4, Math.sqrt(e.capacidad) * 0.36);
-                  return (
-                    <CircleMarker
-                      key={e.id}
-                      center={e.center}
-                      radius={isSel ? radius + 3 : radius}
-                      pathOptions={{
-                        fillColor: ESTADOS[estado].color,
-                        fillOpacity: estado === 'nodata' ? 0.6 : 0.9,
-                        color: isSel ? '#0b1220' : '#ffffff',
-                        weight: isSel ? 2.5 : 1,
-                      }}
-                      eventHandlers={{ click: () => select(e) }}
-                    >
-                      <Tooltip className="embalse-tip" direction="top" offset={[0, -radius]}>
-                        {e.nombre}  {e.pct !== null ? `${fmt(e.pct, 1)} %` : 'sin lectura'}
-                      </Tooltip>
-                    </CircleMarker>
-                  );
-                })
+                <Puntos embalses={verSinLectura ? visibles : visibles.filter((e) => e.pct !== null || e.id === selectedId)} selectedId={selectedId} onSelect={select} />
               )}
             </MapContainer>
 
-            {/* Herramientas flotantes */}
             <div className="absolute top-3 left-3 right-16 z-[600] flex flex-wrap items-start gap-2 pointer-events-none">
               <div className="relative pointer-events-auto w-full sm:w-72">
                 <label htmlFor="buscar" className="sr-only">Buscar embalse</label>
@@ -328,26 +306,34 @@ export default function Visor() {
               </div>
             </div>
 
-            {/* Zoom */}
             <div className="absolute right-3 top-3 z-[500] flex flex-col rounded-xl bg-white shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] overflow-hidden">
               <MapBtn label="Acercar" onClick={() => mapRef.current?.zoomIn()}><Plus size={16} strokeWidth={1.75} /></MapBtn>
               <MapBtn label="Alejar" onClick={() => mapRef.current?.zoomOut()}><Minus size={16} strokeWidth={1.75} /></MapBtn>
               <MapBtn label="Ver toda España" onClick={resetView}><LocateFixed size={16} strokeWidth={1.75} /></MapBtn>
             </div>
 
-            {/* Leyenda */}
             <div className="absolute left-3 bottom-8 z-[500] max-w-[calc(100%-1.5rem)] rounded-xl bg-white/95 backdrop-blur shadow-[0_6px_20px_-6px_rgba(11,18,32,0.35)] px-3 py-2 flex flex-wrap items-center gap-x-3.5 gap-y-1 text-[12.5px] text-ink-2">
               <span className="font-medium text-ink">Llenado</span>
-              {(Object.keys(ESTADOS) as Estado[]).map((k) => (
+              {(Object.keys(ESTADOS) as Estado[]).filter((k) => k !== 'nodata').map((k) => (
                 <span key={k} className="inline-flex items-center gap-1.5" title={ESTADOS[k].rango}>
                   <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: ESTADOS[k].color }} aria-hidden="true" />
                   {ESTADOS[k].label}
                   <span className="hidden md:inline num text-[11px] text-muted">{stats.conteo[k]}</span>
                 </span>
               ))}
+              <button
+                type="button"
+                aria-pressed={verSinLectura}
+                onClick={() => setVerSinLectura((v) => !v)}
+                title={verSinLectura ? 'Ocultar los embalses sin lectura de nivel' : 'Mostrar también los embalses sin lectura de nivel'}
+                className={`inline-flex items-center gap-1.5 rounded-md px-1.5 -mx-1.5 py-0.5 transition-colors duration-200 ${verSinLectura ? 'bg-paper-2 text-ink' : 'text-muted hover:text-ink'}`}
+              >
+                <span className={`w-2.5 h-2.5 rounded-full shrink-0 border ${verSinLectura ? 'bg-st-nodata border-st-nodata' : 'border-st-nodata'}`} aria-hidden="true" />
+                Sin lectura
+                <span className="hidden md:inline num text-[11px] text-muted">{stats.conteo.nodata}</span>
+              </button>
             </div>
 
-            {/* Coordenadas */}
             <p className="hidden md:block absolute right-3 bottom-8 z-[500] num text-[11px] bg-white/90 rounded-md px-2 py-1 shadow-sm">
               {cursor ? `${cursor[0].toFixed(4)}° N  ${Math.abs(cursor[1]).toFixed(4)}° ${cursor[1] < 0 ? 'W' : 'E'}` : 'EPSG:4326'}
               <span className="text-muted">  z{zoom}</span>
@@ -360,7 +346,6 @@ export default function Visor() {
             )}
           </div>
 
-          {/* Panel lateral */}
           <aside className="rounded-2xl border border-rule bg-white flex flex-col lg:h-full overflow-hidden" aria-live="polite">
             <div className="px-5 pt-5 pb-4 border-b border-rule">
               <h1 className="text-[24px] leading-tight tracking-[-0.03em]">Estado de los embalses de España</h1>
@@ -429,7 +414,7 @@ export default function Visor() {
       </section>
 
       <section className="max-w-[1280px] mx-auto w-full px-5 sm:px-8 pt-10 pb-24">
-      {/* Gráficos */}
+
       <div className="grid lg:grid-cols-2 gap-6">
         <Grafico titulo="Llenado por cuenca" nota="Agua embalsada sobre capacidad, solo embalses con lectura.">
           <ResponsiveContainer width="100%" height="100%">
@@ -466,12 +451,9 @@ export default function Visor() {
   );
 }
 
-// ---------------- Subcomponentes ----------------
-
 function Unidad({ children }: { children: React.ReactNode }) {
   return <span className="text-[15px] text-muted ml-1.5 font-sans">{children}</span>;
 }
-
 
 function CifraMini({ label, nota, children }: { label: string; nota?: string; children: React.ReactNode }) {
   return (

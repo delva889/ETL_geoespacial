@@ -4,7 +4,6 @@ import type { Map as LeafletMap } from 'leaflet';
 import { Pause, Play } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
-// Centroides tomados del propio data.geojson del proyecto.
 const RECORRIDO = [
   { nombre: 'La Serena', cuenca: 'Guadiana', lat: 38.87, lng: -5.149 },
   { nombre: 'Almendra', cuenca: 'Duero', lat: 41.2187, lng: -6.1782 },
@@ -14,13 +13,11 @@ const RECORRIDO = [
   { nombre: 'Valdecañas', cuenca: 'Tajo', lat: 39.8196, lng: -5.4322 },
 ];
 
-// En pantallas anchas el embalse se desplaza a la derecha para dejar sitio al titular
 const desplazamiento = () => (typeof window !== 'undefined' && window.innerWidth > 1024 ? 0.12 : 0);
 
 const prefersReduced = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/** Imagen de satélite a pantalla completa que recorre grandes embalses. */
 export default function HeroMap() {
   const mapRef = useRef<LeafletMap | null>(null);
   const [i, setI] = useState(0);
@@ -58,12 +55,11 @@ export default function HeroMap() {
         >
           <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
         </MapContainer>
-        {/* Oscurecido para leer el texto: más denso a la izquierda y abajo */}
+
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,10,16,0.88)_0%,rgba(7,10,16,0.55)_45%,rgba(7,10,16,0.1)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(0deg,rgba(7,10,16,0.85),transparent)]" />
       </div>
 
-      {/* Ficha del embalse que se está viendo */}
       <div className="order-last relative mx-5 mb-8 sm:mx-0 sm:mb-0 sm:absolute sm:right-8 sm:bottom-8 z-10 sm:w-[320px] rounded-2xl bg-night/60 backdrop-blur-md border border-white/15 text-white p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">

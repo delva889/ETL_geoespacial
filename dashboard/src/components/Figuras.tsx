@@ -10,10 +10,9 @@ export interface Figura {
   titulo: string;
   texto: string;
   herramienta: 'FME' | 'Pentaho PDI';
-  fuente?: string; // archivo del proyecto, si está en el repositorio
+  fuente?: string;
 }
 
-/** Figuras de la memoria técnica, en PNG original sin pérdida. */
 export const FIGURAS: Record<string, Figura> = {
   geocodificacion: {
     file: 'fme-geocodificacion.png', w: 1207, h: 278, herramienta: 'FME', fuente: 'geocodingAPI.fmw',
@@ -37,7 +36,6 @@ export const FIGURAS: Record<string, Figura> = {
   },
 };
 
-/** Captura de un flujo. Nunca se muestra por encima de su tamaño real para que no se emborrone. */
 export function Captura({ fig, oscuro = false, pie }: { fig: Figura; oscuro?: boolean; pie?: string }) {
   const [abierta, setAbierta] = useState(false);
 

@@ -4,13 +4,12 @@ export const REPO_URL = 'https://github.com/delva889/ETL_geoespacial';
 export const MEMORIA_URL = `${REPO_URL}/blob/main/docs/Memoria_Tecnica_ETL_GIS.pdf`;
 export const AUTHOR = 'Carlos del Valle';
 export const AUTORES = 'Carlos del Valle y Manuel Torija';
-/** Título de la memoria técnica, usado como nombre del proyecto. */
+
 export const PROYECTO = 'Modelo de transformación e integración de datos geoespaciales';
 export const PROYECTO_AMBITO = 'aplicados a la energía hidráulica en España';
 
 const BASE = import.meta.env.BASE_URL;
 
-// ---------- Tipos ----------
 export interface EmbalseProperties {
   fid?: number;
   pantano: string;
@@ -53,7 +52,6 @@ export interface LastUpdateInfo {
   estaciones_caudal?: number;
 }
 
-/** Embalse ya normalizado para la interfaz. */
 export interface Embalse {
   id: string;
   nombre: string;
@@ -70,7 +68,6 @@ export interface Embalse {
   feature: EmbalseFeature;
 }
 
-// ---------- Utilidades ----------
 const num = (v: unknown): number | null => {
   const n = typeof v === 'number' ? v : parseFloat(String(v));
   return Number.isFinite(n) ? n : null;
@@ -97,15 +94,13 @@ export const estadoDe = (pct: number | null): Estado => {
   return 'excelente';
 };
 
-// ---------- Sentinel-2 ----------
 export interface SentinelScene {
   url: string;
   satelite: string;
   tile: string;
-  fecha: string; // ISO yyyy-mm-dd
+  fecha: string;
 }
 
-/** Interpreta URLs del tipo .../S2B_29TPJ_20250118_0_L2A/TCI.tif */
 export function parseSentinel(url?: string): SentinelScene | null {
   if (!url) return null;
   const m = url.match(/(S2[ABC])_(\d{2}[A-Z]{3})_(\d{4})(\d{2})(\d{2})_\d+_L2A/);
@@ -122,7 +117,6 @@ export function copernicusBrowserUrl(lat: number, lng: number, fecha?: string) {
   return `https://browser.dataspace.copernicus.eu/?${p.toString()}`;
 }
 
-// ---------- Geometría ----------
 function bboxCenter(f: EmbalseFeature): [number, number] | null {
   const polys = f.geometry.type === 'MultiPolygon'
     ? (f.geometry.coordinates as number[][][][])
@@ -160,14 +154,12 @@ export function normalizar(f: EmbalseFeature, i: number): Embalse {
   };
 }
 
-// ---------- Carga de datos ----------
 async function getJSON<T>(file: string): Promise<T> {
   const res = await fetch(`${BASE}${file}`);
   if (!res.ok) throw new Error(`${file}: ${res.status}`);
   return res.json() as Promise<T>;
 }
 
-/** Usa la versión simplificada si existe (generada en el build) y si no, el original. */
 export const loadEmbalses = () =>
   getJSON<EmbalsesGeoJSON>('data.lite.geojson').catch(() => getJSON<EmbalsesGeoJSON>('data.geojson'));
 

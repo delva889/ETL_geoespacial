@@ -77,7 +77,6 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* Fuentes */}
       <section className="border-t border-rule">
         <div className={`${W} py-20`}>
           <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-10">Fuentes de datos</h2>
@@ -107,7 +106,6 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* Scraping */}
       <section className="bg-white border-y border-rule">
         <div className={`${W} py-20 grid lg:grid-cols-12 gap-x-10 gap-y-10`}>
           <div className="lg:col-span-4">
@@ -131,7 +129,6 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* FME */}
       <section>
         <div className={`${W} py-20`}>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
@@ -148,7 +145,6 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* Pentaho */}
       <section className="bg-white border-y border-rule">
         <div className={`${W} py-20`}>
           <h2 className="text-[34px] sm:text-[46px] leading-[1.02] mb-4">Flujo de Pentaho PDI</h2>
@@ -159,7 +155,6 @@ export default function Metodologia() {
         </div>
       </section>
 
-      {/* Decisiones y límites */}
       <section>
         <div className={`${W} py-20 grid md:grid-cols-12 gap-x-8 gap-y-16`}>
           <div className="md:col-span-7">

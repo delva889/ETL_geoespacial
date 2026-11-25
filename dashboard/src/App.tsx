@@ -15,7 +15,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          {/* El visor es la portada: lo primero que ve quien entra */}
+
           <Route index element={<Suspense fallback={<Cargando />}><Visor /></Suspense>} />
           <Route path="proyecto" element={<Proyecto />} />
           <Route path="metodologia" element={<Metodologia />} />

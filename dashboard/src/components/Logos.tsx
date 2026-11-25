@@ -5,7 +5,6 @@ export interface Tech {
   nombre: string;
 }
 
-/** Herramientas reales del proyecto con logotipo disponible (devicon / simple-icons, autoalojados). */
 export const TECH: Record<string, Tech> = {
   python: { id: 'python', nombre: 'Python' },
   pandas: { id: 'pandas', nombre: 'pandas' },
@@ -32,7 +31,6 @@ const BANDA = [
   'typescript', 'vitejs', 'tailwindcss', 'githubactions', 'github', 'javascript', 'html5', 'css3',
 ];
 
-/** Una línea de logotipos que se desplaza y flota. Se detiene al pasar el ratón; quieta con movimiento reducido. */
 export function TechMarquee() {
   return (
     <div className="marquee relative overflow-hidden py-10" role="region" aria-label="Herramientas usadas en el proyecto">
@@ -56,9 +54,8 @@ export function TechMarquee() {
   );
 }
 
-/** Logotipos tenues que flotan detrás de una cabecera. Decorativos: ocultos a lectores de pantalla. */
 export function FloatingLogos({ ids }: { ids: string[] }) {
-  // Ocupan el hueco entre el titular (columnas 1-7) y el texto (9-12)
+
   const pos = [
     { top: '10%', left: '50%', size: 44 },
     { top: '62%', left: '47%', size: 36 },
@@ -84,7 +81,6 @@ export function FloatingLogos({ ids }: { ids: string[] }) {
   );
 }
 
-/** Fila compacta de logotipos para cada paso del pipeline. */
 export function ToolRow({ ids, extra = [] }: { ids: string[]; extra?: string[] }) {
   return (
     <ul className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4">

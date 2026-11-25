@@ -1,8 +1,3 @@
-// Genera una versión ligera de data.geojson para la web: simplifica las
-// geometrías (Douglas-Peucker) y redondea coordenadas. El fichero original
-// no se toca: sigue siendo la fuente que actualiza el pipeline ETL.
-//
-// Uso: node scripts/build-lite.mjs <entrada.geojson> <salida.geojson> [tolerancia_grados]
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const [input, output, tolArg] = process.argv.slice(2);
@@ -10,7 +5,7 @@ if (!input || !output) {
   console.error('Uso: node scripts/build-lite.mjs <entrada> <salida> [tolerancia]');
   process.exit(1);
 }
-const TOL = Number(tolArg ?? 0.00012); // ≈ 10–13 m en latitudes ibéricas
+const TOL = Number(tolArg ?? 0.00012);
 const TOL2 = TOL * TOL;
 const round = (n) => Math.round(n * 1e5) / 1e5;
 

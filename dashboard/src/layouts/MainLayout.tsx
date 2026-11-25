@@ -25,16 +25,14 @@ export default function MainLayout() {
 
       <header className="sticky top-0 z-[1000] bg-white/80 backdrop-blur-xl border-b border-rule">
         <div className={`${enVisor ? 'max-w-[1680px] px-3 sm:px-4' : 'max-w-[1280px] px-5 sm:px-8'} mx-auto h-14 flex items-center gap-4`}>
-          {/* Nombre del proyecto: el título de la memoria */}
+
           <Link to="/proyecto" className="hidden md:flex items-center gap-3 min-w-0 flex-1 group" title={`${PROYECTO} ${PROYECTO_AMBITO}`}>
-            <span className="w-2 h-2 rounded-full bg-cobalt shrink-0" aria-hidden="true" />
             <span className="min-w-0 leading-tight">
               <span className="block text-[13.5px] font-semibold tracking-tight truncate group-hover:text-cobalt transition-colors duration-200">{PROYECTO}</span>
               <span className="block text-[12px] text-muted truncate">{PROYECTO_AMBITO.charAt(0).toUpperCase() + PROYECTO_AMBITO.slice(1)}</span>
             </span>
           </Link>
 
-          {/* Secciones: control segmentado */}
           <nav aria-label="Principal" className="flex items-center p-1 rounded-xl bg-paper-2 border border-rule shrink-0">
             {NAV.map(({ name, path, icon: Icon }) => (
               <NavLink

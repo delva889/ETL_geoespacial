@@ -35,7 +35,6 @@ const PASOS = [
   },
 ];
 
-/** Cuenta hasta el valor una sola vez; sin animación con movimiento reducido. */
 function CountUp({ value, dec = 0 }: { value: number; dec?: number }) {
   const [v, setV] = useState(0);
   useEffect(() => {
@@ -67,7 +66,7 @@ export default function Proyecto() {
 
   return (
     <>
-      {/* Portada: satélite a pantalla completa */}
+
       <section className="relative flex flex-col bg-night text-white min-h-[calc(100svh-3.5rem)] sm:min-h-[620px] sm:h-[calc(100svh-3.5rem)] overflow-hidden">
         <HeroMap />
         <div className={`${W} relative z-10 flex-1 flex flex-col justify-center pt-12 pb-8 sm:pt-0 sm:pb-24`}>
@@ -102,7 +101,6 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Cifras del último ciclo */}
       <section className={`${W} pt-16 sm:pt-20`}>
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-rule rounded-2xl overflow-hidden border border-rule">
           {cifras.map((c) => (
@@ -117,12 +115,10 @@ export default function Proyecto() {
         </dl>
       </section>
 
-      {/* Herramientas: una línea de logotipos en movimiento */}
       <section aria-label="Herramientas del proyecto" className="pt-6">
         <TechMarquee />
       </section>
 
-      {/* El reto */}
       <section className={`${W} py-20 sm:py-28 grid md:grid-cols-12 gap-x-10 gap-y-8 items-end`}>
         <h2 className="md:col-span-7 text-[36px] sm:text-[52px] leading-[1.02]">
           Los datos del agua son públicos. Lo difícil es que coincidan.
@@ -136,7 +132,6 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Pipeline */}
       <section className="bg-white border-y border-rule">
         <div className={`${W} py-20 sm:py-28`}>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
@@ -157,7 +152,6 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Sentinel-2 */}
       <section className="bg-night text-white">
         <div className={`${W} py-20 sm:py-28 grid lg:grid-cols-12 gap-x-12 gap-y-12 items-center`}>
           <div className="lg:col-span-5">
@@ -174,7 +168,6 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Energía */}
       <section className={`${W} py-20 sm:py-28`}>
         <div className="grid lg:grid-cols-12 gap-x-12 gap-y-12 items-start">
           <div className="lg:col-span-5">
@@ -218,7 +211,6 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* Cierre */}
       <section className={`${W} pb-24`}>
         <div className="rounded-3xl bg-cobalt text-white px-8 sm:px-14 py-14 sm:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <h2 className="text-[32px] sm:text-[44px] leading-[1.05] max-w-[18ch]">Busca un embalse y mira cómo está esta semana.</h2>
